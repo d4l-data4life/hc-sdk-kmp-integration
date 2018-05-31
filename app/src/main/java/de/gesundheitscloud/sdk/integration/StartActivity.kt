@@ -32,8 +32,8 @@
 
 package de.gesundheitscloud.sdk.integration
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import de.gesundheitscloud.sdk.integration.ui.start.StartFragment
 
 class StartActivity : AppCompatActivity() {
