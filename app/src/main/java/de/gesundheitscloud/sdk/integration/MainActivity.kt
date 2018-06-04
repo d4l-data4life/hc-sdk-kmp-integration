@@ -30,21 +30,18 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration.ui.start
+package de.gesundheitscloud.sdk.integration
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 
-class StartViewModel : ViewModel() {
+/**
+ * An activity that inflates a layout that has a NavHostFragment.
+ */
+class MainActivity : AppCompatActivity() {
 
-    private val _data = MutableLiveData<String>();
-
-    val data: LiveData<String>
-        get() = _data
-
-
-    init {
-        _data.value = "Hello, welcome to Gesundheitscloud!"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.main_activity)
     }
 }

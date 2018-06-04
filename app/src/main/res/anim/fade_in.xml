@@ -31,11 +31,9 @@
   ~ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".StartActivity"
-    />
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:duration="@android:integer/config_mediumAnimTime"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"/>
+</set>
