@@ -31,16 +31,16 @@ cache:
     - $HOME/.android/build-cache
 
 before_script:
-    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;28.0.0-rc2" "platforms;android-P" "platforms;android-P" "system-images;android-P;google_apis_playstore;x86_64"
-    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-P;google_apis_playstore;x86_64"
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-21" "system-images;android-21;default;armeabi-v7a"
+    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-21;default;armeabi-v7a"
     - echo 'disk.dataPartition.size=512M' >> ~/.android/avd/test.avd/config.ini
     - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
 script:
     - chmod +x gradlew
     - ./gradlew check
-#    - android-wait-for-emulator
-#    - adb shell input keyevent 82 &
-#    - adb logcat -s TestRunner:V & LOGCAT_PID=$!
-#    - ./gradlew connectedDebugAndroidTest --stacktrace
-#    - if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi
+    - android-wait-for-emulator
+    - adb shell input keyevent 82 &
+    - adb logcat -s TestRunner:V & LOGCAT_PID=$!
+    - ./gradlew connectedDebugAndroidTest --stacktrace
+    - if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi

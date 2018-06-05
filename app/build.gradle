@@ -3,25 +3,23 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 'android-P'
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "de.gesundheitscloud.sdk.integration"
 
         minSdkVersion 21
-        targetSdkVersion 'P'
+        targetSdkVersion 27
 
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -31,18 +29,43 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    sourceSets {
+        main.res.srcDirs = [
+                'src/main/res',
+
+                // feature resources
+                'src/main/res_feature/login',
+                'src/main/res_feature/document',
+                'src/main/res_feature/welcome',
+        ]
+
+    }
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
-    implementation "androidx.constraintlayout:constraintlayout:1.1.0"
+    def supportVersion = "27.1.1"
+    implementation "com.android.support:appcompat-v7:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:support-v4:$supportVersion"
 
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
+    implementation "com.android.support.constraint:constraint-layout:1.1.0"
+
+    implementation 'androidx.core:core-ktx:0.3'
+
+    // Navigation
+
+    def navigationVersion = "1.0.0-alpha01"
+    implementation "android.arch.navigation:navigation-runtime:$navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
+
 
     testImplementation 'junit:junit:4.12'
 
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
