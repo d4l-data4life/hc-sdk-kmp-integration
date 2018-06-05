@@ -32,16 +32,24 @@
 
 package de.gesundheitscloud.sdk.integration.ui.welcome
 
+import android.app.Activity.RESULT_OK
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
+import de.gesundheitscloud.sdk.integration.MainViewModel
 import de.gesundheitscloud.sdk.integration.R
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
+
+    private lateinit var mainViewModel: MainViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.welcome_fragment, container, false)
@@ -50,8 +58,22 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.let { mainViewModel = ViewModelProviders.of(it).get(MainViewModel::class.java) }
+
         welcome_login_button.setOnClickListener {
-            //TODO
+            val intent = mainViewModel.client.getHCSignInIntent(context) //SDK need static accessor
+            startActivity(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GC_AUTH) {
+            if (resultCode == RESULT_OK) {
+                this.view?.let { Snackbar.make(it, "Success login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
+            } else {
+                this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
+            }
         }
     }
 

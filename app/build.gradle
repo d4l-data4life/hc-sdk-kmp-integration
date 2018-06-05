@@ -17,13 +17,36 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [redirectScheme:"de.gesundheitscloud.example"]
     }
 
     buildTypes {
+        debug {
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        staging {
+            dimension "environment"
+        }
+        sandbox {
+            dimension "environment"
+        }
+    }
+
+    defaultPublishConfig "stagingDebug"
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -56,11 +79,16 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:0.3'
 
-    // Navigation
+    def lifecycleVersion = "1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
 
     def navigationVersion = "1.0.0-alpha01"
     implementation "android.arch.navigation:navigation-runtime:$navigationVersion"
     implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
+
+
+    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-beta'
 
 
     testImplementation 'junit:junit:4.12'

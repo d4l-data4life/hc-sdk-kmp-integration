@@ -32,18 +32,11 @@
 
 package de.gesundheitscloud.sdk.integration
 
-import org.junit.Test
+import android.arch.lifecycle.ViewModel
+import de.gesundheitscloud.sdk.HealthCloud
 
-import org.junit.Assert.*
+class MainViewModel : ViewModel() {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
+    val client : HealthCloud = HealthCloud.getInstance()
+
 }

@@ -36,35 +36,43 @@
     package="de.gesundheitscloud.sdk.integration"
     >
 
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+    <application>
 
-        <activity android:name="de.gesundheitscloud.sdk.integration.MainActivity">
+        <activity
+            android:name="net.openid.appauth.RedirectUriReceiverActivity">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <!-- TODO: This intent filter will be unnecessary in the future. -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="https" />
-                <data android:scheme="http" />
-                <data android:host="www.gesundheitscloud.de" />
-                <data android:pathPrefix="/user/" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="${redirectScheme}" />
             </intent-filter>
         </activity>
-        
+
+        <meta-data
+            android:name="de.gesundheitscloud.sdk.CLIENT_ID"
+            android:value="android"
+            />
+        <meta-data
+            android:name="de.gesundheitscloud.sdk.CLIENT_SECRET"
+            android:value="androidsupersecret"
+            />
+        <meta-data
+            android:name="de.gesundheitscloud.sdk.REDIRECT_URL"
+            android:value="${redirectScheme}://oauth"
+            />
+        <meta-data
+            android:name="de.gesundheitscloud.sdk.ENVIRONMENT"
+            android:value="sandbox"
+            />
     </application>
 
 </manifest>
