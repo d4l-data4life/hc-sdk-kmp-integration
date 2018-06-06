@@ -24,19 +24,19 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 ### Usage
 
-Run gradle wrapper task.
+Run gradle wrapper task for connected tests:
 
-```gradle
+```bash
 ./gradlew connectedAndroidTest
 ```
 
 ### Test suit
 
 - [ ] Login
-- [ ]  Logout
-- [ ]  Document CRUD
-- [ ]  Report CRUD
-- [ ]  Observation CRUD
-- [ ]  Fetch record by type
-- [ ]  Count total records
-- [ ]  Count records per type
+- [ ] Logout
+- [ ] Document CRUD
+- [ ] Report CRUD
+- [ ] Observation CRUD
+- [ ] Fetch record by type
+- [ ] Count total records
+- [ ] Count records per type

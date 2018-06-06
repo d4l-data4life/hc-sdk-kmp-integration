@@ -30,47 +30,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration.ui.welcome
+package de.gesundheitscloud.sdk.integration.ui.home
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import de.gesundheitscloud.sdk.HealthCloud
-import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
 import de.gesundheitscloud.sdk.integration.R
-import kotlinx.android.synthetic.main.welcome_fragment.*
+import kotlinx.android.synthetic.main.home_fragment.*
 
-class WelcomeFragment : Fragment() {
+class HomeFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.welcome_fragment, container, false)
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        welcome_login_button.setOnClickListener {
-            val intent = HealthCloud.getHCSignInIntent(context)
-            startActivityForResult(intent, GC_AUTH)
+        home_logout_button.setOnClickListener {
+            // TODO logout
+            findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GC_AUTH) {
-            if (resultCode == RESULT_OK) {
-                findNavController().navigate(R.id.action_welcome_screen_to_home_screen)
-            } else {
-                this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
-            }
-        }
-    }
-
 }

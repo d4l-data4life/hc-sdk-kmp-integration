@@ -32,45 +32,29 @@
 
 package de.gesundheitscloud.sdk.integration.ui.welcome
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import de.gesundheitscloud.sdk.HealthCloud
-import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
-import de.gesundheitscloud.sdk.integration.R
-import kotlinx.android.synthetic.main.welcome_fragment.*
+import android.support.test.espresso.intent.rule.IntentsTestRule
+import android.support.test.runner.AndroidJUnit4
+import de.gesundheitscloud.sdk.integration.MainActivity
+import de.gesundheitscloud.sdk.integration.screen.WelcomeScreen
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-class WelcomeFragment : Fragment() {
+@RunWith(AndroidJUnit4::class)
+class WelcomeFragmentTest {
+
+    @Rule
+    @JvmField
+    val rule = IntentsTestRule(MainActivity::class.java)
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.welcome_fragment, container, false)
-    }
+    private val screen = WelcomeScreen()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        welcome_login_button.setOnClickListener {
-            val intent = HealthCloud.getHCSignInIntent(context)
-            startActivityForResult(intent, GC_AUTH)
+    @Test
+    fun testContentScreen() {
+        screen {
+            loginButton { click() }
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GC_AUTH) {
-            if (resultCode == RESULT_OK) {
-                findNavController().navigate(R.id.action_welcome_screen_to_home_screen)
-            } else {
-                this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
-            }
-        }
-    }
-
 }

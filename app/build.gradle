@@ -18,12 +18,12 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        manifestPlaceholders = [redirectScheme:"de.gesundheitscloud.example"]
+        manifestPlaceholders = [
+                redirectScheme: "de.gesundheitscloud.example"
+        ]
     }
 
     buildTypes {
-        debug {
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -58,7 +58,7 @@ android {
                 'src/main/res',
 
                 // feature resources
-                'src/main/res_feature/login',
+                'src/main/res_feature/home',
                 'src/main/res_feature/document',
                 'src/main/res_feature/welcome',
         ]
@@ -75,7 +75,7 @@ dependencies {
     implementation "com.android.support:design:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
 
-    implementation "com.android.support.constraint:constraint-layout:1.1.0"
+    implementation "com.android.support.constraint:constraint-layout:1.1.1"
 
     implementation 'androidx.core:core-ktx:0.3'
 
@@ -84,16 +84,27 @@ dependencies {
     implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
 
     def navigationVersion = "1.0.0-alpha01"
-    implementation "android.arch.navigation:navigation-runtime:$navigationVersion"
-    implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-beta'
+    implementation 'de.gesundheitscloud:hc-sdk-android:8807a8315a'
 
 
     testImplementation 'junit:junit:4.12'
 
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation "com.android.support:support-annotations:$supportVersion"
+
+    def androidTestVersion = "1.0.2"
+    androidTestImplementation "com.android.support.test:runner:$androidTestVersion"
+    androidTestImplementation "com.android.support.test:rules:$androidTestVersion"
+
+    def espressoVersion = "3.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+
+    androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"
+
+    androidTestImplementation 'com.agoda.kakao:kakao:1.3.0'
 }
