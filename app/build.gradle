@@ -19,7 +19,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
-                redirectScheme: "de.gesundheitscloud.example"
+                clientId      : "android",
+                clientSecret  : "androidsupersecret",
+                environment   : "staging",
+                redirectScheme: "de.gesundheitscloud.example",
+                appAuthRedirectScheme: "de.gesundheitscloud.example"
         ]
     }
 
@@ -35,9 +39,15 @@ android {
     productFlavors {
         staging {
             dimension "environment"
+            manifestPlaceholders = [
+                    environment   : "staging",
+            ]
         }
         sandbox {
             dimension "environment"
+            manifestPlaceholders = [
+                    environment   : "sandbox",
+            ]
         }
     }
 
@@ -88,7 +98,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:8807a8315a'
+    implementation 'de.gesundheitscloud:hc-sdk-android:d87fbba1c4'
 
 
     testImplementation 'junit:junit:4.12'
