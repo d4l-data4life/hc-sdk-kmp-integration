@@ -97,7 +97,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:76d73c4a58'
+    implementation 'de.gesundheitscloud:hc-sdk-android:d182faf29c'
 
 
     testImplementation 'junit:junit:4.12'
