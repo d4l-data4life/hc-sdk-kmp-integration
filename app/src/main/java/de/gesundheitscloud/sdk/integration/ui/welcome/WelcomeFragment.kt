@@ -32,16 +32,22 @@
 
 package de.gesundheitscloud.sdk.integration.ui.welcome
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import de.gesundheitscloud.sdk.HealthCloud
+import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
 import de.gesundheitscloud.sdk.integration.R
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.welcome_fragment, container, false)
@@ -51,7 +57,19 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         welcome_login_button.setOnClickListener {
-            //TODO
+            val intent = HealthCloud.getHCSignInIntent(context)
+            startActivityForResult(intent, GC_AUTH)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GC_AUTH) {
+            if (resultCode == RESULT_OK) {
+                findNavController().navigate(R.id.action_welcome_screen_to_home_screen)
+            } else {
+                this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
+            }
         }
     }
 

@@ -30,20 +30,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+package de.gesundheitscloud.sdk.integration.screen
 
-import org.junit.Test
+import com.agoda.kakao.KButton
+import com.agoda.kakao.Screen
+import de.gesundheitscloud.sdk.integration.R
 
-import org.junit.Assert.*
+class WelcomeScreen : Screen<WelcomeScreen>() {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-    }
+    val loginButton = KButton { withId(R.id.welcome_login_button) }
+
 }

@@ -32,7 +32,7 @@
   -->
 
 <resources>
+    <string name="welcome_screen_title">Welcome</string>
     <string name="welcome_title">Welcome to Gesundheitscloud Integration test</string>
-
     <string name="welcome_login_button_label">Login</string>
 </resources>

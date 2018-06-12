@@ -30,20 +30,30 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+package de.gesundheitscloud.sdk.integration.ui.home
 
-import org.junit.Test
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import de.gesundheitscloud.sdk.integration.R
+import kotlinx.android.synthetic.main.home_fragment.*
 
-import org.junit.Assert.*
+class HomeFragment : Fragment() {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.home_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        home_logout_button.setOnClickListener {
+            // TODO logout
+            findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
+        }
     }
 }

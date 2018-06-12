@@ -30,20 +30,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+package de.gesundheitscloud.sdk.integration.ui.welcome
 
+import android.support.test.espresso.intent.rule.IntentsTestRule
+import android.support.test.runner.AndroidJUnit4
+import de.gesundheitscloud.sdk.integration.MainActivity
+import de.gesundheitscloud.sdk.integration.screen.WelcomeScreen
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
-import org.junit.Assert.*
+@RunWith(AndroidJUnit4::class)
+class WelcomeFragmentTest {
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
+    @Rule
+    @JvmField
+    val rule = IntentsTestRule(MainActivity::class.java)
+
+
+    private val screen = WelcomeScreen()
+
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun testContentScreen() {
+        screen {
+            loginButton { click() }
+        }
     }
 }

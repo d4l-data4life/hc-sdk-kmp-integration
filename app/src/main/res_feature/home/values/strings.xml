@@ -31,35 +31,8 @@
   ~ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/welcome_screen"
-    >
-
-    <fragment
-        android:id="@+id/welcome_screen"
-        android:name="de.gesundheitscloud.sdk.integration.ui.welcome.WelcomeFragment"
-        android:label="@string/welcome_screen_title"
-        tools:layout="@layout/welcome_fragment"
-        >
-        <action
-            android:id="@+id/action_welcome_screen_to_home_screen"
-            app:destination="@id/home_screen"
-            />
-    </fragment>
-
-    <fragment
-        android:id="@+id/home_screen"
-        android:name="de.gesundheitscloud.sdk.integration.ui.home.HomeFragment"
-        android:label="@string/home_screen_title"
-        tools:layout="@layout/home_fragment"
-        >
-        <action
-            android:id="@+id/action_home_screen_to_welcome_screen"
-            app:popUpTo="@id/welcome_screen"
-            />
-    </fragment>
-
-</navigation>
+<resources>
+    <string name="home_screen_title">Home</string>
+    <string name="home_title">Welcome to Gesundheitscloud</string>
+    <string name="home_logout_button_label">Logout</string>
+</resources>
