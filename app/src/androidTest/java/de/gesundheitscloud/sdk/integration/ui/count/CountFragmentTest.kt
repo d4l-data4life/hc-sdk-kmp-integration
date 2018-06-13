@@ -30,13 +30,69 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration.screen
+package de.gesundheitscloud.sdk.integration.ui.count
 
-import com.agoda.kakao.KButton
-import com.agoda.kakao.Screen
+import android.support.test.espresso.intent.rule.IntentsTestRule
+import android.support.test.runner.AndroidJUnit4
+import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.R
+import de.gesundheitscloud.sdk.integration.screen.CountScreen
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 
-class WelcomeScreen : Screen<WelcomeScreen>() {
+@RunWith(AndroidJUnit4::class)
+class CountFragmentTest {
 
-    val loginButton = KButton { withId(R.id.welcome_login_button) }
+    @Rule
+    @JvmField
+    val rule = IntentsTestRule(MainActivity::class.java)
+
+
+    private val screen = CountScreen()
+
+    @Test
+    fun testCount() {
+        screen {
+            countButton {
+                click()
+            }
+
+            documentsCount {
+                hasText(R.string.count_placeholder)
+            }
+
+            reportsCount {
+                hasText(R.string.count_placeholder)
+            }
+
+            observationsCount {
+                hasText(R.string.count_placeholder)
+            }
+
+            totalCount {
+                hasText(R.string.count_placeholder)
+            }
+
+            // wait for sdk results
+            idle(3000)
+
+            documentsCount {
+                hasNoText(R.string.count_placeholder)
+            }
+
+            reportsCount {
+                hasNoText(R.string.count_placeholder)
+            }
+
+            observationsCount {
+                hasNoText(R.string.count_placeholder)
+            }
+
+            totalCount {
+                hasNoText(R.string.count_placeholder)
+            }
+
+        }
+    }
 }

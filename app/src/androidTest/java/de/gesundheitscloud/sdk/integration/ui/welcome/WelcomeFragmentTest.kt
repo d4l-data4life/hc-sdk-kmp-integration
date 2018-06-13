@@ -54,7 +54,7 @@ class WelcomeFragmentTest {
     @Test
     fun testContentScreen() {
         screen {
-            loginButton { click() }
+//            loginButton { click() }
         }
     }
 }
