@@ -45,56 +45,65 @@
         android:id="@+id/home_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/ui_spacing_single"
         android:layout_marginStart="@dimen/ui_spacing_single"
-        android:layout_marginTop="@dimen/ui_spacing_quadruple"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="@dimen/ui_spacing_single"
         android:src="@drawable/gc_logo"
-        app:layout_constraintBottom_toTopOf="@id/home_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:ignore="ContentDescription"
-        />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/home_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/ui_spacing_quadruple"
-        android:layout_marginEnd="@dimen/ui_spacing_double"
         android:layout_marginStart="@dimen/ui_spacing_double"
-        android:layout_marginTop="@dimen/ui_spacing_double"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/ui_spacing_double"
         android:text="@string/home_title"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/home_logout_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/home_logo"
-        app:layout_constraintVertical_chainStyle="packed"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/home_logo"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/home_count_button"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ui_spacing_double"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/ui_spacing_double"
+        android:text="@string/home_count_button_label"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_title" />
 
     <Button
         android:id="@+id/home_logout_button"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/ui_spacing_quadruple"
-        android:layout_marginEnd="@dimen/ui_spacing_double"
         android:layout_marginStart="@dimen/ui_spacing_double"
-        android:layout_marginTop="@dimen/ui_spacing_quadruple"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/ui_spacing_double"
         android:text="@string/home_logout_button_label"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_title"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/home_count_button" />
+
+
 
 </android.support.constraint.ConstraintLayout>

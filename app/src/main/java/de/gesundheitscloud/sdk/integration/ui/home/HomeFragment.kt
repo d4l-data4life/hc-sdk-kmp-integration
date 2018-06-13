@@ -55,5 +55,9 @@ class HomeFragment : Fragment() {
             // TODO logout
             findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
         }
+
+        home_count_button.setOnClickListener {
+            findNavController().navigate(R.id.action_home_screen_to_countFragment)
+        }
     }
 }

@@ -60,6 +60,14 @@
             android:id="@+id/action_home_screen_to_welcome_screen"
             app:popUpTo="@id/welcome_screen"
             />
+        <action
+            android:id="@+id/action_home_screen_to_countFragment"
+            app:destination="@id/count_screen" />
     </fragment>
+    <fragment
+        android:id="@+id/count_screen"
+        android:name="de.gesundheitscloud.sdk.integration.ui.count.CountFragment"
+        android:label="@string/count_screen_title"
+        tools:layout="@layout/count_fragment"/>
 
 </navigation>

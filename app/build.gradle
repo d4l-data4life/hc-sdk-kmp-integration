@@ -70,8 +70,8 @@ android {
                 'src/main/res_feature/home',
                 'src/main/res_feature/document',
                 'src/main/res_feature/welcome',
+                'src/main/res_feature/count'
         ]
-
     }
 }
 
