@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ BSD 3-Clause License
+  ~
+  ~ Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are permitted provided that the following conditions are met:
+  ~
+  ~ * Redistributions of source code must retain the above copyright notice, this
+  ~ list of conditions and the following disclaimer.
+  ~
+  ~ * Redistributions in binary form must reproduce the above copyright notice,
+  ~ this list of conditions and the following disclaimer in the documentation
+  ~ and/or other materials provided with the distribution.
+  ~
+  ~ * Neither the name of the copyright holder nor the names of its
+  ~ contributors may be used to endorse or promote products derived from
+  ~ this software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  ~ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  ~ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  ~ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  ~ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  ~ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  ~ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  ~ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  ~ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  ~ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,10 +44,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_documents_label"
+        android:text="@string/count_documents_label"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/count_documents_number"
+        app:layout_constraintEnd_toStartOf="@id/count_documents_number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,13 +57,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_count_placeholder"
+        android:text="@string/count_placeholder"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/count_documents_label"
+        app:layout_constraintBottom_toBottomOf="@id/count_documents_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/count_documents_label"
-        app:layout_constraintTop_toTopOf="@+id/count_documents_label" />
+        app:layout_constraintStart_toEndOf="@id/count_documents_label"
+        app:layout_constraintTop_toTopOf="@id/count_documents_label" />
 
     <TextView
         android:id="@+id/count_reports_label"
@@ -42,12 +73,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_reports_label"
+        android:text="@string/count_reports_label"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/count_reports_number"
+        app:layout_constraintEnd_toStartOf="@id/count_reports_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/count_documents_label" />
+        app:layout_constraintTop_toBottomOf="@id/count_documents_label" />
 
     <TextView
         android:id="@+id/count_reports_number"
@@ -55,13 +86,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_count_placeholder"
+        android:text="@string/count_placeholder"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/count_reports_label"
+        app:layout_constraintBottom_toBottomOf="@id/count_reports_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/count_reports_label"
-        app:layout_constraintTop_toTopOf="@+id/count_reports_label" />
+        app:layout_constraintStart_toEndOf="@id/count_reports_label"
+        app:layout_constraintTop_toTopOf="@id/count_reports_label" />
 
     <TextView
         android:id="@+id/count_observations_label"
@@ -70,13 +101,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_observations_label"
+        android:text="@string/count_observations_label"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/count_observations_number"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@id/count_observations_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/count_reports_label" />
+        app:layout_constraintTop_toBottomOf="@id/count_reports_label" />
 
     <TextView
         android:id="@+id/count_observations_number"
@@ -84,13 +114,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_count_placeholder"
+        android:text="@string/count_placeholder"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/count_observations_label"
+        app:layout_constraintBottom_toBottomOf="@id/count_observations_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/count_observations_label"
-        app:layout_constraintTop_toTopOf="@+id/count_observations_label" />
+        app:layout_constraintStart_toEndOf="@id/count_observations_label"
+        app:layout_constraintTop_toTopOf="@id/count_observations_label" />
 
 
     <View
@@ -101,7 +131,7 @@
         android:background="#DDD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/count_observations_label" />
+        app:layout_constraintTop_toBottomOf="@id/count_observations_label" />
 
     <TextView
         android:id="@+id/count_total_label"
@@ -110,12 +140,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_total_label"
+        android:text="@string/count_total_label"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/count_total_number"
+        app:layout_constraintEnd_toStartOf="@id/count_total_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/total_separator_view" />
+        app:layout_constraintTop_toBottomOf="@id/total_separator_view" />
 
     <TextView
         android:id="@+id/count_total_number"
@@ -123,12 +153,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/hc_count_placeholder"
+        android:text="@string/count_placeholder"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/count_total_label"
+        app:layout_constraintBottom_toBottomOf="@id/count_total_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/count_total_label"
-        app:layout_constraintTop_toTopOf="@+id/count_total_label" />
+        app:layout_constraintStart_toEndOf="@id/count_total_label"
+        app:layout_constraintTop_toTopOf="@id/count_total_label" />
 
 </android.support.constraint.ConstraintLayout>

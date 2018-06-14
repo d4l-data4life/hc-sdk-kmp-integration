@@ -33,9 +33,9 @@
 
 <resources>
     <string name="count_screen_title">Count</string>
-    <string name="hc_documents_label">Documents</string>
-    <string name="hc_reports_label">Reports</string>
-    <string name="hc_observations_label">Observations</string>
-    <string name="hc_total_label">Total</string>
-    <string name="hc_count_placeholder">-</string>
+    <string name="count_documents_label">Documents</string>
+    <string name="count_reports_label">Reports</string>
+    <string name="count_observations_label">Observations</string>
+    <string name="count_total_label">Total</string>
+    <string name="count_placeholder">-</string>
 </resources>
