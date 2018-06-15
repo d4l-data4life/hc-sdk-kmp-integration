@@ -36,8 +36,8 @@ import com.agoda.kakao.KButton
 import com.agoda.kakao.Screen
 import de.gesundheitscloud.sdk.integration.R
 
+
 class WelcomeScreen : Screen<WelcomeScreen>() {
 
     val loginButton = KButton { withId(R.id.welcome_login_button) }
-
 }

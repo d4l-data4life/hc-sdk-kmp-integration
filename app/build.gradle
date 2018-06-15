@@ -114,6 +114,9 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
 
+    def uiautomatorVersion = "2.1.3"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomatorVersion"
+
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"
 
     androidTestImplementation 'com.agoda.kakao:kakao:1.3.0'

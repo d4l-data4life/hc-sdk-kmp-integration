@@ -32,9 +32,13 @@
 
 package de.gesundheitscloud.sdk.integration.ui.welcome
 
+import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiSelector
 import de.gesundheitscloud.sdk.integration.MainActivity
+import de.gesundheitscloud.sdk.integration.screen.HomeScreen
 import de.gesundheitscloud.sdk.integration.screen.WelcomeScreen
 import org.junit.Rule
 import org.junit.Test
@@ -49,12 +53,35 @@ class WelcomeFragmentTest {
 
 
     private val screen = WelcomeScreen()
+    private val homeScreen = HomeScreen()
 
 
     @Test
-    fun testContentScreen() {
+    fun testLoginFlow() {
         screen {
             loginButton { click() }
+
+            var device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            val selector = UiSelector()
+
+            var email = device.findObject(selector.textMatches("Email"))
+            email.click()
+            email.legacySetText("i1456260@nwytg.com")
+
+            var password = device.findObject(selector.textMatches("Password"))
+            password.click()
+            password.legacySetText("password1")
+
+            device.pressBack()
+
+            var submit = device.findObject(selector.resourceId("loginButton"))
+            submit.click()
+
         }
+
+        homeScreen {
+            logoutButton.click()
+        }
+
     }
 }

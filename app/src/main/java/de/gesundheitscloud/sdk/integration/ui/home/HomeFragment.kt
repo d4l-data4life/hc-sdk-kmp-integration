@@ -32,17 +32,27 @@
 
 package de.gesundheitscloud.sdk.integration.ui.home
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import de.gesundheitscloud.sdk.HCException
+import de.gesundheitscloud.sdk.integration.MainViewModel
 import de.gesundheitscloud.sdk.integration.R
+import de.gesundheitscloud.sdk.listener.VoidResultListener
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
 
+    private var model: MainViewModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model = ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.home_fragment, container, false)
@@ -52,8 +62,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         home_logout_button.setOnClickListener {
-            // TODO logout
-            findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
+            model!!.client.logout(object : VoidResultListener {
+                override fun onSuccess() {
+                    findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
+                }
+
+                override fun onError(error: HCException?) {
+
+                }
+            })
         }
     }
 }
