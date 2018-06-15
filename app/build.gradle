@@ -23,7 +23,6 @@ android {
                 clientSecret  : "androidsupersecret",
                 environment   : "staging",
                 redirectScheme: "de.gesundheitscloud.example",
-                appAuthRedirectScheme: "de.gesundheitscloud.example"
         ]
     }
 
@@ -40,13 +39,13 @@ android {
         staging {
             dimension "environment"
             manifestPlaceholders = [
-                    environment   : "staging",
+                    environment: "staging",
             ]
         }
         sandbox {
             dimension "environment"
             manifestPlaceholders = [
-                    environment   : "sandbox",
+                    environment: "sandbox",
             ]
         }
     }
@@ -93,12 +92,12 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
     implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
 
-    def navigationVersion = "1.0.0-alpha01"
+    def navigationVersion = "1.0.0-alpha02"
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:d87fbba1c4'
+    implementation 'de.gesundheitscloud:hc-sdk-android:d182faf29c'
 
 
     testImplementation 'junit:junit:4.12'
