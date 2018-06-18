@@ -65,14 +65,6 @@ class WelcomeFragmentTest {
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val selector = UiSelector()
 
-            // dismiss Chrome welcome screen
-            val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
-            if (accept.exists())
-                accept.click()
-            val noThanks = device.findObject(selector.textMatches("NO THANKS"))
-            if (noThanks.exists())
-                noThanks.click()
-
             // enter credentials and press submit button
             val email = device.findObject(selector.descriptionMatches("Email"))
             email.legacySetText("i1456260@nwytg.com")
