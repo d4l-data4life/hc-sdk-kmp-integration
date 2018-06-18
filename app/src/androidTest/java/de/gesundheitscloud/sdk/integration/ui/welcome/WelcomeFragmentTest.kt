@@ -52,31 +52,35 @@ class WelcomeFragmentTest {
     val rule = IntentsTestRule(MainActivity::class.java)
 
 
-    private val screen = WelcomeScreen()
+    private val welcomeScreen = WelcomeScreen()
     private val homeScreen = HomeScreen()
 
 
     @Test
     fun testLoginFlow() {
-        screen {
-            loginButton { click() }
-
-            var device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        welcomeScreen {
+            loginButton {
+                click()
+            }
+            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val selector = UiSelector()
 
-            var email = device.findObject(selector.textMatches("Email"))
-            email.click()
+            // dismiss Chrome welcome screen
+            val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
+            if (accept.exists())
+                accept.click()
+            val noThanks = device.findObject(selector.textMatches("NO THANKS"))
+            if (noThanks.exists())
+                noThanks.click()
+
+            // enter credentials and press submit button
+            val email = device.findObject(selector.descriptionMatches("Email"))
             email.legacySetText("i1456260@nwytg.com")
-
-            var password = device.findObject(selector.textMatches("Password"))
-            password.click()
+            val password = device.findObject(selector.descriptionMatches("Password"))
             password.legacySetText("password1")
-
             device.pressBack()
-
-            var submit = device.findObject(selector.resourceId("loginButton"))
-            submit.click()
-
+            val submit = device.findObject(selector.resourceIdMatches("loginButton"))
+            submit.clickAndWaitForNewWindow()
         }
 
         homeScreen {
