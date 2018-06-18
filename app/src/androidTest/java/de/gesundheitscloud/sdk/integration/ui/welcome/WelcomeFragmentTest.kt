@@ -36,6 +36,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.UiScrollable
 import android.support.test.uiautomator.UiSelector
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.screen.HomeScreen
@@ -64,6 +65,11 @@ class WelcomeFragmentTest {
             }
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val selector = UiSelector()
+
+            // scroll to bottom
+            val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
+            if(root.exists())
+                root.scrollToEnd(10)
 
             // enter credentials and press submit button
             val email = device.findObject(selector.descriptionMatches("Email"))
