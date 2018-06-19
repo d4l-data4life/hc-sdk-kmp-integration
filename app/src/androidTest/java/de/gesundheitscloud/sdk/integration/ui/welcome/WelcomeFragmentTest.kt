@@ -67,9 +67,12 @@ class WelcomeFragmentTest {
             val selector = UiSelector()
 
             // scroll to bottom
+            val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
+            wv.scrollForward()
+            wv.scrollToEnd(10)
             val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
-            if(root.exists())
-                root.scrollToEnd(10)
+            root.scrollForward()
+            root.scrollToEnd(10)
 
             // enter credentials and press submit button
             val email = device.findObject(selector.descriptionMatches("Email"))
