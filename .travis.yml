@@ -48,6 +48,8 @@ script:
   - emulator -avd test -no-window &
   - ./gradlew check
   - android-wait-for-emulator
-  - adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
+  - adb shell settings put global window_animation_scale 0 &
+  - adb shell settings put global transition_animation_scale 0 &
+  - adb shell settings put global animator_duration_scale 0 &
   - adb shell input keyevent 82 &
   - ./gradlew connectedStagingDebugAndroidTest --stacktrace

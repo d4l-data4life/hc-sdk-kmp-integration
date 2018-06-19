@@ -38,12 +38,15 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiScrollable
 import android.support.test.uiautomator.UiSelector
+import android.view.WindowManager
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.screen.HomeScreen
 import de.gesundheitscloud.sdk.integration.screen.WelcomeScreen
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @RunWith(AndroidJUnit4::class)
 class WelcomeFragmentTest {
@@ -56,6 +59,16 @@ class WelcomeFragmentTest {
     private val welcomeScreen = WelcomeScreen()
     private val homeScreen = HomeScreen()
 
+    @Before
+    fun unlockScreen() {
+        val activity = rule.activity
+        val wakeUpDevice = Runnable {
+            activity.window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        activity.runOnUiThread(wakeUpDevice)
+    }
 
     @Test
     fun testLoginFlow() {
