@@ -18,14 +18,7 @@ before_install:
 
 android:
   components:
-    - platform-tools
     - tools
-    - extra-android-support
-    - extra-android-m2repository
-    - extra-google-m2repository
-    - build-tools-27.0.3
-    - android-27
-    - sys-img-armeabi-v7a-android-27
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -39,14 +32,14 @@ cache:
     - $HOME/.android/build-cache
 
 before_script:
-    - echo no | android create avd --force -n test -t android-27 --abi armeabi-v7a
-    - emulator -avd test -no-audio -no-window &
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-27" "system-images;android-24;default;armeabi-v7a"
+    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-27;default;armeabi-v7a"
+    - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
     - adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
     - adb shell input keyevent 82 &
 
 script:
-    - chmod +x gradlew
     - adb logcat -s TestRunner:V & LOGCAT_PID=$!
     - ./gradlew clean assembleAndroidTest connectedStagingDebugAndroidTest --stacktrace
     - if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi
