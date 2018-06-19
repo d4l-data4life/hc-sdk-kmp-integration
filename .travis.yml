@@ -14,7 +14,6 @@ before_install:
     - mkdir "$ANDROID_HOME/licenses" || true
     - echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e" > "$ANDROID_HOME/licenses/android-sdk-license"
     - echo -e "84831b9409646a918e30573bab4c9c91346d8abd\n504667f4c0de7af1a06de9f4b1727b84351f2910" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-    - chmod +x gradlew
 
 android:
   components:
@@ -32,14 +31,17 @@ cache:
     - $HOME/.android/build-cache
 
 before_script:
-    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-25" "system-images;android-25;default;armeabi-v7a"
-    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-25;default;armeabi-v7a"
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-24" "system-images;android-24;default;armeabi-v7a"
+    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-24;default;armeabi-v7a"
     - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+
+script:
+    - chmod +x gradlew
+    - ./gradlew check
     - android-wait-for-emulator
     - adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
     - adb shell input keyevent 82 &
-
-script:
     - adb logcat -s TestRunner:V & LOGCAT_PID=$!
     - ./gradlew clean assembleAndroidTest connectedStagingDebugAndroidTest --stacktrace
     - if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi
+
