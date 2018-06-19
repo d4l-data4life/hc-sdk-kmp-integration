@@ -32,7 +32,7 @@ cache:
     - $HOME/.android/build-cache
 
 before_script:
-    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-27" "system-images;android-24;default;armeabi-v7a"
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-27" "system-images;android-27;default;armeabi-v7a"
     - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-27;default;armeabi-v7a"
     - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
