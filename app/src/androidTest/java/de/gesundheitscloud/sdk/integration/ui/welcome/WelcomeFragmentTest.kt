@@ -66,6 +66,14 @@ class WelcomeFragmentTest {
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val selector = UiSelector()
 
+            // dismiss Chrome welcome screen
+            val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
+            if (accept.exists())
+                accept.click()
+            val noThanks = device.findObject(selector.textMatches("NO THANKS"))
+            if (noThanks.exists())
+                noThanks.click()
+
             // scroll to bottom
             val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
             wv.scrollForward()
