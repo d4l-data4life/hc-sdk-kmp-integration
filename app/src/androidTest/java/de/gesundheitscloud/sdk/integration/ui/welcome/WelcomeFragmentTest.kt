@@ -77,6 +77,7 @@ class WelcomeFragmentTest {
             // enter credentials and press submit button
             val email = device.findObject(selector.descriptionMatches("Email"))
             email.legacySetText("i1456260@nwytg.com")
+            device.pressBack()
             val password = device.findObject(selector.descriptionMatches("Password"))
             password.legacySetText("password1")
             device.pressBack()
