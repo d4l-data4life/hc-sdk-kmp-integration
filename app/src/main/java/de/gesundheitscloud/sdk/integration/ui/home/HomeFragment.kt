@@ -62,9 +62,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         home_logout_button.setOnClickListener {
-            model!!.client.logout(object : VoidResultListener {
+            model?.client?.logout(object : VoidResultListener {
                 override fun onSuccess() {
-                    findNavController().navigate(R.id.action_home_screen_to_welcome_screen)
+                    activity?.runOnUiThread { findNavController().navigate(R.id.action_home_screen_to_welcome_screen) }
                 }
 
                 override fun onError(error: HCException?) {

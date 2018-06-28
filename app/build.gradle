@@ -21,7 +21,7 @@ android {
         manifestPlaceholders = [
                 clientId      : "android",
                 clientSecret  : "androidsupersecret",
-                environment   : "staging",
+                environment   : "development",
                 redirectScheme: "de.gesundheitscloud.example",
         ]
     }
@@ -36,16 +36,16 @@ android {
     flavorDimensions "environment"
 
     productFlavors {
-        staging {
+        development {
             dimension "environment"
             manifestPlaceholders = [
-                    environment: "staging",
+                    environment: "development",
             ]
         }
-        sandbox {
+        production {
             dimension "environment"
             manifestPlaceholders = [
-                    environment: "sandbox",
+                    environment: "production",
             ]
         }
     }
@@ -97,7 +97,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:d182faf29c'
+    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc'
 
 
     testImplementation 'junit:junit:4.12'

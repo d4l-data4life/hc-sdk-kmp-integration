@@ -63,39 +63,40 @@ class WelcomeFragmentTest {
             loginButton {
                 click()
             }
-//            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
-//            val selector = UiSelector()
-//
-//            // dismiss Chrome welcome screen
-//            val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
-//            if (accept.exists())
-//                accept.click()
-//            val noThanks = device.findObject(selector.textMatches("NO THANKS"))
-//            if (noThanks.exists())
-//                noThanks.click()
-//
-//            // scroll to bottom
-//            val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
-//            wv.scrollForward()
-//            wv.scrollToEnd(10)
-//            val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
-//            root.scrollForward()
-//            root.scrollToEnd(10)
-//
-//            // enter credentials and press submit button
-//            val email = device.findObject(selector.descriptionMatches("Email"))
-//            email.legacySetText("i1456260@nwytg.com")
-//            device.pressBack()
-//            val password = device.findObject(selector.descriptionMatches("Password"))
-//            password.legacySetText("password1")
-//            device.pressBack()
-//            val submit = device.findObject(selector.resourceIdMatches("loginButton"))
-//            submit.clickAndWaitForNewWindow()
+            val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+            val selector = UiSelector()
+
+            // dismiss Chrome welcome screen
+            val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
+            if (accept.exists())
+                accept.click()
+            val noThanks = device.findObject(selector.textMatches("NO THANKS"))
+            if (noThanks.exists())
+                noThanks.click()
+
+            // scroll to bottom
+            val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
+            wv.scrollForward()
+            wv.scrollToEnd(10)
+            val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
+            root.scrollForward()
+            root.scrollToEnd(10)
+
+            // enter credentials and press submit button
+            val email = device.findObject(selector.descriptionMatches("Email"))
+            email.legacySetText("l57719@nwytg.com")
+            device.pressBack()
+            val password = device.findObject(selector.descriptionMatches("Password"))
+            password.legacySetText("password1")
+            device.pressBack()
+
+            val submit = device.findObject(selector.descriptionContains("Grant Access"))
+            submit.click()
         }
 
-//        homeScreen {
-//            logoutButton.click()
-//        }
+        homeScreen {
+            logoutButton.click()
+        }
 
     }
 }
