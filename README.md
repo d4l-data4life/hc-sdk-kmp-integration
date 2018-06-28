@@ -13,7 +13,7 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 * Kotlin 1.2.41
 * Java 8
 * Gradle 4.7
-* Android Studio 3.2 Alpha 18
+* Android Studio 3.2 Alpha 16
 * Android Emulator
 
 
