@@ -21,7 +21,7 @@ android {
         manifestPlaceholders = [
                 clientId      : "android",
                 clientSecret  : "androidsupersecret",
-                environment   : "staging",
+                environment   : "development",
                 redirectScheme: "de.gesundheitscloud.example",
         ]
     }
@@ -36,16 +36,16 @@ android {
     flavorDimensions "environment"
 
     productFlavors {
-        staging {
+        development {
             dimension "environment"
             manifestPlaceholders = [
-                    environment: "staging",
+                    environment: "development",
             ]
         }
-        sandbox {
+        production {
             dimension "environment"
             manifestPlaceholders = [
-                    environment: "sandbox",
+                    environment: "production",
             ]
         }
     }
@@ -84,7 +84,7 @@ dependencies {
     implementation "com.android.support:design:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
 
-    implementation "com.android.support.constraint:constraint-layout:1.1.1"
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
 
     implementation 'androidx.core:core-ktx:0.3'
 
@@ -97,7 +97,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    implementation 'de.gesundheitscloud:hc-sdk-android:d182faf29c'
+    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc'
 
 
     testImplementation 'junit:junit:4.12'
@@ -112,6 +112,9 @@ dependencies {
     def espressoVersion = "3.0.2"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+
+    def uiautomatorVersion = "2.1.3"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomatorVersion"
 
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"
 
