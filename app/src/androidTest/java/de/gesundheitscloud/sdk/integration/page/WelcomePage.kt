@@ -30,14 +30,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration.screen
+package de.gesundheitscloud.sdk.integration.page
 
 import com.agoda.kakao.KButton
+import com.agoda.kakao.KView
 import com.agoda.kakao.Screen
 import de.gesundheitscloud.sdk.integration.R
 
+class WelcomePage : BasePage() {
 
-class WelcomeScreen : Screen<WelcomeScreen>() {
+    private val welcomeScreen = WelcomeScreen()
 
-    val loginButton = KButton { withId(R.id.welcome_login_button) }
+    init {
+        welcomeScreen.root { isDisplayed() }
+    }
+
+
+    fun openLoginPage(): LoginPage {
+        welcomeScreen.loginButton { click() }
+
+        return LoginPage()
+    }
+
+
+    class WelcomeScreen : Screen<WelcomeScreen>() {
+        val root = KView { withId(R.id.welcome_constraint) }
+
+        val loginButton = KButton { withId(R.id.welcome_login_button) }
+    }
+
 }
