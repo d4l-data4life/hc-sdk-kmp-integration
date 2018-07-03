@@ -10,10 +10,10 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 ### Requirements
 
 * Android 5.0.1 (API 21)
-* Kotlin 1.2.41
+* Kotlin 1.2.50
 * Java 8
-* Gradle 4.7
-* Android Studio 3.2 Alpha 16
+* Gradle 4.8.1
+* Android Studio 3.2 Beta 2
 * Android Emulator
 
 
