@@ -2,7 +2,7 @@
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
 
 buildscript {
-    ext.kotlin_version = '1.2.50'
+    ext.kotlin_version = '1.2.51'
     repositories {
         google()
         jcenter()

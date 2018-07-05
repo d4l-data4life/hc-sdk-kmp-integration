@@ -46,16 +46,18 @@ class LoginPage : BasePage() {
         device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), timeout)
     }
 
-    fun doLogin(email: String, password: String) : HomePage {
+    fun doLogin(email: String, password: String): HomePage {
         val selector = UiSelector()
 
         // dismiss Chrome welcome screen
         val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
-        if (accept.exists())
+        if (accept.exists()) {
             accept.click()
+        }
         val noThanks = device.findObject(selector.textMatches("NO THANKS"))
-        if (noThanks.exists())
+        if (noThanks.exists()) {
             noThanks.click()
+        }
 
         // scroll to bottom
         val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
