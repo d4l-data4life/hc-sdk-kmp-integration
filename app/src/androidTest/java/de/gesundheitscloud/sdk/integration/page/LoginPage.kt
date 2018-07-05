@@ -32,10 +32,11 @@
 
 package de.gesundheitscloud.sdk.integration.page
 
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiScrollable
-import android.support.test.uiautomator.UiSelector
-import android.support.test.uiautomator.Until
+import androidx.test.InstrumentationRegistry
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until
 
 class LoginPage : BasePage() {
 
@@ -45,7 +46,6 @@ class LoginPage : BasePage() {
 
 
     fun doLogin(email: String, password: String): HomePage {
-
         val selector = UiSelector()
 
         // dismiss Chrome welcome screen

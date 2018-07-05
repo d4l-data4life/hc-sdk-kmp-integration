@@ -32,7 +32,7 @@
 
 package de.gesundheitscloud.sdk.integration
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import de.gesundheitscloud.sdk.HealthCloud
 
 class MainViewModel : ViewModel() {

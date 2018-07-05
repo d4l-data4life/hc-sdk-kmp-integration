@@ -35,11 +35,12 @@ package de.gesundheitscloud.sdk.integration.ui.welcome
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import de.gesundheitscloud.sdk.HealthCloud
 import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
@@ -66,7 +67,7 @@ class WelcomeFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GC_AUTH) {
             if (resultCode == RESULT_OK) {
-                findNavController().navigate(R.id.action_welcome_screen_to_home_screen)
+                findNavController(this).navigate(R.id.action_welcome_screen_to_home_screen)
             } else {
                 this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
             }
