@@ -17,6 +17,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
 
         manifestPlaceholders = [
                 clientId      : "android",
@@ -73,6 +74,10 @@ android {
         ]
 
     }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+    }
 }
 
 dependencies {
@@ -108,6 +113,7 @@ dependencies {
 
     def androidTestVersion = "1.0.2"
     androidTestImplementation "com.android.support.test:runner:$androidTestVersion"
+    androidTestUtil "com.android.support.test:orchestrator:$androidTestVersion"
     androidTestImplementation "com.android.support.test:rules:$androidTestVersion"
 
     def espressoVersion = "3.0.2"
