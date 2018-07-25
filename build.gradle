@@ -1,6 +1,3 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-import org.gradle.api.tasks.wrapper.Wrapper.DistributionType
-
 buildscript {
     ext.kotlin_version = '1.2.51'
     repositories {
@@ -35,5 +32,6 @@ task clean(type: Delete) {
 
 wrapper {
     gradleVersion = "4.9"
-    distributionType = DistributionType.ALL
+    //noinspection UnnecessaryQualifiedReference
+    distributionType = Wrapper.DistributionType.ALL
 }
