@@ -39,17 +39,19 @@ import de.gesundheitscloud.sdk.integration.R
 
 class WelcomePage : BasePage() {
 
-    private val welcomeScreen = WelcomeScreen()
-
-    init {
-        welcomeScreen.root { isDisplayed() }
-    }
+    private val screen = WelcomeScreen()
 
 
     fun openLoginPage(): LoginPage {
-        welcomeScreen.loginButton { click() }
+        screen.loginButton { click() }
 
         return LoginPage()
+    }
+
+    fun isVisible() : WelcomePage {
+        screen.root { isDisplayed() }
+
+        return this
     }
 
 

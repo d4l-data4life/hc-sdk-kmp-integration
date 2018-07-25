@@ -51,9 +51,15 @@ class LoginFlowTest {
     @Test
     fun testLoginFlow() {
         WelcomePage()
+                .isVisible()
                 .openLoginPage()
-                .doLogin("wolf.montwe+staging@gesundheitscloud.de", "asdfgh1!")
-                .doLogout()
+                .doLogin("wolf.montwe+develop@gesundheitscloud.de", "asdfgh1!")
+//                .isVisible()
+//                .doLogout()
+//                .isVisible()
+
+
+        val test = ""
     }
 
 }

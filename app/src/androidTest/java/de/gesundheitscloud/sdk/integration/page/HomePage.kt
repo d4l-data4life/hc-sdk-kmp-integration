@@ -42,15 +42,17 @@ class HomePage : BasePage() {
     private val screen = HomeScreen()
 
 
-    init {
-        screen.root { isDisplayed() }
-    }
-
-
     fun doLogout(): WelcomePage {
         screen.logoutButton { click() }
 
         return WelcomePage()
+    }
+
+
+    fun isVisible(): HomePage {
+        screen.root { isDisplayed() }
+
+        return this
     }
 
 

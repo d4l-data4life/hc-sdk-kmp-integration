@@ -41,12 +41,9 @@ class LoginPage : BasePage() {
 
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
-
-    init {
-        device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), timeout)
-    }
-
     fun doLogin(email: String, password: String): HomePage {
+        device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), timeout)
+
         val selector = UiSelector()
 
         // dismiss Chrome welcome screen
@@ -63,22 +60,18 @@ class LoginPage : BasePage() {
         val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
         wv.scrollForward()
         wv.scrollToEnd(10)
-        val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
-        root.scrollForward()
-        root.scrollToEnd(10)
 
         // enter credentials and press submit button
-        val email = device.findObject(selector.descriptionMatches("Email"))
-        email.legacySetText("l57719@nwytg.com")
+        val emailInput = device.findObject(selector.resourceId("emailInput"))
+        emailInput.legacySetText(email)
         device.pressBack()
-        val password = device.findObject(selector.descriptionMatches("Password"))
-        password.legacySetText("password1")
+        val passwordInput = device.findObject(selector.resourceId("passwordInput"))
+        passwordInput.legacySetText(password)
         device.pressBack()
 
-        val submit = device.findObject(selector.descriptionContains("Grant Access"))
+        val submit = device.findObject(selector.resourceId("loginButton"))
         submit.click()
 
         return HomePage()
     }
-
 }
