@@ -39,7 +39,7 @@ script:
     - chmod +x gradlew
     - ./gradlew check
     - android-wait-for-emulator
-    - adb install ./resources/com.android.chrome_67.0.3396.87-339608701_minAPI21(armeabi-v7a)(nodpi).apk
+    - adb install ./resources/com.android.chrome_67.0.3396.87-339608701_minAPI21\(armeabi-v7a\)\(nodpi\).apk
     - adb shell 'echo "chrome --disable-fre --no-default-browser-check --no-first-run" > /data/local/tmp/chrome-command-line'
     - adb shell input keyevent 82 &
     - adb logcat -s TestRunner:V & LOGCAT_PID=$!
