@@ -32,5 +32,29 @@
 
 package de.gesundheitscloud.sdk.integration.page
 
+import android.support.test.InstrumentationRegistry
+import android.support.test.uiautomator.By
+import android.support.test.uiautomator.UiDevice
+import android.support.test.uiautomator.Until
+
 abstract class BasePage {
+
+    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
+
+    init {
+        this.waitForPage()
+    }
+
+
+    abstract fun waitForPage()
+
+    fun waitByResource(resourceName: String) {
+        device.wait(Until.hasObject(By.res(resourceName)), TIMEOUT)
+    }
+
+
+    companion object {
+        val TIMEOUT = 1000 * 300L
+    }
 }

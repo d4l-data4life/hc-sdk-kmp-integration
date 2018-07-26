@@ -32,29 +32,34 @@
 
 package de.gesundheitscloud.sdk.integration.page
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.uiautomator.*
+import android.support.test.uiautomator.By
+import android.support.test.uiautomator.UiScrollable
+import android.support.test.uiautomator.UiSelector
+import android.support.test.uiautomator.Until
 
 class LoginPage : BasePage() {
 
-    private val timeout = 1000 * 60L
+    override fun waitForPage() {
+        device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), TIMEOUT)
+    }
 
-    private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     fun doLogin(email: String, password: String): HomePage {
-        device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), timeout)
 
         val selector = UiSelector()
 
         // dismiss Chrome welcome screen
-        val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
+        val accept = device.findObject(selector.resourceId("com.android.chrome:id/terms_accept"))
         if (accept.exists()) {
             accept.click()
         }
-        val noThanks = device.findObject(selector.textMatches("NO THANKS"))
+        val noThanks = device.findObject(selector.resourceId("com.android.chrome:id/negative_button"))
         if (noThanks.exists()) {
             noThanks.click()
         }
+
+        device.waitForIdle()
+        waitByResource("emailInput")
 
         // scroll to bottom
         val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
@@ -63,15 +68,20 @@ class LoginPage : BasePage() {
 
         // enter credentials and press submit button
         val emailInput = device.findObject(selector.resourceId("emailInput"))
-        emailInput.legacySetText(email)
-        device.pressBack()
+        emailInput.text = email
+        device.waitForIdle()
+
         val passwordInput = device.findObject(selector.resourceId("passwordInput"))
-        passwordInput.legacySetText(password)
-        device.pressBack()
+        passwordInput.text = password
+        device.waitForIdle()
 
         val submit = device.findObject(selector.resourceId("loginButton"))
         submit.click()
 
+        device.waitForIdle()
+        device.wait(Until.hasObject(By.pkg("de.gesundheitscloud.sdk.integration").depth(0)), TIMEOUT)
+
         return HomePage()
     }
+
 }

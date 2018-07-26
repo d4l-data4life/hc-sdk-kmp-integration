@@ -42,6 +42,11 @@ class WelcomePage : BasePage() {
     private val screen = WelcomeScreen()
 
 
+    override fun waitForPage() {
+        waitByResource("de.gesundheitscloud.sdk.integration:id/welcome_constraint")
+    }
+
+
     fun openLoginPage(): LoginPage {
         screen.loginButton { click() }
 

@@ -39,7 +39,13 @@ import de.gesundheitscloud.sdk.integration.R
 
 class HomePage : BasePage() {
 
+
     private val screen = HomeScreen()
+
+
+    override fun waitForPage() {
+        waitByResource("de.gesundheitscloud.sdk.integration:id/home_constraint")
+    }
 
 
     fun doLogout(): WelcomePage {

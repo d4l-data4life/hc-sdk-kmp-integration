@@ -41,6 +41,7 @@ import android.support.test.uiautomator.UiSelector
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.HomePage
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -57,6 +58,7 @@ class WelcomeFragmentTest {
     private val welcomeScreen = WelcomePage.WelcomeScreen()
     private val homeScreen = HomePage.HomeScreen()
 
+    @Ignore
     @Test
     fun testLoginFlow() {
 
