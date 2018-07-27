@@ -39,8 +39,9 @@ import android.support.test.uiautomator.UiDevice
 import android.support.test.uiautomator.UiScrollable
 import android.support.test.uiautomator.UiSelector
 import de.gesundheitscloud.sdk.integration.MainActivity
-import de.gesundheitscloud.sdk.integration.screen.HomeScreen
-import de.gesundheitscloud.sdk.integration.screen.WelcomeScreen
+import de.gesundheitscloud.sdk.integration.page.HomePage
+import de.gesundheitscloud.sdk.integration.page.WelcomePage
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,43 +55,46 @@ class WelcomeFragmentTest {
     val rule = IntentsTestRule(MainActivity::class.java)
 
 
-    private val welcomeScreen = WelcomeScreen()
-    private val homeScreen = HomeScreen()
+    private val welcomeScreen = WelcomePage.WelcomeScreen()
+    private val homeScreen = HomePage.HomeScreen()
 
+    @Ignore
     @Test
     fun testLoginFlow() {
+
+
         welcomeScreen {
             loginButton {
                 click()
             }
+
             val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
             val selector = UiSelector()
 
             // dismiss Chrome welcome screen
             val accept = device.findObject(selector.textMatches("ACCEPT & CONTINUE"))
-            if (accept.exists())
+            if (accept.exists()) {
                 accept.click()
+            }
             val noThanks = device.findObject(selector.textMatches("NO THANKS"))
-            if (noThanks.exists())
+            if (noThanks.exists()) {
                 noThanks.click()
+            }
 
             // scroll to bottom
             val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
             wv.scrollForward()
             wv.scrollToEnd(10)
-            val root = UiScrollable(selector.descriptionMatches("GesundheitsCloud"))
-            root.scrollForward()
-            root.scrollToEnd(10)
 
             // enter credentials and press submit button
-            val email = device.findObject(selector.descriptionMatches("Email"))
+            val email = device.findObject(selector.resourceId("emailInput"))
             email.legacySetText("l57719@nwytg.com")
             device.pressBack()
-            val password = device.findObject(selector.descriptionMatches("Password"))
+            val password = device.findObject(selector.resourceId("passwordInput"))
             password.legacySetText("password1")
             device.pressBack()
 
-            val submit = device.findObject(selector.descriptionContains("Grant Access"))
+            val submit = device.findObject(selector.resourceId("loginButton"))
             submit.click()
         }
 
