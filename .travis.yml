@@ -58,7 +58,8 @@ script:
     - ./gradlew assembleDevelopmentDebug
 
     # Firebase Test Lab run
-    - gcloud firebase test android run \
+    - |
+      gcloud firebase test android run \
           --type instrumentation \
           --app app/build/outputs/apk/development/debug/app-development-debug.apk \
           --test app/build/outputs/apk/androidTest/development/debug/app-development-debug-androidTest.apk \
