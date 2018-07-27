@@ -29,18 +29,46 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.m2
     - $HOME/.android/build-cache
+    - $HOME/google-cloud-sdk
 
 before_script:
-    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-24" "system-images;android-24;default;armeabi-v7a"
-    - echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-24;default;armeabi-v7a"
-    - $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+    # Install Google Cloud SDK
+    - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+    - source /home/travis/google-cloud-sdk/path.bash.inc
+    - gcloud --quiet version
+    - gcloud --quite components update
+
+    # Activate Google Cloud credentials
+    - openssl aes-256-cbc -K $encrypted_f18cb52fe8b2_key -iv $encrypted_f18cb52fe8b2_iv -in gcloud-service-key.json.enc -out gcloud-service-key.json -d
+    - gcloud auth activate-service-account --key-file gcloud-service-key.json
+
+    # Setup Google Cloud project
+    - gcloud config set project "hc-sdk-android-integration"
+
+    # Setup emulator
+    #- $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-21" "system-images;android-21;default;armeabi-v7a"
+    #- echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-21;default;armeabi-v7a"
+    #- $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
 
 script:
     - chmod +x gradlew
+    - ./gradlew clean
     - ./gradlew check
-    - android-wait-for-emulator
-    - adb install ./resources/com.android.chrome_68.0.3440.70-344007001_minAPI21_armeabi-v7a_nodpi.apk
-    - adb shell input keyevent 82 &
-    - adb logcat -s TestRunner:V & LOGCAT_PID=$!
-    - ./gradlew clean assembleAndroidTest connectedDevelopmentDebugAndroidTest --stacktrace
-    - if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi
+    - ./gradlew assembleAndroidTest
+    - ./gradlew assembleDevelopmentDebug
+
+    # Firebase Test Lab run
+    - gcloud firebase test android run \
+          --type instrumentation \
+          --app app/build/outputs/apk/development/debug/app-development-debug.apk \
+          --test app/build/outputs/apk/androidTest/development/debug/app-development-debug-androidTest.apk \
+          --device model=NexusLowRes,version=24,locale=de,orientation=portrait \
+          --timeout 300s
+
+    # Emulator test
+    #- android-wait-for-emulator
+    #- adb install ./resources/com.android.chrome_68.0.3440.70-344007001_minAPI21_armeabi-v7a_nodpi.apk
+    #- adb shell input keyevent 82 &
+    #- adb logcat -s TestRunner:V & LOGCAT_PID=$!
+    #- ./gradlew clean assembleAndroidTest connectedDevelopmentDebugAndroidTest --stacktrace
+    #- if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi

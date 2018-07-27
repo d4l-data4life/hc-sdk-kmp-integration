@@ -39,7 +39,7 @@ import android.support.test.uiautomator.Until
 
 abstract class BasePage {
 
-    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())!!
 
 
     init {
@@ -55,6 +55,6 @@ abstract class BasePage {
 
 
     companion object {
-        val TIMEOUT = 1000 * 300L
+        const val TIMEOUT = 1000 * 60L
     }
 }
