@@ -9,11 +9,11 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 ### Requirements
 
-* Android 5.0.1 (API 21)
-* Kotlin 1.2.41
+* Android 5.0.1 (API 21) to Android 9 (API 28)
+* Kotlin 1.2.51
 * Java 8
-* Gradle 4.7
-* Android Studio 3.2 Alpha 16
+* Gradle 4.9
+* Android Studio 3.2 Beta 4
 * Android Emulator
 
 
@@ -32,8 +32,8 @@ Run gradle wrapper task for connected tests:
 
 ### Test suit
 
-- [ ] Login
-- [ ] Logout
+- [x] Login
+- [x] Logout
 - [ ] Document CRUD
 - [ ] Report CRUD
 - [ ] Observation CRUD
