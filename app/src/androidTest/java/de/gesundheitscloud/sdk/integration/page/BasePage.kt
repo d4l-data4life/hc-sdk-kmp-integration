@@ -32,10 +32,10 @@
 
 package de.gesundheitscloud.sdk.integration.page
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.uiautomator.By
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.Until
+import androidx.test.InstrumentationRegistry
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.Until
 
 abstract class BasePage {
 
@@ -56,5 +56,7 @@ abstract class BasePage {
 
     companion object {
         const val TIMEOUT = 1000 * 60L
+
+        const val TIMEOUT_SHORT = 1000 * 5L
     }
 }

@@ -45,10 +45,8 @@ before_script:
     # Setup Google Cloud project
     - gcloud config set project "hc-sdk-android-integration"
 
-    # Setup emulator
-    #- $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;27.0.3" "platforms;android-27" "platforms;android-21" "system-images;android-21;default;armeabi-v7a"
-    #- echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n test -k "system-images;android-21;default;armeabi-v7a"
-    #- $ANDROID_HOME/emulator/emulator -avd test -no-audio -no-window &
+    # Setup Android SDK
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;28.0.1" "platforms;android-28"
 
 script:
     - chmod +x gradlew
@@ -59,11 +57,3 @@ script:
 
     # Firebase Test Lab run
     - ./script/gcloud-test-lab.sh
-
-    # Emulator test
-    #- android-wait-for-emulator
-    #- adb install ./resources/com.android.chrome_68.0.3440.70-344007001_minAPI21_armeabi-v7a_nodpi.apk
-    #- adb shell input keyevent 82 &
-    #- adb logcat -s TestRunner:V & LOGCAT_PID=$!
-    #- ./gradlew clean assembleAndroidTest connectedDevelopmentDebugAndroidTest --stacktrace
-    #- if [ -n "$LOGCAT_PID" ] ; then kill $LOGCAT_PID; fi

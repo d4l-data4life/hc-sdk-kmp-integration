@@ -74,10 +74,6 @@ android {
         ]
 
     }
-
-    testOptions {
-        execution 'ANDROID_TEST_ORCHESTRATOR'
-    }
 }
 
 dependencies {
@@ -85,11 +81,9 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.0.0-beta01'
 
-
-    def supportVersion = "28.0.0-alpha3"
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.browser:browser:1.0.0-beta01'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    def androidXVersion = "1.0.0-beta01"
+    implementation "androidx.appcompat:appcompat:$androidXVersion"
+    implementation "androidx.browser:browser:$androidXVersion"
 
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha1"
 
@@ -113,8 +107,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-//    androidTestImplementation 'androidx.annotation:annotation:1.0.0-beta01'
-
     def androidTestVersion = "1.1.0-alpha3"
     androidTestImplementation "androidx.test:runner:$androidTestVersion"
     androidTestImplementation "androidx.test:rules:$androidTestVersion"
@@ -131,5 +123,7 @@ dependencies {
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"
 
     // https://github.com/agoda-com/Kakao
-    androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
+    // androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
+    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
+    androidTestImplementation 'com.github.wmontwe:Kakao:1.4.0-androidx'
 }
