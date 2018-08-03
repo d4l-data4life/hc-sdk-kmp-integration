@@ -32,8 +32,8 @@
 
 package de.gesundheitscloud.sdk.integration.flow
 
-import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.runner.AndroidJUnit4
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
 import org.junit.Rule

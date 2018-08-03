@@ -32,12 +32,12 @@
 
 package de.gesundheitscloud.sdk.integration.ui.welcome
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.test.uiautomator.UiDevice
-import android.support.test.uiautomator.UiScrollable
-import android.support.test.uiautomator.UiSelector
+import androidx.test.InstrumentationRegistry
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.runner.AndroidJUnit4
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.HomePage
 import de.gesundheitscloud.sdk.integration.page.WelcomePage

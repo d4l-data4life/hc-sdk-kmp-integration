@@ -32,11 +32,11 @@
 
 package de.gesundheitscloud.sdk.integration
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 
 /**
  * An activity that inflates a layout that has a NavHostFragment.
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-        setupNavigation()
+//        setupNavigation()
     }
 
-    private fun setupNavigation() {
-        val navigationController = findNavController(R.id.navigation_host_fragment)
-        setupActionBarWithNavController(navigationController)
-    }
+//    private fun setupNavigation() {
+//        val navigationController = findNavController(R.id.navigation_host_fragment)
+//        setupActionBarWithNavController(navigationController)
+//    }
 
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navigation_host_fragment).navigateUp()
