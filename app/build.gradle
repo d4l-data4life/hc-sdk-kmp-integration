@@ -79,25 +79,25 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation 'androidx.core:core-ktx:1.0.0-beta01'
+    implementation 'androidx.core:core-ktx:1.0.0-rc02'
 
-    def androidXVersion = "1.0.0-beta01"
+    def androidXVersion = "1.0.0-rc02"
     implementation "androidx.appcompat:appcompat:$androidXVersion"
     implementation "androidx.browser:browser:$androidXVersion"
 
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha1"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
 
 
-    def lifecycleVersion = "2.0.0-beta01"
+    def lifecycleVersion = "2.0.0-rc01"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
 
-    def navigationVersion = "1.0.0-alpha04"
+    def navigationVersion = "1.0.0-alpha05"
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
 
-    def materialVersion = "1.0.0-beta01"
+    def materialVersion = "1.0.0-rc01"
     implementation "com.google.android.material:material:$materialVersion"
 
 
@@ -107,17 +107,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-    def androidTestVersion = "1.1.0-alpha3"
+    def androidTestVersion = "1.1.0-alpha4"
     androidTestImplementation "androidx.test:runner:$androidTestVersion"
     androidTestImplementation "androidx.test:rules:$androidTestVersion"
     androidTestUtil "androidx.test:orchestrator:$androidTestVersion"
 
-    def espressoVersion = "3.1.0-alpha3"
+    def espressoVersion = "3.1.0-alpha4"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
     androidTestImplementation "androidx.test.espresso:espresso-web:$espressoVersion"
 
-    def uiautomatorVersion = "2.2.0-alpha3"
+    def uiautomatorVersion = "2.2.0-alpha4"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomatorVersion"
 
     androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"

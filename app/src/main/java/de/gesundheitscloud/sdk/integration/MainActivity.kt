@@ -51,15 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
-//        setupNavigation()
     }
-
-//    private fun setupNavigation() {
-//        val navigationController = findNavController(R.id.navigation_host_fragment)
-//        setupActionBarWithNavController(navigationController)
-//    }
-
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navigation_host_fragment).navigateUp()
 
