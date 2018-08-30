@@ -46,7 +46,7 @@ before_script:
     - gcloud config set project "hc-sdk-android-integration"
 
     # Setup Android SDK
-    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;28.0.1" "platforms;android-28"
+    - $ANDROID_HOME/tools/bin/sdkmanager --channel=0 "tools" "platform-tools" "build-tools;28.0.2" "platforms;android-28"
 
 script:
     - chmod +x gradlew
