@@ -33,10 +33,10 @@
 package de.gesundheitscloud.sdk.integration
 
 import androidx.lifecycle.ViewModel
-import de.gesundheitscloud.sdk.HealthCloud
+import de.gesundheitscloud.sdk.HealthCloudAndroid
 
 class MainViewModel : ViewModel() {
 
-    val client : HealthCloud = HealthCloud.getInstance()
+    val client : HealthCloudAndroid = HealthCloudAndroid.getInstance()
 
 }

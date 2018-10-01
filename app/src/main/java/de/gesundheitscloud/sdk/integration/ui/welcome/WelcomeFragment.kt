@@ -42,8 +42,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
-import de.gesundheitscloud.sdk.HealthCloud
-import de.gesundheitscloud.sdk.HealthCloud.GC_AUTH
+import de.gesundheitscloud.sdk.HealthCloudAndroid
+import de.gesundheitscloud.sdk.HealthCloudAndroid.GC_AUTH
 import de.gesundheitscloud.sdk.integration.R
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
@@ -58,7 +58,7 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         welcome_login_button.setOnClickListener {
-            val intent = HealthCloud.getHCSignInIntent(context)
+            val intent = HealthCloudAndroid.getHCSignInIntent(context)
             startActivityForResult(intent, GC_AUTH)
         }
     }

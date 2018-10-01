@@ -96,13 +96,15 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
-
     // http://developer.android.com/tools/extras/support-library.html
     def materialVersion = "1.0.0"
     implementation "com.google.android.material:material:$materialVersion"
 
-
-    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2'
+//    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2'
+    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:7c38e03262') {
+        exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'securestore-jvm'
+        exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'crypto-jvm'
+    }
 
 
     testImplementation 'junit:junit:4.12'
