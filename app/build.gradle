@@ -101,9 +101,11 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
 
 //    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2'
-    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:7c38e03262') {
+    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:ef50a7859d') {
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'securestore-jvm'
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'crypto-jvm'
+        exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'auth-jvm'
+        exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'util-jvm'
     }
 
 
