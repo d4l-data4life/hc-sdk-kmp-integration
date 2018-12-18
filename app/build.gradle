@@ -81,9 +81,10 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.0.1'
 
-    def androidXVersion = "1.0.0"
+    def androidXVersion = "1.0.2"
     implementation "androidx.appcompat:appcompat:$androidXVersion"
-    implementation "androidx.browser:browser:$androidXVersion"
+    def androidXBrowserVersion = "1.0.0"
+    implementation "androidx.browser:browser:$androidXBrowserVersion"
 
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
 
