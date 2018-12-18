@@ -20,10 +20,10 @@ android {
         testInstrumentationRunnerArguments clearPackageData: "true"
 
         manifestPlaceholders = [
-                clientId      : "android",
+                clientId      : "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
                 clientSecret  : "androidsupersecret",
                 environment   : "development",
-                redirectScheme: "de.gesundheitscloud.example",
+                redirectScheme: "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
         ]
     }
 
@@ -101,7 +101,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
 
 //    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2'
-    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:ef50a7859d') {
+    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:f580b0833b') {
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'securestore-jvm'
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'crypto-jvm'
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'auth-jvm'
