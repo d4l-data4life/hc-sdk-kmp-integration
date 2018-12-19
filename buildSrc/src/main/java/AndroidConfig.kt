@@ -30,13 +30,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
-
-import androidx.lifecycle.ViewModel
-import de.gesundheitscloud.sdk.HealthCloudAndroid
-
-class MainViewModel : ViewModel() {
-
-    val client : HealthCloudAndroid = HealthCloudAndroid.getInstance()
-
+object AndroidConfig {
+    const val minSdkVersion = 21
+    const val compileSdkVersion = 28
+    const val targetSdkVersion = 28
 }

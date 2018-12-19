@@ -30,13 +30,62 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+object Versions {
+    const val kotlin = "1.3.11"
+    const val kotlinCoroutines = "1.0.0"
 
-import androidx.lifecycle.ViewModel
-import de.gesundheitscloud.sdk.HealthCloudAndroid
+    object GradlePlugin {
+        const val kotlin = Versions.kotlin
+        const val android = "3.3.0-rc02"
 
-class MainViewModel : ViewModel() {
+        /**
+         * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
+         */
+        const val dexcount = "0.8.4"
 
-    val client : HealthCloudAndroid = HealthCloudAndroid.getInstance()
+        /**
+         * [Gradle DownloadTask](https://github.com/michel-kraemer/gradle-download-task)
+         */
+        const val downloadTask = "3.4.3"
+    }
 
+    // AndroidX
+    const val androidXKtx = "1.0.1"
+    const val androidXAppCompat = "1.0.2"
+    const val androidXBrowser = "1.0.0"
+
+    const val androidXConstraintLayout = "2.0.0-alpha2"
+
+    const val androidXLifecycle = "2.0.0"
+    const val androidXNavigation = "1.0.0-alpha08"
+
+    // Material
+    const val material = "1.0.0"
+
+    // Google
+    const val googlePlayServices = "15.0.1"
+
+
+    /**
+     * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
+     */
+    const val threeTenABP = "1.1.1"
+
+    // Injection
+    const val koin = "1.0.1"
+
+
+    // Junit Test
+    const val testJUnit = "4.12"
+
+    /**
+     * [mockk](http://mockk.io)
+     */
+    const val testMockk = "1.8.12"
+
+
+    // Android Test
+    const val androidXTest = "1.1.1"
+    const val androidXEspresso = "3.1.1"
+    const val androidXUiAutomator = "2.2.0"
 }

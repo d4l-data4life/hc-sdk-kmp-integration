@@ -30,13 +30,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+plugins {
+    `kotlin-dsl`
+}
 
-import androidx.lifecycle.ViewModel
-import de.gesundheitscloud.sdk.HealthCloudAndroid
 
-class MainViewModel : ViewModel() {
-
-    val client : HealthCloudAndroid = HealthCloudAndroid.getInstance()
-
+repositories {
+    jcenter()
 }
