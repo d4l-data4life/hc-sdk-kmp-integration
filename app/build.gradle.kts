@@ -19,7 +19,9 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments(clearPackageData = true)
+        testInstrumentationRunnerArguments(mapOf(
+                "clearPackageData" to "true"
+        ))
 
         manifestPlaceholders = mapOf<String, Any>(
                 "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
