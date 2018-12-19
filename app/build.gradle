@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion AndroidConfig.compileSdkVersion
 
     defaultConfig {
         applicationId "de.gesundheitscloud.sdk.integration"
 
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion AndroidConfig.minSdkVersion
+        targetSdkVersion AndroidConfig.targetSdkVersion
 
         versionCode 1
         versionName "1.0"
@@ -43,6 +43,12 @@ android {
                     environment: "development",
             ]
         }
+        staging {
+            dimension "environment"
+            manifestPlaceholders = [
+                    environment: "staging",
+            ]
+        }
         production {
             dimension "environment"
             manifestPlaceholders = [
@@ -72,37 +78,27 @@ android {
                 'src/main/res_feature/document',
                 'src/main/res_feature/welcome',
         ]
-
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation Libraries.kotlinStdLibJdk7
 
-    implementation 'androidx.core:core-ktx:1.0.1'
+    implementation Libraries.androidXKtx
+    implementation Libraries.androidXAppCompat
+    implementation Libraries.androidXBrowser
+    implementation Libraries.androidXConstraintLayout
 
-    def androidXVersion = "1.0.2"
-    implementation "androidx.appcompat:appcompat:$androidXVersion"
-    def androidXBrowserVersion = "1.0.0"
-    implementation "androidx.browser:browser:$androidXBrowserVersion"
+    implementation Libraries.androidXLifecylceCommonJava8
+    implementation Libraries.androidXLifecylceExtensions
 
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha2"
+    implementation Libraries.androidXNavigationFragmentKtx
+    implementation Libraries.androidXNavigationUiKtx
 
-
-    def lifecycleVersion = "2.0.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
-
-    def navigationVersion = "1.0.0-alpha08"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
-
-    // http://developer.android.com/tools/extras/support-library.html
-    def materialVersion = "1.0.0"
-    implementation "com.google.android.material:material:$materialVersion"
+    implementation Libraries.material
 
 //    implementation 'de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2'
-    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:f580b0833b') {
+    implementation('de.gesundheitscloud.hc-sdk-android:sdk-android:2db7fffdd7') {
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'securestore-jvm'
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'crypto-jvm'
         exclude group: 'de.gesundheitscloud.hc-sdk-android', module: 'auth-jvm'
@@ -110,24 +106,20 @@ dependencies {
     }
 
 
+    testImplementation Libraries.testJunit
 
-    testImplementation 'junit:junit:4.12'
 
+    androidTestImplementation Libraries.androidXTestRunner
+    androidTestImplementation Libraries.androidXTestRules
+    androidTestImplementation Libraries.androidXTestOrchestrator
 
-    def androidTestVersion = "1.1.1"
-    androidTestImplementation "androidx.test:runner:$androidTestVersion"
-    androidTestImplementation "androidx.test:rules:$androidTestVersion"
-    androidTestUtil "androidx.test:orchestrator:$androidTestVersion"
+    androidTestImplementation Libraries.androidXTestEspressoCore
+    androidTestImplementation Libraries.androidXTestEspressoIntents
+    androidTestImplementation Libraries.androidXTestEspressoWeb
 
-    def espressoVersion = "3.1.1"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-web:$espressoVersion"
+    androidTestImplementation Libraries.androidXTestUiAutomator
 
-    def uiautomatorVersion = "2.2.0"
-    androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomatorVersion"
-
-    androidTestImplementation "android.arch.navigation:navigation-testing:$navigationVersion"
+    androidTestImplementation Libraries.androidXNavigationTesting
 
     // https://github.com/agoda-com/Kakao
     // androidTestImplementation 'com.agoda.kakao:kakao:1.4.0'
