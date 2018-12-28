@@ -5,31 +5,30 @@ buildscript {
     }
 
     dependencies {
-        classpath GradlePlugins.android
-        classpath GradlePlugins.kotlin
+        classpath(GradlePlugins.android)
+        classpath(GradlePlugins.kotlin)
     }
 }
 
 plugins {
     // https://github.com/ben-manes/gradle-versions-plugin
-    id "com.github.ben-manes.versions" version "0.20.0"
+    id("com.github.ben-manes.versions") version "0.20.0"
 }
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven("https://jitpack.io")
         jcenter()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register<Delete>("clean", Delete::class.java) {
+    delete(rootProject.buildDir)
 }
 
-wrapper {
+tasks.named<Wrapper>("wrapper") {
     gradleVersion = "5.0"
-    //noinspection UnnecessaryQualifiedReference
     distributionType = Wrapper.DistributionType.ALL
 }
