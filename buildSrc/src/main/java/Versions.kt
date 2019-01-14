@@ -88,4 +88,9 @@ object Versions {
     const val androidXTest = "1.1.1"
     const val androidXEspresso = "3.1.1"
     const val androidXUiAutomator = "2.2.0"
+
+    // https://github.com/agoda-com/Kakao = 1.4.0
+    // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
+    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
+    const val androidXKakao = "1.4.0-androidx"
 }

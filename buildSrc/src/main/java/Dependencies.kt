@@ -100,4 +100,7 @@ object Libraries {
     val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
 
     val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
+
+//    val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
+    val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
 }

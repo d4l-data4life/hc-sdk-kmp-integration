@@ -126,10 +126,5 @@ dependencies {
 
     androidTestImplementation(Libraries.androidXTestUiAutomator)
 
-    androidTestImplementation(Libraries.androidXNavigationTesting)
-
-    // https://github.com/agoda-com/Kakao
-    // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
-    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
-    androidTestImplementation("com.github.wmontwe:Kakao:1.4.0-androidx")
+    androidTestImplementation(Libraries.androidXTestKakao)
 }
