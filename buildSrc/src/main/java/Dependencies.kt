@@ -62,7 +62,6 @@ object Libraries {
     // Navigation
     val androidXNavigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
     val androidXNavigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
-    val androidXNavigationTesting = "android.arch.navigation:navigation-testing:${Versions.androidXNavigation}"
 
     // Material
     val material = "com.google.android.material:material:${Versions.material}"

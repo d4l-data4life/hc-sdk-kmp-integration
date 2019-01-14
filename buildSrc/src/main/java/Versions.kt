@@ -57,7 +57,7 @@ object Versions {
     const val androidXConstraintLayout = "2.0.0-alpha2"
 
     const val androidXLifecycle = "2.0.0"
-    const val androidXNavigation = "1.0.0-alpha08"
+    const val androidXNavigation = "1.0.0-alpha09"
 
     // Material
     const val material = "1.0.0"
