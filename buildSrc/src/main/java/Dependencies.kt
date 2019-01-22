@@ -62,7 +62,6 @@ object Libraries {
     // Navigation
     val androidXNavigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
     val androidXNavigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
-    val androidXNavigationTesting = "android.arch.navigation:navigation-testing:${Versions.androidXNavigation}"
 
     // Material
     val material = "com.google.android.material:material:${Versions.material}"
@@ -100,4 +99,7 @@ object Libraries {
     val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
 
     val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
+
+//    val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
+    val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
 }

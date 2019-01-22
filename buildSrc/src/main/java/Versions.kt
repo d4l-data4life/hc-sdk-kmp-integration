@@ -36,7 +36,7 @@ object Versions {
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.3.0-rc02"
+        const val android = "3.3.0-rc03"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -57,7 +57,7 @@ object Versions {
     const val androidXConstraintLayout = "2.0.0-alpha2"
 
     const val androidXLifecycle = "2.0.0"
-    const val androidXNavigation = "1.0.0-alpha08"
+    const val androidXNavigation = "1.0.0-alpha09"
 
     // Material
     const val material = "1.0.0"
@@ -88,4 +88,9 @@ object Versions {
     const val androidXTest = "1.1.1"
     const val androidXEspresso = "3.1.1"
     const val androidXUiAutomator = "2.2.0"
+
+    // https://github.com/agoda-com/Kakao = 1.4.0
+    // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
+    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
+    const val androidXKakao = "1.4.0-androidx"
 }

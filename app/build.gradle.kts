@@ -105,7 +105,7 @@ dependencies {
     implementation(Libraries.material)
 
 //    implementation("de.gesundheitscloud:hc-sdk-android:1.0.0-rc.2"
-    implementation("de.gesundheitscloud.hc-sdk-android:sdk-android:2db7fffdd7") {
+    implementation("de.gesundheitscloud.hc-sdk-android:sdk-android:ba92cc9647") {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
@@ -126,10 +126,5 @@ dependencies {
 
     androidTestImplementation(Libraries.androidXTestUiAutomator)
 
-    androidTestImplementation(Libraries.androidXNavigationTesting)
-
-    // https://github.com/agoda-com/Kakao
-    // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
-    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
-    androidTestImplementation("com.github.wmontwe:Kakao:1.4.0-androidx")
+    androidTestImplementation(Libraries.androidXTestKakao)
 }

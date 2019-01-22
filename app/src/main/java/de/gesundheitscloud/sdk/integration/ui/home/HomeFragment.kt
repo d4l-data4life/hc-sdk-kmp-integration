@@ -42,7 +42,7 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import de.gesundheitscloud.sdk.HCException
 import de.gesundheitscloud.sdk.integration.MainViewModel
 import de.gesundheitscloud.sdk.integration.R
-import de.gesundheitscloud.sdk.listener.VoidResultListener
+import de.gesundheitscloud.sdk.listener.Callback
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         home_logout_button.setOnClickListener {
-            model?.client?.logout(object : VoidResultListener {
+            model?.client?.logout(object : Callback {
                 override fun onSuccess() {
                     activity?.runOnUiThread { findNavController(this@HomeFragment).navigate(R.id.action_home_screen_to_welcome_screen) }
                 }
