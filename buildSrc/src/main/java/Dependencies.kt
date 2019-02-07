@@ -31,75 +31,75 @@
  */
 
 object GradlePlugins {
-    val android = "com.android.tools.build:gradle:${Versions.GradlePlugin.android}"
-    val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugin.kotlin}"
+    const val android = "com.android.tools.build:gradle:${Versions.GradlePlugin.android}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugin.kotlin}"
 
-    val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:${Versions.GradlePlugin.dexcount}"
+    const val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:${Versions.GradlePlugin.dexcount}"
 
-    val downloadTask = "de.undercouch:gradle-download-task:${Versions.GradlePlugin.downloadTask}"
+    const val downloadTask = "de.undercouch:gradle-download-task:${Versions.GradlePlugin.downloadTask}"
 }
 
 
 object Libraries {
     // Kotlin
-    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    val kotlinStdLibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
-    val kotlinStdLibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val kotlinStdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+    const val kotlinStdLibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
+    const val kotlinStdLibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlinStdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
-    val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
+    const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 
     // AndroidX
-    val androidXKtx = "androidx.core:core-ktx:${Versions.androidXKtx}"
-    val androidXAppCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
-    val androidXBrowser = "androidx.browser:browser:${Versions.androidXBrowser}"
-    val androidXConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
+    const val androidXKtx = "androidx.core:core-ktx:${Versions.androidXKtx}"
+    const val androidXAppCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
+    const val androidXBrowser = "androidx.browser:browser:${Versions.androidXBrowser}"
+    const val androidXConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
 
     // Lifecylce
-    val androidXLifecylceCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.androidXLifecycle}"
-    val androidXLifecylceExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}"
+    const val androidXLifecylceCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.androidXLifecycle}"
+    const val androidXLifecylceExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}"
 
     // Navigation
-    val androidXNavigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
-    val androidXNavigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
+    const val androidXNavigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
+    const val androidXNavigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
 
     // Material
-    val material = "com.google.android.material:material:${Versions.material}"
+    const val material = "com.google.android.material:material:${Versions.material}"
 
     // Google
-    val googlePlayServicesBase = "com.google.android.gms:play-services-base:${Versions.googlePlayServices}"
+    const val googlePlayServicesBase = "com.google.android.gms:play-services-base:${Versions.googlePlayServices}"
 
     // Date
-    val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
+    const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
     // Injection
-    val koinCore = "org.koin:koin-core:${Versions.koin}"
-    val testKoin = "org.koin:koin-test:${Versions.koin}"
+    const val koinCore = "org.koin:koin-core:${Versions.koin}"
+    const val testKoin = "org.koin:koin-test:${Versions.koin}"
 
 
     // Test
-    val testJunit = "junit:junit:${Versions.testJUnit}"
+    const val testJunit = "junit:junit:${Versions.testJUnit}"
 
-    val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
-    val testKotlinCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
-    val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
-    val testKotlinAnnotationsCommon = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
+    const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
+    const val testKotlinCommon = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+    const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
+    const val testKotlinAnnotationsCommon = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
 
-    val testKotlinMockkCommon = "io.mockk:mockk-common:${Versions.testMockk}"
-    val testKotlinMockkAndroid = "io.mockk:mockk-android:${Versions.testMockk}"
+    const val testKotlinMockkCommon = "io.mockk:mockk-common:${Versions.testMockk}"
+    const val testKotlinMockkAndroid = "io.mockk:mockk-android:${Versions.testMockk}"
 
 
     // Android Test
-    val androidXTestRunner = "androidx.test:runner:${Versions.androidXTest}"
-    val androidXTestRules = "androidx.test:rules:${Versions.androidXTest}"
-    val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTest}"
+    const val androidXTestRunner = "androidx.test:runner:${Versions.androidXTest}"
+    const val androidXTestRules = "androidx.test:rules:${Versions.androidXTest}"
+    const val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTest}"
 
-    val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Versions.androidXEspresso}"
-    val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
-    val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
+    const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Versions.androidXEspresso}"
+    const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
+    const val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
 
-    val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
+    const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
 
-//    val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
-    val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
+//  const val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
+    const val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
 }
