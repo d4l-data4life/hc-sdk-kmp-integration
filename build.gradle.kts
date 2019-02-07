@@ -24,11 +24,11 @@ allprojects {
     }
 }
 
-tasks.register<Delete>("clean", Delete::class.java) {
+tasks.register("clean", Delete::class.java) {
     delete(rootProject.buildDir)
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "5.1.1"
+    gradleVersion = "5.2"
     distributionType = Wrapper.DistributionType.ALL
 }
