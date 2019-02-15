@@ -31,12 +31,12 @@
  */
 
 object Versions {
-    const val kotlin = "1.3.11"
+    const val kotlin = "1.3.21"
     const val kotlinCoroutines = "1.0.0"
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.3.0-rc03"
+        const val android = "3.3.1"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -54,10 +54,10 @@ object Versions {
     const val androidXAppCompat = "1.0.2"
     const val androidXBrowser = "1.0.0"
 
-    const val androidXConstraintLayout = "2.0.0-alpha2"
+    const val androidXConstraintLayout = "2.0.0-alpha3"
 
     const val androidXLifecycle = "2.0.0"
-    const val androidXNavigation = "1.0.0-alpha09"
+    const val androidXNavigation = "1.0.0-beta02"
 
     // Material
     const val material = "1.0.0"
