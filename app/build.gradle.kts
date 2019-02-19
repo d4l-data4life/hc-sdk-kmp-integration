@@ -44,7 +44,8 @@ android {
         create("development") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
-                    "environment" to "development"
+//                    "environment" to "development" // FIXME
+                    "environment" to "staging"
             )
         }
         create("staging") {
