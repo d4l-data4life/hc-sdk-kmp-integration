@@ -35,16 +35,14 @@ package de.gesundheitscloud.sdk.integration.ui.welcome
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import de.gesundheitscloud.sdk.HealthCloudAndroid
 import de.gesundheitscloud.sdk.HealthCloudAndroid.GC_AUTH
-import de.gesundheitscloud.sdk.HealthCloudAndroid_
 import de.gesundheitscloud.sdk.integration.R
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
@@ -59,7 +57,7 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         welcome_login_button.setOnClickListener {
-            val intent = HealthCloudAndroid_.getInstance().getLoginIntent(context, null)
+            val intent = HealthCloudAndroid.getInstance().getLoginIntent(context, null)
             startActivityForResult(intent, GC_AUTH)
         }
     }
