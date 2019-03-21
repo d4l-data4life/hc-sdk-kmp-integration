@@ -105,8 +105,7 @@ dependencies {
 
     implementation(Libraries.material)
 
-//    implementation("de.gesundheitscloud.hc-sdk-android:sdk-android::1.0.0-rc3"
-    implementation("de.gesundheitscloud.hc-sdk-android:sdk-android:1.0.0-rc.3") {
+    implementation(Libraries.gcSdk) {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")

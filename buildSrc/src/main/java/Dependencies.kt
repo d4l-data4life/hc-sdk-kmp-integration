@@ -41,6 +41,9 @@ object GradlePlugins {
 
 
 object Libraries {
+    // GC sdk
+    const val gcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.gcSdk}"
+
     // Kotlin
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     const val kotlinStdLibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
