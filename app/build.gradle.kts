@@ -91,6 +91,7 @@ android {
 
 dependencies {
     implementation(Libraries.kotlinStdLibJdk7)
+    implementation(Libraries.kotlinCoroutinesCore)
 
     implementation(Libraries.androidXKtx)
     implementation(Libraries.androidXAppCompat)
@@ -106,15 +107,20 @@ dependencies {
     implementation(Libraries.material)
 
     implementation(Libraries.gcSdk) {
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "util-jvm")
+        exclude(group= "org.threeten", module= "threetenbp")
+        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "auth-jvm")
+        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "crypto-jvm")
+        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "sdk-jvm")
+        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "securestore-jvm")
+        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "util-jvm")
     }
-
+    implementation(Libraries.threeTenABP)
+    implementation(Libraries.fhir)
 
     testImplementation(Libraries.testJunit)
 
+    androidTestImplementation(Libraries.testKotlin)
+    androidTestImplementation(Libraries.testKotlinJunit)
 
     androidTestImplementation(Libraries.androidXTestRunner)
     androidTestImplementation(Libraries.androidXTestRules)

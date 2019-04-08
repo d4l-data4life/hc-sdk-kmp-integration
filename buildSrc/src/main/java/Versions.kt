@@ -31,7 +31,8 @@
  */
 
 object Versions {
-    const val gcSdk = "1.0.0-rc.4"
+    const val gcSdk = "1.0.0"
+    const val fhir = "0.4.0"
 
     const val kotlin = "1.3.21"
     const val kotlinCoroutines = "1.0.0"
