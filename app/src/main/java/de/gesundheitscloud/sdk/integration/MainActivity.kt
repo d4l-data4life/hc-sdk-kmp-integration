@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
-    override fun finish() {
-        //ignore so that Android test runner can't kill activity after each test
-    }
+//    override fun finish() {
+//        //ignore so that Android test runner can't kill activity after each test
+//    }
 
     fun explicitFinish() {
         super.finish()

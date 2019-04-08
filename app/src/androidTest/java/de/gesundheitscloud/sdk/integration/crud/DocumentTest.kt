@@ -62,6 +62,7 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //test order is important for successful completion!
+@Ignore
 class DocumentTest {
     //region document properties
     private val attachmentTitle = "Brain MRI"

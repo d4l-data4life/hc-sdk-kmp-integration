@@ -36,6 +36,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.runner.AndroidJUnit4
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
