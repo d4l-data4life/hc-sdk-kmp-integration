@@ -43,6 +43,10 @@ object GradlePlugins {
 object Libraries {
     // GC sdk
     const val gcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.gcSdk}"
+    const val fhir = "de.gesundheitscloud:hc-fhir-android:${Versions.fhir}"
+
+    //date
+    const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
     // Kotlin
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
@@ -71,9 +75,6 @@ object Libraries {
 
     // Google
     const val googlePlayServicesBase = "com.google.android.gms:play-services-base:${Versions.googlePlayServices}"
-
-    // Date
-    const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
     // Injection
     const val koinCore = "org.koin:koin-core:${Versions.koin}"
