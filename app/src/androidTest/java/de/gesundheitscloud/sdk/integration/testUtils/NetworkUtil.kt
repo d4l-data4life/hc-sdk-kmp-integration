@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+ * Copyright (c) 2019, HPS Gesundheitscloud gGmbH
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,36 +30,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration
+package de.gesundheitscloud.sdk.integration.testUtils
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
 
-/**
- * An activity that inflates a layout that has a NavHostFragment.
- */
-class MainActivity : AppCompatActivity() {
+object NetworkUtil {
+    private const val GOOGLE_PUB_DNS = "8.8.8.8"
+    private const val DNS_PORT = 53
 
-    private lateinit var mainViewModel: MainViewModel
+    fun isOnline(): Boolean {
+        return try {
+            val timeoutMs = 1500
+            val sock = Socket()
+            val sockaddr = InetSocketAddress(GOOGLE_PUB_DNS, DNS_PORT)
 
+            sock.connect(sockaddr, timeoutMs)
+            sock.close()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+            true
+        } catch (e: IOException) {
+            false
+        }
 
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
-
-    override fun finish() {
-        //ignore so that Android test runner can't kill activity after each test
-    }
-
-    fun explicitFinish() {
-        super.finish()
-    }
-
-    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navigation_host_fragment).navigateUp()
-
 }
