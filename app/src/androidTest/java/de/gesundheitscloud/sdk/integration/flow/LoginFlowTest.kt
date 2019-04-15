@@ -36,7 +36,6 @@ import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.runner.AndroidJUnit4
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,7 +53,7 @@ class LoginFlowTest {
         WelcomePage()
                 .isVisible()
                 .openLoginPage()
-                .doLogin("wolf.montwe+staging2@gesundheitscloud.de", "asdfgh1!")
+                .doLogin("igor+fire@martian.agency", "1234567+")
                 .isVisible()
                 .doLogout()
                 .isVisible()
