@@ -32,6 +32,7 @@
 
 package de.gesundheitscloud.sdk.integration.page
 
+import android.util.Log
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
@@ -78,10 +79,12 @@ class LoginPage : BasePage() {
         device.waitForIdle()
 
         val submit = device.findObject(selector.resourceId("loginButton"))
-        submit.click()
+        val clickSucces = submit.click()
+        Log.d("#igor", "clickSuccess=" + clickSucces)
 
         device.waitForIdle()
-        device.wait(Until.hasObject(By.pkg("de.gesundheitscloud.sdk.integration").depth(0)), TIMEOUT)
+        val result = device.wait(Until.hasObject(By.pkg("de.gesundheitscloud.sdk.integration").depth(0)), TIMEOUT)
+        Log.d("#igor", "result=" + (result == null))
 
         return HomePage()
     }
