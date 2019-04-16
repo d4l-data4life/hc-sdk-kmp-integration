@@ -45,10 +45,10 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 
-fun <T: DomainResource> HealthCloudAndroid.deleteAllRecords(clazz: Class<T> ) {
+fun <T : DomainResource> HealthCloudAndroid.deleteAllRecords(clazz: Class<T>) {
     runBlocking {
         val records = fetchRecords(clazz)
-        deleteRecords(records.map{ it.fhirResource.id!! })
+        deleteRecords(records.map { it.fhirResource.id!! })
     }
 }
 
@@ -59,7 +59,7 @@ private suspend fun <T : DomainResource> fetchRecords(clazz: Class<T>): List<Rec
             LocalDate.now(),
             1000,
             0,
-            object: ResultListener<List<Record<T>>> {
+            object : ResultListener<List<Record<T>>> {
 
                 override fun onSuccess(records: List<Record<T>>) {
                     cont.resume(records)
@@ -72,8 +72,8 @@ private suspend fun <T : DomainResource> fetchRecords(clazz: Class<T>): List<Rec
             })
 }
 
-private suspend fun deleteRecords(recordIds: List<String>): DeleteResult = suspendCoroutine  { cont ->
-    HealthCloudAndroid.getInstance().deleteRecords(recordIds, object: ResultListener<DeleteResult> {
+private suspend fun deleteRecords(recordIds: List<String>): DeleteResult = suspendCoroutine { cont ->
+    HealthCloudAndroid.getInstance().deleteRecords(recordIds, object : ResultListener<DeleteResult> {
         override fun onSuccess(result: DeleteResult) {
             cont.resume(result)
         }

@@ -36,7 +36,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 
 /**
  * An activity that inflates a layout that has a NavHostFragment.
@@ -53,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
-//    override fun finish() {
-//        //ignore so that Android test runner can't kill activity after each test
-//    }
+    override fun finish() {
+        //ignore so that Android test runner can't kill activity after each test
+    }
 
     fun explicitFinish() {
         super.finish()

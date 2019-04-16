@@ -32,7 +32,7 @@
 
 package de.gesundheitscloud.sdk.integration.flow
 
-import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import de.gesundheitscloud.sdk.integration.MainActivity
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
@@ -45,11 +45,13 @@ class LoginFlowTest {
 
     @Rule
     @JvmField
-    val rule = IntentsTestRule(MainActivity::class.java)
+    val rule = ActivityTestRule(MainActivity::class.java, false, false)
 
 
     @Test
     fun testLoginFlow() {
+        val activity = rule.launchActivity(null)
+
         WelcomePage()
                 .isVisible()
                 .openLoginPage()
@@ -57,6 +59,8 @@ class LoginFlowTest {
                 .isVisible()
                 .doLogout()
                 .isVisible()
+
+        activity.explicitFinish()
     }
 
 }

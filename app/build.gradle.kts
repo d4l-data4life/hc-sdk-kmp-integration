@@ -107,12 +107,12 @@ dependencies {
     implementation(Libraries.material)
 
     implementation(Libraries.gcSdk) {
-        exclude(group= "org.threeten", module= "threetenbp")
-        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "auth-jvm")
-        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "crypto-jvm")
-        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "sdk-jvm")
-        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "securestore-jvm")
-        exclude(group= "de.gesundheitscloud.hc-sdk-android", module= "util-jvm")
+        exclude(group = "org.threeten", module = "threetenbp")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "sdk-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "util-jvm")
     }
     implementation(Libraries.threeTenABP)
     implementation(Libraries.fhir)
