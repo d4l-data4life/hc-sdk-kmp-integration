@@ -107,7 +107,7 @@ abstract class BaseTest<T : DomainResource> {
             homePage = WelcomePage()
                     .isVisible()
                     .openLoginPage()
-                    .doLogin("igy.testing@gmail.com", "1234567+")
+                    .doLogin("igor+fire@martian.agency", "1234567+")
                     .isVisible()
 
             assertLogin(true)
@@ -168,12 +168,12 @@ abstract class BaseTest<T : DomainResource> {
         }
     }
 
-    fun assertRecordExpectations(record: Record<T>) {
+    private fun assertRecordExpectations(record: Record<T>) {
         assertNotNull(record.fhirResource)
         assertMetaExpectations(record.meta)
     }
 
-    fun assertMetaExpectations(meta: Meta?) {
+    private fun assertMetaExpectations(meta: Meta?) {
         assertNotNull(meta)
         assertNotNull(meta?.createdDate)
         assertNotNull(meta?.updatedDate)
