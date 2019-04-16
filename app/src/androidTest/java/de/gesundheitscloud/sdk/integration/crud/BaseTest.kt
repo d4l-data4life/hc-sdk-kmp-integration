@@ -168,12 +168,12 @@ abstract class BaseTest<T : DomainResource> {
         }
     }
 
-    private fun assertRecordExpectations(record: Record<T>) {
+    fun assertRecordExpectations(record: Record<T>) {
         assertNotNull(record.fhirResource)
         assertMetaExpectations(record.meta)
     }
 
-    private fun assertMetaExpectations(meta: Meta?) {
+    fun assertMetaExpectations(meta: Meta?) {
         assertNotNull(meta)
         assertNotNull(meta?.createdDate)
         assertNotNull(meta?.updatedDate)
