@@ -63,6 +63,20 @@ class LoginPage : BasePage() {
         device.waitForIdle()
         waitByResource("emailInput")
 
+        // accept cookies
+        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Akzeptieren|Accept)"))
+        if (acceptCookies.exists()) {
+            acceptCookies.click()
+            device.waitForIdle()
+        }
+
+        // close translate popup message
+        val closeTranslatePopup = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
+        if (closeTranslatePopup.exists()) {
+            closeTranslatePopup.click()
+            device.waitForIdle()
+        }
+
         // scroll to bottom
         val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
         wv.scrollForward()
