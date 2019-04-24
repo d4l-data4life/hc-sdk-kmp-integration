@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+ * Copyright (c) 2019, HPS Gesundheitscloud gGmbH
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,37 +30,58 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package de.gesundheitscloud.sdk.integration.flow
+package de.gesundheitscloud.sdk.integration.crossdk
 
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
+import com.jakewharton.threetenabp.AndroidThreeTen
+import de.gesundheitscloud.sdk.HealthCloudAndroid
 import de.gesundheitscloud.sdk.integration.MainActivity
+import de.gesundheitscloud.sdk.integration.page.HomePage
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import de.gesundheitscloud.sdk.integration.testUtils.NetworkUtil
+import org.junit.AfterClass
+import org.junit.Assume
+import org.junit.BeforeClass
 
-@RunWith(AndroidJUnit4::class)
-class LoginFlowTest {
+open class BaseTestLogin {
 
-    @Rule
-    @JvmField
-    val rule = ActivityTestRule(MainActivity::class.java, false, false)
+    companion object {
+        private var isNetConnected: Boolean = false
+        private val rule = ActivityTestRule(MainActivity::class.java, false, false)
+        private lateinit var activity: MainActivity
+        private lateinit var homePage: HomePage
 
+        @JvmStatic
+        protected lateinit var client: HealthCloudAndroid  //SUT
 
-    @Test
-    fun testLoginFlow() {
-        val activity = rule.launchActivity(null)
+        @BeforeClass
+        @JvmStatic
+        fun suiteSetup() {
+            isNetConnected = NetworkUtil.isOnline()
+            Assume.assumeTrue("Internet connection required", isNetConnected)
 
-        WelcomePage()
-                .isVisible()
-                .openLoginPage()
-                .doLogin("wolf.montwe+fire9@gesundheitscloud.de", "asdfgh1!")
-                .isVisible()
-                .doLogout()
-                .isVisible()
+            activity = rule.launchActivity(null)
+            AndroidThreeTen.init(activity.application)
+            client = HealthCloudAndroid.getInstance()
 
-        activity.explicitFinish()
+            homePage = WelcomePage()
+                    .isVisible()
+                    .openLoginPage()
+                    .doLogin("wolf.montwe+fire9@gesundheitscloud.de", "asdfgh1!")
+                    .isVisible()
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun suiteCleanUp() {
+            if (!isNetConnected) return
+
+            homePage
+                    .doLogout()
+                    .isVisible()
+
+            activity.explicitFinish()
+        }
     }
 
 }

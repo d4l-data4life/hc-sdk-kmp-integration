@@ -24,10 +24,10 @@ android {
         ))
 
         manifestPlaceholders = mapOf<String, Any>(
-                "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
+                "clientId" to "89dbc876-ac7c-43b7-8741-25b14065fb91#android",
                 "clientSecret" to "androidsupersecret",
                 "environment" to "development",
-                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab"
+                "redirectScheme" to "de.gesundheitscloud.89dbc876-ac7c-43b7-8741-25b14065fb91"
         )
     }
 
@@ -44,8 +44,7 @@ android {
         create("development") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
-//                    "environment" to "development" // FIXME
-                    "environment" to "staging"
+                    "environment" to "development"
             )
         }
         create("staging") {
@@ -91,6 +90,7 @@ android {
 
 dependencies {
     implementation(Libraries.kotlinStdLibJdk7)
+    implementation(Libraries.kotlinCoroutinesCore)
 
     implementation(Libraries.androidXKtx)
     implementation(Libraries.androidXAppCompat)
@@ -106,15 +106,20 @@ dependencies {
     implementation(Libraries.material)
 
     implementation(Libraries.gcSdk) {
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
+        exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "sdk-jvm")
+        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "util-jvm")
     }
-
+    implementation(Libraries.threeTenABP)
+    implementation(Libraries.fhir)
 
     testImplementation(Libraries.testJunit)
 
+    androidTestImplementation(Libraries.testKotlin)
+    androidTestImplementation(Libraries.testKotlinJunit)
 
     androidTestImplementation(Libraries.androidXTestRunner)
     androidTestImplementation(Libraries.androidXTestRules)
