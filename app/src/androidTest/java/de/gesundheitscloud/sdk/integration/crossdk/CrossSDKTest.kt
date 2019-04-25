@@ -104,7 +104,7 @@ class CrossSDKTest : BaseTestLogin() {
     var expectedClientIds = mutableSetOf(ANDROID_ID, "ios", "web")
 
     @Test
-    fun fetchRecords_shouldFetchRecords() {
+    fun t01_fetchRecords_shouldFetchRecords() {
         clientCallSuccessful = true
         latch = CountDownLatch(1)
         lateinit var fetchedRecords: List<Record<DocumentReference>>
