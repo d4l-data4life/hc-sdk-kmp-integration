@@ -39,41 +39,42 @@ import de.gesundheitscloud.sdk.helpers.AttachmentBuilder
 import de.gesundheitscloud.sdk.helpers.DocumentReferenceBuilder
 import de.gesundheitscloud.sdk.helpers.getAttachments
 import de.gesundheitscloud.sdk.helpers.getTitle
-import org.junit.Assert
-import org.junit.Assert.fail
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 
 @RunWith(AndroidJUnit4::class)
 class DocumentReferenceTest : BaseTest<DocumentReference>() {
 
     //region document properties
-    private val attachmentTitle = "Brain MRI"
-    private val createdDate = FhirDateTimeParser.parseDateTime("2013-04-03")
-    private val contentType = "image/jpeg"
-    private val data = byteArrayOf(0x25, 0x50, 0x44, 0x46, 0x2d)
-    private val dataSizeBytes = data.size
-    private val dataBase64 = "JVBERi0="
-    private val dataHashBase64 = "6GUZUCson6BgvpmHylP3m4FZU4s="
+    val attachmentTitle = "Brain MRI"
+    val createdDate = FhirDateTimeParser.parseDateTime("2013-04-03")
+    val contentType = "image/jpeg"
+    val data = byteArrayOf(0x25, 0x50, 0x44, 0x46, 0x2d)
+    val dataSizeBytes = data.size
+    val dataBase64 = "JVBERi0="
+    val dataHashBase64 = "6GUZUCson6BgvpmHylP3m4FZU4s="
 
-    private val title = "Physical"
-    private val indexed: FhirInstant = FhirDateTimeParser.parseInstant("2013-04-03T15:30:10+01:00")
-    private val status = CodeSystems.DocumentReferenceStatus.CURRENT
-    private val documentCode = "34108-1"
-    private val documentDisplay = "Outpatient Note"
-    private val documentSystem = "http://loinc.org"
-    private val practiceSpecialityCode = "General Medicine"
-    private val practiceSpecialityDisplay = "General Medicine"
-    private val practiceSpecialitySystem = "http://www.ihe.net/xds/connectathon/practiceSettingCodes"
+    val title = "Physical"
+    val indexed: FhirInstant = FhirDateTimeParser.parseInstant("2013-04-03T15:30:10+01:00")
+    val status = CodeSystems.DocumentReferenceStatus.CURRENT
+    val documentCode = "34108-1"
+    val documentDisplay = "Outpatient Note"
+    val documentSystem = "http://loinc.org"
+    val practiceSpecialityCode = "General Medicine"
+    val practiceSpecialityDisplay = "General Medicine"
+    val practiceSpecialitySystem = "http://www.ihe.net/xds/connectathon/practiceSettingCodes"
     //endregion
 
-    override fun getModelClass(): Class<DocumentReference> {
+    private val NEW_TITLE = "New title"
+    private val TITLE_1 = "doc1"
+    private val TITLE_2 = "doc2"
+
+    override fun getTestClass(): Class<DocumentReference> {
         return DocumentReference::class.java
     }
 
-    override fun getTestModel(): DocumentReference {
+    override fun getModel(method: Method, index: Int): DocumentReference {
         val attachment = AttachmentBuilder.buildWith(attachmentTitle, createdDate, contentType, data)
 
         val author = Practitioner()
@@ -93,7 +94,7 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         val practiceSpeciality = CodeableConcept()
         practiceSpeciality.coding = listOf(practiceSpecialityCoding)
 
-        return DocumentReferenceBuilder.buildWith(
+        val document = DocumentReferenceBuilder.buildWith(
                 title,
                 indexed,
                 status,
@@ -101,78 +102,71 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
                 docType,
                 author,
                 practiceSpeciality)
+        mutateModel(document, method, index)
+
+        return document
     }
 
-    override fun prepareModel(model: DocumentReference, method: Method, index: Int) {
+    private fun mutateModel(model: DocumentReference, method: Method, index: Int) {
         when (method) {
             Method.UPDATE -> {
-                model.description = "New title"
+                model.description = NEW_TITLE
                 model.id = recordId
             }
             Method.BATCH_UPDATE -> {
-                model.description = (if (index == 0) "doc1" else "doc2")
+                model.description = (if (index == 0) TITLE_1 else TITLE_2)
                 model.id = recordId
             }
             else -> {
-                fail("Unexpected case")
+                //ignore
             }
         }
     }
 
     override fun assertModelExpectations(model: DocumentReference, method: Method, index: Int) {
         var assertRecordId = true
-        if (method == Method.CREATE || method == Method.BATCH_CREATE || method == Method.FETCH_BY_TYPE) {
-            assertRecordId = false
-        }
+        var docTitle = title
+        var docDataBase64: String? = dataBase64
 
-        assertDocumentExpectations(model, assertRecordId)
         when (method) {
-            Method.CREATE -> {
-                assertEquals(title, model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
-            }
             Method.BATCH_CREATE -> {
                 assertNotNull(model.id)
-                assertEquals(title, model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
+                assertRecordId = false
             }
             Method.FETCH -> {
-                assertEquals(title, model.getTitle())
-                assertNull(model.getAttachments()?.first()?.data)
+                docDataBase64 = null
             }
             Method.FETCH_BY_ID -> {
-                assertEquals(title, model.getTitle())
-                assertNull(model.getAttachments()?.first()?.data)
+                docDataBase64 = null
             }
             Method.FETCH_BY_TYPE -> {
                 assertNotNull(model.id)
-                assertEquals(title, model.getTitle())
-                assertNull(model.getAttachments()?.first()?.data)
+                assertRecordId = false
+                docDataBase64 = null
             }
             Method.UPDATE -> {
-                assertEquals("New title", model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
+                docTitle = NEW_TITLE
             }
             Method.BATCH_UPDATE -> {
-                assertEquals(if (index == 0) "doc1" else "doc2", model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
+                docTitle = if (index == 0) TITLE_1 else TITLE_2
             }
             Method.DOWNLOAD -> {
-                assertEquals("doc2", model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
+                docTitle = TITLE_2
             }
             Method.BATCH_DOWNLOAD -> {
-                assertEquals("doc2", model.getTitle())
-                assertEquals(dataBase64, model.getAttachments()?.first()?.data)
+                docTitle = TITLE_2
             }
             else -> {
-                fail("Unexpected case")
+                //ignore
             }
         }
+
+        assertDocumentExpectations(model, assertRecordId, docTitle, docDataBase64)
     }
 
-    private fun assertDocumentExpectations(doc: DocumentReference, assertRecordId: Boolean = true) {
-        if (assertRecordId) Assert.assertEquals(recordId, doc.id)
+    private fun assertDocumentExpectations(doc: DocumentReference, assertRecordId: Boolean = true, docTitle: String, docDataBase64: String?) {
+        if (assertRecordId) assertEquals(recordId, doc.id)
+        assertEquals(docTitle, doc.getTitle())
         assertEquals(indexed, doc.indexed)
         assertEquals(status, doc.status)
         assertNotNull(doc.type)
@@ -185,15 +179,16 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         assertEquals(practiceSpecialityDisplay, doc.context?.practiceSetting?.coding?.first()?.display)
         assertEquals(practiceSpecialitySystem, doc.context?.practiceSetting?.coding?.first()?.system)
         assertEquals(1, doc.getAttachments()?.size)
-        assertAttachmentExpectations(doc.getAttachments()?.first()!!)
+        assertAttachmentExpectations(doc.getAttachments()?.first()!!, docDataBase64)
     }
 
-    private fun assertAttachmentExpectations(attachment: Attachment) {
+    private fun assertAttachmentExpectations(attachment: Attachment, docDataBase64: String?) {
         assertNotNull(attachment.id)
         assertEquals(attachmentTitle, attachment.title)
         assertEquals(createdDate, attachment.creation)
         assertEquals(contentType, attachment.contentType)
         assertEquals(dataHashBase64, attachment.hash)
         assertEquals(dataSizeBytes, attachment.size)
+        assertEquals(docDataBase64, attachment.data)
     }
 }

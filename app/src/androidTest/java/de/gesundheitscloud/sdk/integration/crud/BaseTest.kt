@@ -38,7 +38,6 @@ import de.gesundheitscloud.fhir.stu3.model.DomainResource
 import de.gesundheitscloud.sdk.HCException
 import de.gesundheitscloud.sdk.HealthCloudAndroid
 import de.gesundheitscloud.sdk.integration.MainActivity
-import de.gesundheitscloud.sdk.integration.page.BasePage.Companion.TIMEOUT
 import de.gesundheitscloud.sdk.integration.page.HomePage
 import de.gesundheitscloud.sdk.integration.page.WelcomePage
 import de.gesundheitscloud.sdk.integration.testUtils.NetworkUtil
@@ -57,15 +56,10 @@ import kotlin.test.assertNotEquals
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //test order is important for successful completion!
 abstract class BaseTest<T : DomainResource> {
-    private val TIMEOUT = 10L
-    private lateinit var model: T
-    private var requestSuccessful = true
 
-    abstract fun getModelClass(): Class<T>
+    abstract fun getTestClass(): Class<T>
 
-    abstract fun getTestModel(): T
-
-    abstract fun prepareModel(model: T, method: Method, index: Int = -1)
+    abstract fun getModel(method: Method, index: Int = -1): T
 
     abstract fun assertModelExpectations(model: T, method: Method, index: Int = -1)
 
@@ -79,9 +73,11 @@ abstract class BaseTest<T : DomainResource> {
     }
 
     companion object {
+        private val TIMEOUT = 10L
         private var setupDone = false
         private var isNetConnected: Boolean = false
         private lateinit var latch: CountDownLatch
+        private var requestSuccessful = true
         private val rule = ActivityTestRule(MainActivity::class.java, false, false)
         private lateinit var activity: MainActivity
         private lateinit var homePage: HomePage
@@ -107,7 +103,7 @@ abstract class BaseTest<T : DomainResource> {
             homePage = WelcomePage()
                     .isVisible()
                     .openLoginPage()
-                    .doLogin("igor+fire@martian.agency", "1234567+")
+                    .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!")
                     .isVisible()
 
             assertLogin(true)
@@ -123,6 +119,9 @@ abstract class BaseTest<T : DomainResource> {
                     .isVisible()
 
             assertLogin(false)
+            recordId = ""
+            recordIds.clear()
+            setupDone = false
             activity.explicitFinish()
         }
 
@@ -150,13 +149,12 @@ abstract class BaseTest<T : DomainResource> {
     @Before
     fun beforeTest() {
         latch = CountDownLatch(1)
-        model = getTestModel()
         requestSuccessful = true
 
         if (setupDone) return
         else {
             setupDone = true
-            client.deleteAllRecords(getModelClass()) //run only once before all the tests
+            client.deleteAllRecords(getTestClass()) //run only once before all the tests
         }
     }
 
@@ -184,7 +182,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var record: Record<T>
 
         //when
-        client.createRecord(model, object : TestResultListener<Record<T>>() {
+        client.createRecord(getModel(Method.CREATE), object : TestResultListener<Record<T>>() {
             override fun onSuccess(r: Record<T>) {
                 record = r
                 latch.countDown()
@@ -205,8 +203,8 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var createResult: CreateResult<T>
 
         //given
-        val model1 = getTestModel()
-        val model2 = getTestModel()
+        val model1 = getModel(Method.BATCH_CREATE)
+        val model2 = getModel(Method.BATCH_CREATE)
 
         //when
         client.createRecords(listOf(model1, model2), object : TestResultListener<CreateResult<T>>() {
@@ -236,7 +234,7 @@ abstract class BaseTest<T : DomainResource> {
         var modelCount: Int = -1
 
         //when
-        client.countRecords(getModelClass(), object : TestResultListener<Int>() {
+        client.countRecords(getTestClass(), object : TestResultListener<Int>() {
             override fun onSuccess(count: Int) {
                 modelCount = count
                 latch.countDown()
@@ -321,8 +319,8 @@ abstract class BaseTest<T : DomainResource> {
 
         //when
         client.fetchRecords(
-                getModelClass(),
-                LocalDate.now().minusYears(10),
+                getTestClass(),
+                null,
                 LocalDate.now(),
                 1000,
                 0,
@@ -347,11 +345,10 @@ abstract class BaseTest<T : DomainResource> {
     fun t08_updateRecord_shouldReturn_updatedRecord() {
         //given
         assertNotNull("recordId expected", recordId)
-        prepareModel(model, Method.UPDATE)
         lateinit var updatedRecord: Record<T>
 
         //when
-        client.updateRecord(model, object : TestResultListener<Record<T>>() {
+        client.updateRecord(getModel(Method.UPDATE), object : TestResultListener<Record<T>>() {
             override fun onSuccess(record: Record<T>) {
                 updatedRecord = record
                 latch.countDown()
@@ -371,10 +368,8 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var updateResult: UpdateResult<T>
 
-        val model1 = getTestModel()
-        val model2 = getTestModel()
-        prepareModel(model1, Method.BATCH_UPDATE, 0)
-        prepareModel(model2, Method.BATCH_UPDATE, 1)
+        val model1 = getModel(Method.BATCH_UPDATE, 0)
+        val model2 = getModel(Method.BATCH_UPDATE, 1)
 
         //when
         client.updateRecords(listOf(model1, model2), object : TestResultListener<UpdateResult<T>>() {

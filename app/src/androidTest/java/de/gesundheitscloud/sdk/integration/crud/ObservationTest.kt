@@ -61,11 +61,11 @@ class ObservationTest : BaseTest<Observation>() {
     val effectiveDate = FhirDateTimeParser.parseDateTime("2013-04-03")
     //endregion
 
-    override fun getModelClass(): Class<Observation> {
+    override fun getTestClass(): Class<Observation> {
         return Observation::class.java
     }
 
-    override fun getTestModel(): Observation {
+    override fun getModel(method: Method, index: Int): Observation {
         val observationCoding = Coding().apply {
             code = observationTypeCode
             display = observationTypeDisplay
@@ -89,7 +89,7 @@ class ObservationTest : BaseTest<Observation>() {
         val issuedDate = FhirDateTimeParser.parseInstant("2013-04-03T15:30:10+01:00")
         val effectiveDate = FhirDateTimeParser.parseDateTime("2013-04-03")
 
-        return ObservationBuilder.buildWith(
+        val observation = ObservationBuilder.buildWith(
                 observationCode,
                 observationValue,
                 observationUnit,
@@ -97,9 +97,12 @@ class ObservationTest : BaseTest<Observation>() {
                 issuedDate,
                 effectiveDate,
                 categoryCodeable)
+        mutateModel(observation, method, index)
+
+        return observation
     }
 
-    override fun prepareModel(model: Observation, method: Method, index: Int) {
+    private fun mutateModel(model: Observation, method: Method, index: Int) {
         when (method) {
             Method.UPDATE -> {
                 model.valueQuantity?.unit = "new unit"

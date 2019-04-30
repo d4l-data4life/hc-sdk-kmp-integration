@@ -54,7 +54,7 @@ class LoginFlowTest {
         WelcomePage()
                 .isVisible()
                 .openLoginPage()
-                .doLogin("igor+fire@martian.agency", "1234567+")
+                .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!")
                 .isVisible()
                 .doLogout()
                 .isVisible()

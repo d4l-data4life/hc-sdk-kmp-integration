@@ -61,11 +61,11 @@ class DiagnosticReportTest : BaseTest<DiagnosticReport>() {
     val observationStatus = CodeSystems.ObservationStatus.FINAL
     //endregion
 
-    override fun getModelClass(): Class<DiagnosticReport> {
+    override fun getTestClass(): Class<DiagnosticReport> {
         return DiagnosticReport::class.java
     }
 
-    override fun getTestModel(): DiagnosticReport {
+    override fun getModel(method: Method, index: Int): DiagnosticReport {
         val reportCoding = Coding().apply {
             code = reportTypeCode
             display = reportTypeDisplay
@@ -74,12 +74,15 @@ class DiagnosticReportTest : BaseTest<DiagnosticReport>() {
         val reportCode = CodeableConcept()
         reportCode.coding = mutableListOf(reportCoding)
 
-        return DiagnosticReportBuilder.buildWith(
+        val report = DiagnosticReportBuilder.buildWith(
                 reportCode,
                 reportStatus,
                 laboratoryName,
                 issuedDate,
                 listOf(getTestObservation(observationId1), getTestObservation(observationId2)))
+        mutateModel(report, method, index)
+
+        return report
     }
 
     private fun getTestObservation(customId: String): Observation {
@@ -97,7 +100,7 @@ class DiagnosticReportTest : BaseTest<DiagnosticReport>() {
         }
     }
 
-    override fun prepareModel(model: DiagnosticReport, method: Method, index: Int) {
+    private fun mutateModel(model: DiagnosticReport, method: Method, index: Int) {
         when (method) {
             Method.UPDATE -> {
                 model.performer?.first()?.actor?.display = "new lab name"
