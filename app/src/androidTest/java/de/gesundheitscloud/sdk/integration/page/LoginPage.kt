@@ -61,10 +61,16 @@ class LoginPage : BasePage() {
         }
 
         device.waitForIdle()
-        waitByResource("emailInput")
+        waitByResource("root")
+
+        val loginTab = device.findObject(selector.className("android.view.View").textMatches("(Login|Anmelden)"))
+        if (loginTab.exists()) {
+            loginTab.click()
+            device.waitForIdle()
+        }
 
         // accept cookies
-        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Akzeptieren|Accept)"))
+        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Accept|Akzeptieren)"))
         if (acceptCookies.exists()) {
             acceptCookies.click()
             device.waitForIdle()

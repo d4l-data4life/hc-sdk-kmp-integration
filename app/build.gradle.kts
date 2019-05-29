@@ -44,8 +44,7 @@ android {
         create("development") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
-//                    "environment" to "development" // FIXME
-                    "environment" to "staging"
+                    "environment" to "development"
             )
         }
         create("staging") {
@@ -62,7 +61,7 @@ android {
         }
     }
 
-    defaultPublishConfig = "stagingDebug"
+    defaultPublishConfig = "developmentDebug"
 
 
     compileOptions {
