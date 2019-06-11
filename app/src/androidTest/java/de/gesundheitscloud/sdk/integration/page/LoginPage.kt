@@ -37,6 +37,7 @@ import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import java.lang.Thread.sleep
+import java.util.regex.Pattern
 
 class LoginPage : BasePage() {
 
@@ -61,10 +62,16 @@ class LoginPage : BasePage() {
         }
 
         device.waitForIdle()
-        waitByResource("emailInput")
+        waitByRegex(Pattern.compile("(EMAIL|E-MAIL-ADRESSE)"))
+
+        val loginTab = device.findObject(selector.className("android.view.View").textMatches("(Login|Anmelden)"))
+        if (loginTab.exists()) {
+            loginTab.click()
+            device.waitForIdle()
+        }
 
         // accept cookies
-        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Akzeptieren|Accept)"))
+        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Accept|Akzeptieren)"))
         if (acceptCookies.exists()) {
             acceptCookies.click()
             device.waitForIdle()

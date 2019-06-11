@@ -36,6 +36,7 @@ import androidx.test.InstrumentationRegistry
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
+import java.util.regex.Pattern
 
 abstract class BasePage {
 
@@ -53,6 +54,13 @@ abstract class BasePage {
         device.wait(Until.hasObject(By.res(resourceName)), TIMEOUT)
     }
 
+    fun waitByText(text: String) {
+        device.wait(Until.hasObject(By.text(text)), TIMEOUT)
+    }
+
+    fun waitByRegex(pattern: Pattern) {
+        device.wait(Until.hasObject(By.text(pattern)), TIMEOUT)
+    }
 
     companion object {
         const val TIMEOUT = 1000 * 60L
