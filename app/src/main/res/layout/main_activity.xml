@@ -22,7 +22,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context="de.gesundheitscloud.sdk.integration.MainActivity"
+    tools:context="care.data4life.integration.app.MainActivity"
     >
 
     <fragment

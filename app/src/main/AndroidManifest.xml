@@ -33,7 +33,7 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.gesundheitscloud.sdk.integration"
+    package="care.data4life.integration.app"
     >
 
     <application
@@ -45,7 +45,7 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name="de.gesundheitscloud.sdk.integration.MainActivity">
+        <activity android:name="care.data4life.integration.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

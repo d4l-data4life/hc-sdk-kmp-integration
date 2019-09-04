@@ -8,7 +8,7 @@ android {
     compileSdkVersion(AndroidConfig.compileSdkVersion)
 
     defaultConfig {
-        applicationId = "de.gesundheitscloud.sdk.integration"
+        applicationId = "care.data4life.integration.app"
 
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.targetSdkVersion)
@@ -27,7 +27,8 @@ android {
                 "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
                 "clientSecret" to "androidsupersecret",
                 "environment" to "development",
-                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab"
+                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
+                "debug" to "true"
         )
     }
 
@@ -111,7 +112,7 @@ dependencies {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "sdk-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "util-jvm")
+        exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
     implementation(Libraries.threeTenABP)
     implementation(Libraries.fhir)
