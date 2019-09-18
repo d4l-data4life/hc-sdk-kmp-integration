@@ -41,8 +41,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import care.data4life.integration.app.MainViewModel
 import care.data4life.integration.app.R
-import de.gesundheitscloud.sdk.lang.D4LException
-import de.gesundheitscloud.sdk.listener.Callback
+import care.data4life.sdk.lang.D4LException
+import care.data4life.sdk.listener.Callback
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {

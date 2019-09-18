@@ -41,9 +41,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import de.gesundheitscloud.sdk.HealthCloudAndroid
-import de.gesundheitscloud.sdk.HealthCloudAndroid.GC_AUTH
 import care.data4life.integration.app.R
+import care.data4life.sdk.Data4LifeClient
+import care.data4life.sdk.Data4LifeClient.GC_AUTH
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
@@ -57,7 +57,7 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         welcome_login_button.setOnClickListener {
-            val intent = HealthCloudAndroid.getInstance().getLoginIntent(context, null)
+            val intent = Data4LifeClient.getInstance().getLoginIntent(context, null)
             startActivityForResult(intent, GC_AUTH)
         }
     }
