@@ -44,6 +44,7 @@ object Libraries {
     // GC sdk
     const val gcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.gcSdk}"
     const val fhir = "de.gesundheitscloud:hc-fhir-android:${Versions.fhir}"
+    const val fhirHelper = "com.github.gesundheitscloud.sdk-fhir-helper-multiplatform:fhir-helper-android:${Versions.fhirHelper}"
 
     //date
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"

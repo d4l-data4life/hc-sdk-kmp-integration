@@ -33,12 +33,12 @@
 package care.data4life.integration.app.crud
 
 import androidx.test.runner.AndroidJUnit4
-import de.gesundheitscloud.fhir.stu3.model.*
-import de.gesundheitscloud.fhir.stu3.util.FhirDateTimeParser
-import de.gesundheitscloud.sdk.helpers.AttachmentBuilder
-import de.gesundheitscloud.sdk.helpers.DocumentReferenceBuilder
-import de.gesundheitscloud.sdk.helpers.getAttachments
-import de.gesundheitscloud.sdk.helpers.getTitle
+import care.data4life.fhir.stu3.model.*
+import care.data4life.fhir.stu3.util.FhirDateTimeParser
+import care.data4life.sdk.helpers.AttachmentBuilder
+import care.data4life.sdk.helpers.DocumentReferenceBuilder
+import care.data4life.sdk.helpers.getAttachments
+import care.data4life.sdk.helpers.getTitle
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull

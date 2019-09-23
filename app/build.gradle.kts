@@ -116,6 +116,9 @@ dependencies {
     }
     implementation(Libraries.threeTenABP)
     implementation(Libraries.fhir)
+    implementation(Libraries.fhirHelper) {
+        exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
+    }
 
     testImplementation(Libraries.testJunit)
 

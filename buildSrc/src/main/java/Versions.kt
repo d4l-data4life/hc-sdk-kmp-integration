@@ -33,6 +33,7 @@
 object Versions {
     const val gcSdk = "1.4.1"
     const val fhir = "0.5.0"
+    const val fhirHelper = "1.2.2"
 
     const val kotlin = "1.3.50"
     const val kotlinCoroutines = "1.3.1"

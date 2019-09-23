@@ -39,12 +39,12 @@ import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.WelcomePage
 import care.data4life.integration.app.testUtils.NetworkUtil
 import care.data4life.integration.app.testUtils.deleteAllRecords
+import care.data4life.sdk.Data4LifeClient
+import care.data4life.sdk.lang.D4LException
+import care.data4life.sdk.listener.Callback
+import care.data4life.sdk.listener.ResultListener
+import care.data4life.sdk.model.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import de.gesundheitscloud.sdk.HealthCloudAndroid
-import de.gesundheitscloud.sdk.lang.D4LException
-import de.gesundheitscloud.sdk.listener.Callback
-import de.gesundheitscloud.sdk.listener.ResultListener
-import de.gesundheitscloud.sdk.model.*
 import junit.framework.Assert.*
 import org.junit.*
 import org.junit.Assume.assumeTrue
@@ -88,7 +88,7 @@ abstract class BaseTest<T : DomainResource> {
         protected var recordIds = mutableListOf<String>()
 
         @JvmStatic
-        protected lateinit var client: HealthCloudAndroid  //SUT
+        protected lateinit var client: Data4LifeClient  //SUT
 
         @BeforeClass
         @JvmStatic
@@ -98,7 +98,7 @@ abstract class BaseTest<T : DomainResource> {
 
             activity = rule.launchActivity(null)
             AndroidThreeTen.init(activity.application)
-            client = HealthCloudAndroid.getInstance()
+            client = Data4LifeClient.getInstance()
 
             homePage = WelcomePage()
                     .isVisible()

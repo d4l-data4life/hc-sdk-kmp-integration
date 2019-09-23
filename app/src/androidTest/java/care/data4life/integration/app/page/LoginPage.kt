@@ -101,7 +101,7 @@ class LoginPage : BasePage() {
         submit.click()
 
         device.waitForIdle()
-        device.wait(Until.hasObject(By.pkg("care.data4life.integration.integration").depth(0)), TIMEOUT)
+        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
         return HomePage()
     }

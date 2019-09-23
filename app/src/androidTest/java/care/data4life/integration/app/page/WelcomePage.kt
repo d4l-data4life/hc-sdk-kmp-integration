@@ -43,7 +43,7 @@ class WelcomePage : BasePage() {
 
 
     override fun waitForPage() {
-        waitByResource("care.data4life.integration.integration:id/welcome_constraint")
+        waitByResource("care.data4life.integration.app:id/welcome_constraint")
     }
 
 
