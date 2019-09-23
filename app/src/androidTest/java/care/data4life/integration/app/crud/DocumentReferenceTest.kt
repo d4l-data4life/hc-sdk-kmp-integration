@@ -32,7 +32,7 @@
 
 package care.data4life.integration.app.crud
 
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import care.data4life.fhir.stu3.model.*
 import care.data4life.fhir.stu3.util.FhirDateTimeParser
 import care.data4life.sdk.helpers.AttachmentBuilder

@@ -128,6 +128,7 @@ dependencies {
     androidTestImplementation(Libraries.androidXTestRunner)
     androidTestImplementation(Libraries.androidXTestRules)
     androidTestImplementation(Libraries.androidXTestOrchestrator)
+    androidTestImplementation(Libraries.androidXTestExtJUnit)
 
     androidTestImplementation(Libraries.androidXTestEspressoCore)
     androidTestImplementation(Libraries.androidXTestEspressoIntents)

@@ -99,6 +99,8 @@ object Libraries {
     const val androidXTestRules = "androidx.test:rules:${Versions.androidXTest}"
     const val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTest}"
 
+    const val androidXTestExtJUnit = "androidx.test.ext:junit:${Versions.androidXTestExtJUnit}"
+
     const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Versions.androidXEspresso}"
     const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
     const val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
