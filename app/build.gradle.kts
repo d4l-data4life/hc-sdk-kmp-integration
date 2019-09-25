@@ -26,7 +26,7 @@ android {
         manifestPlaceholders = mapOf<String, Any>(
                 "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
                 "clientSecret" to "androidsupersecret",
-                "environment" to "development",
+                "environment" to "staging",
                 "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
                 "debug" to "true"
         )

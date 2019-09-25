@@ -39,11 +39,13 @@ import care.data4life.sdk.helpers.AttachmentBuilder
 import care.data4life.sdk.helpers.DocumentReferenceBuilder
 import care.data4life.sdk.helpers.getAttachments
 import care.data4life.sdk.helpers.getTitle
+import org.junit.Ignore
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 @RunWith(AndroidJUnit4::class)
+@Ignore
 class DocumentReferenceTest : BaseTest<DocumentReference>() {
 
     //region document properties
