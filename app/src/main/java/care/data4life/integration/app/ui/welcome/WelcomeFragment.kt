@@ -40,10 +40,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import care.data4life.integration.app.R
 import care.data4life.sdk.Data4LifeClient
-import care.data4life.sdk.Data4LifeClient.GC_AUTH
+import care.data4life.sdk.Data4LifeClient.D4L_AUTH
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
@@ -58,13 +58,13 @@ class WelcomeFragment : Fragment() {
 
         welcome_login_button.setOnClickListener {
             val intent = Data4LifeClient.getInstance().getLoginIntent(context, null)
-            startActivityForResult(intent, GC_AUTH)
+            startActivityForResult(intent, D4L_AUTH)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GC_AUTH) {
+        if (requestCode == D4L_AUTH) {
             if (resultCode == RESULT_OK) {
                 findNavController(this).navigate(R.id.action_welcome_screen_to_home_screen)
             } else {

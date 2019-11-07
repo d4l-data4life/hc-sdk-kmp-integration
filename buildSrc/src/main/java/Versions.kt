@@ -31,8 +31,8 @@
  */
 
 object Versions {
-    const val gcSdk = "1.4.1"
-    const val fhir = "0.5.0"
+    const val hcSdk = "1.5.2"
+    const val fhirSdk = "0.5.0"
     const val fhirHelper = "1.2.2"
 
     const val kotlin = "1.3.50"
@@ -40,7 +40,7 @@ object Versions {
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.5.0"
+        const val android = "3.5.1"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)

@@ -64,7 +64,7 @@ class LoginPage : BasePage() {
         waitByResource("root")
         device.waitForIdle()
 
-        val loginTab = device.findObject(selector.className("android.view.View").textMatches("(Login|Anmelden)"))
+        val loginTab = device.findObject(selector.className("android.view.View").textMatches("(Log in|Anmelden)"))
         if (loginTab.exists()) {
             loginTab.click()
             device.waitForIdle()

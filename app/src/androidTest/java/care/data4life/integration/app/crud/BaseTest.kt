@@ -87,8 +87,11 @@ abstract class BaseTest<T : DomainResource> {
         @JvmStatic
         protected var recordIds = mutableListOf<String>()
 
+
+        //SUT
         @JvmStatic
-        protected lateinit var client: Data4LifeClient  //SUT
+        protected lateinit var client: Data4LifeClient
+
 
         @BeforeClass
         @JvmStatic
