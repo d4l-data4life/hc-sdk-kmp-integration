@@ -36,6 +36,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
+import care.data4life.integration.app.testUtils.Auth2FAHelper
 import java.lang.Thread.sleep
 
 class LoginPage : BasePage() {
@@ -45,7 +46,7 @@ class LoginPage : BasePage() {
     }
 
 
-    fun doLogin(email: String, password: String): HomePage {
+    fun doLogin(email: String, password: String, phoneNumber: String): HomePage {
         sleep(TIMEOUT_SHORT)
 
         val selector = UiSelector()
@@ -100,6 +101,21 @@ class LoginPage : BasePage() {
 
         val submit = device.findObject(selector.resourceId("loginButton"))
         submit.click()
+
+        // 2FA
+        //FIXME
+        val code = Auth2FAHelper.fetchCurrent2faCode()
+
+        val codeInput1 = device.findObject(selector.resourceId("2fa_input"))
+        val codeInput2 = device.findObject(selector.resourceId("2fa_input"))
+        val codeInput3 = device.findObject(selector.resourceId("2fa_input"))
+        val codeInput4 = device.findObject(selector.resourceId("2fa_input"))
+        val codeInput5 = device.findObject(selector.resourceId("2fa_input"))
+        val codeInput6 = device.findObject(selector.resourceId("2fa_input"))
+
+
+        val codeSubmit = device.findObject(selector.resourceId("codeButton"))
+        codeSubmit.click()
 
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
