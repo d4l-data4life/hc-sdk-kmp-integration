@@ -81,6 +81,13 @@ object Libraries {
     const val koinCore = "org.koin:koin-core:${Versions.koin}"
     const val testKoin = "org.koin:koin-test:${Versions.koin}"
 
+    // Network
+    val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    val testOkHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+
 
     // Test
     const val testJunit = "junit:junit:${Versions.testJUnit}"

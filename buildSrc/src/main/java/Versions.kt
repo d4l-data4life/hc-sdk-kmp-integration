@@ -69,6 +69,17 @@ object Versions {
     // Google
     const val googlePlayServices = "15.0.1"
 
+    // Network
+    /**
+     * [okHttp](https://github.com/square/okhttp)
+     */
+    const val okHttp = "4.2.0"
+    /**
+     *
+     *[retrofit](https://github.com/square/retrofit)
+     */
+    const val retrofit = "2.6.1"
+
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
