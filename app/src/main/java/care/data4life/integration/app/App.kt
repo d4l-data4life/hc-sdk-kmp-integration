@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+ * Copyright (c) 2019, HPS Gesundheitscloud gGmbH
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,15 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object AndroidConfig {
-    const val minSdkVersion = 21
-    const val compileSdkVersion = 29
-    const val targetSdkVersion = 29
+package care.data4life.integration.app
+
+import android.app.Application
+import care.data4life.sdk.Data4LifeClient
+
+class App : Application() {
+
+    override fun onCreate() {
+        super.onCreate()
+        Data4LifeClient.init(this)
+    }
 }

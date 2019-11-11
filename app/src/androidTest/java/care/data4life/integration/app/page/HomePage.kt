@@ -30,8 +30,42 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object AndroidConfig {
-    const val minSdkVersion = 21
-    const val compileSdkVersion = 29
-    const val targetSdkVersion = 29
+package care.data4life.integration.app.page
+
+import com.agoda.kakao.KButton
+import com.agoda.kakao.KView
+import com.agoda.kakao.Screen
+import care.data4life.integration.app.R
+
+class HomePage : BasePage() {
+
+
+    private val screen = HomeScreen()
+
+
+    override fun waitForPage() {
+        waitByResource("care.data4life.integration.app:id/home_constraint")
+    }
+
+
+    fun doLogout(): WelcomePage {
+        screen.logoutButton { click() }
+
+        return WelcomePage()
+    }
+
+
+    fun isVisible(): HomePage {
+        screen.root { isDisplayed() }
+
+        return this
+    }
+
+
+    class HomeScreen : Screen<HomeScreen>() {
+        val root = KView { withId(R.id.home_constraint) }
+
+        val logoutButton = KButton { withId(R.id.home_logout_button) }
+    }
+
 }

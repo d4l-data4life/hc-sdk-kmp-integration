@@ -30,8 +30,13 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object AndroidConfig {
-    const val minSdkVersion = 21
-    const val compileSdkVersion = 29
-    const val targetSdkVersion = 29
+package care.data4life.integration.app
+
+import androidx.lifecycle.ViewModel
+import care.data4life.sdk.Data4LifeClient
+
+class MainViewModel : ViewModel() {
+
+    val client: Data4LifeClient = Data4LifeClient.getInstance()
+
 }

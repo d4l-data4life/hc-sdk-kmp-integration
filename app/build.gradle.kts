@@ -8,7 +8,7 @@ android {
     compileSdkVersion(AndroidConfig.compileSdkVersion)
 
     defaultConfig {
-        applicationId = "de.gesundheitscloud.sdk.integration"
+        applicationId = "care.data4life.integration.app"
 
         minSdkVersion(AndroidConfig.minSdkVersion)
         targetSdkVersion(AndroidConfig.targetSdkVersion)
@@ -26,8 +26,9 @@ android {
         manifestPlaceholders = mapOf<String, Any>(
                 "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
                 "clientSecret" to "androidsupersecret",
-                "environment" to "development",
-                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab"
+                "environment" to "staging",
+                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
+                "debug" to "true"
         )
     }
 
@@ -105,16 +106,19 @@ dependencies {
 
     implementation(Libraries.material)
 
-    implementation(Libraries.gcSdk) {
+    implementation(Libraries.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "sdk-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "util-jvm")
+        exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
     implementation(Libraries.threeTenABP)
-    implementation(Libraries.fhir)
+    implementation(Libraries.fhirSdk)
+    implementation(Libraries.fhirHelper) {
+        exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
+    }
 
     testImplementation(Libraries.testJunit)
 
@@ -124,6 +128,7 @@ dependencies {
     androidTestImplementation(Libraries.androidXTestRunner)
     androidTestImplementation(Libraries.androidXTestRules)
     androidTestImplementation(Libraries.androidXTestOrchestrator)
+    androidTestImplementation(Libraries.androidXTestExtJUnit)
 
     androidTestImplementation(Libraries.androidXTestEspressoCore)
     androidTestImplementation(Libraries.androidXTestEspressoIntents)

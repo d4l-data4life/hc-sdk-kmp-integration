@@ -30,8 +30,40 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object AndroidConfig {
-    const val minSdkVersion = 21
-    const val compileSdkVersion = 29
-    const val targetSdkVersion = 29
+package care.data4life.integration.app.page
+
+import com.agoda.kakao.KButton
+import com.agoda.kakao.KView
+import com.agoda.kakao.Screen
+import care.data4life.integration.app.R
+
+class WelcomePage : BasePage() {
+
+    private val screen = WelcomeScreen()
+
+
+    override fun waitForPage() {
+        waitByResource("care.data4life.integration.app:id/welcome_constraint")
+    }
+
+
+    fun openLoginPage(): LoginPage {
+        screen.loginButton { click() }
+
+        return LoginPage()
+    }
+
+    fun isVisible() : WelcomePage {
+        screen.root { isDisplayed() }
+
+        return this
+    }
+
+
+    class WelcomeScreen : Screen<WelcomeScreen>() {
+        val root = KView { withId(R.id.welcome_constraint) }
+
+        val loginButton = KButton { withId(R.id.welcome_login_button) }
+    }
+
 }

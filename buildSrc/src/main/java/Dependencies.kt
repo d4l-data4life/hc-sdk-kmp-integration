@@ -41,9 +41,10 @@ object GradlePlugins {
 
 
 object Libraries {
-    // GC sdk
-    const val gcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.gcSdk}"
-    const val fhir = "de.gesundheitscloud:hc-fhir-android:${Versions.fhir}"
+    // HC sdk
+    const val hcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.hcSdk}"
+    const val fhirSdk = "de.gesundheitscloud:hc-fhir-android:${Versions.fhirSdk}"
+    const val fhirHelper = "com.github.gesundheitscloud.sdk-fhir-helper-multiplatform:fhir-helper-android:${Versions.fhirHelper}"
 
     //date
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
@@ -92,11 +93,12 @@ object Libraries {
     const val testKotlinMockkCommon = "io.mockk:mockk-common:${Versions.testMockk}"
     const val testKotlinMockkAndroid = "io.mockk:mockk-android:${Versions.testMockk}"
 
-
     // Android Test
     const val androidXTestRunner = "androidx.test:runner:${Versions.androidXTest}"
     const val androidXTestRules = "androidx.test:rules:${Versions.androidXTest}"
     const val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTest}"
+
+    const val androidXTestExtJUnit = "androidx.test.ext:junit:${Versions.androidXTestExtJUnit}"
 
     const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Versions.androidXEspresso}"
     const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
@@ -104,6 +106,7 @@ object Libraries {
 
     const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
 
-//  const val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
+    //  const val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
     const val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
+
 }

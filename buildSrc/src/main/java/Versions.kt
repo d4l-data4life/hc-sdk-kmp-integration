@@ -31,15 +31,16 @@
  */
 
 object Versions {
-    const val gcSdk = "1.0.0"
-    const val fhir = "0.4.0"
+    const val hcSdk = "1.5.2"
+    const val fhirSdk = "0.5.0"
+    const val fhirHelper = "1.2.2"
 
-    const val kotlin = "1.3.21"
-    const val kotlinCoroutines = "1.0.0"
+    const val kotlin = "1.3.50"
+    const val kotlinCoroutines = "1.3.1"
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.3.1"
+        const val android = "3.5.1"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -54,7 +55,7 @@ object Versions {
 
     // AndroidX
     const val androidXKtx = "1.0.1"
-    const val androidXAppCompat = "1.0.2"
+    const val androidXAppCompat = "1.1.0"
     const val androidXBrowser = "1.0.0"
 
     const val androidXConstraintLayout = "2.0.0-alpha3"
@@ -72,7 +73,7 @@ object Versions {
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
-    const val threeTenABP = "1.1.1"
+    const val threeTenABP = "1.2.1"
 
     // Injection
     const val koin = "1.0.1"
@@ -91,6 +92,7 @@ object Versions {
     const val androidXTest = "1.1.1"
     const val androidXEspresso = "3.1.1"
     const val androidXUiAutomator = "2.2.0"
+    const val androidXTestExtJUnit = "1.1.1"
 
     // https://github.com/agoda-com/Kakao = 1.4.0
     // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
