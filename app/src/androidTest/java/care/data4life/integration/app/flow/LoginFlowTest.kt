@@ -54,7 +54,7 @@ class LoginFlowTest {
     }
 
     @Test
-    @Ignore("2-factor-auth is breaking the login")
+
     fun testLoginFlow() {
         val activity = rule.launchActivity(null)
 

@@ -90,15 +90,15 @@ class LoginPage : BasePage() {
         wv.scrollToEnd(10)
 
         // enter credentials and press submit button
-        val emailInput = device.findObject(selector.resourceId("emailInput"))
+        val emailInput = device.findObject(selector.resourceId("d4life-email"))
         emailInput.text = email
         device.waitForIdle()
 
-        val passwordInput = device.findObject(selector.resourceId("passwordInput"))
+        val passwordInput = device.findObject(selector.resourceId("d4life-password"))
         passwordInput.text = password
         device.waitForIdle()
 
-        val submit = device.findObject(selector.resourceId("loginButton"))
+        val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
         submit.click()
 
         device.waitForIdle()
