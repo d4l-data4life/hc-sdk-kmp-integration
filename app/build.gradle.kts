@@ -137,4 +137,7 @@ dependencies {
     androidTestImplementation(Libraries.androidXTestUiAutomator)
 
     androidTestImplementation(Libraries.androidXTestKakao)
+
+    androidTestImplementation(Libraries.sparkJava)
+    androidTestImplementation(Libraries.twilioSDK)
 }

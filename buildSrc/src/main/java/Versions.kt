@@ -98,4 +98,7 @@ object Versions {
     // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
     // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
     const val androidXKakao = "1.4.0-androidx"
+
+    // Twilio
+    const val twilioSdk = "4.4.5"
 }

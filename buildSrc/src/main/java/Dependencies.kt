@@ -109,4 +109,7 @@ object Libraries {
     //  const val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
     const val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
 
+    //  Twilio
+    const val twilioSDK = "com.twilio.sdk:twilio-java-sdk:${Versions.twilioSdk}'"
+
 }

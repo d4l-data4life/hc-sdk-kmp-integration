@@ -90,12 +90,41 @@ class LoginPage : BasePage() {
         wv.scrollToEnd(10)
 
         // enter credentials and press submit button
-        val emailInput = device.findObject(selector.resourceId("d4life-email"))
+        val emailInput = device.findObject(selector.resourceId("d4l-email"))
         emailInput.text = email
         device.waitForIdle()
 
-        val passwordInput = device.findObject(selector.resourceId("d4life-password"))
+        val passwordInput = device.findObject(selector.resourceId("d4l-password"))
         passwordInput.text = password
+        device.waitForIdle()
+
+        val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
+        submit.click()
+
+
+        device.waitForIdle()
+        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
+
+        return HomePage()
+    }
+
+    fun verifyNumber(countryCode: String, phoneNumber: String): HomePage {
+        Thread.sleep(TIMEOUT_SHORT)
+
+        val selector = UiSelector()
+
+        // scroll to bottom
+        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
+        wv.scrollForward()
+        wv.scrollToEnd(10)
+
+        // enter phone number and press next button
+        val codeInput = device.findObject(selector.resourceId("d4l-code"))
+        codeInput.text = countryCode
+        device.waitForIdle()
+
+        val phoneInput = device.findObject(selector.resourceId("d4l-phone-number"))
+        phoneInput.text = phoneNumber
         device.waitForIdle()
 
         val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
@@ -104,7 +133,10 @@ class LoginPage : BasePage() {
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
+        // send sms using Twilio to input number
+
         return HomePage()
     }
+
 
 }
