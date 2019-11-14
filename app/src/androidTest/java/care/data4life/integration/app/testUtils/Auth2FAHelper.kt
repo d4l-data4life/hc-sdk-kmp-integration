@@ -50,11 +50,11 @@ import java.util.*
 
 interface TwillioService {
 
-    @GET("{date}/Accounts/{${Companion.ACCOUNT_SID}}/Messages/Messages.json")
+    @GET("2010-04-01/Accounts/{${ACCOUNT_SID}}/Messages.json")
     fun fetchLatest2FACode(
             @Header("Authorization") authkey: String,
-            @Path("date") date: String,
-            @Query("To") phoneNumber: String,
+            @Query("dateSent") date: String,
+            @Query("to") phoneNumber: String,
             @Query( "PageSize") pageSize: Int = 1
     ) : String
 
@@ -91,18 +91,6 @@ object Auth2FAHelper {
 
     fun fetchCurrent2faCode(): String {
         val date = dateFormatter.format(LocalDate.now())
-
-        val request = Request.Builder()
-                .url("https://api.twilio.com/${date}/Accounts/AC45c8932053f153ce647e71ba04081d13/Messages/Messages.json?To=${AUTH_PHONE_NUMBER}&PageSize=1")
-                .addHeader("Authorization", credential)
-                .build()
-//
-//        client.newCall(request).execute().use { response ->
-//            if (!response.isSuccessful) throw IOException("Unexpected code $response")
-//
-//            val body = response.body
-//
-//        }
 
         val code = twillioService.fetchLatest2FACode(credential, date, AUTH_PHONE_NUMBER)
 
