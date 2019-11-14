@@ -138,6 +138,5 @@ dependencies {
 
     androidTestImplementation(Libraries.androidXTestKakao)
 
-    androidTestImplementation(Libraries.sparkJava)
-    androidTestImplementation(Libraries.twilioSDK)
+
 }

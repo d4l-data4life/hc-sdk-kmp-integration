@@ -102,6 +102,7 @@ class LoginPage : BasePage() {
         submit.click()
 
 
+
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
@@ -138,5 +139,33 @@ class LoginPage : BasePage() {
         return HomePage()
     }
 
+    fun enterVerificationCode(verificationCode: String, phoneNumber: String): HomePage {
+        Thread.sleep(TIMEOUT_SHORT)
+
+        val selector = UiSelector()
+
+        // scroll to bottom
+        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
+        wv.scrollForward()
+        wv.scrollToEnd(10)
+
+        // enter verification code digits
+        var resourceId = "d4l-pin-poisition-"
+        for (x in 1 until 6){
+            val digit = device.findObject(selector.resourceId("$resourceId + $x"))
+            digit.text = verificationCode[x-1].toString()
+        }
+        val resend = device.findObject(selector.resourceId("d4l-button-resend-sms-code"))
+        val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
+        confirm.click()
+
+
+        device.waitForIdle()
+        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
+
+        // send sms using Twilio to input number
+
+        return HomePage()
+    }
 
 }
