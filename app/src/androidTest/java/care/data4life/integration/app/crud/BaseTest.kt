@@ -37,6 +37,7 @@ import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.WelcomePage
+import care.data4life.integration.app.testUtils.Auth2FAHelper.AUTH_PHONE_NUMBER
 import care.data4life.integration.app.testUtils.NetworkUtil
 import care.data4life.integration.app.testUtils.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
@@ -106,7 +107,7 @@ abstract class BaseTest<T : DomainResource> {
             homePage = WelcomePage()
                     .isVisible()
                     .openLoginPage()
-                    .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!")
+                    .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!", AUTH_PHONE_NUMBER)
                     .isVisible()
 
             assertLogin(true)

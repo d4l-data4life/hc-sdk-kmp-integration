@@ -138,5 +138,7 @@ dependencies {
 
     androidTestImplementation(Libraries.androidXTestKakao)
 
-
+    androidTestImplementation(Libraries.okHttp)
+    androidTestImplementation(Libraries.okHttpLoggingInterceptor)
+    androidTestImplementation(Libraries.retrofit)
 }
