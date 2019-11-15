@@ -79,6 +79,11 @@ object Versions {
      *[retrofit](https://github.com/square/retrofit)
      */
     const val retrofit = "2.6.1"
+    /**
+     *
+     *[gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
+     */
+    const val gson = "2.4.0"
 
 
     /**

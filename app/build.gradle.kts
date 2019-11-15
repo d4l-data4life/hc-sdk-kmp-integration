@@ -141,4 +141,5 @@ dependencies {
     androidTestImplementation(Libraries.okHttp)
     androidTestImplementation(Libraries.okHttpLoggingInterceptor)
     androidTestImplementation(Libraries.retrofit)
+    androidTestImplementation(Libraries.gson)
 }

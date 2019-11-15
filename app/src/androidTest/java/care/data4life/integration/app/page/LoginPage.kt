@@ -102,24 +102,11 @@ class LoginPage : BasePage() {
         val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
         submit.click()
 
-<<<<<<< HEAD
-
-=======
-        // 2FA
-        //FIXME
+        //  2FA
+        //enterPhoneNumber("+1","9292544521")
         val code = Auth2FAHelper.fetchCurrent2faCode()
-
-        val codeInput1 = device.findObject(selector.resourceId("2fa_input"))
-        val codeInput2 = device.findObject(selector.resourceId("2fa_input"))
-        val codeInput3 = device.findObject(selector.resourceId("2fa_input"))
-        val codeInput4 = device.findObject(selector.resourceId("2fa_input"))
-        val codeInput5 = device.findObject(selector.resourceId("2fa_input"))
-        val codeInput6 = device.findObject(selector.resourceId("2fa_input"))
-
-
-        val codeSubmit = device.findObject(selector.resourceId("codeButton"))
-        codeSubmit.click()
->>>>>>> 7ef28027bcec18857f3f27a83598f0cd5791dfea
+        enterVerificationCode(code)
+        //FIXME uncheck box
 
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
@@ -127,7 +114,7 @@ class LoginPage : BasePage() {
         return HomePage()
     }
 
-    fun verifyNumber(countryCode: String, phoneNumber: String): HomePage {
+    fun enterPhoneNumber(countryCode: String, phoneNumber: String) {
         Thread.sleep(TIMEOUT_SHORT)
 
         val selector = UiSelector()
@@ -154,10 +141,9 @@ class LoginPage : BasePage() {
 
         // send sms using Twilio to input number
 
-        return HomePage()
     }
 
-    fun enterVerificationCode(verificationCode: String, phoneNumber: String): HomePage {
+    fun enterVerificationCode(verificationCode: String) {
         Thread.sleep(TIMEOUT_SHORT)
 
         val selector = UiSelector()
@@ -181,9 +167,6 @@ class LoginPage : BasePage() {
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
-        // send sms using Twilio to input number
-
-        return HomePage()
     }
 
 }

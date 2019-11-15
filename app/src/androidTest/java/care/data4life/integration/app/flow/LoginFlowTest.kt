@@ -55,25 +55,13 @@ class LoginFlowTest {
     }
 
     @Test
-<<<<<<< HEAD
-
-    fun testLoginFlow() {
-=======
-    @Ignore("2-factor-auth is breaking the login")
     fun testLoginLogoutFlow() {
->>>>>>> 7ef28027bcec18857f3f27a83598f0cd5791dfea
         val activity = rule.launchActivity(null)
 
         WelcomePage()
                 .isVisible()
-<<<<<<< HEAD
-                .openLoginPage()
-                .doLogin("ouafae.benelkadi@data4life.care", "iloveData4Life!")
-                //.verifyNumber("+49","17640499677")
-=======
                 .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!", "+19292544521") // HomePage
->>>>>>> 7ef28027bcec18857f3f27a83598f0cd5791dfea
+                .doLogin("ouafae.benelkadi+fire1@data4life.care", "iloveData4Life!", "+19292544521") // HomePage
                 .isVisible()
                 .doLogout() // WelcomeScreen
                 .isVisible()

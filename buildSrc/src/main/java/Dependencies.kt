@@ -86,6 +86,7 @@ object Libraries {
     val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     val testOkHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
     val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
 
 

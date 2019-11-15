@@ -32,7 +32,9 @@
 
 package care.data4life.integration.app.testUtils
 
+import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.test.platform.app.InstrumentationRegistry
+import com.google.gson.annotations.SerializedName
 import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Credentials
 import okhttp3.Request
@@ -40,6 +42,9 @@ import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -51,12 +56,11 @@ import java.util.*
 interface TwillioService {
 
     @GET("2010-04-01/Accounts/{${ACCOUNT_SID}}/Messages.json")
-    fun fetchLatest2FACode(
-            @Header("Authorization") authkey: String,
+    fun get2FACode(
             @Query("dateSent") date: String,
             @Query("to") phoneNumber: String,
-            @Query( "PageSize") pageSize: Int = 1
-    ) : String
+            @Query("page") page: Int
+    ) : Call<List<Message>>
 
     companion object {
         const val BASE_URL = "https://api.twilio.com"
@@ -65,6 +69,18 @@ interface TwillioService {
         const val AUTH_TOKEN = "JVExGoQKNEusgWZx7BRbBMqWu7orXWmM"
     }
 
+}
+
+class Message {
+
+    @SerializedName("body")
+    var body: String? = null
+    @SerializedName("error_code")
+    var error_code: String? = null
+    @SerializedName("from")
+    var from: String? = null
+    @SerializedName("to")
+    var to: String? = null
 }
 
 object Auth2FAHelper {
@@ -88,11 +104,27 @@ object Auth2FAHelper {
         twillioService = retrofit.create(TwillioService::class.java)
     }
 
+    private fun fetchLatest2FACode(date: String): List<Message> {
+        var messages = ArrayList<Message>()
+        val call: Call<List<Message>> = twillioService.get2FACode(date, AUTH_PHONE_NUMBER, 0)
+        call.enqueue(object : Callback<List<Message>>{
+            override fun onResponse(call: Call<List<Message>>, response: Response<List<Message>>) {
+                messages.addAll(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<List<Message>>, t: Throwable) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                var code: String? = t.message
+            }
+        }
+        )
+        return  messages
+    }
 
     fun fetchCurrent2faCode(): String {
         val date = dateFormatter.format(LocalDate.now())
 
-        val code = twillioService.fetchLatest2FACode(credential, date, AUTH_PHONE_NUMBER)
+        val code = fetchLatest2FACode(date).get(0).body
 
         return ""
     }
@@ -103,6 +135,8 @@ object Auth2FAHelper {
 //    }
 
 }
+
+
 
 class Auth2FAHelperTest {
 
