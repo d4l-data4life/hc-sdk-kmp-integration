@@ -105,7 +105,7 @@ class LoginPage : BasePage() {
         //  2FA
         //enterPhoneNumber("+1","9292544521")
         val code = Auth2FAHelper.fetchCurrent2faCode()
-        enterVerificationCode(code)
+        //enterVerificationCode(code)
         //FIXME uncheck box
 
         device.waitForIdle()

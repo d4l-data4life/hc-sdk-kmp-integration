@@ -34,6 +34,7 @@ package care.data4life.integration.app
 
 import android.app.Application
 import care.data4life.sdk.Data4LifeClient
+import com.facebook.stetho.Stetho
 
 class App : Application() {
 

@@ -88,6 +88,8 @@ object Libraries {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
     val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}"
+    val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}"
 
 
     // Test

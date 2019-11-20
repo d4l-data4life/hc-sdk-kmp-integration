@@ -84,7 +84,11 @@ object Versions {
      *[gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
      */
     const val gson = "2.4.0"
-
+    /**
+     *
+     *[chucker inspector](//https://github.com/ChuckerTeam/chucker/tree/develop)
+     */
+    const val chucker = "3.0.1"
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)

@@ -32,12 +32,25 @@
 
 package care.data4life.integration.app.testUtils
 
+import android.content.Context
+import android.util.Log
+import androidx.annotation.Nullable
 import androidx.appcompat.widget.FitWindowsLinearLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import care.data4life.sdk.Data4LifeClient.init
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.facebook.stetho.Stetho
+import com.facebook.stetho.okhttp.StethoInterceptor
 import com.google.gson.annotations.SerializedName
 import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Credentials
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.internal.connection.ConnectInterceptor.intercept
+import okhttp3.internal.waitMillis
 import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.LocalDate
@@ -46,25 +59,28 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.io.IOException
+import java.lang.Thread.sleep
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface TwillioService {
 
-    @GET("2010-04-01/Accounts/{${ACCOUNT_SID}}/Messages.json")
+    @GET("2010-04-01/Accounts/$ACCOUNT_SID/Messages.json")
     fun get2FACode(
             @Query("dateSent") date: String,
             @Query("to") phoneNumber: String,
-            @Query("page") page: Int
-    ) : Call<List<Message>>
+            @Query("pageSize") page: Int
+    ) : Call<ListMessage>
 
     companion object {
         const val BASE_URL = "https://api.twilio.com"
-        const val ACCOUNT_SID = "AC45c8932053f153ce647e71ba04081d13"
+        const val ACCOUNT_SID = "ACcfd6d6a012cc5076c3bc3aa99d1f98a8"
         const val AUTH_SID = "SKaf8a5eaa4e3e5fd5d01b3daff4060684"
         const val AUTH_TOKEN = "JVExGoQKNEusgWZx7BRbBMqWu7orXWmM"
     }
@@ -83,49 +99,84 @@ class Message {
     var to: String? = null
 }
 
+
+class ListMessage {
+    @SerializedName("messages")
+    var messages: List<Message>? = null
+    @SerializedName("first_page_uri")
+    var first_page_uri: String? = null
+    @SerializedName("end")
+    var end: Int? = null
+
+}
+
+class BasicAuthInterceptor(user: String, password: String) : Interceptor {
+
+    private val credentials: String = Credentials.basic(user, password)
+
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): okhttp3.Response{
+        val request = chain.request()
+        val authenticatedRequest = request.newBuilder()
+                .header("Authorization", credentials).build()
+        return chain.proceed(authenticatedRequest)
+    }
+}
+
 object Auth2FAHelper {
 
     const val AUTH_PHONE_NUMBER = "+19292544521"
 
-
-    private val credential = Credentials.basic(TwillioService.AUTH_SID, TwillioService.AUTH_TOKEN)
-
     private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)
 
 
-    private val twillioService: TwillioService
 
 
-    init {
-        val retrofit = Retrofit.Builder()
-                .baseUrl(TwillioService.BASE_URL)
-                .build()
+    private fun initTwillioService(): TwillioService {
+        val twillioService: TwillioService
 
-        twillioService = retrofit.create(TwillioService::class.java)
+            val okHttpClient = OkHttpClient.Builder()
+                    .addInterceptor(BasicAuthInterceptor(TwillioService.AUTH_SID, TwillioService.AUTH_TOKEN))
+                    .build()
+            val retrofit = Retrofit.Builder()
+                    .baseUrl(TwillioService.BASE_URL)
+                    .client(okHttpClient)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+
+
+            twillioService = retrofit.create(TwillioService::class.java)
+
+        return twillioService
     }
-
-    private fun fetchLatest2FACode(date: String): List<Message> {
+    /*private fun fetchLatest2FACodee(date: String): List<Message>{
         var messages = ArrayList<Message>()
-        val call: Call<List<Message>> = twillioService.get2FACode(date, AUTH_PHONE_NUMBER, 0)
-        call.enqueue(object : Callback<List<Message>>{
-            override fun onResponse(call: Call<List<Message>>, response: Response<List<Message>>) {
-                messages.addAll(response.body()!!)
+        var liveData : MutableLiveData<ListMessage> = MutableLiveData()
+        val call: Call<ListMessage> = initTwillioService().get2FACode(date, AUTH_PHONE_NUMBER, 1)
+        call.enqueue(object : Callback<ListMessage>{
+            override fun onResponse(call: Call<ListMessage>, response: Response<ListMessage>) {
+               // messages.addAll(response.body()?.messages!!)
+                Log.d("ListMessages", "list is "+response.body().toString())
             }
 
-            override fun onFailure(call: Call<List<Message>>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            override fun onFailure(call: Call<ListMessage>, t: Throwable) {
                 var code: String? = t.message
             }
         }
         )
         return  messages
+    }*/
+
+    private fun fetchLatest2FACode(date: String): ListMessage?{
+        val call: Call<ListMessage> = initTwillioService().get2FACode(date, AUTH_PHONE_NUMBER, 1)
+        var messages = call.execute().body()
+        return messages
     }
 
     fun fetchCurrent2faCode(): String {
         val date = dateFormatter.format(LocalDate.now())
-
-        val code = fetchLatest2FACode(date).get(0).body
-
+        val code = fetchLatest2FACode(date)?.messages?.get(0)?.body
+        //fetchLatest2FACodee(date)
         return ""
     }
 
@@ -140,14 +191,18 @@ object Auth2FAHelper {
 
 class Auth2FAHelperTest {
 
+    lateinit var instrumentationContext: Context
+
     @Before
     fun setup() {
         AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().targetContext)
+        instrumentationContext = InstrumentationRegistry.getInstrumentation().targetContext
     }
 
 
     @Test
     fun tryIt() {
+        sleep(5000)
         Auth2FAHelper.fetchCurrent2faCode()
     }
 
