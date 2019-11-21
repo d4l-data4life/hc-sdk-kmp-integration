@@ -39,10 +39,7 @@ import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import care.data4life.sdk.Data4LifeClient.init
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.facebook.stetho.Stetho
-import com.facebook.stetho.okhttp.StethoInterceptor
+import care.data4life.integration.app.testUtils.Auth2FAHelper.fetchCurrent2faCode
 import com.google.gson.annotations.SerializedName
 import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Credentials
@@ -125,14 +122,12 @@ class BasicAuthInterceptor(user: String, password: String) : Interceptor {
 
 object Auth2FAHelper {
 
-    const val AUTH_PHONE_NUMBER = "+19292544521"
-
     private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)
 
 
 
 
-    private fun initTwillioService(): TwillioService {
+    fun initTwillioService(): TwillioService {
         val twillioService: TwillioService
 
             val okHttpClient = OkHttpClient.Builder()
@@ -149,41 +144,28 @@ object Auth2FAHelper {
 
         return twillioService
     }
-    /*private fun fetchLatest2FACodee(date: String): List<Message>{
-        var messages = ArrayList<Message>()
-        var liveData : MutableLiveData<ListMessage> = MutableLiveData()
-        val call: Call<ListMessage> = initTwillioService().get2FACode(date, AUTH_PHONE_NUMBER, 1)
-        call.enqueue(object : Callback<ListMessage>{
-            override fun onResponse(call: Call<ListMessage>, response: Response<ListMessage>) {
-               // messages.addAll(response.body()?.messages!!)
-                Log.d("ListMessages", "list is "+response.body().toString())
-            }
 
-            override fun onFailure(call: Call<ListMessage>, t: Throwable) {
-                var code: String? = t.message
-            }
-        }
-        )
-        return  messages
-    }*/
 
-    private fun fetchLatest2FACode(date: String): ListMessage?{
-        val call: Call<ListMessage> = initTwillioService().get2FACode(date, AUTH_PHONE_NUMBER, 1)
+    fun fetchLatest2FACode(phoneNumber: String, date: String): ListMessage?{
+        val call: Call<ListMessage> = initTwillioService().get2FACode(date, phoneNumber, 1)
         var messages = call.execute().body()
         return messages
     }
 
-    fun fetchCurrent2faCode(): String {
+    fun fetchCurrent2faCode(phoneNumber: String): String? {
         val date = dateFormatter.format(LocalDate.now())
-        val code = fetchLatest2FACode(date)?.messages?.get(0)?.body
-        //fetchLatest2FACodee(date)
-        return ""
+        val message = fetchLatest2FACode(phoneNumber, date)?.messages?.get(0)?.body
+
+        return message
     }
 
 
-//    fun extractVerificationCode(text: String): String {
-//
-//    }
+    fun extractVerificationCode(text: String?): String? {
+        var verificationCode = text
+        if(text!!.isNotEmpty())
+            verificationCode = text.substring(text.length-6,text.length)
+        return verificationCode
+    }
 
 }
 
@@ -203,7 +185,7 @@ class Auth2FAHelperTest {
     @Test
     fun tryIt() {
         sleep(5000)
-        Auth2FAHelper.fetchCurrent2faCode()
+        //Auth2FAHelper.extractVerificationCode(fetchCurrent2faCode())
     }
 
 }

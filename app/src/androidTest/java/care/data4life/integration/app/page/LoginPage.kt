@@ -32,6 +32,7 @@
 
 package care.data4life.integration.app.page
 
+import android.widget.EditText
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
@@ -104,9 +105,8 @@ class LoginPage : BasePage() {
 
         //  2FA
         //enterPhoneNumber("+1","9292544521")
-        val code = Auth2FAHelper.fetchCurrent2faCode()
-        //enterVerificationCode(code)
-        //FIXME uncheck box
+        val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
+        enterVerificationCode(code!!)
 
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
@@ -154,18 +154,19 @@ class LoginPage : BasePage() {
         wv.scrollToEnd(10)
 
         // enter verification code digits
-        var resourceId = "d4l-pin-poisition-"
+        var resourceId = "d4l-pin-position-"
         for (x in 1 until 6){
-            val digit = device.findObject(selector.resourceId("$resourceId + $x"))
-            digit.text = verificationCode[x-1].toString()
+            var res = device.findObject(selector.className("android.widget.EditText"))
+            res.text = verificationCode[x].toString()
+            //val digit = device.findObject(selector.resourceId(resourceId.plus(x)))
         }
+
+        val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
+        rememberCheckBox.click()
+
         val resend = device.findObject(selector.resourceId("d4l-button-resend-sms-code"))
         val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
         confirm.click()
-
-
-        device.waitForIdle()
-        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
     }
 
