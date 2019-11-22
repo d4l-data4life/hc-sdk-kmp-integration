@@ -33,10 +33,7 @@
 package care.data4life.integration.app.page
 
 import android.widget.EditText
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiScrollable
-import androidx.test.uiautomator.UiSelector
-import androidx.test.uiautomator.Until
+import androidx.test.uiautomator.*
 import care.data4life.integration.app.testUtils.Auth2FAHelper
 import java.lang.Thread.sleep
 
@@ -103,10 +100,16 @@ class LoginPage : BasePage() {
         val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
         submit.click()
 
-        //  2FA
+        // 2FA
         //enterPhoneNumber("+1","9292544521")
         val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
         enterVerificationCode(code!!)
+
+        // wrong code
+        repeat(3){
+            resendCode(phoneNumber)
+        }
+
 
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
@@ -144,29 +147,44 @@ class LoginPage : BasePage() {
     }
 
     fun enterVerificationCode(verificationCode: String) {
-        Thread.sleep(TIMEOUT_SHORT)
+        sleep(TIMEOUT_SHORT)
 
         val selector = UiSelector()
 
         // scroll to bottom
         val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
         wv.scrollForward()
-        wv.scrollToEnd(10)
+        wv.scrollToEnd(3)
 
         // enter verification code digits
         var resourceId = "d4l-pin-position-"
-        for (x in 1 until 6){
-            var res = device.findObject(selector.className("android.widget.EditText"))
-            res.text = verificationCode[x].toString()
+        var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
+        for (x in 0 until 6){
+            digits[x].text = verificationCode[x]+1.toString()
             //val digit = device.findObject(selector.resourceId(resourceId.plus(x)))
         }
 
         val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
         rememberCheckBox.click()
 
-        val resend = device.findObject(selector.resourceId("d4l-button-resend-sms-code"))
         val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
         confirm.click()
+
+    }
+
+    fun resendCode(phoneNumber: String){
+        val selector = UiSelector()
+        val dismissButton = device.findObject(selector.className("android.widget.Button").textMatches("(DISMISS)"))
+        if (dismissButton.exists()) {
+            dismissButton.click()
+
+            val resend = device.findObject(selector.resourceId("d4l-button-resend-sms-code"))
+            resend.click()
+
+            sleep(TIMEOUT_SHORT)
+            val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
+            enterVerificationCode(code!!)
+        }
 
     }
 

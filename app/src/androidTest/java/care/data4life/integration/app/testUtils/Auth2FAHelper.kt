@@ -39,6 +39,7 @@ import androidx.appcompat.widget.FitWindowsLinearLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import care.data4life.integration.app.page.BasePage
 import care.data4life.integration.app.testUtils.Auth2FAHelper.fetchCurrent2faCode
 import com.google.gson.annotations.SerializedName
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -153,9 +154,10 @@ object Auth2FAHelper {
     }
 
     fun fetchCurrent2faCode(phoneNumber: String): String? {
+        sleep(BasePage.TIMEOUT_SHORT)
         val date = dateFormatter.format(LocalDate.now())
         val message = fetchLatest2FACode(phoneNumber, date)?.messages?.get(0)?.body
-
+        Log.d("LastCode",message)
         return message
     }
 
@@ -163,7 +165,7 @@ object Auth2FAHelper {
     fun extractVerificationCode(text: String?): String? {
         var verificationCode = text
         if(text!!.isNotEmpty())
-            verificationCode = text.substring(text.length-6,text.length)
+            verificationCode = text.substring(text.length-6, text.length)
         return verificationCode
     }
 
