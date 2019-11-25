@@ -142,7 +142,6 @@ class LoginPage : BasePage() {
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
 
-        // send sms using Twilio to input number
 
     }
 
@@ -160,12 +159,13 @@ class LoginPage : BasePage() {
         var resourceId = "d4l-pin-position-"
         var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
         for (x in 0 until 6){
-            digits[x].text = verificationCode[x]+1.toString()
+            digits[x].text = verificationCode[x].toString()
             //val digit = device.findObject(selector.resourceId(resourceId.plus(x)))
         }
 
         val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
-        rememberCheckBox.click()
+        if(rememberCheckBox.isChecked)
+            rememberCheckBox.click()
 
         val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
         confirm.click()

@@ -35,9 +35,7 @@ package care.data4life.integration.app.flow
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.WelcomePage
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

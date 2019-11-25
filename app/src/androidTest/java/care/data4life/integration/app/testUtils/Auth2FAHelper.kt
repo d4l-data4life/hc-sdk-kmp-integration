@@ -33,39 +33,25 @@
 package care.data4life.integration.app.testUtils
 
 import android.content.Context
-import android.util.Log
-import androidx.annotation.Nullable
-import androidx.appcompat.widget.FitWindowsLinearLayout
-import androidx.lifecycle.MutableLiveData
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.UiDevice
 import care.data4life.integration.app.page.BasePage
-import care.data4life.integration.app.testUtils.Auth2FAHelper.fetchCurrent2faCode
 import com.google.gson.annotations.SerializedName
 import com.jakewharton.threetenabp.AndroidThreeTen
 import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.internal.connection.ConnectInterceptor.intercept
-import okhttp3.internal.waitMillis
 import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
 import retrofit2.http.Query
 import java.io.IOException
 import java.lang.Thread.sleep
 import java.util.*
-import kotlin.collections.ArrayList
 
 interface TwillioService {
 
@@ -74,7 +60,7 @@ interface TwillioService {
             @Query("dateSent") date: String,
             @Query("to") phoneNumber: String,
             @Query("pageSize") page: Int
-    ) : Call<ListMessage>
+    ): Call<ListMessage>
 
     companion object {
         const val BASE_URL = "https://api.twilio.com"
@@ -113,7 +99,7 @@ class BasicAuthInterceptor(user: String, password: String) : Interceptor {
     private val credentials: String = Credentials.basic(user, password)
 
     @Throws(IOException::class)
-    override fun intercept(chain: Interceptor.Chain): okhttp3.Response{
+    override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
         val request = chain.request()
         val authenticatedRequest = request.newBuilder()
                 .header("Authorization", credentials).build()
@@ -126,28 +112,26 @@ object Auth2FAHelper {
     private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)
 
 
-
-
     fun initTwillioService(): TwillioService {
         val twillioService: TwillioService
 
-            val okHttpClient = OkHttpClient.Builder()
-                    .addInterceptor(BasicAuthInterceptor(TwillioService.AUTH_SID, TwillioService.AUTH_TOKEN))
-                    .build()
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(TwillioService.BASE_URL)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+        val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(BasicAuthInterceptor(TwillioService.AUTH_SID, TwillioService.AUTH_TOKEN))
+                .build()
+        val retrofit = Retrofit.Builder()
+                .baseUrl(TwillioService.BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
 
-            twillioService = retrofit.create(TwillioService::class.java)
+        twillioService = retrofit.create(TwillioService::class.java)
 
         return twillioService
     }
 
 
-    fun fetchLatest2FACode(phoneNumber: String, date: String): ListMessage?{
+    fun fetchLatest2FACode(phoneNumber: String, date: String): ListMessage? {
         val call: Call<ListMessage> = initTwillioService().get2FACode(date, phoneNumber, 1)
         var messages = call.execute().body()
         return messages
@@ -157,20 +141,18 @@ object Auth2FAHelper {
         sleep(BasePage.TIMEOUT_SHORT)
         val date = dateFormatter.format(LocalDate.now())
         val message = fetchLatest2FACode(phoneNumber, date)?.messages?.get(0)?.body
-        Log.d("LastCode",message)
         return message
     }
 
 
     fun extractVerificationCode(text: String?): String? {
         var verificationCode = text
-        if(text!!.isNotEmpty())
-            verificationCode = text.substring(text.length-6, text.length)
+        if (text!!.isNotEmpty())
+            verificationCode = text.substring(text.length - 6, text.length)
         return verificationCode
     }
 
 }
-
 
 
 class Auth2FAHelperTest {
