@@ -157,10 +157,11 @@ class LoginPage : BasePage() {
 
         // enter verification code digits
         var resourceId = "d4l-pin-position-"
-        var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
+       // var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
         for (x in 0 until 6){
-            digits[x].text = verificationCode[x].toString()
-            //val digit = device.findObject(selector.resourceId(resourceId.plus(x)))
+            //digits[x].text = verificationCode[x].toString()
+            val digit = device.findObject(selector.resourceId(resourceId.plus(x + 1)))
+            digit.text = verificationCode[x].toString()
         }
 
         val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
