@@ -102,8 +102,8 @@ class LoginPage : BasePage() {
 
         // 2FA
         //enterPhoneNumber("+1","9292544521")
-        val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
-        enterVerificationCode(code!!)
+        val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
+        enterVerificationCode(code)
 
         // wrong code
         repeat(3){
@@ -183,7 +183,7 @@ class LoginPage : BasePage() {
             resend.click()
 
             sleep(TIMEOUT_SHORT)
-            val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
+            val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
             enterVerificationCode(code)
         }
 

@@ -143,16 +143,9 @@ object Auth2FAHelper {
         sleep(BasePage.TIMEOUT_SHORT)
         val date = dateFormatter.format(LocalDate.now())
         val message = fetchLatest2FACode(phoneNumber, date)?.messages?.get(0)?.body
-        return message ?: WRONG_PIN
+        return message?.substring(message.length - 6, message.length) ?: WRONG_PIN
     }
 
-
-    fun extractVerificationCode(text: String): String {
-        var verificationCode = text
-        if (text!!.isNotEmpty())
-            verificationCode = text.substring(text.length - 6, text.length)
-        return verificationCode
-    }
 
 }
 
