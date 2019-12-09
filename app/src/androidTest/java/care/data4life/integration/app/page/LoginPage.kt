@@ -184,7 +184,7 @@ class LoginPage : BasePage() {
 
             sleep(TIMEOUT_SHORT)
             val code = Auth2FAHelper.extractVerificationCode(Auth2FAHelper.fetchCurrent2faCode(phoneNumber))
-            enterVerificationCode(code!!)
+            enterVerificationCode(code)
         }
 
     }
