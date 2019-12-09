@@ -155,6 +155,12 @@ class LoginPage : BasePage() {
         wv.scrollForward()
         wv.scrollToEnd(3)
 
+        // close popup message
+        val closeSavePassword = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
+        if (closeSavePassword.exists()) {
+            closeSavePassword.click()
+        }
+
         // enter verification code digits
         var resourceId = "d4l-pin-position-"
        // var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))

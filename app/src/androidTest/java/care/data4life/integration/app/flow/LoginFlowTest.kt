@@ -47,10 +47,6 @@ class LoginFlowTest {
     @JvmField
     val rule = ActivityTestRule(MainActivity::class.java, false, false)
 
-    @Test
-    fun pass() {
-        assert(true)
-    }
 
     @Test
     fun testLoginLogoutFlow() {
