@@ -65,7 +65,12 @@ class LoginPage : BasePage() {
             closeNotifPopup.click()
             device.waitForIdle()
         }
-        device.waitForIdle()
+        // authorize access
+        val authorizeAccess = device.findObject(selector.className("android.widget.Button").textMatches("(CONTINUE|HINZUFÜGEN)"))
+        if (authorizeAccess.exists()) {
+            authorizeAccess.click()
+            device.waitForIdle()
+        }
         waitByResource("root")
         device.waitForIdle()
 
