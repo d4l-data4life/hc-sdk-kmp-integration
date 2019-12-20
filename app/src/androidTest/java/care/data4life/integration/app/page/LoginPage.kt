@@ -32,7 +32,6 @@
 
 package care.data4life.integration.app.page
 
-import android.widget.EditText
 import androidx.test.uiautomator.*
 import care.data4life.integration.app.testUtils.Auth2FAHelper
 import java.lang.Thread.sleep
