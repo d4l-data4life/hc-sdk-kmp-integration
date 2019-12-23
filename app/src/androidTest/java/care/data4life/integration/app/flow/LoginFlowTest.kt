@@ -36,7 +36,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.WelcomePage
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,22 +47,17 @@ class LoginFlowTest {
     @JvmField
     val rule = ActivityTestRule(MainActivity::class.java, false, false)
 
-    @Test
-    fun pass() {
-        assert(true)
-    }
 
     @Test
-    @Ignore("2-factor-auth is breaking the login")
-    fun testLoginFlow() {
+    fun testLoginLogoutFlow() {
         val activity = rule.launchActivity(null)
 
         WelcomePage()
                 .isVisible()
-                .openLoginPage()
-                .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!")
+                .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
+                .doLogin("ouafae.benelkadi+fire1@data4life.care", "iloveData4Life!", "+19292544521") // HomePage
                 .isVisible()
-                .doLogout()
+                .doLogout() // WelcomeScreen
                 .isVisible()
 
         activity.explicitFinish()

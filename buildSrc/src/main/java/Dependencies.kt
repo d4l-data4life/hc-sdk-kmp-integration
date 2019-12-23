@@ -81,6 +81,16 @@ object Libraries {
     const val koinCore = "org.koin:koin-core:${Versions.koin}"
     const val testKoin = "org.koin:koin-test:${Versions.koin}"
 
+    // Network
+    val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+    val testOkHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
+    val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}"
+    val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}"
+
 
     // Test
     const val testJunit = "junit:junit:${Versions.testJUnit}"
@@ -108,5 +118,8 @@ object Libraries {
 
     //  const val androidXTestKakao = "com.agoda.kakao:kakao:${Versions.androidXKakao}"
     const val androidXTestKakao = "com.github.wmontwe:Kakao:${Versions.androidXKakao}"
+
+    //  Twilio
+    const val twilioSDK = "com.twilio.sdk'"
 
 }

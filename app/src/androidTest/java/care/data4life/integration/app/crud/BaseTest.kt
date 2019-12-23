@@ -106,7 +106,7 @@ abstract class BaseTest<T : DomainResource> {
             homePage = WelcomePage()
                     .isVisible()
                     .openLoginPage()
-                    .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!")
+                    .doLogin("wolf.montwe+fire8@gesundheitscloud.de", "asdfgh1!", "+19292544521")
                     .isVisible()
 
             assertLogin(true)

@@ -89,7 +89,7 @@
         android:layout_marginEnd="@dimen/ui_spacing_double"
         android:layout_marginStart="@dimen/ui_spacing_double"
         android:text="@string/welcome_login_button_label"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -69,6 +69,26 @@ object Versions {
     // Google
     const val googlePlayServices = "15.0.1"
 
+    // Network
+    /**
+     * [okHttp](https://github.com/square/okhttp)
+     */
+    const val okHttp = "4.2.0"
+    /**
+     *
+     *[retrofit](https://github.com/square/retrofit)
+     */
+    const val retrofit = "2.6.1"
+    /**
+     *
+     *[gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
+     */
+    const val gson = "2.4.0"
+    /**
+     *
+     *[chucker inspector](//https://github.com/ChuckerTeam/chucker/tree/develop)
+     */
+    const val chucker = "3.0.1"
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
@@ -98,4 +118,7 @@ object Versions {
     // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
     // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
     const val androidXKakao = "1.4.0-androidx"
+
+    // Twilio
+    const val twilioSdk = "4.4.5"
 }

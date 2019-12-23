@@ -120,7 +120,13 @@ dependencies {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 
+    releaseImplementation(Libraries.checkerRelease)
+    androidTestImplementation(Libraries.chuckerDebug)
+
+
+
     testImplementation(Libraries.testJunit)
+
 
     androidTestImplementation(Libraries.testKotlin)
     androidTestImplementation(Libraries.testKotlinJunit)
@@ -137,4 +143,10 @@ dependencies {
     androidTestImplementation(Libraries.androidXTestUiAutomator)
 
     androidTestImplementation(Libraries.androidXTestKakao)
+
+    androidTestImplementation(Libraries.okHttp)
+    androidTestImplementation(Libraries.okHttpLoggingInterceptor)
+    androidTestImplementation(Libraries.retrofit)
+    androidTestImplementation(Libraries.gson)
+
 }
