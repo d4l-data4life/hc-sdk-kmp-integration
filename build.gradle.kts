@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.25.0"
+    id("com.github.ben-manes.versions") version "0.27.0"
 }
 
 allprojects {
@@ -21,6 +21,15 @@ allprojects {
         mavenCentral()
         maven("https://jitpack.io")
         jcenter()
+    }
+
+    // FIXME remove if dependency conflict is solved
+    configurations.all {
+        resolutionStrategy {
+            force(Libraries.okHttp)
+            force(Libraries.okHttpLoggingInterceptor)
+            force(Libraries.retrofit)
+        }
     }
 }
 
