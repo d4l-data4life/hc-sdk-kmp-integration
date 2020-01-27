@@ -54,17 +54,17 @@ object Versions {
     }
 
     // AndroidX
-    const val androidXKtx = "1.0.1"
+    const val androidXKtx = "1.1.0"
     const val androidXAppCompat = "1.1.0"
-    const val androidXBrowser = "1.0.0"
+    const val androidXBrowser = "1.2.0"
 
-    const val androidXConstraintLayout = "2.0.0-alpha3"
+    const val androidXConstraintLayout = "2.0.0-beta4"
 
-    const val androidXLifecycle = "2.0.0"
-    const val androidXNavigation = "1.0.0-beta02"
+    const val androidXLifecycle = "2.1.0"
+    const val androidXNavigation = "2.2.0"
 
     // Material
-    const val material = "1.0.0"
+    const val material = "1.1.0-rc01"
 
     // Google
     const val googlePlayServices = "15.0.1"
