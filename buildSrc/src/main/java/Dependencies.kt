@@ -41,6 +41,8 @@ object GradlePlugins {
 
 
 object Libraries {
+    const val androidDesugar = "com.android.tools:desugar_jdk_libs:${Versions.androidDesugar}"
+
     // HC sdk
     const val hcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.hcSdk}"
     const val fhirSdk = "de.gesundheitscloud:hc-fhir-android:${Versions.fhirSdk}"

@@ -79,15 +79,6 @@ android {
     defaultPublishConfig = "developmentDebug"
 
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    lintOptions {
-        isAbortOnError = false
-    }
-
     sourceSets {
         getByName("main") {
             res.setSrcDirs(setOf(
@@ -100,10 +91,32 @@ android {
             ))
         }
     }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled = true
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        isAbortOnError = false
+    }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 
 dependencies {
+    coreLibraryDesugaring(Libraries.androidDesugar)
+
     implementation(Libraries.kotlinStdLibJdk7)
     implementation(Libraries.kotlinCoroutinesCore)
 

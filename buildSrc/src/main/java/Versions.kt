@@ -40,7 +40,7 @@ object Versions {
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.5.3"
+        const val android = "4.0.0-alpha09"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -52,6 +52,9 @@ object Versions {
          */
         const val downloadTask = "3.4.3"
     }
+
+    // Android
+    const val androidDesugar = "1.0.4"
 
     // AndroidX
     const val androidXKtx = "1.1.0"
@@ -118,7 +121,4 @@ object Versions {
     // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
     // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
     const val androidXKakao = "1.4.0-androidx"
-
-    // Twilio
-    const val twilioSdk = "4.4.5"
 }
