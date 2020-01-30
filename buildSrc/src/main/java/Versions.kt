@@ -33,14 +33,14 @@
 object Versions {
     const val hcSdk = "1.5.2"
     const val fhirSdk = "0.5.0"
-    const val fhirHelper = "1.2.2"
+    const val fhirHelper = "1.2.3"
 
-    const val kotlin = "1.3.50"
-    const val kotlinCoroutines = "1.3.1"
+    const val kotlin = "1.3.61"
+    const val kotlinCoroutines = "1.3.3"
 
     object GradlePlugin {
         const val kotlin = Versions.kotlin
-        const val android = "3.5.1"
+        const val android = "3.5.3"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -54,17 +54,17 @@ object Versions {
     }
 
     // AndroidX
-    const val androidXKtx = "1.0.1"
+    const val androidXKtx = "1.1.0"
     const val androidXAppCompat = "1.1.0"
-    const val androidXBrowser = "1.0.0"
+    const val androidXBrowser = "1.2.0"
 
-    const val androidXConstraintLayout = "2.0.0-alpha3"
+    const val androidXConstraintLayout = "2.0.0-beta4"
 
-    const val androidXLifecycle = "2.0.0"
-    const val androidXNavigation = "1.0.0-beta02"
+    const val androidXLifecycle = "2.1.0"
+    const val androidXNavigation = "2.2.0"
 
     // Material
-    const val material = "1.0.0"
+    const val material = "1.1.0-rc01"
 
     // Google
     const val googlePlayServices = "15.0.1"
@@ -73,27 +73,27 @@ object Versions {
     /**
      * [okHttp](https://github.com/square/okhttp)
      */
-    const val okHttp = "4.2.0"
+    const val okHttp = "4.3.1"
     /**
      *
      *[retrofit](https://github.com/square/retrofit)
      */
-    const val retrofit = "2.6.1"
+    const val retrofit = "2.7.1"
     /**
      *
      *[gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
      */
-    const val gson = "2.4.0"
+    const val gson = "2.7.1"
     /**
      *
      *[chucker inspector](//https://github.com/ChuckerTeam/chucker/tree/develop)
      */
-    const val chucker = "3.0.1"
+    const val chucker = "3.1.1"
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
-    const val threeTenABP = "1.2.1"
+    const val threeTenABP = "1.2.2"
 
     // Injection
     const val koin = "1.0.1"
