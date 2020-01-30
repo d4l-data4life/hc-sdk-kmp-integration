@@ -2,7 +2,7 @@
 
 image::https://travis-ci.com/gesundheitscloud/hc-sdk-android-integration.svg?token=NeEVpUUDpspgyYoAyV8A&branch=master[Build Status,link=https://travis-ci.com/gesundheitscloud/hc-sdk-android-integration]
 
-image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/android-ci-mac-mini/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
+image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/Android%20CI%20%28MacMini%29/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
 
 This is an integration of the https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK] for testing purposes.
 
