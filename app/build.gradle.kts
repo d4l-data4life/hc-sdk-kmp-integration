@@ -58,6 +58,14 @@ android {
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
         }
+        create("sandbox") {
+            setDimension("environment")
+            manifestPlaceholders = mapOf<String, Any>(
+                    "environment" to "sandbox"
+            )
+            applicationIdSuffix = ".sandbox"
+            versionNameSuffix = "-sandbox"
+        }
         create("production") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
