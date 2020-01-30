@@ -17,12 +17,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/cache@v1.0.3
-        id: cache-gradle
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle-
       - name: Start emulator and wait for it
         run: ./script/ci/android/start_and_wait_for_emulator.sh
       - name: Cleanup
