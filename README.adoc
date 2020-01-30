@@ -26,9 +26,10 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 Run gradle wrapper task for connected tests:
 
-```bash
+[source,bash]
+----
 ./gradlew connectedAndroidTest
-```
+----
 
 == Test suit
 
