@@ -68,7 +68,7 @@ class WelcomeFragment : Fragment() {
             if (resultCode == RESULT_OK) {
                 findNavController(this).navigate(R.id.action_welcome_screen_to_home_screen)
             } else {
-                this.view?.let { Snackbar.make(it, "Failed to login with Gesundheitscloud", Snackbar.LENGTH_LONG).show() }
+                this.view?.let { Snackbar.make(it, "Failed to login with D4L", Snackbar.LENGTH_LONG).show() }
             }
         }
     }
