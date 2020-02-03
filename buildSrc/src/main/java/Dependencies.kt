@@ -50,10 +50,7 @@ object Libraries {
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
     // Kotlin
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    const val kotlinStdLibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
     const val kotlinStdLibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    const val kotlinStdLibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
 
     const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 
@@ -68,8 +65,8 @@ object Libraries {
     const val androidXLifecylceExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}"
 
     // Navigation
-    const val androidXNavigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
-    const val androidXNavigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
+    const val androidXNavigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
+    const val androidXNavigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
 
     // Material
     const val material = "com.google.android.material:material:${Versions.material}"
@@ -87,7 +84,6 @@ object Libraries {
     val testOkHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
-    val retrofitConverterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}"
     val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}"
 

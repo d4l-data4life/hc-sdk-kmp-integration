@@ -26,7 +26,7 @@ android {
         manifestPlaceholders = mapOf<String, Any>(
                 "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
                 "clientSecret" to "androidsupersecret",
-                "environment" to "staging",
+                "environment" to "development",
                 "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
                 "debug" to "true"
         )
@@ -47,18 +47,24 @@ android {
             manifestPlaceholders = mapOf<String, Any>(
                     "environment" to "development"
             )
+            applicationIdSuffix = ".development"
+            versionNameSuffix = "-development"
         }
         create("staging") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
                     "environment" to "staging"
             )
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
         }
         create("production") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
                     "environment" to "production"
             )
+            applicationIdSuffix = ".production"
+            versionNameSuffix = "-production"
         }
     }
 
