@@ -16,6 +16,7 @@ create_emulator() {
       -n ${emulator_name} \
       -k "system-images;android-${emulator_api};${emulator_type};${emulator_abi}" \
       -c 1000M \
+      -d 'Nexus 4' \
       -f
 }
 
@@ -28,6 +29,7 @@ run_headless_emulator() {
       -no-accel \
       -no-audio \
       -no-boot-anim \
+      -skin 768x1280 \
       -camera-back none \
       -camera-front none &
 }
@@ -38,6 +40,7 @@ run_emulator() {
         -no-snapshot \
         -no-audio \
         -no-boot-anim \
+        -skin 768x1280 \
         -camera-back none \
         -camera-front none &
 }
