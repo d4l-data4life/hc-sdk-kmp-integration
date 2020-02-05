@@ -4,11 +4,25 @@
 set -e
 set -o pipefail
 
+# emulator configuration
+emulator_name=sdk-integration
+emulator_api=29
+emulator_type=google_apis # choose: "default" OR "google_apis" OR "google_apis_playstore"
+emulator_abi=x86_64
+
+# create emulator
+create_emulator() {
+  echo "no" | avdmanager create avd \
+      -n ${emulator_name} \
+      -k "system-images;android-${emulator_api};${emulator_type};${emulator_abi}" \
+      -c 1000M \
+      -f
+}
 
  # start headless emulator in background
 run_headless_emulator() {
     emulator -no-window  \
-      -avd test \
+      -avd $emulator_name \
       -gpu swiftshader_indirect \
       -no-snapshot \
       -no-accel \
@@ -20,7 +34,7 @@ run_headless_emulator() {
 
 # start emulator in background
 run_emulator() {
-    emulator -avd test \
+    emulator -avd $emulator_name \
         -no-snapshot \
         -no-audio \
         -no-boot-anim \
@@ -47,6 +61,14 @@ adb devices
 
 sleep 2
 
+# delete old avd image
+avdmanager delete avd --name $emulator_name || true
+
+sleep 2
+
+create_emulator
+
+sleep 10
 
 if [[ ${RUN_HEADLESS} -eq 1 ]]
 then
