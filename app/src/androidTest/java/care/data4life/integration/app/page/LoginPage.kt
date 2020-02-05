@@ -32,7 +32,10 @@
 
 package care.data4life.integration.app.page
 
-import androidx.test.uiautomator.*
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
+import androidx.test.uiautomator.Until
 import care.data4life.integration.app.testUtils.Auth2FAHelper
 import java.lang.Thread.sleep
 
@@ -74,7 +77,8 @@ class LoginPage : BasePage() {
         waitByResource("root")
         device.waitForIdle()
 
-        val loginTab = device.findObject(selector.className("android.view.View").textMatches("(Log in|Anmelden)"))
+
+        val loginTab = device.findObject(selector.resourceId("d4l-button-login"))
         if (loginTab.exists()) {
             loginTab.click()
             device.waitForIdle()
@@ -117,7 +121,7 @@ class LoginPage : BasePage() {
         enterVerificationCode(code)
 
         // wrong code
-        repeat(3){
+        repeat(3) {
             resendCode(phoneNumber)
         }
 
@@ -174,15 +178,15 @@ class LoginPage : BasePage() {
 
         // enter verification code digits
         var resourceId = "d4l-pin-position-"
-       // var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
-        for (x in 0 until 6){
+        // var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
+        for (x in 0 until 6) {
             //digits[x].text = verificationCode[x].toString()
             val digit = device.findObject(selector.resourceId(resourceId.plus(x + 1)))
             digit.text = verificationCode[x].toString()
         }
 
         val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
-        if(rememberCheckBox.isChecked)
+        if (rememberCheckBox.isChecked)
             rememberCheckBox.click()
 
         val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
@@ -190,7 +194,7 @@ class LoginPage : BasePage() {
 
     }
 
-    fun resendCode(phoneNumber: String){
+    fun resendCode(phoneNumber: String) {
         val selector = UiSelector()
         val dismissButton = device.findObject(selector.className("android.widget.Button").textMatches("(DISMISS)"))
         if (dismissButton.exists()) {
