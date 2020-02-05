@@ -16,7 +16,7 @@ jobs:
     runs-on: [self-hosted, macos]
 
     steps:
-      - uses: Display runner context
+      - name: Display runner context
         run: hostname -s
       - uses: actions/checkout@v1
       - name: Start emulator and wait for it
