@@ -41,6 +41,8 @@ object GradlePlugins {
 
 
 object Libraries {
+    const val androidDesugar = "com.android.tools:desugar_jdk_libs:${Versions.androidDesugar}"
+
     // HC sdk
     const val hcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.hcSdk}"
     const val fhirSdk = "de.gesundheitscloud:hc-fhir-android:${Versions.fhirSdk}"
@@ -50,7 +52,7 @@ object Libraries {
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
     // Kotlin
-    const val kotlinStdLibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 
     const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 

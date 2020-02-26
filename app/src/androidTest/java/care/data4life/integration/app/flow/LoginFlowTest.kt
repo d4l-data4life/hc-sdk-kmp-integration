@@ -55,7 +55,7 @@ class LoginFlowTest {
         WelcomePage()
                 .isVisible()
                 .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin("ouafae.benelkadi+fire1@data4life.care", "iloveData4Life!", "+19292544521") // HomePage
+                .doLogin("wolf.montwe+ci01@data4life.care", "Asdfgh1!", "+19292544521") // HomePage
                 .isVisible()
                 .doLogout() // WelcomeScreen
                 .isVisible()

@@ -32,5 +32,6 @@
   -->
 
 <resources>
-    <string name="app_name">GHC SDK Integration</string>
+    <string name="app_name">D4L SDK Integration App</string>
+    <string name="sdk_environment">SDK Environment</string>
 </resources>

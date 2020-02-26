@@ -62,10 +62,10 @@ class LoginPage : BasePage() {
         }
 
         // close notification about leaving app popup
-        val closeNotifPopup = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
+        val closeNotifyPopup = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
         sleep(TIMEOUT_SHORT)
-        if (closeNotifPopup.exists()) {
-            closeNotifPopup.click()
+        if (closeNotifyPopup.exists()) {
+            closeNotifyPopup.click()
             device.waitForIdle()
         }
         // authorize access

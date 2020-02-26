@@ -58,6 +58,14 @@ android {
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
         }
+        create("sandbox") {
+            setDimension("environment")
+            manifestPlaceholders = mapOf<String, Any>(
+                    "environment" to "sandbox"
+            )
+            applicationIdSuffix = ".sandbox"
+            versionNameSuffix = "-sandbox"
+        }
         create("production") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
@@ -71,15 +79,6 @@ android {
     defaultPublishConfig = "developmentDebug"
 
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    lintOptions {
-        isAbortOnError = false
-    }
-
     sourceSets {
         getByName("main") {
             res.setSrcDirs(setOf(
@@ -92,11 +91,33 @@ android {
             ))
         }
     }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled = false
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        isAbortOnError = false
+    }
+
+    buildFeatures {
+        compose = false
+    }
 }
 
 
 dependencies {
-    implementation(Libraries.kotlinStdLibJdk7)
+    coreLibraryDesugaring(Libraries.androidDesugar)
+
+    implementation(Libraries.kotlinStdLib)
     implementation(Libraries.kotlinCoroutinesCore)
 
     implementation(Libraries.androidXKtx)
