@@ -45,7 +45,7 @@ import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
 import care.data4life.sdk.model.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import junit.framework.Assert.*
+import org.junit.Assert.*
 import org.junit.*
 import org.junit.Assume.assumeTrue
 import org.junit.runners.MethodSorters
