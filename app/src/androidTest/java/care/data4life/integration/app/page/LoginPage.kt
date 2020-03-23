@@ -77,6 +77,8 @@ class LoginPage : BasePage() {
         waitByResource("root")
         device.waitForIdle()
 
+        // scroll to bottom
+        scrollToBottom(3, selector)
 
         val loginTab = device.findObject(selector.resourceId("d4l-button-login"))
         if (loginTab.exists()) {
@@ -99,9 +101,8 @@ class LoginPage : BasePage() {
         }
 
         // scroll to bottom
-        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
-        wv.scrollForward()
-        wv.scrollToEnd(10)
+        // scroll to bottom
+        scrollToBottom(10, selector)
 
         // enter credentials and press submit button
         val emailInput = device.findObject(selector.resourceId("d4l-email"))
@@ -138,9 +139,7 @@ class LoginPage : BasePage() {
         val selector = UiSelector()
 
         // scroll to bottom
-        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
-        wv.scrollForward()
-        wv.scrollToEnd(10)
+        scrollToBottom(10, selector)
 
         // enter phone number and press next button
         val codeInput = device.findObject(selector.resourceId("d4l-code"))
@@ -208,6 +207,13 @@ class LoginPage : BasePage() {
             enterVerificationCode(code)
         }
 
+    }
+
+    fun scrollToBottom(scrollNumber: Int, selector: UiSelector){
+        // scroll to bottom
+        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
+        wv.scrollForward()
+        wv.scrollToEnd(scrollNumber)
     }
 
 }
