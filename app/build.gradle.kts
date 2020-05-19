@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-    compileSdkVersion(AndroidConfig.compileSdkVersion)
+    compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
 
     defaultConfig {
-        applicationId = "care.data4life.integration.app"
+        applicationId = AppConfig.androidConfig.applicationId
 
-        minSdkVersion(AndroidConfig.minSdkVersion)
-        targetSdkVersion(AndroidConfig.targetSdkVersion)
+        minSdkVersion(AppConfig.androidConfig.minSdkVersion)
+        targetSdkVersion(AppConfig.androidConfig.targetSdkVersion)
 
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = AppConfig.androidConfig.versionCode
+        versionName = AppConfig.androidConfig.versionName
 
         vectorDrawables.useSupportLibrary = true
 
