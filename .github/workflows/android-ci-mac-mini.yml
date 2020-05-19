@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Display runner context
         run: hostname -s
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Start emulator and wait for it
         run: ./script/ci/android/prepare_start_and_wait_for_emulator.sh
       - name: Cleanup
