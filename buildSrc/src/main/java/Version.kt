@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object Versions {
+object Version {
     const val hcSdk = "1.5.2"
     const val fhirSdk = "0.5.0"
     const val fhirHelper = "1.2.3"
@@ -39,7 +39,7 @@ object Versions {
     const val kotlinCoroutines = "1.3.3"
 
     object GradlePlugin {
-        const val kotlin = Versions.kotlin
+        const val kotlin = Version.kotlin
         const val android = "4.0.0-alpha09"
 
         /**

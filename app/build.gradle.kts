@@ -115,25 +115,25 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Libraries.androidDesugar)
+    coreLibraryDesugaring(Dependency.android.desugar)
 
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.kotlinCoroutinesCore)
+    implementation(Dependency.kotlin.stdLib)
+    implementation(Dependency.kotlin.coroutinesCore)
 
-    implementation(Libraries.androidXKtx)
-    implementation(Libraries.androidXAppCompat)
-    implementation(Libraries.androidXBrowser)
-    implementation(Libraries.androidXConstraintLayout)
+    implementation(Dependency.android.androidX.ktx)
+    implementation(Dependency.android.androidX.appCompat)
+    implementation(Dependency.android.androidX.browser)
+    implementation(Dependency.android.androidX.constraintLayout)
 
-    implementation(Libraries.androidXLifecylceCommonJava8)
-    implementation(Libraries.androidXLifecylceExtensions)
+    implementation(Dependency.android.androidX.lifecylceCommonJava8)
+    implementation(Dependency.android.androidX.lifecylceExtensions)
 
-    implementation(Libraries.androidXNavigationFragmentKtx)
-    implementation(Libraries.androidXNavigationUiKtx)
+    implementation(Dependency.android.androidX.navigationFragmentKtx)
+    implementation(Dependency.android.androidX.navigationUiKtx)
 
-    implementation(Libraries.material)
+    implementation(Dependency.android.material)
 
-    implementation(Libraries.hcSdk) {
+    implementation(Dependency.android.d4l.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
@@ -141,39 +141,39 @@ dependencies {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
-    implementation(Libraries.threeTenABP)
-    implementation(Libraries.fhirSdk)
-    implementation(Libraries.fhirHelper) {
+    implementation(Dependency.android.threeTenABP)
+    implementation(Dependency.android.d4l.fhirSdk)
+    implementation(Dependency.android.d4l.fhirHelper) {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 
-    releaseImplementation(Libraries.checkerRelease)
-    androidTestImplementation(Libraries.chuckerDebug)
+    releaseImplementation(Dependency.android.checkerRelease)
+    androidTestImplementation(Dependency.android.chuckerDebug)
 
 
 
-    testImplementation(Libraries.testJunit)
+    testImplementation(Dependency.test.testJunit)
 
 
-    androidTestImplementation(Libraries.testKotlin)
-    androidTestImplementation(Libraries.testKotlinJunit)
+    androidTestImplementation(Dependency.test.testKotlin)
+    androidTestImplementation(Dependency.test.testKotlinJunit)
 
-    androidTestImplementation(Libraries.androidXTestRunner)
-    androidTestImplementation(Libraries.androidXTestRules)
-    androidTestImplementation(Libraries.androidXTestOrchestrator)
-    androidTestImplementation(Libraries.androidXTestExtJUnit)
+    androidTestImplementation(Dependency.androidTest.androidXTestRunner)
+    androidTestImplementation(Dependency.androidTest.androidXTestRules)
+    androidTestImplementation(Dependency.androidTest.androidXTestOrchestrator)
+    androidTestImplementation(Dependency.androidTest.androidXTestExtJUnit)
 
-    androidTestImplementation(Libraries.androidXTestEspressoCore)
-    androidTestImplementation(Libraries.androidXTestEspressoIntents)
-    androidTestImplementation(Libraries.androidXTestEspressoWeb)
+    androidTestImplementation(Dependency.androidTest.androidXTestEspressoCore)
+    androidTestImplementation(Dependency.androidTest.androidXTestEspressoIntents)
+    androidTestImplementation(Dependency.androidTest.androidXTestEspressoWeb)
 
-    androidTestImplementation(Libraries.androidXTestUiAutomator)
+    androidTestImplementation(Dependency.androidTest.androidXTestUiAutomator)
 
-    androidTestImplementation(Libraries.androidXTestKakao)
+    androidTestImplementation(Dependency.androidTest.androidXTestKakao)
 
-    androidTestImplementation(Libraries.okHttp)
-    androidTestImplementation(Libraries.okHttpLoggingInterceptor)
-    androidTestImplementation(Libraries.retrofit)
-    androidTestImplementation(Libraries.gson)
+    androidTestImplementation(Dependency.android.okHttp)
+    androidTestImplementation(Dependency.android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependency.android.retrofit)
+    androidTestImplementation(Dependency.android.gson)
 
 }
