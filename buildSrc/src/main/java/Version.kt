@@ -31,16 +31,16 @@
  */
 
 object Version {
-    const val hcSdk = "1.5.2"
-    const val fhirSdk = "0.5.0"
-    const val fhirHelper = "1.2.3"
+    const val hcSdk = "1.6.0"
+    const val fhirSdk = "0.6.0"
+    const val fhirHelper = "1.2.4"
 
-    const val kotlin = "1.3.61"
-    const val kotlinCoroutines = "1.3.3"
+    const val kotlin = "1.3.72"
+    const val kotlinCoroutines = "1.3.6"
 
     object GradlePlugin {
         const val kotlin = Version.kotlin
-        const val android = "4.0.0-alpha09"
+        const val android = "4.0.0-rc01"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -54,10 +54,10 @@ object Version {
     }
 
     // Android
-    const val androidDesugar = "1.0.4"
+    const val androidDesugar = "1.0.5"
 
     // AndroidX
-    const val androidXKtx = "1.1.0"
+    const val androidXKtx = "1.2.0"
     const val androidXAppCompat = "1.1.0"
     const val androidXBrowser = "1.2.0"
 
@@ -67,7 +67,7 @@ object Version {
     const val androidXNavigation = "2.2.0"
 
     // Material
-    const val material = "1.1.0-rc01"
+    const val material = "1.1.0"
 
     // Google
     const val googlePlayServices = "15.0.1"
@@ -96,14 +96,14 @@ object Version {
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
-    const val threeTenABP = "1.2.2"
+    const val threeTenABP = "1.2.4"
 
     // Injection
     const val koin = "1.0.1"
 
 
     // Junit Test
-    const val testJUnit = "4.12"
+    const val testJUnit = "4.13"
 
     /**
      * [mockk](http://mockk.io)
@@ -117,8 +117,6 @@ object Version {
     const val androidXUiAutomator = "2.2.0"
     const val androidXTestExtJUnit = "1.1.1"
 
-    // https://github.com/agoda-com/Kakao = 1.4.0
-    // androidTestImplementation("com.agoda.kakao:kakao:1.4.0")
-    // currently patched version for AndroidX from https://github.com/wmontwe/Kakao
-    const val androidXKakao = "1.4.0-androidx"
+    // https://github.com/agoda-com/Kakao
+    const val androidXKakao = "2.3.2"
 }
