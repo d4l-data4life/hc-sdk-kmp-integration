@@ -1,4 +1,4 @@
-name: Android CI (MacMini)
+name: D4L CI Android
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
       - release/*
 
 jobs:
-  build:
+  build-and-verify:
 
     runs-on: [self-hosted, macos]
 
