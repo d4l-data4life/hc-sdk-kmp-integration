@@ -47,7 +47,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         >
 
-        <activity android:name="care.data4life.integration.app.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
