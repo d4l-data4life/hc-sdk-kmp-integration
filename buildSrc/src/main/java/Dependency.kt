@@ -40,6 +40,7 @@ object Dependency {
 
         const val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:${Version.GradlePlugin.dexcount}"
 
+
         const val downloadTask = "de.undercouch:gradle-download-task:${Version.GradlePlugin.downloadTask}"
     }
 

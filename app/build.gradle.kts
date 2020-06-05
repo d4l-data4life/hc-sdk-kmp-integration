@@ -111,6 +111,20 @@ android {
     buildFeatures {
         compose = false
     }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests.all(KotlinClosure1<Any, Test>({
+            (this as Test).also { testTask ->
+                testTask.testLogging {
+                    events("passed", "skipped", "failed", "standardOut", "standardError")
+                }
+            }
+        }, unitTests))
+
+        execution = "ANDROID_TEST_ORCHESTRATOR"
+    }
 }
 
 

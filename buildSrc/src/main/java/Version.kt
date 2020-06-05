@@ -32,6 +32,10 @@
 
 object Version {
     const val hcSdk = "1.6.0"
+
+    /**
+     * [D4L-FHIR-SDK]https://github.com/gesundheitscloud/hc-fhir-android)
+     */
     const val fhirSdk = "0.6.0"
     const val fhirHelper = "1.2.4"
 
@@ -44,7 +48,7 @@ object Version {
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
-         */
+        */
         const val dexcount = "0.8.4"
 
         /**
