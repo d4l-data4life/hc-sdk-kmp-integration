@@ -32,31 +32,19 @@
 
 object Dependency {
 
-    val gradlePlugin = GradlePlugin
-
     object GradlePlugin {
         const val android = "com.android.tools.build:gradle:${Version.GradlePlugin.android}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.GradlePlugin.kotlin}"
-
-        const val dexcount = "com.getkeepsafe.dexcount:dexcount-gradle-plugin:${Version.GradlePlugin.dexcount}"
-
-
-        const val downloadTask = "de.undercouch:gradle-download-task:${Version.GradlePlugin.downloadTask}"
     }
-
-    val kotlin = Kotlin
-
-    object Kotlin {
-        val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlin}"
-        const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlinCoroutines}"
-    }
-
-    val android = Android
 
     object Android {
-        const val desugar = "com.android.tools:desugar_jdk_libs:${Version.androidDesugar}"
+        // Kotlin
+        const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlin}"
+        const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlinCoroutines}"
 
-        val androidX = AndroidX
+        // Android
+        const val androidDesugar = "com.android.tools:desugar_jdk_libs:${Version.androidDesugar}"
+
         object AndroidX {
             // AndroidX
             const val ktx = "androidx.core:core-ktx:${Version.androidXKtx}"
@@ -87,43 +75,35 @@ object Dependency {
         const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Version.threeTenABP}"
 
         // Network
-        val okHttp = "com.squareup.okhttp3:okhttp:${Version.okHttp}"
-        val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
-        val testOkHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:${Version.okHttp}"
-        val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
-        val gson = "com.squareup.retrofit2:converter-gson:${Version.gson}"
+        const val okHttp = "com.squareup.okhttp3:okhttp:${Version.okHttp}"
+        const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Version.okHttp}"
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Version.retrofit}"
+        const val gson = "com.squareup.retrofit2:converter-gson:${Version.gson}"
 
-        val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Version.chucker}"
-        val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Version.chucker}"
-    }
+        const val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Version.chucker}"
+        const val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Version.chucker}"
 
-    val test = Test
-    object Test {
-        const val testJunit = "junit:junit:${Version.testJUnit}"
+        object Test {
+            const val junit = "junit:junit:${Version.testJUnit}"
 
-        const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
-        const val testKotlinCommon = "org.jetbrains.kotlin:kotlin-test-common:${Version.kotlin}"
-        const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
-        const val testKotlinAnnotationsCommon = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Version.kotlin}"
+            const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
+            const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
+        }
 
-        const val testKotlinMockkCommon = "io.mockk:mockk-common:${Version.testMockk}"
-        const val testKotlinMockkAndroid = "io.mockk:mockk-android:${Version.testMockk}"
-    }
+        object AndroidTest {
+            const val androidXTestRunner = "androidx.test:runner:${Version.androidXTest}"
+            const val androidXTestRules = "androidx.test:rules:${Version.androidXTest}"
+            const val androidXTestOrchestrator = "androidx.test:orchestrator:${Version.androidXTest}"
 
-    val androidTest = AndroidTest
-    object AndroidTest {
-        const val androidXTestRunner = "androidx.test:runner:${Version.androidXTest}"
-        const val androidXTestRules = "androidx.test:rules:${Version.androidXTest}"
-        const val androidXTestOrchestrator = "androidx.test:orchestrator:${Version.androidXTest}"
+            const val androidXTestExtJUnit = "androidx.test.ext:junit:${Version.androidXTestExtJUnit}"
 
-        const val androidXTestExtJUnit = "androidx.test.ext:junit:${Version.androidXTestExtJUnit}"
+            const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Version.androidXEspresso}"
+            const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Version.androidXEspresso}"
+            const val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Version.androidXEspresso}"
 
-        const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Version.androidXEspresso}"
-        const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Version.androidXEspresso}"
-        const val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Version.androidXEspresso}"
+            const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Version.androidXUiAutomator}"
 
-        const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Version.androidXUiAutomator}"
-
-        const val androidXTestKakao = "com.agoda.kakao:kakao:${Version.androidXKakao}"
+            const val androidXTestKakao = "com.agoda.kakao:kakao:${Version.androidXKakao}"
+        }
     }
 }

@@ -5,8 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath(Dependency.gradlePlugin.android)
-        classpath(Dependency.gradlePlugin.kotlin)
+        classpath(Dependency.GradlePlugin.android)
+        classpath(Dependency.GradlePlugin.kotlin)
     }
 }
 
@@ -26,9 +26,9 @@ allprojects {
     // FIXME remove if dependency conflict is solved
     configurations.all {
         resolutionStrategy {
-            force(Dependency.android.okHttp)
-            force(Dependency.android.okHttpLoggingInterceptor)
-            force(Dependency.android.retrofit)
+            force(Dependency.Android.okHttp)
+            force(Dependency.Android.okHttpLoggingInterceptor)
+            force(Dependency.Android.retrofit)
         }
     }
 }

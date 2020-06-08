@@ -129,25 +129,25 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Dependency.android.desugar)
+    coreLibraryDesugaring(Dependency.Android.androidDesugar)
 
-    implementation(Dependency.kotlin.stdLib)
-    implementation(Dependency.kotlin.coroutinesCore)
+    implementation(Dependency.Android.kotlinStdLib)
+    implementation(Dependency.Android.kotlinCoroutinesCore)
 
-    implementation(Dependency.android.androidX.ktx)
-    implementation(Dependency.android.androidX.appCompat)
-    implementation(Dependency.android.androidX.browser)
-    implementation(Dependency.android.androidX.constraintLayout)
+    implementation(Dependency.Android.AndroidX.ktx)
+    implementation(Dependency.Android.AndroidX.appCompat)
+    implementation(Dependency.Android.AndroidX.browser)
+    implementation(Dependency.Android.AndroidX.constraintLayout)
 
-    implementation(Dependency.android.androidX.lifecylceCommonJava8)
-    implementation(Dependency.android.androidX.lifecylceExtensions)
+    implementation(Dependency.Android.AndroidX.lifecylceCommonJava8)
+    implementation(Dependency.Android.AndroidX.lifecylceExtensions)
 
-    implementation(Dependency.android.androidX.navigationFragmentKtx)
-    implementation(Dependency.android.androidX.navigationUiKtx)
+    implementation(Dependency.Android.AndroidX.navigationFragmentKtx)
+    implementation(Dependency.Android.AndroidX.navigationUiKtx)
 
-    implementation(Dependency.android.material)
+    implementation(Dependency.Android.material)
 
-    implementation(Dependency.android.d4l.hcSdk) {
+    implementation(Dependency.Android.d4l.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
@@ -155,39 +155,39 @@ dependencies {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
-    implementation(Dependency.android.threeTenABP)
-    implementation(Dependency.android.d4l.fhirSdk)
-    implementation(Dependency.android.d4l.fhirHelper) {
+    implementation(Dependency.Android.threeTenABP)
+    implementation(Dependency.Android.d4l.fhirSdk)
+    implementation(Dependency.Android.d4l.fhirHelper) {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 
-    releaseImplementation(Dependency.android.checkerRelease)
-    androidTestImplementation(Dependency.android.chuckerDebug)
+    releaseImplementation(Dependency.Android.checkerRelease)
+    androidTestImplementation(Dependency.Android.chuckerDebug)
 
 
 
-    testImplementation(Dependency.test.testJunit)
+    testImplementation(Dependency.Android.Test.junit)
 
 
-    androidTestImplementation(Dependency.test.testKotlin)
-    androidTestImplementation(Dependency.test.testKotlinJunit)
+    androidTestImplementation(Dependency.Android.Test.testKotlin)
+    androidTestImplementation(Dependency.Android.Test.testKotlinJunit)
 
-    androidTestImplementation(Dependency.androidTest.androidXTestRunner)
-    androidTestImplementation(Dependency.androidTest.androidXTestRules)
-    androidTestImplementation(Dependency.androidTest.androidXTestOrchestrator)
-    androidTestImplementation(Dependency.androidTest.androidXTestExtJUnit)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestRunner)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestRules)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestOrchestrator)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestExtJUnit)
 
-    androidTestImplementation(Dependency.androidTest.androidXTestEspressoCore)
-    androidTestImplementation(Dependency.androidTest.androidXTestEspressoIntents)
-    androidTestImplementation(Dependency.androidTest.androidXTestEspressoWeb)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoCore)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoIntents)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoWeb)
 
-    androidTestImplementation(Dependency.androidTest.androidXTestUiAutomator)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestUiAutomator)
 
-    androidTestImplementation(Dependency.androidTest.androidXTestKakao)
+    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestKakao)
 
-    androidTestImplementation(Dependency.android.okHttp)
-    androidTestImplementation(Dependency.android.okHttpLoggingInterceptor)
-    androidTestImplementation(Dependency.android.retrofit)
-    androidTestImplementation(Dependency.android.gson)
+    androidTestImplementation(Dependency.Android.okHttp)
+    androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependency.Android.retrofit)
+    androidTestImplementation(Dependency.Android.gson)
 
 }
