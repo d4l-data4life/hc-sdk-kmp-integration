@@ -32,11 +32,15 @@
 
 package care.data4life.integration.app.page
 
+import android.webkit.WebView
+import android.widget.Button
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
+import care.data4life.integration.app.BuildConfig
 import care.data4life.integration.app.testUtils.Auth2FAHelper
+import care.data4life.integration.app.testUtils.User
 import java.lang.Thread.sleep
 
 class LoginPage : BasePage() {
@@ -45,175 +49,209 @@ class LoginPage : BasePage() {
         device.wait(Until.hasObject(By.pkg("com.android.chrome").depth(0)), TIMEOUT)
     }
 
-
-    fun doLogin(email: String, password: String, phoneNumber: String): HomePage {
+    fun doLogin(user: User): HomePage {
         sleep(TIMEOUT_SHORT)
 
-        val selector = UiSelector()
+        // Chrome
+        dismissChromeWelcomeScreen()
 
-        // dismiss Chrome welcome screen
-        val accept = device.findObject(selector.resourceId("com.android.chrome:id/terms_accept"))
-        if (accept.exists()) {
-            accept.click()
-        }
-        val noThanks = device.findObject(selector.resourceId("com.android.chrome:id/negative_button"))
-        if (noThanks.exists()) {
-            noThanks.click()
+        // AuthApp
+        dismissAuthAppCookie()
+
+        // Page login/register
+        scrollToBottom(2)
+        clickButton(authAppButtonLogin, true)
+
+        // Page enter email/password
+        scrollToBottom(2)
+        enterText(authAppInputEmail, user.email, true)
+        enterText(authAppInputPassword, user.password, true)
+        clickButton(authAppButtonSubmitLogin, true)
+
+        // Chrome
+        sleep(TIMEOUT_SHORT)
+        dismissChromeSavePassword()
+
+        // AuthApp
+
+        // Page Phone number
+        // FIXME ids missing so disabled it
+//        scrollToBottom(2)
+//        enterText(authAppInputPhoneCountryCode, user.phoneCountryCode, false)
+//        enterText(authAppInputPhoneNumber, user.phoneLocalNumber, false)
+//        clickButton(authAppButtonPhoneNumber, false)
+
+        // Page 2FA
+        scrollToBottom(2)
+        val code = Auth2FAHelper().fetchCurrent2faCode(user.phoneNumber)
+        enter2FA(code)
+        unselectRememberDeviceCheckbox()
+        clickButton(authAppButtonSmsCodeSubmit, true)
+
+        // In case 2FA code was wrong, retry 3 times
+        repeat(3) {
+            resendCode(user.phoneNumber)
         }
 
+        return HomePage()
+    }
+
+
+    private fun enter2FA(code: String) {
+        when (BuildConfig.FLAVOR) {
+            "development" -> enterText(authAppInputPinV2, code,true)
+            else -> enterVerificationCodeV1(code)
+        }
+    }
+
+    private fun doLoginV1(user: User) {
         // close notification about leaving app popup
-        val closeNotifyPopup = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
+        val closeNotifyPopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
         sleep(TIMEOUT_SHORT)
         if (closeNotifyPopup.exists()) {
             closeNotifyPopup.click()
             device.waitForIdle()
         }
         // authorize access
-        val authorizeAccess = device.findObject(selector.className("android.widget.Button").textMatches("(ADD|HINZUFÜGEN)"))
+        val authorizeAccess = device.findObject(UiSelector().className("android.widget.Button").textMatches("(ADD|HINZUFÜGEN)"))
         if (authorizeAccess.exists()) {
             authorizeAccess.click()
             device.waitForIdle()
         }
-        waitByResource("root")
-        device.waitForIdle()
-
-        // scroll to bottom
-        scrollToBottom(3, selector)
-
-        val loginTab = device.findObject(selector.resourceId("d4l-button-login"))
-        if (loginTab.exists()) {
-            loginTab.click()
-            device.waitForIdle()
-        }
-
-        // accept cookies
-        val acceptCookies = device.findObject(selector.className("android.widget.Button").textMatches("(Accept|Akzeptieren)"))
-        if (acceptCookies.exists()) {
-            acceptCookies.click()
-            device.waitForIdle()
-        }
 
         // close translate popup message
-        val closeTranslatePopup = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
+        val closeTranslatePopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
         if (closeTranslatePopup.exists()) {
             closeTranslatePopup.click()
             device.waitForIdle()
         }
 
-        // scroll to bottom
-        // scroll to bottom
-        scrollToBottom(10, selector)
-
-        // enter credentials and press submit button
-        val emailInput = device.findObject(selector.resourceId("d4l-email"))
-        emailInput.text = email
-        device.waitForIdle()
-
-        val passwordInput = device.findObject(selector.resourceId("d4l-password"))
-        passwordInput.text = password
-        device.waitForIdle()
-
-        val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
-        submit.click()
-
-        // 2FA
-        //enterPhoneNumber("+1","9292544521")
-        val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
-        enterVerificationCode(code)
-
-        // wrong code
-        repeat(3) {
-            resendCode(phoneNumber)
-        }
-
-
         device.waitForIdle()
         device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
-
-        return HomePage()
     }
 
-    fun enterPhoneNumber(countryCode: String, phoneNumber: String) {
-        Thread.sleep(TIMEOUT_SHORT)
-
-        val selector = UiSelector()
-
-        // scroll to bottom
-        scrollToBottom(10, selector)
-
-        // enter phone number and press next button
-        val codeInput = device.findObject(selector.resourceId("d4l-code"))
-        codeInput.text = countryCode
-        device.waitForIdle()
-
-        val phoneInput = device.findObject(selector.resourceId("d4l-phone-number"))
-        phoneInput.text = phoneNumber
-        device.waitForIdle()
-
-        val submit = device.findObject(selector.resourceId("d4l-button-submit-login"))
-        submit.click()
-
-        device.waitForIdle()
-        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
-
-
-    }
-
-    fun enterVerificationCode(verificationCode: String) {
-        sleep(TIMEOUT_SHORT)
-
-        val selector = UiSelector()
-
-        // scroll to bottom
-        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
-        wv.scrollForward()
-        wv.scrollToEnd(3)
-
-        // close popup message
-        val closeSavePassword = device.findObject(selector.resourceId("com.android.chrome:id/infobar_close_button"))
-        if (closeSavePassword.exists()) {
-            closeSavePassword.click()
+    // Chrome
+    private fun dismissChromeWelcomeScreen() {
+        // dismiss Chrome welcome screen
+        val accept = device.findObject(UiSelector().resourceId("com.android.chrome:id/terms_accept"))
+        if (accept.exists()) {
+            accept.click()
+            device.waitForIdle()
         }
+        val noThanks = device.findObject(UiSelector().resourceId("com.android.chrome:id/negative_button"))
+        if (noThanks.exists()) {
+            noThanks.click()
+            device.waitForIdle()
+        }
+    }
 
-        // enter verification code digits
-        var resourceId = "d4l-pin-position-"
-        // var digits : List<UiObject2> = device.findObjects(By.clazz("android.widget.EditText"))
+    private fun dismissChromeSavePassword() {
+        dismissChromeInfobar()
+    }
+
+    private fun dismissChromeInfobar() {
+        val closeNotifyPopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
+        if (closeNotifyPopup.exists()) {
+            closeNotifyPopup.click()
+            device.waitForIdle()
+        }
+    }
+
+    // Auth App
+
+    // FIXME cookie consent needs a stable ID
+    private fun dismissAuthAppCookie() {
+        val acceptCookies = device.findObject(
+                UiSelector().instance(0)
+                        .className(Button::class.java)
+                        .descriptionMatches("(Accept|Akzeptieren)")
+        )
+        acceptCookies.waitForExists(TIMEOUT_SHORT)
+        if (acceptCookies.exists()) {
+            acceptCookies.click()
+            device.waitForIdle()
+        }
+    }
+
+    private fun enterVerificationCodeV1(verificationCode: String) {
         for (x in 0 until 6) {
-            //digits[x].text = verificationCode[x].toString()
-            val digit = device.findObject(selector.resourceId(resourceId.plus(x + 1)))
+            val digit = device.findObject(UiSelector().resourceId(authAppInputPinV1.plus(x + 1)))
             digit.text = verificationCode[x].toString()
         }
-
-        val rememberCheckBox = device.findObject(selector.resourceId("d4l-checkbox-remember"))
-        if (rememberCheckBox.isChecked)
-            rememberCheckBox.click()
-
-        val confirm = device.findObject(selector.resourceId("d4l-button-submit-sms-code"))
-        confirm.click()
-
     }
 
-    fun resendCode(phoneNumber: String) {
-        val selector = UiSelector()
-        val dismissButton = device.findObject(selector.className("android.widget.Button").textMatches("(DISMISS)"))
+    private fun unselectRememberDeviceCheckbox() {
+        val rememberCheckBox = device.findObject(UiSelector().resourceId("d4l-checkbox-remember"))
+        if (rememberCheckBox.isChecked)
+            rememberCheckBox.click()
+    }
+
+    private fun click() {
+        clickButton(authAppButtonSmsCodeSubmit, true)
+    }
+
+    private fun resendCode(phoneNumber: String) {
+        val dismissButton = device.findObject(UiSelector().className("android.widget.Button").textMatches("(DISMISS)"))
         if (dismissButton.exists()) {
             dismissButton.click()
 
-            val resend = device.findObject(selector.resourceId("d4l-button-resend-sms-code"))
+            val resend = device.findObject(UiSelector().resourceId("d4l-button-resend-sms-code"))
             resend.click()
 
             sleep(TIMEOUT_SHORT)
             val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
-            enterVerificationCode(code)
+            enterVerificationCodeV1(code)
         }
 
     }
 
-    fun scrollToBottom(scrollNumber: Int, selector: UiSelector){
-        // scroll to bottom
-        val wv = UiScrollable(selector.classNameMatches("android.webkit.WebView"))
-        wv.scrollForward()
-        wv.scrollToEnd(scrollNumber)
+
+    // Helper
+
+    private fun scrollToBottom(maxSwipes: Int) {
+        UiScrollable(UiSelector().className(WebView::class.java))
+                .scrollToEnd(maxSwipes)
     }
 
+    private fun clickButton(resourceId: String, required: Boolean?) {
+        val button = device.findObject(UiSelector().instance(0).resourceId(resourceId))
+        button.waitForExists(TIMEOUT_SHORT)
+        if (button.exists()) {
+            button.click()
+            device.waitForIdle()
+        } else {
+            if (required != null && required) throw IllegalStateException("Button not found: $resourceId")
+        }
+    }
+
+    private fun enterText(resourceId: String, text: String, required: Boolean?) {
+        val input = device.findObject(UiSelector().instance(0).resourceId(resourceId))
+        input.waitForExists(TIMEOUT_SHORT)
+        if (input.exists()) {
+            input.text = text
+            device.waitForIdle()
+        } else {
+            if (required != null && required) throw IllegalStateException("Input not found: $resourceId")
+        }
+    }
+
+    companion object {
+        // Page register/login
+        const val authAppButtonLogin = "d4l-button-login"
+
+        // Page enter email/password
+        const val authAppInputEmail = "d4l-email"
+        const val authAppInputPassword = "d4l-password"
+        const val authAppButtonSubmitLogin = "d4l-button-submit-login"
+
+        // Page phone number
+        const val authAppInputPhoneCountryCode = "d4l-code"
+        const val authAppInputPhoneNumber = "d4l-phone-number"
+        const val authAppButtonPhoneNumber = "d4l-button-submit-login"
+
+        // Page 2FA
+        const val authAppInputPinV1 = "d4l-pin-position-"
+        const val authAppInputPinV2 = "d4l-pin"
+        const val authAppButtonSmsCodeSubmit = "d4l-button-submit-sms-code"
+    }
 }

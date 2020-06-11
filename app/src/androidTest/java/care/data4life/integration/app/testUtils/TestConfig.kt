@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+ * Copyright (c) 2020, HPS Gesundheitscloud gGmbH
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,38 +30,25 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package care.data4life.integration.app.flow
+package care.data4life.integration.app.testUtils
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.page.WelcomePage
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+data class TestConfig(
+    val twillioConfig: TwillioConfig,
+    val testUser: User
+)
 
-@RunWith(AndroidJUnit4::class)
-class LoginFlowTest {
-
-    @Rule
-    @JvmField
-    val rule = ActivityTestRule(MainActivity::class.java, false, false)
-
-
-    @Test
-    fun testLoginLogoutFlow() {
-        val activity = rule.launchActivity(null)
-
-
-        WelcomePage()
-                .isVisible()
-                .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin("wolf.montwe+ci01@data4life.care", "Asdfgh1!", "+1","9292544521") // HomePage
-                .isVisible()
-                .doLogout() // WelcomeScreen
-                .isVisible()
-
-        activity.explicitFinish()
-    }
-
+data class User(
+        val email: String,
+        val password: String,
+        val phoneCountryCode: String,
+        val phoneLocalNumber: String
+) {
+    val phoneNumber: String
+        get() = phoneCountryCode + phoneLocalNumber
 }
+
+data class TwillioConfig(
+        val accountSid: String,
+        val authSid: String,
+        val authToken: String
+)

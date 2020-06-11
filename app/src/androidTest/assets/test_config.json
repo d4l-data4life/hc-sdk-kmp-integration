@@ -1,0 +1,13 @@
+{
+  "twillioConfig": {
+    "accountSid": "",
+    "authSid": "",
+    "authToken": ""
+  },
+  "testUser": {
+    "email": "",
+    "password": "",
+    "phoneCountryCode": "",
+    "phoneLocalNumber": ""
+  }
+}

@@ -147,7 +147,7 @@ dependencies {
 
     implementation(Dependency.Android.material)
 
-    implementation(Dependency.Android.d4l.hcSdk) {
+    implementation(Dependency.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
@@ -156,8 +156,8 @@ dependencies {
         exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
     implementation(Dependency.Android.threeTenABP)
-    implementation(Dependency.Android.d4l.fhirSdk)
-    implementation(Dependency.Android.d4l.fhirHelper) {
+    implementation(Dependency.Android.D4L.fhirSdk)
+    implementation(Dependency.Android.D4L.fhirHelper) {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 

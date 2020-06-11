@@ -1,7 +1,7 @@
 /*
  * BSD 3-Clause License
  *
- * Copyright (c) 2018, HPS Gesundheitscloud gGmbH
+ * Copyright (c) 2020, HPS Gesundheitscloud gGmbH
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,38 +30,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package care.data4life.integration.app.flow
-
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.page.WelcomePage
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-@RunWith(AndroidJUnit4::class)
-class LoginFlowTest {
-
-    @Rule
-    @JvmField
-    val rule = ActivityTestRule(MainActivity::class.java, false, false)
-
-
-    @Test
-    fun testLoginLogoutFlow() {
-        val activity = rule.launchActivity(null)
-
-
-        WelcomePage()
-                .isVisible()
-                .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin("wolf.montwe+ci01@data4life.care", "Asdfgh1!", "+1","9292544521") // HomePage
-                .isVisible()
-                .doLogout() // WelcomeScreen
-                .isVisible()
-
-        activity.explicitFinish()
+object TestConfig {
+    object Twillio {
+        const val ACCOUNT_SID = "ACcfd6d6a012cc5076c3bc3aa99d1f98a8"
+        const val AUTH_SID = "SKaf8a5eaa4e3e5fd5d01b3daff4060684"
+        const val AUTH_TOKEN = "JVExGoQKNEusgWZx7BRbBMqWu7orXWmM"
     }
 
+    object User {
+
+    }
 }

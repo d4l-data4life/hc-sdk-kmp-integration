@@ -64,7 +64,6 @@ object Dependency {
         // Material
         const val material = "com.google.android.material:material:${Version.material}"
 
-        val d4l = D4L
         object D4L {
             const val hcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Version.hcSdk}"
             const val fhirSdk = "de.gesundheitscloud:hc-fhir-android:${Version.fhirSdk}"
