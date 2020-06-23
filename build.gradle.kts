@@ -5,14 +5,13 @@ buildscript {
     }
 
     dependencies {
-        classpath(Dependency.GradlePlugin.android)
-        classpath(Dependency.GradlePlugin.kotlin)
+        classpath(GradlePlugins.android)
+        classpath(GradlePlugins.kotlin)
     }
 }
 
 plugins {
-    // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.28.0"
+    dependencyUpdates()
 }
 
 apply(from = "d4l-client-config.gradle.kts")

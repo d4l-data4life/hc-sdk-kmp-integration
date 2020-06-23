@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
+    androidApp()
+    kotlinAndroid()
+    kotlinAndroidExtensions()
 }
 
 val d4lClientConfig : D4LClientConfig by rootProject.extra
@@ -129,25 +129,25 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Dependency.Android.androidDesugar)
+    coreLibraryDesugaring(Dependencies.Android.androidDesugar)
 
-    implementation(Dependency.Android.kotlinStdLib)
-    implementation(Dependency.Android.kotlinCoroutinesCore)
+    implementation(Dependencies.Android.kotlinStdLib)
+    implementation(Dependencies.Android.kotlinCoroutinesCore)
 
-    implementation(Dependency.Android.AndroidX.ktx)
-    implementation(Dependency.Android.AndroidX.appCompat)
-    implementation(Dependency.Android.AndroidX.browser)
-    implementation(Dependency.Android.AndroidX.constraintLayout)
+    implementation(Dependencies.Android.AndroidX.ktx)
+    implementation(Dependencies.Android.AndroidX.appCompat)
+    implementation(Dependencies.Android.AndroidX.browser)
+    implementation(Dependencies.Android.AndroidX.constraintLayout)
 
-    implementation(Dependency.Android.AndroidX.lifecylceCommonJava8)
-    implementation(Dependency.Android.AndroidX.lifecylceExtensions)
+    implementation(Dependencies.Android.AndroidX.lifecylceCommonJava8)
+    implementation(Dependencies.Android.AndroidX.lifecylceExtensions)
 
-    implementation(Dependency.Android.AndroidX.navigationFragmentKtx)
-    implementation(Dependency.Android.AndroidX.navigationUiKtx)
+    implementation(Dependencies.Android.AndroidX.navigationFragmentKtx)
+    implementation(Dependencies.Android.AndroidX.navigationUiKtx)
 
-    implementation(Dependency.Android.material)
+    implementation(Dependencies.Android.material)
 
-    implementation(Dependency.Android.D4L.hcSdk) {
+    implementation(Dependencies.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
@@ -155,43 +155,43 @@ dependencies {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
-    implementation(Dependency.Android.threeTenABP)
-    implementation(Dependency.Android.D4L.fhirSdk)
-    implementation(Dependency.Android.D4L.fhirHelper) {
+    implementation(Dependencies.Android.threeTenABP)
+    implementation(Dependencies.Android.D4L.fhirSdk)
+    implementation(Dependencies.Android.D4L.fhirHelper) {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 
-    releaseImplementation(Dependency.Android.checkerRelease)
-    androidTestImplementation(Dependency.Android.chuckerDebug)
+    releaseImplementation(Dependencies.Android.checkerRelease)
+    androidTestImplementation(Dependencies.Android.chuckerDebug)
 
 
 
-    testImplementation(Dependency.Android.Test.junit)
+    testImplementation(Dependencies.Android.Test.junit)
 
 
-    androidTestImplementation(Dependency.Android.Test.testKotlin)
-    androidTestImplementation(Dependency.Android.Test.testKotlinJunit)
+    androidTestImplementation(Dependencies.Android.Test.testKotlin)
+    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
 
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestRunner)
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestRules)
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestOrchestrator)
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestExtJUnit)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRunner)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
 
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoCore)
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoIntents)
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestEspressoWeb)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoCore)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoIntents)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoWeb)
 
-    androidTestImplementation(Dependency.Android.AndroidTest.androidXTestUiAutomator)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
 
-    androidTestImplementation(Dependency.Android.AndroidTest.kakao)
+    androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
 
-    androidTestImplementation(Dependency.Android.AndroidTest.kaspresso)
+    androidTestImplementation(Dependencies.Android.AndroidTest.kaspresso)
 
 
-    androidTestImplementation(Dependency.Android.okHttp)
-    androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
-    androidTestImplementation(Dependency.Android.retrofit)
-    androidTestImplementation(Dependency.Android.gson)
+    androidTestImplementation(Dependencies.Android.okHttp)
+    androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependencies.Android.retrofit)
+    androidTestImplementation(Dependencies.Android.gson)
 }
 
 val d4lTestConfig : D4LTestConfig by rootProject.extra

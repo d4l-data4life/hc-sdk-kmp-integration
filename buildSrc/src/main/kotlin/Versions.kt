@@ -30,7 +30,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object Version {
+object Versions {
     const val hcSdk = "1.6.0"
 
     /**
@@ -43,7 +43,7 @@ object Version {
     const val kotlinCoroutines = "1.3.6"
 
     object GradlePlugin {
-        const val kotlin = Version.kotlin
+        const val kotlin = Versions.kotlin
         const val android = "4.0.0"
 
         /**
@@ -55,6 +55,11 @@ object Version {
          * [Gradle DownloadTask](https://github.com/michel-kraemer/gradle-download-task)
          */
         const val downloadTask = "3.4.3"
+
+        /**
+         * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
+         */
+        const val dependencyUpdates = "0.28.0"
     }
 
     // Android
