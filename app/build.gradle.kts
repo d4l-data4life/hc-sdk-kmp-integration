@@ -185,6 +185,9 @@ dependencies {
 
     androidTestImplementation(Dependency.Android.AndroidTest.kakao)
 
+    androidTestImplementation(Dependency.Android.AndroidTest.kaspresso)
+
+
     androidTestImplementation(Dependency.Android.okHttp)
     androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
     androidTestImplementation(Dependency.Android.retrofit)

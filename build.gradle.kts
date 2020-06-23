@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
     // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.27.0"
+    id("com.github.ben-manes.versions") version "0.28.0"
 }
 
 apply(from = "d4l-client-config.gradle.kts")
