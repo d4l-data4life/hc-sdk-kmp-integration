@@ -30,17 +30,8 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-object TestConfig {
-    object Twillio {
-        const val ACCOUNT_SID = "ACcfd6d6a012cc5076c3bc3aa99d1f98a8"
-        const val AUTH_SID = "SKaf8a5eaa4e3e5fd5d01b3daff4060684"
-        const val AUTH_TOKEN = "JVExGoQKNEusgWZx7BRbBMqWu7orXWmM"
-    }
-
-    object User {
-        const val EMAIL = ""
-        const val PASSWORD = ""
-        const val PHONE_COUNTRY_CODE = ""
-        const val PHONE_LOCAL_NUMBER = ""
-    }
-}
+data class D4LClientConfig(
+        val id: String,
+        val secret: String,
+        val redirectScheme: String
+)

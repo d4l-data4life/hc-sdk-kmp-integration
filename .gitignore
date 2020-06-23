@@ -1,3 +1,5 @@
+# Client config
+d4l-client-config.gradle.kts
 
 # Gradle
 .gradle/

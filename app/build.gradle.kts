@@ -4,6 +4,7 @@ plugins {
     id("kotlin-android-extensions")
 }
 
+val d4lClientConfig : D4LClientConfig by rootProject.extra
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
 
@@ -16,18 +17,16 @@ android {
         versionCode = AppConfig.androidConfig.versionCode
         versionName = AppConfig.androidConfig.versionName
 
-        vectorDrawables.useSupportLibrary = true
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments(mapOf(
                 "clearPackageData" to "true"
         ))
 
         manifestPlaceholders = mapOf<String, Any>(
-                "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
-                "clientSecret" to "androidsupersecret",
+                "clientId" to d4lClientConfig.id,
+                "clientSecret" to d4lClientConfig.secret,
+                "redirectScheme" to d4lClientConfig.redirectScheme,
                 "environment" to "development",
-                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
                 "debug" to "true"
         )
     }
