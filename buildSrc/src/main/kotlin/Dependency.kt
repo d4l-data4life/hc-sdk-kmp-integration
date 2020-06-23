@@ -103,6 +103,7 @@ object Dependency {
             const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Version.androidXUiAutomator}"
 
             const val kakao = "com.agoda.kakao:kakao:${Version.androidTestKakao}"
+            const val kaspresso = "com.kaspersky.android-components:kaspresso:${Version.androidTestKaspresso}"
         }
     }
 }

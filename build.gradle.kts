@@ -25,15 +25,6 @@ allprojects {
         maven("https://jitpack.io")
         jcenter()
     }
-
-    // FIXME remove if dependency conflict is solved
-    configurations.all {
-        resolutionStrategy {
-            force(Dependency.Android.okHttp)
-            force(Dependency.Android.okHttpLoggingInterceptor)
-            force(Dependency.Android.retrofit)
-        }
-    }
 }
 
 tasks.register("clean", Delete::class.java) {
