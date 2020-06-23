@@ -5,7 +5,6 @@ plugins {
 }
 
 val d4lClientConfig : D4LClientConfig by rootProject.extra
-val d4lTestConfig : D4LClientConfig by rootProject.extra
 
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
@@ -190,5 +189,17 @@ dependencies {
     androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
     androidTestImplementation(Dependency.Android.retrofit)
     androidTestImplementation(Dependency.Android.gson)
-
 }
+
+val d4lTestConfig : D4LTestConfig by rootProject.extra
+
+val copyTestAssets by tasks.creating {
+    dependsOn("assemble")
+    doLast {
+        val assetsDir = file("${projectDir}/src/androidTest/assets")
+        val configJson = com.google.gson.Gson().toJson(d4lTestConfig)
+
+        val file = File(assetsDir, "test_config.json").writeText(configJson)
+    }
+}
+
