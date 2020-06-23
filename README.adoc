@@ -25,6 +25,17 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Usage
 
+Before you start you need to add `d4l-client-config.gradle.kts` file in the project root folder and add following content:
+
+[source, kotlin]
+----
+extra.set("d4lClientConfig", D4LClientConfig(
+        id = "{CLIENT_ID}",
+        secret = "{CLIENT_SECRET}",
+        redirectScheme = "{CLIENT_REDIRECT_SCHEME}"
+))
+----
+
 Run gradle wrapper task for connected tests:
 
 [source,bash]
