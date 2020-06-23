@@ -5,6 +5,8 @@ plugins {
 }
 
 val d4lClientConfig : D4LClientConfig by rootProject.extra
+val d4lTestConfig : D4LClientConfig by rootProject.extra
+
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
 

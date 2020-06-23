@@ -16,6 +16,7 @@ plugins {
 }
 
 apply(from = "d4l-client-config.gradle.kts")
+apply(from = "d4l-test-config.gradle.kts")
 
 allprojects {
     repositories {
