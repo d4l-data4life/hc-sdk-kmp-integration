@@ -38,6 +38,9 @@ object TestConfig {
     }
 
     object User {
-
+        const val EMAIL = ""
+        const val PASSWORD = ""
+        const val PHONE_COUNTRY_CODE = ""
+        const val PHONE_LOCAL_NUMBER = ""
     }
 }

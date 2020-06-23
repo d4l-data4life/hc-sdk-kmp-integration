@@ -122,5 +122,5 @@ object Version {
     const val androidXTestExtJUnit = "1.1.1"
 
     // https://github.com/agoda-com/Kakao
-    const val androidXKakao = "2.3.2"
+    const val androidTestKakao = "2.3.2"
 }
