@@ -31,9 +31,15 @@ Before you start you need to add `d4l-client-config.gradle.kts` and `d4l-test-co
 ----
 // d4l-client-config.gradle.kts
 extra.set("d4lClientConfig", D4LClientConfig(
-        id = "{CLIENT_ID}",
-        secret = "{CLIENT_SECRET}",
-        redirectScheme = "{CLIENT_REDIRECT_SCHEME}"
+        mapOf(
+                Environment.DEVELOP to ClientConfig(
+                        id = "{CLIENT_ID}",
+                        secret = "{CLIENT_SECRET}",
+                        redirectScheme = "{CLIENT_REDIRECT_SCHEME}"
+                ),
+                // ...
+                // for every environment add a config
+        )
 ))
 ----
 

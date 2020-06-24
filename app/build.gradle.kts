@@ -24,9 +24,9 @@ android {
         ))
 
         manifestPlaceholders = mapOf<String, Any>(
-                "clientId" to d4lClientConfig.id,
-                "clientSecret" to d4lClientConfig.secret,
-                "redirectScheme" to d4lClientConfig.redirectScheme,
+                "clientId" to d4lClientConfig[Environment.DEVELOP].id,
+                "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
+                "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
                 "environment" to "development",
                 "debug" to "true"
         )
@@ -45,6 +45,9 @@ android {
         create("development") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.DEVELOP].id,
+                    "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
                     "environment" to "development"
             )
             applicationIdSuffix = ".development"
@@ -53,6 +56,9 @@ android {
         create("staging") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.STAGING].id,
+                    "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
                     "environment" to "staging"
             )
             applicationIdSuffix = ".staging"
@@ -61,6 +67,9 @@ android {
         create("sandbox") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.SANDBOX].id,
+                    "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
                     "environment" to "sandbox"
             )
             applicationIdSuffix = ".sandbox"
@@ -69,6 +78,9 @@ android {
         create("production") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
+                    "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
                     "environment" to "production"
             )
             applicationIdSuffix = ".production"

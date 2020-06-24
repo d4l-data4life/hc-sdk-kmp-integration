@@ -31,7 +31,26 @@
  */
 
 extra.set("d4lClientConfig", D4LClientConfig(
-        id = System.getenv("D4L_CLIENT_ID"),
-        secret = System.getenv("D4L_CLIENT_SECRET"),
-        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
+        mapOf(
+                Environment.DEVELOP to ClientConfig(
+                        id = System.getenv("D4L_CLIENT_ID"),
+                        secret = System.getenv("D4L_CLIENT_SECRET"),
+                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
+                ),
+                Environment.STAGING to ClientConfig(
+                        id = System.getenv("D4L_CLIENT_ID"),
+                        secret = System.getenv("D4L_CLIENT_SECRET"),
+                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
+                ),
+                Environment.SANDBOX to ClientConfig(
+                        id = System.getenv("D4L_CLIENT_ID"),
+                        secret = System.getenv("D4L_CLIENT_SECRET"),
+                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
+                ),
+                Environment.PRODUCTION to ClientConfig(
+                        id = System.getenv("D4L_CLIENT_ID"),
+                        secret = System.getenv("D4L_CLIENT_SECRET"),
+                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
+                )
+        )
 ))
