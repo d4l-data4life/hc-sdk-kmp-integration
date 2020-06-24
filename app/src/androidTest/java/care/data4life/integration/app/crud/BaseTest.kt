@@ -38,6 +38,7 @@ import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.WelcomePage
 import care.data4life.integration.app.testUtils.NetworkUtil
+import care.data4life.integration.app.testUtils.TestConfigLoader
 import care.data4life.integration.app.testUtils.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.lang.D4LException
@@ -103,10 +104,12 @@ abstract class BaseTest<T : DomainResource> {
             AndroidThreeTen.init(activity.application)
             client = Data4LifeClient.getInstance()
 
+            val user = TestConfigLoader.load().user
+
             homePage = WelcomePage()
                     .isVisible()
                     .openLoginPage()
-                    .doLogin("wolf.montwe+ci01@data4life.care", "Asdfgh1!", "+1","9292544521")
+                    .doLogin(user)
                     .isVisible()
 
             assertLogin(true)

@@ -1,10 +1,12 @@
+import com.android.build.gradle.internal.tasks.factory.dependsOn
+
 plugins {
     androidApp()
     kotlinAndroid()
     kotlinAndroidExtensions()
 }
 
-val d4lClientConfig : D4LClientConfig by rootProject.extra
+val d4lClientConfig: D4LClientConfig by rootProject.extra
 
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
@@ -112,6 +114,10 @@ android {
         compose = false
     }
 
+    useLibrary("android.test.runner")
+    useLibrary("android.test.base")
+    useLibrary("android.test.mock")
+
     testOptions {
         animationsDisabled = true
 
@@ -123,7 +129,8 @@ android {
             }
         }, unitTests))
 
-        execution = "ANDROID_TEST_ORCHESTRATOR"
+        // FIXME Test Orchestrator is currently broken and results in no tests found
+        // execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
@@ -162,20 +169,19 @@ dependencies {
     }
 
     releaseImplementation(Dependencies.Android.checkerRelease)
-    androidTestImplementation(Dependencies.Android.chuckerDebug)
-
 
 
     testImplementation(Dependencies.Android.Test.junit)
 
 
-    androidTestImplementation(Dependencies.Android.Test.testKotlin)
-    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
-
+    androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestCore)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRunner)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
+
+    androidTestImplementation(Dependencies.Android.Test.testKotlin)
+    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoCore)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoIntents)
@@ -184,7 +190,6 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
-
     androidTestImplementation(Dependencies.Android.AndroidTest.kaspresso)
 
 
@@ -192,13 +197,12 @@ dependencies {
     androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
     androidTestImplementation(Dependencies.Android.retrofit)
     androidTestImplementation(Dependencies.Android.gson)
+    androidTestImplementation(Dependencies.Android.chuckerDebug)
 }
 
-val d4lTestConfig : D4LTestConfig by rootProject.extra
-
-val copyTestAssets by tasks.creating {
-    dependsOn("assemble")
+val provideAndroidTestConfig: Task by tasks.creating {
     doLast {
+        val d4lTestConfig: D4LTestConfig by rootProject.extra
         val assetsDir = file("${projectDir}/src/androidTest/assets")
         val configJson = com.google.gson.Gson().toJson(d4lTestConfig)
 
@@ -206,3 +210,6 @@ val copyTestAssets by tasks.creating {
     }
 }
 
+tasks.named("clean") {
+    delete("${projectDir}/src/androidTest/assets/test_config.json")
+}

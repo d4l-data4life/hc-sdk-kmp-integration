@@ -83,7 +83,7 @@ class LoginPage : BasePage() {
 
         // Page 2FA
         scrollToBottom(2)
-        val code = Auth2FAHelper().fetchCurrent2faCode(user.phoneNumber)
+        val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
         enter2FA(code)
         unselectRememberDeviceCheckbox()
         clickButton(authAppButtonSmsCodeSubmit, true)
@@ -102,32 +102,6 @@ class LoginPage : BasePage() {
             "development" -> enterText(authAppInputPinV2, code,true)
             else -> enterVerificationCodeV1(code)
         }
-    }
-
-    private fun doLoginV1(user: User) {
-        // close notification about leaving app popup
-        val closeNotifyPopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
-        sleep(TIMEOUT_SHORT)
-        if (closeNotifyPopup.exists()) {
-            closeNotifyPopup.click()
-            device.waitForIdle()
-        }
-        // authorize access
-        val authorizeAccess = device.findObject(UiSelector().className("android.widget.Button").textMatches("(ADD|HINZUFÜGEN)"))
-        if (authorizeAccess.exists()) {
-            authorizeAccess.click()
-            device.waitForIdle()
-        }
-
-        // close translate popup message
-        val closeTranslatePopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
-        if (closeTranslatePopup.exists()) {
-            closeTranslatePopup.click()
-            device.waitForIdle()
-        }
-
-        device.waitForIdle()
-        device.wait(Until.hasObject(By.pkg("care.data4life.integration.app").depth(0)), TIMEOUT)
     }
 
     // Chrome
@@ -184,10 +158,6 @@ class LoginPage : BasePage() {
         val rememberCheckBox = device.findObject(UiSelector().resourceId("d4l-checkbox-remember"))
         if (rememberCheckBox.isChecked)
             rememberCheckBox.click()
-    }
-
-    private fun click() {
-        clickButton(authAppButtonSmsCodeSubmit, true)
     }
 
     private fun resendCode(phoneNumber: String) {

@@ -121,10 +121,11 @@ object Versions {
 
 
     // Android Test
-    const val androidXTest = "1.1.1"
+    const val androidXTestCore = "1.0.0"
+    const val androidXTest = "1.1.0"
     const val androidXEspresso = "3.1.1"
     const val androidXUiAutomator = "2.2.0"
-    const val androidXTestExtJUnit = "1.1.1"
+    const val androidXTestExtJUnit = "1.1.0"
 
     // https://github.com/agoda-com/Kakao
     const val androidTestKakao = "2.3.2"

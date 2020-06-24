@@ -32,9 +32,13 @@
 
 package care.data4life.integration.app.testUtils
 
+import androidx.test.platform.app.InstrumentationRegistry
+import com.google.gson.Gson
+import java.io.BufferedReader
+
 data class TestConfig(
-    val twillioConfig: TwillioConfig,
-    val testUser: User
+        val user: User,
+        val twillio: TwillioConfig
 )
 
 data class User(
@@ -52,3 +56,14 @@ data class TwillioConfig(
         val authSid: String,
         val authToken: String
 )
+
+object TestConfigLoader {
+    private const val FILE_NAME = "test_config.json"
+
+    fun load(): TestConfig {
+        val input = InstrumentationRegistry.getInstrumentation().context.assets.open(FILE_NAME)
+        val json = input.bufferedReader().use(BufferedReader::readText)
+
+        return Gson().fromJson(json, TestConfig::class.java)
+    }
+}

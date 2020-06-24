@@ -55,6 +55,9 @@
             </intent-filter>
         </activity>
 
+        <uses-library android:name="android.test.runner"
+            android:required="false" />
+
     </application>
 
 </manifest>

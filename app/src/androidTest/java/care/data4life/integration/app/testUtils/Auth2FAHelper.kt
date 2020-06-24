@@ -60,13 +60,8 @@ interface TwillioService {
 
     companion object {
         const val BASE_URL = "https://api.twilio.com"
-
-        //        const val ACCOUNT_SID = "ACcfd6d6a012cc5076c3bc3aa99d1f98a8"
-//        const val AUTH_SID = "SKaf8a5eaa4e3e5fd5d01b3daff4060684"
-//        const val AUTH_TOKEN = "JVExGoQKNEusgWZx7BRbBMqWu7orXWmM"
         const val WRONG_PIN = "000000"
     }
-
 }
 
 class Message {
@@ -108,12 +103,13 @@ private class BasicAuthInterceptor(user: String, password: String) : Interceptor
     }
 }
 
-class Auth2FAHelper(
-        private val config: TwillioConfig
-) {
+object Auth2FAHelper {
+
+    private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)
+    private val config = TestConfigLoader.load().twillio
+
 
     private fun initTwillioService(): TwillioService {
-        val twillioService: TwillioService
 
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(BasicAuthInterceptor(config.authSid, config.authToken))
@@ -125,10 +121,7 @@ class Auth2FAHelper(
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-
-        twillioService = retrofit.create(TwillioService::class.java)
-
-        return twillioService
+        return retrofit.create(TwillioService::class.java)
     }
 
     private fun fetchLatest2FACode(phoneNumber: String, date: String): ListMessage? {
@@ -143,10 +136,6 @@ class Auth2FAHelper(
                 startIndex = message.length - 6,
                 endIndex = message.length
         ) ?: WRONG_PIN
-    }
-
-    companion object {
-        private val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)
     }
 
 }
