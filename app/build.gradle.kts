@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.tasks.factory.dependsOn
-
 plugins {
     androidApp()
     kotlinAndroid()
@@ -206,10 +204,12 @@ val provideAndroidTestConfig: Task by tasks.creating {
         val assetsDir = file("${projectDir}/src/androidTest/assets")
         val configJson = com.google.gson.Gson().toJson(d4lTestConfig)
 
-        val file = File(assetsDir, "test_config.json").writeText(configJson)
+        File(assetsDir, "test_config.json").writeText(configJson)
     }
 }
 
 tasks.named("clean") {
-    delete("${projectDir}/src/androidTest/assets/test_config.json")
+    doLast {
+        delete("${projectDir}/src/androidTest/assets/test_config.json")
+    }
 }
