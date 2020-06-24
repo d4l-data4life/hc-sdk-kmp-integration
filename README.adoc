@@ -59,6 +59,7 @@ Run gradle wrapper task for connected tests:
 
 [source,bash]
 ----
+./gradlew provideAndroidTestConfig
 ./gradlew connectedAndroidTest
 ----
 

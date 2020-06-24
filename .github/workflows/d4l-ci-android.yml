@@ -43,6 +43,8 @@ jobs:
         run: adb install ./ci/android/com.android.chrome_79.0.3945.93-394509315-x86-nodpi.apk
       - name: Cleanup
         run: ./gradlew clean
+      - name: Configure project
+        run: ./gradlew provideAndroidTestConfig
       - name: Run checks
         run: ./gradlew check
       - name: Run End2End Tests
