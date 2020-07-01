@@ -23,10 +23,6 @@ jobs:
       - name: Display runner context
         run: hostname -s
       - uses: actions/checkout@v2
-      - name: Prepare project
-        run: |
-          cp ./ci/android/d4l-client-config.gradle.kts .
-          cp ./ci/android/d4l-test-config.gradle.kts .
       - name: Start emulator and wait for it
         run: ./ci/android/prepare_start_and_wait_for_emulator.sh
       - name: Install Chrome Browser
