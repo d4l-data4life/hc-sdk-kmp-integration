@@ -215,9 +215,7 @@ val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"
 
 val provideAndroidTestConfig: Task by tasks.creating {
     doLast {
-        val d4lTestConfig: D4LTestConfig by rootProject.extra
-        val assetsDir = file(androidTestAssetsPath)
-        File(assetsDir, "test_config.json").writeText(D4LConfigHelper.toJson(d4lTestConfig))
+        File(androidTestAssetsPath, "test_config.json").writeText(D4LConfigHelper.toJson(d4LTestConfig))
     }
 }
 
