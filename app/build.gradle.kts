@@ -4,7 +4,8 @@ plugins {
     kotlinAndroidExtensions()
 }
 
-val d4lClientConfig: D4LClientConfig by rootProject.extra
+val d4lClientConfig = D4LConfigHelper.loadClientConfig("$rootDir")
+val d4LTestConfig = D4LConfigHelper.loadTestConfig("$rootDir")
 
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
@@ -210,18 +211,18 @@ dependencies {
     androidTestImplementation(Dependencies.Android.chuckerDebug)
 }
 
+val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"
+
 val provideAndroidTestConfig: Task by tasks.creating {
     doLast {
         val d4lTestConfig: D4LTestConfig by rootProject.extra
-        val assetsDir = file("${projectDir}/src/androidTest/assets")
-        val configJson = com.google.gson.Gson().toJson(d4lTestConfig)
-
-        File(assetsDir, "test_config.json").writeText(configJson)
+        val assetsDir = file(androidTestAssetsPath)
+        File(assetsDir, "test_config.json").writeText(D4LConfigHelper.toJson(d4lTestConfig))
     }
 }
 
 tasks.named("clean") {
     doLast {
-        delete("${projectDir}/src/androidTest/assets/test_config.json")
+        delete("${androidTestAssetsPath}/test_config.json")
     }
 }

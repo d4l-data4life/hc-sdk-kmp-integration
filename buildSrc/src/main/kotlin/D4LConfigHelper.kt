@@ -1,3 +1,6 @@
+import com.google.gson.GsonBuilder
+import java.io.File
+
 /*
  * BSD 3-Clause License
  *
@@ -30,27 +33,44 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-extra.set("d4lClientConfig", D4LClientConfig(
-        mapOf(
-                Environment.DEVELOP to ClientConfig(
-                        id = System.getenv("D4L_CLIENT_ID"),
-                        secret = System.getenv("D4L_CLIENT_SECRET"),
-                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
-                ),
-                Environment.STAGING to ClientConfig(
-                        id = System.getenv("D4L_CLIENT_ID"),
-                        secret = System.getenv("D4L_CLIENT_SECRET"),
-                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
-                ),
-                Environment.SANDBOX to ClientConfig(
-                        id = System.getenv("D4L_CLIENT_ID"),
-                        secret = System.getenv("D4L_CLIENT_SECRET"),
-                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
-                ),
-                Environment.PRODUCTION to ClientConfig(
-                        id = System.getenv("D4L_CLIENT_ID"),
-                        secret = System.getenv("D4L_CLIENT_SECRET"),
-                        redirectScheme = System.getenv("D4L_CLIENT_REDIRECT_SCHEME")
-                )
-        )
-))
+object D4LConfigHelper {
+
+    private const val FILE_NAME_CLIENT_CONFIG = "d4l-client-config.json"
+    private const val FILE_NAME_TEST_CONFIG = "d4l-test-config.json"
+
+    private const val ENV_CLIENT_CONFIG = "D4L_CLIENT_CONFIG"
+    private const val ENV_TEST_CONFIG = "D4L_TEST_CONFIG"
+
+    private fun gson() = GsonBuilder().setPrettyPrinting().create()
+
+    private fun loadConfig(path: String, fileName: String, envVarName: String): String {
+        return try {
+            File(path, fileName).readText()
+        } catch (e: Exception) {
+            try {
+                System.getenv(envVarName)
+            } catch (e: Exception) {
+                null
+            }
+        } ?: throw IllegalStateException("Config file not found here: $path/$fileName nor environment variable $envVarName was set")
+    }
+
+    fun loadClientConfig(path: String): D4LClientConfig {
+        val configJson = loadConfig(path, FILE_NAME_CLIENT_CONFIG, ENV_CLIENT_CONFIG)
+        return gson().fromJson(configJson, D4LClientConfig::class.java)
+    }
+
+    fun toJson(d4lClientConfig: D4LClientConfig): String {
+        return gson().toJson(d4lClientConfig)
+    }
+
+    fun loadTestConfig(path: String): D4LTestConfig {
+        val configJson = loadConfig(path, FILE_NAME_TEST_CONFIG, ENV_TEST_CONFIG)
+        return gson().fromJson(configJson, D4LTestConfig::class.java)
+    }
+
+    fun toJson(d4lTestConfig: D4LTestConfig): String {
+        return gson().toJson(d4lTestConfig)
+    }
+
+}
