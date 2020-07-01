@@ -16,18 +16,8 @@ jobs:
     runs-on: [self-hosted, macos]
 
     env:
-      D4L_CLIENT_ID: ${{ secrets.D4L_CLIENT_ID }}
-      D4L_CLIENT_SECRET: ${{ secrets.D4L_CLIENT_SECRET }}
-      D4L_CLIENT_REDIRECT_SCHEME: ${{ secrets.D4L_CLIENT_REDIRECT_SCHEME }}
-
-      D4L_TEST_USER_EMAIL: ${{ secrets.D4L_TEST_USER_EMAIL }}
-      D4L_TEST_USER_PASSWORD: ${{ secrets.D4L_TEST_USER_PASSWORD }}
-      D4L_TEST_USER_PHONE_COUNTRY_CODE: ${{ secrets.D4L_TEST_USER_PHONE_COUNTRY_CODE }}
-      D4L_TEST_USER_PHONE_LOCAL_NUMBER: ${{ secrets.D4L_TEST_USER_PHONE_LOCAL_NUMBER }}
-
-      D4L_TEST_TWILLIO_ACCOUNT_SID: ${{ secrets.D4L_TEST_TWILLIO_ACCOUNT_SID }}
-      D4L_TEST_TWILLIO_AUTH_SID: ${{ secrets.D4L_TEST_TWILLIO_AUTH_SID }}
-      D4L_TEST_TWILLIO_AUTH_TOKEN: ${{ secrets.D4L_TEST_TWILLIO_AUTH_TOKEN }}
+      D4L_CLIENT_CONFIG: ${{ secrets.D4L_CLIENT_CONFIG }}
+      D4L_TEST_CONFIG: ${{ secrets.D4L_TEST_CONFIG }}
 
     steps:
       - name: Display runner context
