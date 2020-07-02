@@ -53,10 +53,9 @@ abstract class BasePage {
         device.wait(Until.hasObject(By.res(resourceName)), TIMEOUT)
     }
 
-
     companion object {
-        const val TIMEOUT = 1000 * 60L
+        const val TIMEOUT = 1000 * 10L
 
-        const val TIMEOUT_SHORT = 1000 * 5L
+        const val TIMEOUT_SHORT = 500 * 1L
     }
 }

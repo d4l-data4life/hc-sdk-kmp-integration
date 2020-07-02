@@ -1,10 +1,8 @@
 = D4L SDK integration test suit
 
-image::https://travis-ci.com/gesundheitscloud/hc-sdk-android-integration.svg?token=NeEVpUUDpspgyYoAyV8A&branch=master[Build Status,link=https://travis-ci.com/gesundheitscloud/hc-sdk-android-integration]
+image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/D4L%20CI%20Android/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
 
-image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/Android%20CI%20%28MacMini%29/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
-
-This is an integration of the https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK] for testing purposes.
+This is an integration of the link:https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK] for testing purposes.
 
 A suit of UI tests to identify breaking changes and regressions by SDK version changes.
 
@@ -12,24 +10,62 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 == Requirements
 
 * Android 5.0.1 (API 21) to Android 10 (API 29)
-* Kotlin 1.3.61
-* Java 8 https://developer.android.com/studio/write/java8-support[Limitations] https://jakewharton.com/d8-library-desugaring/[Desugaring]
-* Gradle 6.1.1
-* Android Studio 4.0.0-Alpha09
+* Kotlin 1.3.72
+* Java 8 link:https://developer.android.com/studio/write/java8-support[Limitations] https://jakewharton.com/d8-library-desugaring/[Desugaring]
+* Gradle 6.5
+* link:https://developer.android.com/studio#downloads[Android Studio 4.0.0]
 * Android Emulator 21 - 29
 
 
 == Dependencies
 
-* https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK]
+* link:https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK]
+* link:https://github.com/gesundheitscloud/hc-fhir-android[D4L FHIR SDK]
 
 
 == Usage
+
+Before you start you need to add `d4l-client-config.gradle.kts` and `d4l-test-config.gradle.kts` file in the project root folder and add following content:
+
+[source, kotlin, d4l-client-config.gradle.kts]
+----
+// d4l-client-config.gradle.kts
+extra.set("d4lClientConfig", D4LClientConfig(
+        mapOf(
+                Environment.DEVELOP to ClientConfig(
+                        id = "{CLIENT_ID}",
+                        secret = "{CLIENT_SECRET}",
+                        redirectScheme = "{CLIENT_REDIRECT_SCHEME}"
+                ),
+                // ...
+                // for every environment add a config
+        )
+))
+----
+
+[source, kotlin, d4l-test-config.gradle.kts]
+----
+// d4l-test-config.gradle.kts
+extra.set("d4lTestConfig", D4LTestConfig(
+        user = UserConfig(
+                email = "{USER_EMAIL}",
+                password = "{USER_PASSWORD}",
+                phoneCountryCode = "{USER_PHONE_COUNTRY_CODE}",
+                phoneLocalNumber = "{USER_PHONE_LOCAL_NUMBER}"
+        ),
+        twillio = TwillioConfig(
+                accountSid = "{TWILLIO_ACCOUNT_SID}",
+                authSid = "{TWILLIO_AUTH_SID}",
+                authToken = "{TWILLIO_AUTH_TOKEN}"
+        )
+))
+----
 
 Run gradle wrapper task for connected tests:
 
 [source,bash]
 ----
+./gradlew provideAndroidTestConfig
 ./gradlew connectedAndroidTest
 ----
 

@@ -47,13 +47,16 @@
         tools:ignore="GoogleAppIndexingWarning"
         >
 
-        <activity android:name="care.data4life.integration.app.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <uses-library android:name="android.test.runner"
+            android:required="false" />
 
     </application>
 

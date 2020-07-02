@@ -1,22 +1,23 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
+    androidApp()
+    kotlinAndroid()
+    kotlinAndroidExtensions()
 }
 
+val d4lClientConfig = D4LConfigHelper.loadClientConfig("$rootDir")
+val d4LTestConfig = D4LConfigHelper.loadTestConfig("$rootDir")
+
 android {
-    compileSdkVersion(AndroidConfig.compileSdkVersion)
+    compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
 
     defaultConfig {
-        applicationId = "care.data4life.integration.app"
+        applicationId = AppConfig.androidConfig.applicationId
 
-        minSdkVersion(AndroidConfig.minSdkVersion)
-        targetSdkVersion(AndroidConfig.targetSdkVersion)
+        minSdkVersion(AppConfig.androidConfig.minSdkVersion)
+        targetSdkVersion(AppConfig.androidConfig.targetSdkVersion)
 
-        versionCode = 1
-        versionName = "1.0"
-
-        vectorDrawables.useSupportLibrary = true
+        versionCode = AppConfig.androidConfig.versionCode
+        versionName = AppConfig.androidConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments(mapOf(
@@ -24,10 +25,10 @@ android {
         ))
 
         manifestPlaceholders = mapOf<String, Any>(
-                "clientId" to "73b2a47c-535e-40f3-bcc7-88deccec1dab#android",
-                "clientSecret" to "androidsupersecret",
+                "clientId" to d4lClientConfig[Environment.DEVELOP].id,
+                "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
+                "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
                 "environment" to "development",
-                "redirectScheme" to "de.gesundheitscloud.73b2a47c-535e-40f3-bcc7-88deccec1dab",
                 "debug" to "true"
         )
     }
@@ -45,6 +46,9 @@ android {
         create("development") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.DEVELOP].id,
+                    "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
                     "environment" to "development"
             )
             applicationIdSuffix = ".development"
@@ -53,6 +57,9 @@ android {
         create("staging") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.STAGING].id,
+                    "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
                     "environment" to "staging"
             )
             applicationIdSuffix = ".staging"
@@ -61,6 +68,9 @@ android {
         create("sandbox") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.SANDBOX].id,
+                    "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
                     "environment" to "sandbox"
             )
             applicationIdSuffix = ".sandbox"
@@ -69,6 +79,9 @@ android {
         create("production") {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
+                    "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
+                    "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
                     "environment" to "production"
             )
             applicationIdSuffix = ".production"
@@ -111,29 +124,48 @@ android {
     buildFeatures {
         compose = false
     }
+
+    useLibrary("android.test.runner")
+    useLibrary("android.test.base")
+    useLibrary("android.test.mock")
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests.all(KotlinClosure1<Any, Test>({
+            (this as Test).also { testTask ->
+                testTask.testLogging {
+                    events("passed", "skipped", "failed", "standardOut", "standardError")
+                }
+            }
+        }, unitTests))
+
+        // FIXME Test Orchestrator is currently broken and results in no tests found
+        // execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 
 dependencies {
-    coreLibraryDesugaring(Libraries.androidDesugar)
+    coreLibraryDesugaring(Dependencies.Android.androidDesugar)
 
-    implementation(Libraries.kotlinStdLib)
-    implementation(Libraries.kotlinCoroutinesCore)
+    implementation(Dependencies.Android.kotlinStdLib)
+    implementation(Dependencies.Android.kotlinCoroutinesCore)
 
-    implementation(Libraries.androidXKtx)
-    implementation(Libraries.androidXAppCompat)
-    implementation(Libraries.androidXBrowser)
-    implementation(Libraries.androidXConstraintLayout)
+    implementation(Dependencies.Android.AndroidX.ktx)
+    implementation(Dependencies.Android.AndroidX.appCompat)
+    implementation(Dependencies.Android.AndroidX.browser)
+    implementation(Dependencies.Android.AndroidX.constraintLayout)
 
-    implementation(Libraries.androidXLifecylceCommonJava8)
-    implementation(Libraries.androidXLifecylceExtensions)
+    implementation(Dependencies.Android.AndroidX.lifecylceCommonJava8)
+    implementation(Dependencies.Android.AndroidX.lifecylceExtensions)
 
-    implementation(Libraries.androidXNavigationFragmentKtx)
-    implementation(Libraries.androidXNavigationUiKtx)
+    implementation(Dependencies.Android.AndroidX.navigationFragmentKtx)
+    implementation(Dependencies.Android.AndroidX.navigationUiKtx)
 
-    implementation(Libraries.material)
+    implementation(Dependencies.Android.material)
 
-    implementation(Libraries.hcSdk) {
+    implementation(Dependencies.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
@@ -141,39 +173,54 @@ dependencies {
         exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
         exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
     }
-    implementation(Libraries.threeTenABP)
-    implementation(Libraries.fhirSdk)
-    implementation(Libraries.fhirHelper) {
+    implementation(Dependencies.Android.threeTenABP)
+    implementation(Dependencies.Android.D4L.fhirSdk)
+    implementation(Dependencies.Android.D4L.fhirHelper) {
         exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
     }
 
-    releaseImplementation(Libraries.checkerRelease)
-    androidTestImplementation(Libraries.chuckerDebug)
+    releaseImplementation(Dependencies.Android.checkerRelease)
 
 
+    testImplementation(Dependencies.Android.Test.junit)
 
-    testImplementation(Libraries.testJunit)
+
+    androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestCore)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRunner)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
+
+    androidTestImplementation(Dependencies.Android.Test.testKotlin)
+    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
+
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoCore)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoIntents)
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoWeb)
+
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
+
+    androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
+    androidTestImplementation(Dependencies.Android.AndroidTest.kaspresso)
 
 
-    androidTestImplementation(Libraries.testKotlin)
-    androidTestImplementation(Libraries.testKotlinJunit)
+    androidTestImplementation(Dependencies.Android.okHttp)
+    androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependencies.Android.retrofit)
+    androidTestImplementation(Dependencies.Android.gson)
+    androidTestImplementation(Dependencies.Android.chuckerDebug)
+}
 
-    androidTestImplementation(Libraries.androidXTestRunner)
-    androidTestImplementation(Libraries.androidXTestRules)
-    androidTestImplementation(Libraries.androidXTestOrchestrator)
-    androidTestImplementation(Libraries.androidXTestExtJUnit)
+val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"
 
-    androidTestImplementation(Libraries.androidXTestEspressoCore)
-    androidTestImplementation(Libraries.androidXTestEspressoIntents)
-    androidTestImplementation(Libraries.androidXTestEspressoWeb)
+val provideAndroidTestConfig: Task by tasks.creating {
+    doLast {
+        File(androidTestAssetsPath, "test_config.json").writeText(D4LConfigHelper.toJson(d4LTestConfig))
+    }
+}
 
-    androidTestImplementation(Libraries.androidXTestUiAutomator)
-
-    androidTestImplementation(Libraries.androidXTestKakao)
-
-    androidTestImplementation(Libraries.okHttp)
-    androidTestImplementation(Libraries.okHttpLoggingInterceptor)
-    androidTestImplementation(Libraries.retrofit)
-    androidTestImplementation(Libraries.gson)
-
+tasks.named("clean") {
+    doLast {
+        delete("${androidTestAssetsPath}/test_config.json")
+    }
 }

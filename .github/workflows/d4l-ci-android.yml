@@ -1,0 +1,37 @@
+name: D4L CI Android
+
+on:
+  push:
+    branches:
+      - master
+      - release/*
+  pull_request:
+    branches:
+      - master
+      - release/*
+
+jobs:
+  build-and-verify:
+
+    runs-on: [self-hosted, macos]
+
+    env:
+      D4L_CLIENT_CONFIG: ${{ secrets.D4L_CLIENT_CONFIG }}
+      D4L_TEST_CONFIG: ${{ secrets.D4L_TEST_CONFIG }}
+
+    steps:
+      - name: Display runner context
+        run: hostname -s
+      - uses: actions/checkout@v2
+      - name: Start emulator and wait for it
+        run: ./ci/android/prepare_start_and_wait_for_emulator.sh
+      - name: Install Chrome Browser
+        run: adb install ./ci/android/com.android.chrome_79.0.3945.93-394509315-x86-nodpi.apk
+      - name: Cleanup
+        run: ./gradlew clean
+      - name: Configure project
+        run: ./gradlew provideAndroidTestConfig
+      - name: Run checks
+        run: ./gradlew check
+      - name: Run End2End Tests
+        run: ./gradlew connectedAndroidTest

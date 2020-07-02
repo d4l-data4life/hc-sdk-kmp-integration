@@ -33,14 +33,17 @@
 package care.data4life.integration.app.flow
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.WelcomePage
+import care.data4life.integration.app.testUtils.TestConfigLoader
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@LargeTest
 class LoginFlowTest {
 
     @Rule
@@ -52,10 +55,12 @@ class LoginFlowTest {
     fun testLoginLogoutFlow() {
         val activity = rule.launchActivity(null)
 
+        val user = TestConfigLoader.load().user
+
         WelcomePage()
                 .isVisible()
                 .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin("wolf.montwe+ci01@data4life.care", "Asdfgh1!", "+19292544521") // HomePage
+                .doLogin(user) // HomePage
                 .isVisible()
                 .doLogout() // WelcomeScreen
                 .isVisible()

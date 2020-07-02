@@ -11,8 +11,7 @@ buildscript {
 }
 
 plugins {
-    // https://github.com/ben-manes/gradle-versions-plugin
-    id("com.github.ben-manes.versions") version "0.27.0"
+    dependencyUpdates()
 }
 
 allprojects {
@@ -22,15 +21,6 @@ allprojects {
         maven("https://jitpack.io")
         jcenter()
     }
-
-    // FIXME remove if dependency conflict is solved
-    configurations.all {
-        resolutionStrategy {
-            force(Libraries.okHttp)
-            force(Libraries.okHttpLoggingInterceptor)
-            force(Libraries.retrofit)
-        }
-    }
 }
 
 tasks.register("clean", Delete::class.java) {
@@ -38,6 +28,6 @@ tasks.register("clean", Delete::class.java) {
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "6.1.1"
+    gradleVersion = "6.5"
     distributionType = Wrapper.DistributionType.ALL
 }
