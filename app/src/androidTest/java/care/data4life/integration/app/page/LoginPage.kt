@@ -99,7 +99,7 @@ class LoginPage : BasePage() {
 
     private fun enter2FA(code: String) {
         when (BuildConfig.FLAVOR) {
-            "development" -> enterText(authAppInputPinV2, code,true)
+            "development" -> enterText(authAppInputPinV2, code, true)
             else -> enterVerificationCodeV1(code)
         }
     }

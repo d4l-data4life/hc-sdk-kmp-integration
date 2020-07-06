@@ -46,8 +46,8 @@ import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
 import care.data4life.sdk.model.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import org.junit.Assert.*
 import org.junit.*
+import org.junit.Assert.*
 import org.junit.Assume.assumeTrue
 import org.junit.runners.MethodSorters
 import org.threeten.bp.LocalDate
@@ -85,6 +85,7 @@ abstract class BaseTest<T : DomainResource> {
 
         @JvmStatic
         protected lateinit var recordId: String
+
         @JvmStatic
         protected var recordIds = mutableListOf<String>()
 

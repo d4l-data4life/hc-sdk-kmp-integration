@@ -48,7 +48,7 @@ object Versions {
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
-        */
+         */
         const val dexcount = "0.8.4"
 
         /**
@@ -86,16 +86,19 @@ object Versions {
      * [okHttp](https://github.com/square/okhttp)
      */
     const val okHttp = "4.3.1"
+
     /**
      *
      *[retrofit](https://github.com/square/retrofit)
      */
     const val retrofit = "2.7.1"
+
     /**
      *
      *[gson](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)
      */
     const val gson = "2.7.1"
+
     /**
      *
      *[chucker inspector](//https://github.com/ChuckerTeam/chucker/tree/develop)

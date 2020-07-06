@@ -53,7 +53,7 @@ class WelcomePage : BasePage() {
         return LoginPage()
     }
 
-    fun isVisible() : WelcomePage {
+    fun isVisible(): WelcomePage {
         screen.root { isDisplayed() }
 
         return this
