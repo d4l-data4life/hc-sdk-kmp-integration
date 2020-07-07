@@ -6,7 +6,6 @@ This is an integration of the link:https://github.com/gesundheitscloud/hc-sdk-an
 
 A suit of UI tests to identify breaking changes and regressions by SDK version changes.
 
-
 == Requirements
 
 * Android 5.0.1 (API 21) to Android 10 (API 29)
@@ -16,18 +15,16 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 * link:https://developer.android.com/studio#downloads[Android Studio 4.0.0]
 * Android Emulator 21 - 29
 
-
 == Dependencies
 
 * link:https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK]
 * link:https://github.com/gesundheitscloud/hc-fhir-android[D4L FHIR SDK]
 
-
 == Usage
 
 Before you start you need to add `d4l-client-config.gradle.kts` and `d4l-test-config.gradle.kts` file in the project root folder and add following content:
 
-[source, kotlin, d4l-client-config.gradle.kts]
+[source,kotlin,d4l-client-config.gradle.kts]
 ----
 // d4l-client-config.gradle.kts
 extra.set("d4lClientConfig", D4LClientConfig(
@@ -43,7 +40,7 @@ extra.set("d4lClientConfig", D4LClientConfig(
 ))
 ----
 
-[source, kotlin, d4l-test-config.gradle.kts]
+[source,kotlin,d4l-test-config.gradle.kts]
 ----
 // d4l-test-config.gradle.kts
 extra.set("d4lTestConfig", D4LTestConfig(

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 D4L data4life gGmbH - All rights reserved.
+ */
+
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 

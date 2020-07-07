@@ -1,7 +1,7 @@
 <component name="CopyrightManager">
-    <settings default="HealthCloud">
-        <module2copyright>
-            <element module="All" copyright="HealthCloud" />
-        </module2copyright>
-    </settings>
+  <settings>
+    <module2copyright>
+      <element module="All" copyright="d4l-closed-source" />
+    </module2copyright>
+  </settings>
 </component>

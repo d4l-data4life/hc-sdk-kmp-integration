@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020 D4L data4life gGmbH - All rights reserved.
+ */
+
 import com.google.gson.GsonBuilder
 import java.io.File
 
