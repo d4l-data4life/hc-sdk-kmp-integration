@@ -34,7 +34,7 @@ Before you start you need to add `d4l-client-config.json` and `d4l-test-config.j
       "secret": "{CLIENT_SECRET}",
       "redirectScheme": "{CLIENT_REDIRECT_SCHEME}"
     },
-    "DEVELOP": {
+    "DEVELOPMENT": {
       "id": "{CLIENT_ID}",
       "secret": "{CLIENT_SECRET}",
       "redirectScheme": "{CLIENT_REDIRECT_SCHEME}"

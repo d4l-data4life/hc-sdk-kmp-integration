@@ -25,10 +25,10 @@ android {
         ))
 
         manifestPlaceholders = mapOf<String, Any>(
-                "clientId" to d4lClientConfig[Environment.DEVELOP].id,
-                "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
-                "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
-                "environment" to "development",
+                "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
+                "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
+                "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
+                "environment" to "${Environment.DEVELOPMENT}",
                 "debug" to "true"
         )
     }
@@ -43,46 +43,46 @@ android {
     flavorDimensions("environment")
 
     productFlavors {
-        create("development") {
+        val development by creating {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
-                    "clientId" to d4lClientConfig[Environment.DEVELOP].id,
-                    "clientSecret" to d4lClientConfig[Environment.DEVELOP].secret,
-                    "redirectScheme" to d4lClientConfig[Environment.DEVELOP].redirectScheme,
-                    "environment" to "development"
+                    "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
+                    "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
+                    "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
+                    "environment" to "${Environment.DEVELOPMENT}"
             )
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
         }
-        create("staging") {
+        val staging by creating {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
                     "clientId" to d4lClientConfig[Environment.STAGING].id,
                     "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
                     "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
-                    "environment" to "staging"
+                    "environment" to "${Environment.STAGING}"
             )
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
         }
-        create("sandbox") {
+        val sandbox by creating {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
                     "clientId" to d4lClientConfig[Environment.SANDBOX].id,
                     "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
                     "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
-                    "environment" to "sandbox"
+                    "environment" to "${Environment.SANDBOX}"
             )
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
         }
-        create("production") {
+        val production by creating {
             setDimension("environment")
             manifestPlaceholders = mapOf<String, Any>(
                     "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
                     "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
                     "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
-                    "environment" to "production"
+                    "environment" to "${Environment.PRODUCTION}"
             )
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"

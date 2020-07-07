@@ -18,8 +18,12 @@ data class ClientConfig(
 
 enum class Environment {
     LOCAL,
-    DEVELOP,
+    DEVELOPMENT,
     STAGING,
     SANDBOX,
-    PRODUCTION
+    PRODUCTION;
+
+    override fun toString(): String {
+        return super.toString().toLowerCase()
+    }
 }
