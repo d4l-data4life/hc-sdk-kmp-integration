@@ -4,8 +4,8 @@ plugins {
     kotlinAndroidExtensions()
 }
 
-val d4lClientConfig = D4LConfigHelper.loadClientConfig("$rootDir")
-val d4LTestConfig = D4LConfigHelper.loadTestConfig("$rootDir")
+val d4lClientConfig = D4LConfigHelper.loadClientConfigAndroid("$rootDir")
+val d4LTestConfig = D4LConfigHelper.loadTestConfigAndroid("$rootDir")
 
 android {
     compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)

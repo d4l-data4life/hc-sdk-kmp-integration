@@ -22,11 +22,11 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Usage
 
-Before you start you need to add `d4l-client-config.json` and `d4l-test-config.json` file in the project root folder and add following content:
+Before you start you need to add `d4l-client-config-android.json` and `d4l-test-config-android.json` file in the project root folder and add following content:
 
 [source,json,d4l-client-config.json]
 ----
-// d4l-client-config.json
+// d4l-client-config-android.json
 {
   "configs": {
     "LOCAL": {
@@ -47,7 +47,7 @@ Before you start you need to add `d4l-client-config.json` and `d4l-test-config.j
 
 [source,json,d4l-test-config.json]
 ----
-// d4l-test-config.json
+// d4l-test-config-android.json
 {
   "user": {
     "email": "{USER_EMAIL}",
