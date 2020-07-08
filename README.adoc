@@ -24,7 +24,7 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 Before you start you need to add `d4l-client-config-android.json` and `d4l-test-config-android.json` file in the project root folder and add following content:
 
-[source,json,d4l-client-config.json]
+[source,json,d4l-client-config-android.json]
 ----
 // d4l-client-config-android.json
 {
@@ -45,7 +45,7 @@ Before you start you need to add `d4l-client-config-android.json` and `d4l-test-
 }
 ----
 
-[source,json,d4l-test-config.json]
+[source,json,d4l-test-config-android.json]
 ----
 // d4l-test-config-android.json
 {
