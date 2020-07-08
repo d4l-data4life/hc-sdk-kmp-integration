@@ -39,11 +39,11 @@ import java.io.File
 
 object D4LConfigHelper {
 
-    private const val FILE_NAME_CLIENT_CONFIG = "d4l-client-config.json"
-    private const val FILE_NAME_TEST_CONFIG = "d4l-test-config.json"
+    private const val FILE_NAME_CLIENT_CONFIG_ANDROID = "d4l-client-config-android.json"
+    private const val FILE_NAME_TEST_CONFIG_ANDROID = "d4l-test-config-android.json"
 
-    private const val ENV_CLIENT_CONFIG = "D4L_CLIENT_CONFIG"
-    private const val ENV_TEST_CONFIG = "D4L_TEST_CONFIG"
+    private const val ENV_CLIENT_CONFIG_ANDROID = "D4L_CLIENT_CONFIG_ANDROID"
+    private const val ENV_TEST_CONFIG_ANDROID = "D4L_TEST_CONFIG_ANDROID"
 
     private fun gson() = GsonBuilder().setPrettyPrinting().create()
 
@@ -59,8 +59,8 @@ object D4LConfigHelper {
         } ?: throw IllegalStateException("Config file not found here: $path/$fileName nor environment variable $envVarName was set")
     }
 
-    fun loadClientConfig(path: String): D4LClientConfig {
-        val configJson = loadConfig(path, FILE_NAME_CLIENT_CONFIG, ENV_CLIENT_CONFIG)
+    fun loadClientConfigAndroid(path: String): D4LClientConfig {
+        val configJson = loadConfig(path, FILE_NAME_CLIENT_CONFIG_ANDROID, ENV_CLIENT_CONFIG_ANDROID)
         return gson().fromJson(configJson, D4LClientConfig::class.java)
     }
 
@@ -68,8 +68,8 @@ object D4LConfigHelper {
         return gson().toJson(d4lClientConfig)
     }
 
-    fun loadTestConfig(path: String): D4LTestConfig {
-        val configJson = loadConfig(path, FILE_NAME_TEST_CONFIG, ENV_TEST_CONFIG)
+    fun loadTestConfigAndroid(path: String): D4LTestConfig {
+        val configJson = loadConfig(path, FILE_NAME_TEST_CONFIG_ANDROID, ENV_TEST_CONFIG_ANDROID)
         return gson().fromJson(configJson, D4LTestConfig::class.java)
     }
 

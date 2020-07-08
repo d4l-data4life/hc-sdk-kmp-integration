@@ -10,7 +10,6 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
-import care.data4life.integration.app.BuildConfig
 import care.data4life.integration.app.testUtils.Auth2FAHelper
 import care.data4life.integration.app.testUtils.User
 import java.lang.Thread.sleep
@@ -56,7 +55,7 @@ class LoginPage : BasePage() {
         // Page 2FA
         scrollToBottom(2)
         val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
-        enter2FA(code)
+        enterText(authAppInputPinV2, code, true)
         unselectRememberDeviceCheckbox()
         clickButton(authAppButtonSmsCodeSubmit, true)
 
@@ -65,15 +64,9 @@ class LoginPage : BasePage() {
             resendCode(user.phoneNumber)
         }
 
+        sleep(TIMEOUT_SHORT)
+
         return HomePage()
-    }
-
-
-    private fun enter2FA(code: String) {
-        when (BuildConfig.FLAVOR) {
-            "development" -> enterText(authAppInputPinV2, code, true)
-            else -> enterVerificationCodeV1(code)
-        }
     }
 
     // Chrome
@@ -119,17 +112,11 @@ class LoginPage : BasePage() {
         }
     }
 
-    private fun enterVerificationCodeV1(verificationCode: String) {
-        for (x in 0 until 6) {
-            val digit = device.findObject(UiSelector().resourceId(authAppInputPinV1.plus(x + 1)))
-            digit.text = verificationCode[x].toString()
-        }
-    }
-
     private fun unselectRememberDeviceCheckbox() {
         val rememberCheckBox = device.findObject(UiSelector().resourceId("d4l-checkbox-remember"))
-        if (rememberCheckBox.isChecked)
+        if (rememberCheckBox.exists() && rememberCheckBox.isChecked) {
             rememberCheckBox.click()
+        }
     }
 
     private fun resendCode(phoneNumber: String) {
@@ -142,7 +129,7 @@ class LoginPage : BasePage() {
 
             sleep(TIMEOUT_SHORT)
             val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
-            enterVerificationCodeV1(code)
+            enterText(authAppInputPinV2, code, true)
         }
 
     }
@@ -192,7 +179,6 @@ class LoginPage : BasePage() {
         const val authAppButtonPhoneNumber = "d4l-button-submit-login"
 
         // Page 2FA
-        const val authAppInputPinV1 = "d4l-pin-position-"
         const val authAppInputPinV2 = "d4l-pin"
         const val authAppButtonSmsCodeSubmit = "d4l-button-submit-sms-code"
     }

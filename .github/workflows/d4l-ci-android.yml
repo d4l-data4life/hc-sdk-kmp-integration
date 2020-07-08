@@ -16,8 +16,8 @@ jobs:
     runs-on: [self-hosted, macos]
 
     env:
-      D4L_CLIENT_CONFIG: ${{ secrets.D4L_CLIENT_CONFIG }}
-      D4L_TEST_CONFIG: ${{ secrets.D4L_TEST_CONFIG }}
+      D4L_CLIENT_CONFIG_ANDROID: ${{ secrets.D4L_CLIENT_CONFIG_ANDROID }}
+      D4L_TEST_CONFIG_ANDROID: ${{ secrets.D4L_TEST_CONFIG_ANDROID }}
 
     steps:
       - name: Display runner context
@@ -34,4 +34,7 @@ jobs:
       - name: Run checks
         run: ./gradlew check
       - name: Run End2End Tests
-        run: ./gradlew connectedAndroidTest
+        run: |
+          ./gradlew connectedDevelopmentDebugAndroidTest
+          ./gradlew connectedStagingDebugAndroidTest
+          ./gradlew connectedProductionDebugAndroidTest

@@ -7,6 +7,7 @@ package care.data4life.integration.app.testUtils
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.gson.Gson
 import java.io.BufferedReader
+import java.io.FileNotFoundException
 
 data class TestConfig(
         val user: User,
@@ -33,9 +34,13 @@ object TestConfigLoader {
     private const val FILE_NAME = "test_config.json"
 
     fun load(): TestConfig {
-        val input = InstrumentationRegistry.getInstrumentation().context.assets.open(FILE_NAME)
-        val json = input.bufferedReader().use(BufferedReader::readText)
+        try {
+            val input = InstrumentationRegistry.getInstrumentation().context.assets.open(FILE_NAME)
+            val json = input.bufferedReader().use(BufferedReader::readText)
 
-        return Gson().fromJson(json, TestConfig::class.java)
+            return Gson().fromJson(json, TestConfig::class.java)
+        } catch (error: FileNotFoundException) {
+            throw IllegalStateException("Please run '/gradlew provideAndroidTestConfig' before running the tests", error)
+        }
     }
 }

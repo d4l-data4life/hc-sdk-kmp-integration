@@ -22,40 +22,45 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Usage
 
-Before you start you need to add `d4l-client-config.gradle.kts` and `d4l-test-config.gradle.kts` file in the project root folder and add following content:
+Before you start you need to add `d4l-client-config-android.json` and `d4l-test-config-android.json` file in the project root folder and add following content:
 
-[source,kotlin,d4l-client-config.gradle.kts]
+[source,json,d4l-client-config-android.json]
 ----
-// d4l-client-config.gradle.kts
-extra.set("d4lClientConfig", D4LClientConfig(
-        mapOf(
-                Environment.DEVELOP to ClientConfig(
-                        id = "{CLIENT_ID}",
-                        secret = "{CLIENT_SECRET}",
-                        redirectScheme = "{CLIENT_REDIRECT_SCHEME}"
-                ),
-                // ...
-                // for every environment add a config
-        )
-))
+// d4l-client-config-android.json
+{
+  "configs": {
+    "LOCAL": {
+      "id": "{CLIENT_ID}",
+      "secret": "{CLIENT_SECRET}",
+      "redirectScheme": "{CLIENT_REDIRECT_SCHEME}"
+    },
+    "DEVELOPMENT": {
+      "id": "{CLIENT_ID}",
+      "secret": "{CLIENT_SECRET}",
+      "redirectScheme": "{CLIENT_REDIRECT_SCHEME}"
+    },
+    // ...
+    // for every environment add a config STAGING, SANDBOX, PRODUCTION
+  }
+}
 ----
 
-[source,kotlin,d4l-test-config.gradle.kts]
+[source,json,d4l-test-config-android.json]
 ----
-// d4l-test-config.gradle.kts
-extra.set("d4lTestConfig", D4LTestConfig(
-        user = UserConfig(
-                email = "{USER_EMAIL}",
-                password = "{USER_PASSWORD}",
-                phoneCountryCode = "{USER_PHONE_COUNTRY_CODE}",
-                phoneLocalNumber = "{USER_PHONE_LOCAL_NUMBER}"
-        ),
-        twillio = TwillioConfig(
-                accountSid = "{TWILLIO_ACCOUNT_SID}",
-                authSid = "{TWILLIO_AUTH_SID}",
-                authToken = "{TWILLIO_AUTH_TOKEN}"
-        )
-))
+// d4l-test-config-android.json
+{
+  "user": {
+    "email": "{USER_EMAIL}",
+    "password": "{USER_PASSWORD}",
+    "phoneCountryCode": "{USER_PHONE_COUNTRY_CODE}",
+    "phoneLocalNumber": "{USER_PHONE_LOCAL_NUMBER}"
+  },
+  "twillio": {
+    "accountSid": "{TWILLIO_ACCOUNT_SID}",
+    "authSid": "{TWILLIO_AUTH_SID}",
+    "authToken": "{TWILLIO_AUTH_TOKEN}"
+  }
+}
 ----
 
 Run gradle wrapper task for connected tests:
