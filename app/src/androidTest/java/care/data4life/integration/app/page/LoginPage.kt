@@ -30,11 +30,11 @@ class LoginPage : BasePage() {
         dismissAuthAppCookie()
 
         // Page login/register
-        scrollToBottom(2)
+        ensurePageLoaded()
         clickButton(authAppButtonLogin, true)
 
         // Page enter email/password
-        scrollToBottom(2)
+        ensurePageLoaded()
         enterText(authAppInputEmail, user.email, true)
         enterText(authAppInputPassword, user.password, true)
         clickButton(authAppButtonSubmitLogin, true)
@@ -47,13 +47,13 @@ class LoginPage : BasePage() {
 
         // Page Phone number
         // FIXME ids missing so disabled it
-//        scrollToBottom(2)
+//        ensurePageLoaded()
 //        enterText(authAppInputPhoneCountryCode, user.phoneCountryCode, false)
 //        enterText(authAppInputPhoneNumber, user.phoneLocalNumber, false)
 //        clickButton(authAppButtonPhoneNumber, false)
 
         // Page 2FA
-        scrollToBottom(2)
+        ensurePageLoaded()
         val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
         enterText(authAppInputPinV2, code, true)
         unselectRememberDeviceCheckbox()
@@ -137,9 +137,19 @@ class LoginPage : BasePage() {
 
     // Helper
 
+    private fun ensurePageLoaded() {
+        scrollToBottom(1)
+        scrollToTop(1)
+    }
+
     private fun scrollToBottom(maxSwipes: Int) {
         UiScrollable(UiSelector().className(WebView::class.java))
                 .scrollToEnd(maxSwipes)
+    }
+
+    private fun scrollToTop(maxSwipes: Int) {
+        UiScrollable(UiSelector().className(WebView::class.java))
+                .scrollToBeginning(maxSwipes)
     }
 
     private fun clickButton(resourceId: String, required: Boolean?) {
