@@ -25,8 +25,9 @@ jobs:
         run: adb install ./ci/android/com.android.chrome_79.0.3945.93-394509315-x86-nodpi.apk
       - name: Configure project
         run: ./gradlew provideAndroidTestConfig
-      - name: Run End2End Tests
-        run: |
-          ./gradlew connectedDevelopmentDebugAndroidTest
-          ./gradlew connectedStagingDebugAndroidTest
-          ./gradlew connectedProductionDebugAndroidTest
+      - name: Run Production End2End Tests
+        run: ./gradlew connectedProductionDebugAndroidTest
+      - name: Run Staging End2End Tests
+        run: ./gradlew connectedStagingDebugAndroidTest
+      - name: Run Development End2End Tests
+        run: ./gradlew connectedDevelopmentDebugAndroidTest

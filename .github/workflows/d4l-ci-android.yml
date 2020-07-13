@@ -33,8 +33,9 @@ jobs:
         run: ./gradlew provideAndroidTestConfig
       - name: Run checks
         run: ./gradlew check
-      - name: Run End2End Tests
-        run: |
-          ./gradlew connectedDevelopmentDebugAndroidTest
-          ./gradlew connectedStagingDebugAndroidTest
-          ./gradlew connectedProductionDebugAndroidTest
+      - name: Run Production End2End Tests
+        run: ./gradlew connectedProductionDebugAndroidTest
+      - name: Run Staging End2End Tests
+        run: ./gradlew connectedStagingDebugAndroidTest
+      - name: Run Development End2End Tests
+        run: ./gradlew connectedDevelopmentDebugAndroidTest
