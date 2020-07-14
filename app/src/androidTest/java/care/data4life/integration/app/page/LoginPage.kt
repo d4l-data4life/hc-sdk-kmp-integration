@@ -90,6 +90,7 @@ class LoginPage : BasePage() {
 
     private fun dismissChromeInfobar() {
         val closeNotifyPopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
+        closeNotifyPopup.waitForExists(TIMEOUT_SHORT)
         if (closeNotifyPopup.exists()) {
             closeNotifyPopup.click()
             device.waitForIdle()
@@ -114,6 +115,7 @@ class LoginPage : BasePage() {
 
     private fun unselectRememberDeviceCheckbox() {
         val rememberCheckBox = device.findObject(UiSelector().resourceId("d4l-checkbox-remember"))
+        rememberCheckBox.waitForExists(TIMEOUT_SHORT)
         if (rememberCheckBox.exists() && rememberCheckBox.isChecked) {
             rememberCheckBox.click()
         }
@@ -121,6 +123,7 @@ class LoginPage : BasePage() {
 
     private fun resendCode(phoneNumber: String) {
         val dismissButton = device.findObject(UiSelector().className("android.widget.Button").textMatches("(DISMISS)"))
+        dismissButton.waitForExists(TIMEOUT_SHORT)
         if (dismissButton.exists()) {
             dismissButton.click()
 
@@ -138,8 +141,8 @@ class LoginPage : BasePage() {
     // Helper
 
     private fun ensurePageLoaded() {
-        scrollToBottom(1)
         scrollToTop(1)
+        scrollToBottom(1)
     }
 
     private fun scrollToBottom(maxSwipes: Int) {
