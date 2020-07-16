@@ -22,7 +22,11 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Usage
 
-Before you start you need to add `d4l-client-config-android.json` and `d4l-test-config-android.json` file in the project root folder and add following content:
+Before you start you need to add `d4l-client-config-android.json` and `d4l-test-config-android.json` files in the project root folder and add following content.
+
+`d4l-client-config-android.json` needs to contain a config for every environment LOCAL, DEVELOPMENT, STAGING, SANDBOX, PRODUCTION.
+
+NOTE: The CI expects this configuration from environment variables stored in GitHub secrets: `D4L_CLIENT_CONFIG_ANDROID` and `D4L_CLIENT_CONFIG_IOS`
 
 [source,json,d4l-client-config-android.json]
 ----
@@ -38,9 +42,7 @@ Before you start you need to add `d4l-client-config-android.json` and `d4l-test-
       "id": "{CLIENT_ID}",
       "secret": "{CLIENT_SECRET}",
       "redirectScheme": "{CLIENT_REDIRECT_SCHEME}"
-    },
-    // ...
-    // for every environment add a config STAGING, SANDBOX, PRODUCTION
+    }
   }
 }
 ----

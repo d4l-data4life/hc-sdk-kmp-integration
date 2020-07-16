@@ -30,11 +30,11 @@ class LoginPage : BasePage() {
         dismissAuthAppCookie()
 
         // Page login/register
-        scrollToBottom(2)
+        ensurePageLoaded()
         clickButton(authAppButtonLogin, true)
 
         // Page enter email/password
-        scrollToBottom(2)
+        ensurePageLoaded()
         enterText(authAppInputEmail, user.email, true)
         enterText(authAppInputPassword, user.password, true)
         clickButton(authAppButtonSubmitLogin, true)
@@ -47,13 +47,13 @@ class LoginPage : BasePage() {
 
         // Page Phone number
         // FIXME ids missing so disabled it
-//        scrollToBottom(2)
+//        ensurePageLoaded()
 //        enterText(authAppInputPhoneCountryCode, user.phoneCountryCode, false)
 //        enterText(authAppInputPhoneNumber, user.phoneLocalNumber, false)
 //        clickButton(authAppButtonPhoneNumber, false)
 
         // Page 2FA
-        scrollToBottom(2)
+        ensurePageLoaded()
         val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
         enterText(authAppInputPinV2, code, true)
         unselectRememberDeviceCheckbox()
@@ -90,6 +90,7 @@ class LoginPage : BasePage() {
 
     private fun dismissChromeInfobar() {
         val closeNotifyPopup = device.findObject(UiSelector().resourceId("com.android.chrome:id/infobar_close_button"))
+        closeNotifyPopup.waitForExists(TIMEOUT_SHORT)
         if (closeNotifyPopup.exists()) {
             closeNotifyPopup.click()
             device.waitForIdle()
@@ -114,6 +115,7 @@ class LoginPage : BasePage() {
 
     private fun unselectRememberDeviceCheckbox() {
         val rememberCheckBox = device.findObject(UiSelector().resourceId("d4l-checkbox-remember"))
+        rememberCheckBox.waitForExists(TIMEOUT_SHORT)
         if (rememberCheckBox.exists() && rememberCheckBox.isChecked) {
             rememberCheckBox.click()
         }
@@ -121,6 +123,7 @@ class LoginPage : BasePage() {
 
     private fun resendCode(phoneNumber: String) {
         val dismissButton = device.findObject(UiSelector().className("android.widget.Button").textMatches("(DISMISS)"))
+        dismissButton.waitForExists(TIMEOUT_SHORT)
         if (dismissButton.exists()) {
             dismissButton.click()
 
@@ -137,9 +140,19 @@ class LoginPage : BasePage() {
 
     // Helper
 
+    private fun ensurePageLoaded() {
+        scrollToTop(1)
+        scrollToBottom(1)
+    }
+
     private fun scrollToBottom(maxSwipes: Int) {
         UiScrollable(UiSelector().className(WebView::class.java))
                 .scrollToEnd(maxSwipes)
+    }
+
+    private fun scrollToTop(maxSwipes: Int) {
+        UiScrollable(UiSelector().className(WebView::class.java))
+                .scrollToBeginning(maxSwipes)
     }
 
     private fun clickButton(resourceId: String, required: Boolean?) {
