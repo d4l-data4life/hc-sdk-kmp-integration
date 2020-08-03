@@ -1,4 +1,4 @@
-= D4L SDK integration test suit
+= D4L SDK Integration Test Suit
 
 image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/D4L%20CI%20Android/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
 
