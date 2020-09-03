@@ -14,19 +14,14 @@ object Versions {
     const val kotlin = "1.3.72"
     const val kotlinCoroutines = "1.3.6"
 
-    object GradlePlugin {
+    object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "4.0.0"
+        const val android = "4.0.1"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
         const val dexcount = "0.8.4"
-
-        /**
-         * [Gradle DownloadTask](https://github.com/michel-kraemer/gradle-download-task)
-         */
-        const val downloadTask = "3.4.3"
 
         /**
          * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
@@ -82,17 +77,9 @@ object Versions {
      */
     const val threeTenABP = "1.2.4"
 
-    // Injection
-    const val koin = "1.0.1"
-
 
     // Junit Test
     const val testJUnit = "4.13"
-
-    /**
-     * [mockk](http://mockk.io)
-     */
-    const val testMockk = "1.8.12"
 
 
     // Android Test
