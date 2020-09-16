@@ -11,7 +11,7 @@ object Versions {
     const val fhirSdk = "0.6.1"
     const val fhirHelper = "1.2.4"
 
-    const val kotlin = "1.4.0"
+    const val kotlin = "1.4.10"
     const val kotlinCoroutines = "1.3.9"
 
     object GradlePlugins {
@@ -26,7 +26,7 @@ object Versions {
         /**
          * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
          */
-        const val dependencyUpdates = "0.29.0"
+        const val dependencyUpdates = "0.33.0"
     }
 
     // Android
@@ -39,7 +39,7 @@ object Versions {
 
     const val androidXConstraintLayout = "2.0.1"
 
-    const val androidXLifecycle = "2.1.0"
+    const val androidXLifecycle = "2.2.0"
     const val androidXNavigation = "2.3.0"
 
     // Material
