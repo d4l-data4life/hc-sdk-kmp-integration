@@ -147,7 +147,7 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Dependencies.Android.androidDesugar)
+    coreLibraryDesugaring(Dependencies.Android.desugar)
 
     implementation(Dependencies.Android.kotlinStdLib)
     implementation(Dependencies.Android.kotlinCoroutinesCore)

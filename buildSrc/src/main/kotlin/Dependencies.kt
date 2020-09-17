@@ -10,7 +10,7 @@ object Dependencies {
         const val kotlinCoroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
 
         // Android
-        const val androidDesugar = "com.android.tools:desugar_jdk_libs:${Versions.androidDesugar}"
+        const val desugar = "com.android.tools:desugar_jdk_libs:${Versions.androidDesugar}"
 
         object AndroidX {
             // AndroidX
@@ -37,7 +37,7 @@ object Dependencies {
             const val fhirHelper = "com.github.gesundheitscloud.sdk-fhir-helper-multiplatform:fhir-helper-android:${Versions.fhirHelper}"
         }
 
-        //date
+        // Date
         const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 
         // Network

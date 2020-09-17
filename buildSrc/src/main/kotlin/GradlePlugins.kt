@@ -38,12 +38,12 @@ import org.gradle.plugin.use.PluginDependencySpec
  */
 
 object GradlePlugins {
-    const val android = "com.android.tools.build:gradle:${Versions.GradlePlugin.android}"
-    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugin.kotlin}"
+    const val android = "com.android.tools.build:gradle:${Versions.GradlePlugins.android}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugins.kotlin}"
 }
 
 fun PluginDependenciesSpec.dependencyUpdates(): PluginDependencySpec =
-        id("com.github.ben-manes.versions").version(Versions.GradlePlugin.dependencyUpdates)
+        id("com.github.ben-manes.versions").version(Versions.GradlePlugins.dependencyUpdates)
 
 
 fun PluginDependenciesSpec.androidApp(): PluginDependencySpec =
