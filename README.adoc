@@ -1,8 +1,8 @@
-= D4L SDK Integration Test Suit
+= HC SDK Integration Test Suit
 
-image::https://github.com/gesundheitscloud/hc-sdk-android-integration/workflows/D4L%20CI%20Android/badge.svg[Build Status,link=https://github.com/gesundheitscloud/hc-sdk-android-integration/actions]
+image:https://github.com/d4l-data4life/hc-sdk-android-integration/workflows/D4L%20CI%20Android/badge.svg[Build Status,link=https://github.com/d4l-data4life/hc-sdk-android-integration/actions?query=workflow%3A%22D4L+CI+Android%22] image:https://github.com/d4l-data4life/hc-sdk-android-integration/workflows/D4L%20CI%20Android%20-%20Login%20verification/badge.svg[Build Status,link=https://github.com/d4l-data4life/hc-sdk-android-integration/actions?query=workflow%3A%22D4L+CI+Android+-+Login+verification%22]
 
-This is an integration of the link:https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK] for testing purposes.
+This is an Android integration of the link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK] for testing purposes.
 
 A suit of UI tests to identify breaking changes and regressions by SDK version changes.
 
@@ -17,8 +17,8 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Dependencies
 
-* link:https://github.com/gesundheitscloud/hc-sdk-android[D4L SDK]
-* link:https://github.com/gesundheitscloud/hc-fhir-android[D4L FHIR SDK]
+* link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK]
+* link:https://github.com/d4l-data4life/hc-fhir-java[D4L FHIR SDK]
 
 == Usage
 
