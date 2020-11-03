@@ -24,13 +24,13 @@ android {
                 "clearPackageData" to "true"
         ))
 
-        manifestPlaceholders = mapOf<String, Any>(
+        manifestPlaceholders(mapOf(
                 "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
                 "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
                 "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
                 "environment" to "${Environment.DEVELOPMENT}",
                 "debug" to "true"
-        )
+        ))
     }
 
     buildTypes {
@@ -44,46 +44,46 @@ android {
 
     productFlavors {
         val development by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
                     "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
                     "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
                     "environment" to "${Environment.DEVELOPMENT}"
-            )
+            ))
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
         }
         val staging by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.STAGING].id,
                     "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
                     "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
                     "environment" to "${Environment.STAGING}"
-            )
+            ))
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
         }
         val sandbox by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.SANDBOX].id,
                     "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
                     "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
                     "environment" to "${Environment.SANDBOX}"
-            )
+            ))
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
         }
         val production by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
                     "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
                     "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
                     "environment" to "${Environment.PRODUCTION}"
-            )
+            ))
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
         }
@@ -107,7 +107,7 @@ android {
 
     compileOptions {
         // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled = false
+        isCoreLibraryDesugaringEnabled = false
 
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -132,13 +132,11 @@ android {
     testOptions {
         animationsDisabled = true
 
-        unitTests.all(KotlinClosure1<Any, Test>({
-            (this as Test).also { testTask ->
-                testTask.testLogging {
-                    events("passed", "skipped", "failed", "standardOut", "standardError")
-                }
+        unitTests.all {
+            it.testLogging {
+                events("passed", "skipped", "failed", "standardOut", "standardError")
             }
-        }, unitTests))
+        }
 
         // FIXME Test Orchestrator is currently broken and results in no tests found
         // execution = "ANDROIDX_TEST_ORCHESTRATOR"

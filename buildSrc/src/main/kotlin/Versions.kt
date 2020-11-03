@@ -16,7 +16,7 @@ object Versions {
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "4.0.1"
+        const val android = "4.1.0"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
