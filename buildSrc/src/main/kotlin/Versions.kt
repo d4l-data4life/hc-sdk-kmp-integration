@@ -12,7 +12,7 @@ object Versions {
     const val fhirHelper = "1.2.4"
 
     const val kotlin = "1.4.10"
-    const val kotlinCoroutines = "1.3.9"
+    const val kotlinCoroutines = "1.4.0"
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
@@ -26,7 +26,7 @@ object Versions {
         /**
          * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
          */
-        const val dependencyUpdates = "0.33.0"
+        const val dependencyUpdates = "0.34.0"
     }
 
     // Android
@@ -37,10 +37,10 @@ object Versions {
     const val androidXAppCompat = "1.2.0"
     const val androidXBrowser = "1.2.0"
 
-    const val androidXConstraintLayout = "2.0.1"
+    const val androidXConstraintLayout = "2.0.4"
 
     const val androidXLifecycle = "2.2.0"
-    const val androidXNavigation = "2.3.0"
+    const val androidXNavigation = "2.3.1"
 
     // Material
     const val material = "1.2.1"
@@ -67,16 +67,16 @@ object Versions {
      *
      *[chucker inspector](//https://github.com/ChuckerTeam/chucker/tree/develop)
      */
-    const val chucker = "3.2.0"
+    const val chucker = "3.3.0"
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
-    const val threeTenABP = "1.2.4"
+    const val threeTenABP = "1.3.0"
 
 
     // Junit Test
-    const val testJUnit = "4.13"
+    const val testJUnit = "4.13.1"
 
 
     // Android Test
@@ -87,8 +87,8 @@ object Versions {
     const val androidXTestExtJUnit = "1.1.2"
 
     // https://github.com/agoda-com/Kakao
-    const val androidTestKakao = "2.3.4"
+    const val androidTestKakao = "2.4.0"
 
     // https://github.com/KasperskyLab/Kaspresso
-    const val androidTestKaspresso = "1.1.0"
+    const val androidTestKaspresso = "1.2.0"
 }
