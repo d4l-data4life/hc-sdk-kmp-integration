@@ -37,6 +37,6 @@ tasks.register("clean", Delete::class.java) {
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "6.6.1"
+    gradleVersion = "6.7"
     distributionType = Wrapper.DistributionType.ALL
 }
