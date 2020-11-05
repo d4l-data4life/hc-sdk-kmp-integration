@@ -32,9 +32,10 @@ object Dependencies {
         const val material = "com.google.android.material:material:${Versions.material}"
 
         object D4L {
-            const val hcSdk = "de.gesundheitscloud.hc-sdk-android:sdk-android:${Versions.hcSdk}"
-            const val fhirSdk = "de.gesundheitscloud:hc-fhir-android:${Versions.fhirSdk}"
-            const val fhirHelper = "com.github.gesundheitscloud.sdk-fhir-helper-multiplatform:fhir-helper-android:${Versions.fhirHelper}"
+            const val hcSdk = "care.data4life.hc-sdk-kmp:sdk-android:${Versions.hcSdk}"
+            const val utilSdk = "care.data4life.hc-util-sdk-kmp:util-android:${Versions.utilSdk}"
+            const val fhirSdk = "care.data4life.hc-fhir-sdk-java:hc-fhir-sdk-java:${Versions.fhirSdk}"
+            const val fhirHelper = "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Versions.fhirHelper}"
         }
 
         // Date

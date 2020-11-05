@@ -3,13 +3,28 @@
  */
 
 object Versions {
-    const val hcSdk = "1.6.1"
 
     /**
-     * [D4L-FHIR-SDK]https://github.com/gesundheitscloud/hc-fhir-android)
+     * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
      */
-    const val fhirSdk = "0.6.1"
-    const val fhirHelper = "1.2.4"
+    const val hcSdk = "1.7.3"
+
+    /**
+     * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
+     */
+    const val fhirSdk = "0.7.0"
+
+    /**
+     * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
+     */
+    const val fhirHelper = "1.3.1"
+
+
+    /**
+     * [D4L-UTIL-SDK-KMP](https://github.com/d4l-data4life/hc-util-sdk-kmp)
+     */
+    const val utilSdk = "1.6.2"
+
 
     const val kotlin = "1.4.10"
     const val kotlinCoroutines = "1.4.0"
