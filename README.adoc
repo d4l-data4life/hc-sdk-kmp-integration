@@ -11,9 +11,9 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 * Android 5.0.1 (API 21) to Android 10 (API 29)
 * Kotlin 1.4.10
 * Java 8 link:https://developer.android.com/studio/write/java8-support[Limitations] https://jakewharton.com/d8-library-desugaring/[Desugaring]
-* Gradle 6.6.1
-* link:https://developer.android.com/studio#downloads[Android Studio 4.0.1]
 * Android Emulator 21 - 29
+* Gradle 6.7
+* link:https://developer.android.com/studio#downloads[Android Studio 4.1.1]
 
 == Dependencies
 

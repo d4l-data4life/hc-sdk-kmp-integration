@@ -41,6 +41,7 @@ android {
             setMatchingFallbacks("release", "debug")
         }
         getByName("release") {
+            isDebuggable = false
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             setMatchingFallbacks("release", "debug")
@@ -205,6 +206,9 @@ dependencies {
     implementation(Dependencies.Android.threeTenABP)
     implementation(Dependencies.Android.D4L.fhirSdk)
     implementation(Dependencies.Android.D4L.utilSdk)
+    implementation(Dependencies.Android.D4L.fhirHelper) {
+        exclude("care.data4life.hc-util-sdk-kmp", "util-android")
+    }
 
     releaseImplementation(Dependencies.Android.checkerRelease)
 
