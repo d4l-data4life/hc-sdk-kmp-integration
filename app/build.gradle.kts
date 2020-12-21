@@ -154,8 +154,7 @@ android {
             }
         }
 
-        // FIXME Test Orchestrator is currently broken and results in no tests found
-        // execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
