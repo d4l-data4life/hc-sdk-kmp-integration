@@ -8,10 +8,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import care.data4life.fhir.stu3.model.*
 import care.data4life.fhir.stu3.util.FhirDateTimeParser
-import care.data4life.sdk.helpers.AttachmentBuilder
-import care.data4life.sdk.helpers.DocumentReferenceBuilder
-import care.data4life.sdk.helpers.getAttachments
-import care.data4life.sdk.helpers.getTitle
+import care.data4life.sdk.helpers.stu3.AttachmentBuilder
+import care.data4life.sdk.helpers.stu3.DocumentReferenceBuilder
+import care.data4life.sdk.helpers.stu3.getAttachments
+import care.data4life.sdk.helpers.stu3.getTitle
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -31,7 +31,7 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
 
     val title = "Physical"
     val indexed: FhirInstant = FhirDateTimeParser.parseInstant("2013-04-03T15:30:10+01:00")
-    val status = CodeSystems.DocumentReferenceStatus.CURRENT
+    val status = CodeSystemDocumentReferenceStatus.CURRENT
     val documentCode = "34108-1"
     val documentDisplay = "Outpatient Note"
     val documentSystem = "http://loinc.org"
