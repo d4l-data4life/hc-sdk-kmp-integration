@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
                     activity?.runOnUiThread { findNavController(this@HomeFragment).navigate(R.id.action_home_screen_to_welcome_screen) }
                 }
 
-                override fun onError(error: D4LException?) {
+                override fun onError(exception: D4LException) {
 
                 }
             })

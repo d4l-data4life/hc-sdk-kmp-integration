@@ -19,6 +19,8 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 * link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK]
 * link:https://github.com/d4l-data4life/hc-fhir-java[D4L FHIR SDK]
+* link:https://github.com/d4l-data4life/hc-fhir-helper-kmp[D4L FHIR Helper SDK]
+* link:https://github.com/d4l-data4life/hc-util-kmp[D4L Util SDK]
 
 == Usage
 
