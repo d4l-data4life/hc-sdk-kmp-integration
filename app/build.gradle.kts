@@ -24,19 +24,27 @@ android {
                 "clearPackageData" to "true"
         ))
 
-        manifestPlaceholders = mapOf<String, Any>(
+        manifestPlaceholders(mapOf(
                 "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
                 "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
                 "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
                 "environment" to "${Environment.DEVELOPMENT}",
+                "platform" to d4lClientConfig.platform,
                 "debug" to "true"
-        )
+        ))
     }
 
     buildTypes {
+        getByName("debug") {
+            isDebuggable = true
+            isMinifyEnabled = false
+            setMatchingFallbacks("release", "debug")
+        }
         getByName("release") {
+            isDebuggable = false
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            setMatchingFallbacks("release", "debug")
         }
     }
 
@@ -44,48 +52,56 @@ android {
 
     productFlavors {
         val development by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
                     "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
                     "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
-                    "environment" to "${Environment.DEVELOPMENT}"
-            )
+                    "environment" to "${Environment.DEVELOPMENT}",
+                    "platform" to d4lClientConfig.platform
+            ))
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
+            setMatchingFallbacks("release", "debug")
         }
         val staging by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.STAGING].id,
                     "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
                     "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
-                    "environment" to "${Environment.STAGING}"
-            )
+                    "environment" to "${Environment.STAGING}",
+                    "platform" to d4lClientConfig.platform
+            ))
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
+            setMatchingFallbacks("release", "debug")
         }
         val sandbox by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.SANDBOX].id,
                     "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
                     "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
-                    "environment" to "${Environment.SANDBOX}"
-            )
+                    "environment" to "${Environment.SANDBOX}",
+                    "platform" to d4lClientConfig.platform
+            ))
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
+            setMatchingFallbacks("release", "debug")
         }
         val production by creating {
-            setDimension("environment")
-            manifestPlaceholders = mapOf<String, Any>(
+            dimension("environment")
+            manifestPlaceholders(mapOf(
                     "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
                     "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
                     "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
-                    "environment" to "${Environment.PRODUCTION}"
-            )
+                    "environment" to "${Environment.PRODUCTION}",
+                    "platform" to d4lClientConfig.platform
+            ))
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
+            setMatchingFallbacks("release", "debug")
         }
     }
 
@@ -107,7 +123,7 @@ android {
 
     compileOptions {
         // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled = false
+        isCoreLibraryDesugaringEnabled = false
 
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -132,16 +148,13 @@ android {
     testOptions {
         animationsDisabled = true
 
-        unitTests.all(KotlinClosure1<Any, Test>({
-            (this as Test).also { testTask ->
-                testTask.testLogging {
-                    events("passed", "skipped", "failed", "standardOut", "standardError")
-                }
+        unitTests.all {
+            it.testLogging {
+                events("passed", "skipped", "failed", "standardOut", "standardError")
             }
-        }, unitTests))
+        }
 
-        // FIXME Test Orchestrator is currently broken and results in no tests found
-        // execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
 }
 
@@ -167,16 +180,33 @@ dependencies {
 
     implementation(Dependencies.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "auth-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "crypto-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "sdk-jvm")
-        exclude(group = "de.gesundheitscloud.hc-sdk-android", module = "securestore-jvm")
-        exclude(group = "care.data4life.hc-sdk-android", module = "util-jvm")
+
+        exclude(
+                group = "care.data4life.hc-sdk-kmp",
+                module = "crypto-jvm"
+        )
+        exclude(
+                group = "care.data4life.hc-sdk-kmp",
+                module = "auth-jvm"
+        )
+        exclude(
+                group = "care.data4life.hc-sdk-kmp",
+                module = "sdk-jvm"
+        )
+        exclude(
+                group = "care.data4life.hc-sdk-kmp",
+                module = "securestore-jvm"
+        )
+        exclude(
+                group = "care.data4life.hc-util-sdk-kmp",
+                module = "util-android"
+        )
     }
     implementation(Dependencies.Android.threeTenABP)
     implementation(Dependencies.Android.D4L.fhirSdk)
+    implementation(Dependencies.Android.D4L.utilSdk)
     implementation(Dependencies.Android.D4L.fhirHelper) {
-        exclude("de.gesundheitscloud.sdk-util-multiplatform", "util-android")
+        exclude("care.data4life.hc-util-sdk-kmp", "util-android")
     }
 
     releaseImplementation(Dependencies.Android.checkerRelease)

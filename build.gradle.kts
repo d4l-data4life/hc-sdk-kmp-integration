@@ -18,6 +18,27 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-util-sdk-kmp")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+            }
+        }
+        maven {
+            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-sdk-java")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+            }
+        }
+        maven {
+            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-helper-sdk-kmp")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+            }
+        }
         maven("https://jitpack.io")
         jcenter()
     }
@@ -37,6 +58,6 @@ tasks.register("clean", Delete::class.java) {
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "6.6.1"
+    gradleVersion = "6.7.1"
     distributionType = Wrapper.DistributionType.ALL
 }

@@ -3,6 +3,7 @@
  */
 
 data class D4LClientConfig(
+        val platform: String,
         val configs: Map<Environment, ClientConfig>
 ) {
     operator fun get(environment: Environment): ClientConfig {

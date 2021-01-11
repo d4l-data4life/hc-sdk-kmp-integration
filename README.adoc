@@ -8,17 +8,19 @@ A suit of UI tests to identify breaking changes and regressions by SDK version c
 
 == Requirements
 
-* Android 5.0.1 (API 21) to Android 10 (API 29)
+* Android 6.0 (API 23) to Android 11 (API 30)
 * Kotlin 1.4.10
 * Java 8 link:https://developer.android.com/studio/write/java8-support[Limitations] https://jakewharton.com/d8-library-desugaring/[Desugaring]
-* Gradle 6.6.1
-* link:https://developer.android.com/studio#downloads[Android Studio 4.0.1]
 * Android Emulator 21 - 29
+* Gradle 6.7.1
+* link:https://developer.android.com/studio#downloads[Android Studio 4.1.1]
 
 == Dependencies
 
 * link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK]
 * link:https://github.com/d4l-data4life/hc-fhir-java[D4L FHIR SDK]
+* link:https://github.com/d4l-data4life/hc-fhir-helper-kmp[D4L FHIR Helper SDK]
+* link:https://github.com/d4l-data4life/hc-util-kmp[D4L Util SDK]
 
 == Usage
 
