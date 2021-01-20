@@ -55,7 +55,9 @@ class LoginPage : BasePage() {
         // Page 2FA
         ensurePageLoaded()
         val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
-        enterText(authAppInputPinV2, code, true)
+        if (code != null) {
+            enterText(authAppInputPinV2, code, true)
+        }
         unselectRememberDeviceCheckbox()
         clickButton(authAppButtonSmsCodeSubmit, true)
 
@@ -132,7 +134,9 @@ class LoginPage : BasePage() {
 
             sleep(TIMEOUT_SHORT)
             val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
-            enterText(authAppInputPinV2, code, true)
+            if (code != null) {
+                enterText(authAppInputPinV2, code, true)
+            }
         }
 
     }
@@ -142,7 +146,7 @@ class LoginPage : BasePage() {
 
     private fun ensurePageLoaded() {
         scrollToTop(1)
-        scrollToBottom(1)
+        scrollToBottom(2)
     }
 
     private fun scrollToBottom(maxSwipes: Int) {
