@@ -10,8 +10,8 @@ import java.io.BufferedReader
 import java.io.FileNotFoundException
 
 data class TestConfig(
-        val user: User,
-        val twillio: TwillioConfig
+        val sinch: Sinch,
+        val user: User
 )
 
 data class User(
@@ -24,9 +24,8 @@ data class User(
         get() = phoneCountryCode + phoneLocalNumber
 }
 
-data class TwillioConfig(
-        val accountSid: String,
-        val authSid: String,
+data class Sinch(
+        val servicePlanId: String,
         val authToken: String
 )
 
@@ -40,7 +39,7 @@ object TestConfigLoader {
 
             return Gson().fromJson(json, TestConfig::class.java)
         } catch (error: FileNotFoundException) {
-            throw IllegalStateException("Please run '/gradlew provideAndroidTestConfig' before running the tests", error)
+            throw IllegalStateException("Please run './gradlew provideAndroidTestConfig' before running the tests", error)
         }
     }
 }
