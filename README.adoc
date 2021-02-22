@@ -58,11 +58,6 @@ NOTE: The CI expects this configuration from environment variables stored in Git
     "password": "{USER_PASSWORD}",
     "phoneCountryCode": "{USER_PHONE_COUNTRY_CODE}",
     "phoneLocalNumber": "{USER_PHONE_LOCAL_NUMBER}"
-  },
-  "twillio": {
-    "accountSid": "{TWILLIO_ACCOUNT_SID}",
-    "authSid": "{TWILLIO_AUTH_SID}",
-    "authToken": "{TWILLIO_AUTH_TOKEN}"
   }
 }
 ----
