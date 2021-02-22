@@ -2,6 +2,7 @@ package care.data4life.integration.app.testUtils
 
 import care.data4life.integration.app.testUtils.Auth2FAHelper.config
 import care.data4life.integration.app.testUtils.SinchService.Companion.AUTH_TOKEN
+import care.data4life.integration.app.testUtils.SinchService.Companion.SERVICE_PLAN
 import com.google.gson.annotations.SerializedName
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -27,7 +28,8 @@ interface SinchService {
 
     companion object {
         const val BASE_URL = "https://eu.sms.api.sinch.com/xms/v1/"
-        val AUTH_TOKEN = config.authToken
+        val AUTH_TOKEN = "a5c90a516dbe4ecb9161aacc035fca94"
+        val SERVICE_PLAN = "8e8159ccc2a74e6ea0b1d97e59872341"
     }
 }
 
@@ -96,7 +98,7 @@ object Auth2FAHelper {
     }
 
     fun fetchLatest2FACode(phoneNumber: String, date: String): ListMessageSinch? {
-        val call = initSinchService().get2FACode(config.servicePlanId, date, phoneNumber, 0, 30)
+        val call = initSinchService().get2FACode(SERVICE_PLAN, date, phoneNumber, 0, 30)
         return call.execute().body()
     }
 
