@@ -12,7 +12,7 @@ object Versions {
     /**
      * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
      */
-    const val fhirSdk = "1.1.0"
+    const val fhirSdk = "1.2.1"
 
     /**
      * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)

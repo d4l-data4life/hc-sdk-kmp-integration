@@ -180,33 +180,18 @@ dependencies {
 
     implementation(Dependencies.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
-
-        exclude(
-                group = "care.data4life.hc-sdk-kmp",
-                module = "crypto-jvm"
-        )
-        exclude(
-                group = "care.data4life.hc-sdk-kmp",
-                module = "auth-jvm"
-        )
-        exclude(
-                group = "care.data4life.hc-sdk-kmp",
-                module = "sdk-jvm"
-        )
-        exclude(
-                group = "care.data4life.hc-sdk-kmp",
-                module = "securestore-jvm"
-        )
-        exclude(
-                group = "care.data4life.hc-util-sdk-kmp",
-                module = "util-android"
-        )
+        exclude(group = "care.data4life", module = "securestore-jvm")
+        exclude(group = "care.data4life", module = "crypto-jvm")
+        exclude(group = "care.data4life", module = "auth-jvm")
+        exclude(group = "care.data4life.hc-util-sdk-kmp", module = "util-jvm")
+        exclude(group = "care.data4life.hc-fhir-helper-sdk-kmp", module = "fhir-helper-jvm")
     }
     implementation(Dependencies.Android.threeTenABP)
     implementation(Dependencies.Android.D4L.fhirSdk)
     implementation(Dependencies.Android.D4L.utilSdk)
     implementation(Dependencies.Android.D4L.fhirHelper) {
         exclude("care.data4life.hc-util-sdk-kmp", "util-android")
+        exclude(group = "care.data4life.hc-fhir-sdk-java", module = "hc-fhir-sdk-java")
     }
 
     releaseImplementation(Dependencies.Android.checkerRelease)
