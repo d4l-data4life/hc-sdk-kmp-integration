@@ -7,4 +7,6 @@
     <color name="colorPrimary">#000E7E</color>
     <color name="colorPrimaryDark">#000051</color>
     <color name="colorAccent">#FF5E59</color>
+
+    <color name="colorGrey">@android:color/darker_gray</color>
 </resources>
