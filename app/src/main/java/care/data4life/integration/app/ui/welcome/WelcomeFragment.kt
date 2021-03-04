@@ -10,16 +10,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import care.data4life.integration.app.MainViewModel
 import care.data4life.integration.app.R
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.Data4LifeClient.D4L_AUTH
+import care.data4life.sdk.lang.D4LException
+import care.data4life.sdk.listener.ResultListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
 
+    private lateinit var model: MainViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model = ViewModelProvider(this).get(MainViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.welcome_fragment, container, false)
@@ -32,6 +43,22 @@ class WelcomeFragment : Fragment() {
             val intent = Data4LifeClient.getInstance().getLoginIntent(context, null)
             startActivityForResult(intent, D4L_AUTH)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        model.client.isUserLoggedIn(object : ResultListener<Boolean> {
+            override fun onSuccess(result: Boolean) {
+                if (result) {
+                    findNavController(this@WelcomeFragment).navigate(R.id.action_welcome_screen_to_home_screen)
+                }
+            }
+
+            override fun onError(exception: D4LException) {
+                Toast.makeText(context, exception.message, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
