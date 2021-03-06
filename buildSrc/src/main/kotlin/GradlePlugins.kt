@@ -51,6 +51,3 @@ fun PluginDependenciesSpec.androidApp(): PluginDependencySpec =
 
 fun PluginDependenciesSpec.kotlinAndroid(): PluginDependencySpec =
         id("kotlin-android")
-
-fun PluginDependenciesSpec.kotlinAndroidExtensions(): PluginDependencySpec =
-        id("kotlin-android-extensions")

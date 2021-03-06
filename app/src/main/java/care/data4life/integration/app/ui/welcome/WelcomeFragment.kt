@@ -16,14 +16,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import care.data4life.integration.app.MainViewModel
 import care.data4life.integration.app.R
+import care.data4life.integration.app.databinding.WelcomeFragmentBinding
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.Data4LifeClient.D4L_AUTH
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.ResultListener
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
+
+    private var _binding: WelcomeFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var model: MainViewModel
 
@@ -32,14 +35,19 @@ class WelcomeFragment : Fragment() {
         model = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.welcome_fragment, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = WelcomeFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        welcome_login_button.setOnClickListener {
+        binding.welcomeLoginButton.setOnClickListener {
             val intent = Data4LifeClient.getInstance().getLoginIntent(context, null)
             startActivityForResult(intent, D4L_AUTH)
         }
@@ -67,9 +75,16 @@ class WelcomeFragment : Fragment() {
             if (resultCode == RESULT_OK) {
                 findNavController(this).navigate(R.id.action_welcome_screen_to_home_screen)
             } else {
-                this.view?.let { Snackbar.make(it, "Failed to login with D4L", Snackbar.LENGTH_LONG).show() }
+                this.view?.let {
+                    Snackbar.make(it, "Failed to login with D4L", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

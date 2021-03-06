@@ -1,7 +1,6 @@
 plugins {
     androidApp()
     kotlinAndroid()
-    kotlinAndroidExtensions()
 }
 
 val d4lClientConfig = D4LConfigHelper.loadClientConfigAndroid("$rootDir")
@@ -32,6 +31,10 @@ android {
                 "platform" to d4lClientConfig.platform,
                 "debug" to "true"
         ))
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 
     buildTypes {
@@ -123,7 +126,7 @@ android {
 
     compileOptions {
         // Flag to enable support for the new language APIs
-        isCoreLibraryDesugaringEnabled = false
+        isCoreLibraryDesugaringEnabled = true
 
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

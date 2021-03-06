@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
@@ -40,7 +41,7 @@ allprojects {
             }
         }
         maven("https://jitpack.io")
-        jcenter()
+        jcenter() // Warning: this repository is going to shut down soon
     }
 
     // FIXME remove if dependency conflict is solved
