@@ -28,8 +28,8 @@ interface SinchService {
 
     companion object {
         const val BASE_URL = "https://eu.sms.api.sinch.com/xms/v1/"
-        val AUTH_TOKEN = "a5c90a516dbe4ecb9161aacc035fca94"
-        val SERVICE_PLAN = "8e8159ccc2a74e6ea0b1d97e59872341"
+        val AUTH_TOKEN = config.authToken
+        val SERVICE_PLAN = config.servicePlanId
     }
 }
 
