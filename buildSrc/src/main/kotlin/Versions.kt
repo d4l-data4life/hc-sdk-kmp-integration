@@ -7,12 +7,12 @@ object Versions {
     /**
      * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
      */
-    const val hcSdk = "1.9.0"
+    const val hcSdk = "1.9.2"
 
     /**
      * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
      */
-    const val fhirSdk = "1.1.0"
+    const val fhirSdk = "1.2.1"
 
     /**
      * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
@@ -26,12 +26,12 @@ object Versions {
     const val utilSdk = "1.6.1"
 
 
-    const val kotlin = "1.4.10"
-    const val kotlinCoroutines = "1.4.0"
+    const val kotlin = "1.4.31"
+    const val kotlinCoroutines = "1.4.2"
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "4.1.1"
+        const val android = "4.1.2"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -41,7 +41,7 @@ object Versions {
         /**
          * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
          */
-        const val dependencyUpdates = "0.34.0"
+        const val dependencyUpdates = "0.36.0"
     }
 
     // Android
@@ -55,7 +55,7 @@ object Versions {
     const val androidXConstraintLayout = "2.0.4"
 
     const val androidXLifecycle = "2.2.0"
-    const val androidXNavigation = "2.3.1"
+    const val androidXNavigation = "2.3.3"
 
     // Material
     const val material = "1.2.1"
@@ -91,7 +91,7 @@ object Versions {
 
 
     // Junit Test
-    const val testJUnit = "4.13.1"
+    const val testJUnit = "4.13.2"
 
 
     // Android Test

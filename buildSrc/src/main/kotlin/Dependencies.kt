@@ -34,7 +34,7 @@ object Dependencies {
         object D4L {
             const val hcSdk = "care.data4life.hc-sdk-kmp:sdk-android:${Versions.hcSdk}"
             const val utilSdk = "care.data4life.hc-util-sdk-kmp:util-android:${Versions.utilSdk}"
-            const val fhirSdk = "care.data4life.hc-fhir-sdk-java:hc-fhir-sdk-java:${Versions.fhirSdk}"
+            const val fhirSdk = "care.data4life.hc-fhir-sdk-java:fhir-java:${Versions.fhirSdk}"
             const val fhirHelper = "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Versions.fhirHelper}"
         }
 
