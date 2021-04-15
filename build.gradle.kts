@@ -13,6 +13,7 @@ buildscript {
 plugins {
     id("scripts.dependency-updates")
     id("scripts.download-scripts")
+    id("scripts.versioning")
 }
 
 allprojects {

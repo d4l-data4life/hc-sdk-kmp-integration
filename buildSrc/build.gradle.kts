@@ -6,7 +6,6 @@ plugins {
     `kotlin-dsl`
 }
 
-
 repositories {
     gradlePluginPortal()
     mavenCentral()
@@ -20,6 +19,8 @@ dependencies {
     implementation("com.github.ben-manes:gradle-versions-plugin:0.38.0")
     // download scripts
     implementation("de.undercouch:gradle-download-task:4.1.1")
+    // versioning.gradle.kts
+    implementation("com.palantir.gradle.gitversion:gradle-git-version:0.12.3")
 }
 
 kotlinDslPluginOptions {
