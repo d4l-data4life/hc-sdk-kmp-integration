@@ -37,11 +37,6 @@ object Versions {
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
         const val dexcount = "0.8.4"
-
-        /**
-         * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
-         */
-        const val dependencyUpdates = "0.36.0"
     }
 
     // Android
