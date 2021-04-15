@@ -30,7 +30,7 @@ class LoginPage : BasePage() {
         dismissAuthAppCookie()
 
         // Page login/register
-        ensurePageLoaded()
+        scrollToBottom(1)
         clickButton(authAppButtonLogin, true)
 
         // Page enter email/password
