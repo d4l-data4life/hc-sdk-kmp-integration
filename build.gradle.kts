@@ -12,6 +12,8 @@ buildscript {
 
 plugins {
     dependencyUpdates()
+
+    id("scripts.download-scripts")
 }
 
 allprojects {
