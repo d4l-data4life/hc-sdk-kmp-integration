@@ -30,7 +30,7 @@ class LoginPage : BasePage() {
         dismissAuthAppCookie()
 
         // Page login/register
-        ensurePageLoaded()
+        scrollToBottom(1)
         clickButton(authAppButtonLogin, true)
 
         // Page enter email/password
@@ -51,11 +51,17 @@ class LoginPage : BasePage() {
 //        enterText(authAppInputPhoneCountryCode, user.phoneCountryCode, false)
 //        enterText(authAppInputPhoneNumber, user.phoneLocalNumber, false)
 //        clickButton(authAppButtonPhoneNumber, false)
+//        clickButton(confirmButton, false)
 
         // Page 2FA
         ensurePageLoaded()
-        val code = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
-        enterText(authAppInputPinV2, code, true)
+        val message = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
+        if (message != null) {
+            val code = Auth2FAHelper.extractVerificationCode(message)
+            if (code != null) {
+                enterText(authAppInputPinV2,code , true)
+            }
+        }
         unselectRememberDeviceCheckbox()
         clickButton(authAppButtonSmsCodeSubmit, true)
 
@@ -132,7 +138,9 @@ class LoginPage : BasePage() {
 
             sleep(TIMEOUT_SHORT)
             val code = Auth2FAHelper.fetchCurrent2faCode(phoneNumber)
-            enterText(authAppInputPinV2, code, true)
+            if (code != null) {
+                enterText(authAppInputPinV2, code, true)
+            }
         }
 
     }
@@ -190,6 +198,7 @@ class LoginPage : BasePage() {
         const val authAppInputPhoneCountryCode = "d4l-code"
         const val authAppInputPhoneNumber = "d4l-phone-number"
         const val authAppButtonPhoneNumber = "d4l-button-submit-login"
+        const val confirmButton = "d4l-button-confirm"
 
         // Page 2FA
         const val authAppInputPinV2 = "d4l-pin"

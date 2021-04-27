@@ -4,7 +4,7 @@
 
 data class D4LTestConfig(
         val user: UserConfig,
-        val twillio: TwillioConfig
+        val sinch: SinchConfig
 )
 
 data class UserConfig(
@@ -14,8 +14,7 @@ data class UserConfig(
         val phoneLocalNumber: String
 )
 
-data class TwillioConfig(
-        val accountSid: String,
-        val authSid: String,
+data class SinchConfig(
+        val servicePlanId: String,
         val authToken: String
 )
