@@ -10,23 +10,23 @@ import java.io.BufferedReader
 import java.io.FileNotFoundException
 
 data class TestConfig(
-        val sinch: Sinch,
-        val user: User
+    val sinch: Sinch,
+    val user: User
 )
 
 data class User(
-        val email: String,
-        val password: String,
-        val phoneCountryCode: String,
-        val phoneLocalNumber: String
+    val email: String,
+    val password: String,
+    val phoneCountryCode: String,
+    val phoneLocalNumber: String
 ) {
     val phoneNumber: String
         get() = phoneCountryCode + phoneLocalNumber
 }
 
 data class Sinch(
-        val servicePlanId: String,
-        val authToken: String
+    val servicePlanId: String,
+    val authToken: String
 )
 
 object TestConfigLoader {

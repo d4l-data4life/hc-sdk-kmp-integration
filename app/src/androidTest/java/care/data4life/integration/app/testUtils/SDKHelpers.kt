@@ -16,7 +16,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-
 fun <T : DomainResource> Data4LifeClient.deleteAllRecords(clazz: Class<T>) {
     runBlocking {
         val records = fetchRecords(clazz)
@@ -26,33 +25,37 @@ fun <T : DomainResource> Data4LifeClient.deleteAllRecords(clazz: Class<T>) {
 
 private suspend fun <T : DomainResource> fetchRecords(clazz: Class<T>): List<Record<T>> = suspendCoroutine { cont ->
     Data4LifeClient.getInstance().fetchRecords(
-            clazz,
-            LocalDate.now().minusYears(10),
-            LocalDate.now(),
-            1000,
-            0,
-            object : ResultListener<List<Record<T>>> {
+        clazz,
+        LocalDate.now().minusYears(10),
+        LocalDate.now(),
+        1000,
+        0,
+        object : ResultListener<List<Record<T>>> {
 
-                override fun onSuccess(records: List<Record<T>>) {
-                    cont.resume(records)
-                }
+            override fun onSuccess(records: List<Record<T>>) {
+                cont.resume(records)
+            }
 
-                override fun onError(exception: D4LException) {
-                    exception.printStackTrace()
-                    cont.resumeWithException(exception)
-                }
-            })
+            override fun onError(exception: D4LException) {
+                exception.printStackTrace()
+                cont.resumeWithException(exception)
+            }
+        }
+    )
 }
 
 private suspend fun deleteRecords(recordIds: List<String>): DeleteResult = suspendCoroutine { cont ->
-    Data4LifeClient.getInstance().deleteRecords(recordIds, object : ResultListener<DeleteResult> {
-        override fun onSuccess(result: DeleteResult) {
-            cont.resume(result)
-        }
+    Data4LifeClient.getInstance().deleteRecords(
+        recordIds,
+        object : ResultListener<DeleteResult> {
+            override fun onSuccess(result: DeleteResult) {
+                cont.resume(result)
+            }
 
-        override fun onError(exception: D4LException) {
-            exception.printStackTrace()
-            cont.resumeWithException(exception)
+            override fun onError(exception: D4LException) {
+                exception.printStackTrace()
+                cont.resumeWithException(exception)
+            }
         }
-    })
+    )
 }

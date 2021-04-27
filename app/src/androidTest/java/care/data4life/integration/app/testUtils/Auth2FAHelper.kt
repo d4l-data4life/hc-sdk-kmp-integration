@@ -19,11 +19,11 @@ import java.util.*
 interface SinchService {
     @GET("{service_plan_id}/inbounds")
     fun get2FACode(
-            @Path("service_plan_id") servicePlanId: String,
-            @Query("start_date") startDate: String,
-            @Query("to") phoneNumber: String,
-            @Query("page") page: Int,
-            @Query("pageSize") pageSize: Int
+        @Path("service_plan_id") servicePlanId: String,
+        @Query("start_date") startDate: String,
+        @Query("to") phoneNumber: String,
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int
     ): retrofit2.Call<ListMessageSinch>
 
     companion object {
@@ -71,8 +71,8 @@ public class BasicSAuthInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
         val request = chain.request()
         val authenticatedRequest = request.newBuilder()
-                .addHeader("Authorization", "Bearer $AUTH_TOKEN")
-                .build()
+            .addHeader("Authorization", "Bearer $AUTH_TOKEN")
+            .build()
         return chain.proceed(authenticatedRequest)
     }
 }
@@ -86,13 +86,13 @@ object Auth2FAHelper {
     fun initSinchService(): SinchService {
         val sinchService: SinchService
         val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(BasicSAuthInterceptor())
-                .build()
+            .addInterceptor(BasicSAuthInterceptor())
+            .build()
         val retrofit = Retrofit.Builder()
-                .baseUrl(SinchService.BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(SinchService.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
         sinchService = retrofit.create(SinchService::class.java)
         return sinchService
     }
@@ -114,6 +114,4 @@ object Auth2FAHelper {
             verificationCode = text.substring(text.length - 6, text.length)
         return verificationCode
     }
-
 }
-

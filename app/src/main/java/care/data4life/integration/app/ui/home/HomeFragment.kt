@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onError(exception: D4LException) {
-
                 }
             })
         }

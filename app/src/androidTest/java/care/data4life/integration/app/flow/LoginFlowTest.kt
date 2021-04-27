@@ -22,7 +22,6 @@ class LoginFlowTest {
     @JvmField
     val rule = ActivityTestRule(MainActivity::class.java, false, false)
 
-
     @Test
     fun testLoginLogoutFlow() {
         val activity = rule.launchActivity(null)
@@ -30,14 +29,13 @@ class LoginFlowTest {
         val user = TestConfigLoader.load().user
 
         WelcomePage()
-                .isVisible()
-                .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
-                .doLogin(user) // HomePage
-                .isVisible()
-                .doLogout() // WelcomeScreen
-                .isVisible()
+            .isVisible()
+            .openLoginPage() // LoginPage //FIXME login Page visibility check is missing
+            .doLogin(user) // HomePage
+            .isVisible()
+            .doLogout() // WelcomeScreen
+            .isVisible()
 
         activity.explicitFinish()
     }
-
 }

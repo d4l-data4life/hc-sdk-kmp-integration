@@ -59,7 +59,7 @@ class LoginPage : BasePage() {
         if (message != null) {
             val code = Auth2FAHelper.extractVerificationCode(message)
             if (code != null) {
-                enterText(authAppInputPinV2,code , true)
+                enterText(authAppInputPinV2, code, true)
             }
         }
         unselectRememberDeviceCheckbox()
@@ -108,9 +108,9 @@ class LoginPage : BasePage() {
     // FIXME cookie consent needs a stable ID
     private fun dismissAuthAppCookie() {
         val acceptCookies = device.findObject(
-                UiSelector().instance(0)
-                        .className(Button::class.java)
-                        .descriptionMatches("(Accept|Akzeptieren)")
+            UiSelector().instance(0)
+                .className(Button::class.java)
+                .descriptionMatches("(Accept|Akzeptieren)")
         )
         acceptCookies.waitForExists(TIMEOUT_SHORT)
         if (acceptCookies.exists()) {
@@ -142,9 +142,7 @@ class LoginPage : BasePage() {
                 enterText(authAppInputPinV2, code, true)
             }
         }
-
     }
-
 
     // Helper
 
@@ -155,12 +153,12 @@ class LoginPage : BasePage() {
 
     private fun scrollToBottom(maxSwipes: Int) {
         UiScrollable(UiSelector().className(WebView::class.java))
-                .scrollToEnd(maxSwipes)
+            .scrollToEnd(maxSwipes)
     }
 
     private fun scrollToTop(maxSwipes: Int) {
         UiScrollable(UiSelector().className(WebView::class.java))
-                .scrollToBeginning(maxSwipes)
+            .scrollToBeginning(maxSwipes)
     }
 
     private fun clickButton(resourceId: String, required: Boolean?) {

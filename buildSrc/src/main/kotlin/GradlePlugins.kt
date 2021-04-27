@@ -43,10 +43,10 @@ object GradlePlugins {
 }
 
 fun PluginDependenciesSpec.androidApp(): PluginDependencySpec =
-        id("com.android.application")
+    id("com.android.application")
 
 fun PluginDependenciesSpec.kotlinAndroid(): PluginDependencySpec =
-        id("kotlin-android")
+    id("kotlin-android")
 
 fun PluginDependenciesSpec.kotlinAndroidExtensions(): PluginDependencySpec =
-        id("kotlin-android-extensions")
+    id("kotlin-android-extensions")

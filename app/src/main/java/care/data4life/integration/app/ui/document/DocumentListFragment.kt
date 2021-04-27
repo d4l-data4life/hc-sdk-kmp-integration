@@ -21,8 +21,11 @@ class DocumentListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.document_list_fragment, container, false)
 
@@ -35,15 +38,13 @@ class DocumentListFragment : Fragment() {
 
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
-
         }
         return view
     }
-
 }
 
 class MyAdapter(private val myDataset: Array<String>) :
-        RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+    RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -51,14 +52,14 @@ class MyAdapter(private val myDataset: Array<String>) :
     // Each data item is just a string in this case that is shown in a TextView.
     class ViewHolder(val item: View) : RecyclerView.ViewHolder(item)
 
-
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
         // create a new view
         val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.document_list_view_item, parent, false)
-
+            .inflate(R.layout.document_list_view_item, parent, false)
 
         return ViewHolder(itemView)
     }
@@ -73,4 +74,3 @@ class MyAdapter(private val myDataset: Array<String>) :
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = myDataset.size
 }
-

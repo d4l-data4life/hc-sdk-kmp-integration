@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.welcome_fragment, container, false)
     }
@@ -44,5 +43,4 @@ class WelcomeFragment : Fragment() {
             }
         }
     }
-
 }

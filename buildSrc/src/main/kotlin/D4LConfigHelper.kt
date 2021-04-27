@@ -76,5 +76,4 @@ object D4LConfigHelper {
     fun toJson(d4lTestConfig: D4LTestConfig): String {
         return gson().toJson(d4lTestConfig)
     }
-
 }
