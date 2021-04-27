@@ -13,6 +13,7 @@ buildscript {
 plugins {
     id("scripts.dependency-updates")
     id("scripts.download-scripts")
+    id("scripts.quality-spotless")
     id("scripts.versioning")
 }
 
@@ -53,10 +54,6 @@ allprojects {
             force(Dependencies.Android.retrofit)
         }
     }
-}
-
-tasks.register("clean", Delete::class.java) {
-    delete(rootProject.buildDir)
 }
 
 tasks.named<Wrapper>("wrapper") {
