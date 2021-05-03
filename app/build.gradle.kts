@@ -173,8 +173,8 @@ dependencies {
     implementation(Dependencies.Android.AndroidX.browser)
     implementation(Dependencies.Android.AndroidX.constraintLayout)
 
+    implementation(Dependencies.Android.AndroidX.lifecylceViewModelKtx)
     implementation(Dependencies.Android.AndroidX.lifecylceCommonJava8)
-    implementation(Dependencies.Android.AndroidX.lifecylceExtensions)
 
     implementation(Dependencies.Android.AndroidX.navigationFragmentKtx)
     implementation(Dependencies.Android.AndroidX.navigationUiKtx)
