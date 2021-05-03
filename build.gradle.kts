@@ -22,29 +22,12 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-util-sdk-kmp")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
-        }
-        maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-sdk-java")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
-        }
-        maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-helper-sdk-kmp")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
-        }
-        maven("https://jitpack.io")
-        jcenter() // Warning: this repository is going to shut down soon
+
+        gitHub(project)
+
+        d4l()
+
+        jitPack()
     }
 
     // FIXME remove if dependency conflict is solved
