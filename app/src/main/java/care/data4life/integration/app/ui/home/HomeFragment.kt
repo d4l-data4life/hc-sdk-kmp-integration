@@ -26,7 +26,11 @@ class HomeFragment : Fragment() {
         model = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
