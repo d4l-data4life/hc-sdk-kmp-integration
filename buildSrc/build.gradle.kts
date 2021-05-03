@@ -19,6 +19,9 @@ dependencies {
     implementation("com.github.ben-manes:gradle-versions-plugin:0.38.0")
     // download scripts
     implementation("de.undercouch:gradle-download-task:4.1.1")
+    // quality.gradle.kts
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:5.10.2")
+    implementation("com.pinterest:ktlint:0.41.0")
     // versioning.gradle.kts
     implementation("com.palantir.gradle.gitversion:gradle-git-version:0.12.3")
 }

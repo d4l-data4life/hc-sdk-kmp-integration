@@ -20,8 +20,11 @@ import kotlinx.android.synthetic.main.welcome_fragment.*
 
 class WelcomeFragment : Fragment() {
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.welcome_fragment, container, false)
     }
 
@@ -40,9 +43,10 @@ class WelcomeFragment : Fragment() {
             if (resultCode == RESULT_OK) {
                 findNavController(this).navigate(R.id.action_welcome_screen_to_home_screen)
             } else {
-                this.view?.let { Snackbar.make(it, "Failed to login with D4L", Snackbar.LENGTH_LONG).show() }
+                this.view?.let {
+                    Snackbar.make(it, "Failed to login with D4L", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
     }
-
 }

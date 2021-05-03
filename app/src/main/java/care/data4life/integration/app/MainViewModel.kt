@@ -10,5 +10,4 @@ import care.data4life.sdk.Data4LifeClient
 class MainViewModel : ViewModel() {
 
     val client: Data4LifeClient = Data4LifeClient.getInstance()
-
 }

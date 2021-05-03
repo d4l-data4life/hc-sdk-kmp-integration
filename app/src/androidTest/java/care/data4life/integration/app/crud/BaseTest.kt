@@ -27,7 +27,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //test order is important for successful completion!
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) // test order is important for successful completion!
 abstract class BaseTest<T : DomainResource> {
 
     abstract fun getTestClass(): Class<T>
@@ -61,11 +61,9 @@ abstract class BaseTest<T : DomainResource> {
         @JvmStatic
         protected var recordIds = mutableListOf<String>()
 
-
-        //SUT
+        // SUT
         @JvmStatic
         protected lateinit var client: Data4LifeClient
-
 
         @BeforeClass
         @JvmStatic
@@ -80,10 +78,10 @@ abstract class BaseTest<T : DomainResource> {
             val user = TestConfigLoader.load().user
 
             homePage = WelcomePage()
-                    .isVisible()
-                    .openLoginPage()
-                    .doLogin(user)
-                    .isVisible()
+                .isVisible()
+                .openLoginPage()
+                .doLogin(user)
+                .isVisible()
 
             assertLogin(true)
         }
@@ -94,8 +92,8 @@ abstract class BaseTest<T : DomainResource> {
             if (!isNetConnected) return
 
             homePage
-                    .doLogout()
-                    .isVisible()
+                .doLogout()
+                .isVisible()
 
             assertLogin(false)
             recordId = ""
@@ -133,7 +131,7 @@ abstract class BaseTest<T : DomainResource> {
         if (setupDone) return
         else {
             setupDone = true
-            client.deleteAllRecords(getTestClass()) //run only once before all the tests
+            client.deleteAllRecords(getTestClass()) // run only once before all the tests
         }
     }
 
@@ -160,16 +158,19 @@ abstract class BaseTest<T : DomainResource> {
     fun t01_createRecord_shouldReturn_createdRecord() {
         lateinit var record: Record<T>
 
-        //when
-        client.createRecord(getModel(Method.CREATE), object : TestResultListener<Record<T>>() {
-            override fun onSuccess(r: Record<T>) {
-                record = r
-                latch.countDown()
+        // when
+        client.createRecord(
+            getModel(Method.CREATE),
+            object : TestResultListener<Record<T>>() {
+                override fun onSuccess(r: Record<T>) {
+                    record = r
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Create record failed", requestSuccessful)
         assertRecordExpectations(record)
         assertNotNull(record.fhirResource.id)
@@ -181,21 +182,23 @@ abstract class BaseTest<T : DomainResource> {
     fun t02_createRecords_shouldReturn_createdRecords() {
         lateinit var createResult: CreateResult<T>
 
-        //given
+        // given
         val model1 = getModel(Method.BATCH_CREATE)
         val model2 = getModel(Method.BATCH_CREATE)
 
-        //when
-        client.createRecords(listOf(model1, model2), object : TestResultListener<CreateResult<T>>() {
-            override fun onSuccess(result: CreateResult<T>) {
-                createResult = result
-                latch.countDown()
-
+        // when
+        client.createRecords(
+            listOf(model1, model2),
+            object : TestResultListener<CreateResult<T>>() {
+                override fun onSuccess(result: CreateResult<T>) {
+                    createResult = result
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Create records failed", requestSuccessful)
         assertEquals(2, createResult.successfulOperations.size)
         assertTrue(createResult.failedOperations.isEmpty())
@@ -212,16 +215,19 @@ abstract class BaseTest<T : DomainResource> {
     fun t03_countRecords_shouldReturn_recordCount() {
         var modelCount: Int = -1
 
-        //when
-        client.countRecords(getTestClass(), object : TestResultListener<Int>() {
-            override fun onSuccess(count: Int) {
-                modelCount = count
-                latch.countDown()
+        // when
+        client.countRecords(
+            getTestClass(),
+            object : TestResultListener<Int>() {
+                override fun onSuccess(count: Int) {
+                    modelCount = count
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertNotEquals(-1, modelCount, "Count records failed")
         assertEquals(3, modelCount)
     }
@@ -230,36 +236,42 @@ abstract class BaseTest<T : DomainResource> {
     fun t04_countAllRecords_shouldReturn_recordCount() {
         var modelCount: Int = -1
 
-        //when
-        client.countRecords(null, object : TestResultListener<Int>() {
-            override fun onSuccess(count: Int) {
-                modelCount = count
-                latch.countDown()
+        // when
+        client.countRecords(
+            null,
+            object : TestResultListener<Int>() {
+                override fun onSuccess(count: Int) {
+                    modelCount = count
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertNotEquals(-1, modelCount, "Count all records failed")
         assertEquals(3, modelCount)
     }
 
     @Test
     fun t05_fetchRecord_shouldReturn_fetchedRecord() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var record: Record<T>
 
-        //when
-        client.fetchRecord(recordId, object : TestResultListener<Record<T>>() {
-            override fun onSuccess(r: Record<T>) {
-                record = r
-                latch.countDown()
+        // when
+        client.fetchRecord(
+            recordId,
+            object : TestResultListener<Record<T>>() {
+                override fun onSuccess(r: Record<T>) {
+                    record = r
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Fetch record failed", requestSuccessful)
         assertRecordExpectations(record)
         assertModelExpectations(record.fhirResource, Method.FETCH)
@@ -267,20 +279,23 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t06_fetchRecords_shouldReturn_fetchedRecords() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var fetchResult: FetchResult<T>
 
-        //when
-        client.fetchRecords(listOf(recordId, recordId), object : TestResultListener<FetchResult<T>>() {
-            override fun onSuccess(result: FetchResult<T>) {
-                fetchResult = result
-                latch.countDown()
+        // when
+        client.fetchRecords(
+            listOf(recordId, recordId),
+            object : TestResultListener<FetchResult<T>>() {
+                override fun onSuccess(result: FetchResult<T>) {
+                    fetchResult = result
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Fetch records failed", requestSuccessful)
         assertEquals(2, fetchResult.successfulFetches.size)
         assertTrue(fetchResult.failedFetches.isEmpty())
@@ -292,26 +307,27 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t07_fetchRecordsByType_shouldReturn_fetchedRecords() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var fetchedRecords: List<Record<T>>
 
-        //when
+        // when
         client.fetchRecords(
-                getTestClass(),
-                null,
-                LocalDate.now(),
-                1000,
-                0,
-                object : TestResultListener<List<Record<T>>>() {
-                    override fun onSuccess(records: List<Record<T>>) {
-                        fetchedRecords = records
-                        latch.countDown()
-                    }
-                })
+            getTestClass(),
+            null,
+            LocalDate.now(),
+            1000,
+            0,
+            object : TestResultListener<List<Record<T>>>() {
+                override fun onSuccess(records: List<Record<T>>) {
+                    fetchedRecords = records
+                    latch.countDown()
+                }
+            }
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Fetch records by type failed", requestSuccessful)
         assertEquals(3, fetchedRecords.size)
         fetchedRecords.map {
@@ -322,20 +338,23 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t08_updateRecord_shouldReturn_updatedRecord() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var updatedRecord: Record<T>
 
-        //when
-        client.updateRecord(getModel(Method.UPDATE), object : TestResultListener<Record<T>>() {
-            override fun onSuccess(record: Record<T>) {
-                updatedRecord = record
-                latch.countDown()
+        // when
+        client.updateRecord(
+            getModel(Method.UPDATE),
+            object : TestResultListener<Record<T>>() {
+                override fun onSuccess(record: Record<T>) {
+                    updatedRecord = record
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Update record failed", requestSuccessful)
         assertRecordExpectations(updatedRecord)
         assertModelExpectations(updatedRecord.fhirResource, Method.UPDATE)
@@ -343,23 +362,26 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t09_updateRecords_shouldReturn_updatedRecords() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var updateResult: UpdateResult<T>
 
         val model1 = getModel(Method.BATCH_UPDATE, 0)
         val model2 = getModel(Method.BATCH_UPDATE, 1)
 
-        //when
-        client.updateRecords(listOf(model1, model2), object : TestResultListener<UpdateResult<T>>() {
-            override fun onSuccess(result: UpdateResult<T>) {
-                updateResult = result
-                latch.countDown()
+        // when
+        client.updateRecords(
+            listOf(model1, model2),
+            object : TestResultListener<UpdateResult<T>>() {
+                override fun onSuccess(result: UpdateResult<T>) {
+                    updateResult = result
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Update records failed", requestSuccessful)
         assertEquals(2, updateResult.successfulUpdates.size)
         assertTrue(updateResult.failedUpdates.isEmpty())
@@ -373,20 +395,23 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t10_downloadRecord_shouldReturn_downloadedRecord() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var downloadedRecord: Record<T>
 
-        //when
-        client.downloadRecord(recordId, object : TestResultListener<Record<T>>() {
-            override fun onSuccess(record: Record<T>) {
-                downloadedRecord = record
-                latch.countDown()
+        // when
+        client.downloadRecord(
+            recordId,
+            object : TestResultListener<Record<T>>() {
+                override fun onSuccess(record: Record<T>) {
+                    downloadedRecord = record
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Download record failed", requestSuccessful)
         assertRecordExpectations(downloadedRecord)
         assertModelExpectations(downloadedRecord.fhirResource, Method.DOWNLOAD)
@@ -394,20 +419,23 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t11_downloadRecords_shouldReturn_downloadedRecord() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
         lateinit var downloadResult: DownloadResult<T>
 
-        //when
-        client.downloadRecords(listOf(recordId, recordId), object : TestResultListener<DownloadResult<T>>() {
-            override fun onSuccess(result: DownloadResult<T>) {
-                downloadResult = result
-                latch.countDown()
+        // when
+        client.downloadRecords(
+            listOf(recordId, recordId),
+            object : TestResultListener<DownloadResult<T>>() {
+                override fun onSuccess(result: DownloadResult<T>) {
+                    downloadResult = result
+                    latch.countDown()
+                }
             }
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Download records failed", requestSuccessful)
         assertEquals(2, downloadResult.successfulDownloads.size)
         assertTrue(downloadResult.failedDownloads.isEmpty())
@@ -419,45 +447,49 @@ abstract class BaseTest<T : DomainResource> {
 
     @Test
     fun t12_deleteRecord_shouldDeleteRecord() {
-        //given
+        // given
         assertNotNull("recordId expected", recordId)
 
-        //when
-        client.deleteRecord(recordId, object : Callback {
-            override fun onSuccess() {
-                latch.countDown()
-            }
+        // when
+        client.deleteRecord(
+            recordId,
+            object : Callback {
+                override fun onSuccess() {
+                    latch.countDown()
+                }
 
-            override fun onError(exception: D4LException) {
-                exception.printStackTrace()
-                requestSuccessful = false
-                latch.countDown()
+                override fun onError(exception: D4LException) {
+                    exception.printStackTrace()
+                    requestSuccessful = false
+                    latch.countDown()
+                }
             }
-
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Delete record failed", requestSuccessful)
     }
 
     @Test
     fun t13_deleteRecords_shouldDeleteRecords() {
-        //given
+        // given
         assertEquals("recordIds expected", 2, recordIds.size)
         lateinit var deleteResult: DeleteResult
 
-        //when
-        client.deleteRecords(recordIds, object : TestResultListener<DeleteResult>() {
-            override fun onSuccess(result: DeleteResult) {
-                deleteResult = result
-                latch.countDown()
+        // when
+        client.deleteRecords(
+            recordIds,
+            object : TestResultListener<DeleteResult>() {
+                override fun onSuccess(result: DeleteResult) {
+                    deleteResult = result
+                    latch.countDown()
+                }
             }
-
-        })
+        )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        //then
+        // then
         assertTrue("Delete records failed", requestSuccessful)
         assertEquals(2, deleteResult.successfulDeletes.size)
         assertTrue(deleteResult.failedDeletes.isEmpty())

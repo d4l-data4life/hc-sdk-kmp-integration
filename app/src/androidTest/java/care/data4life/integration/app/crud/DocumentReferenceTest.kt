@@ -69,13 +69,14 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         practiceSpeciality.coding = listOf(practiceSpecialityCoding)
 
         val document = DocumentReferenceBuilder.buildWith(
-                title,
-                indexed,
-                status,
-                listOf(attachment),
-                docType,
-                author,
-                practiceSpeciality)
+            title,
+            indexed,
+            status,
+            listOf(attachment),
+            docType,
+            author,
+            practiceSpeciality
+        )
         mutateModel(document, method, index)
 
         return document
@@ -92,7 +93,7 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
                 model.id = recordId
             }
             else -> {
-                //ignore
+                // ignore
             }
         }
     }
@@ -131,7 +132,7 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
                 docTitle = TITLE_2
             }
             else -> {
-                //ignore
+                // ignore
             }
         }
 

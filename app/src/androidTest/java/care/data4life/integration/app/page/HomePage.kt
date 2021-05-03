@@ -11,14 +11,11 @@ import com.agoda.kakao.text.KButton
 
 class HomePage : BasePage() {
 
-
     private val screen = HomeScreen()
-
 
     override fun waitForPage() {
         waitByResource("care.data4life.integration.app:id/home_constraint")
     }
-
 
     fun doLogout(): WelcomePage {
         screen.logoutButton { click() }
@@ -26,18 +23,15 @@ class HomePage : BasePage() {
         return WelcomePage()
     }
 
-
     fun isVisible(): HomePage {
         screen.root { isDisplayed() }
 
         return this
     }
 
-
     class HomeScreen : Screen<HomeScreen>() {
         val root = KView { withId(R.id.home_constraint) }
 
         val logoutButton = KButton { withId(R.id.home_logout_button) }
     }
-
 }
