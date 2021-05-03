@@ -61,11 +61,11 @@ class HomeFragment : Fragment() {
                         // TODO
                     }
 
-
                     override fun onError(exception: D4LException) {
                         Toast.makeText(context, exception.message, Toast.LENGTH_LONG).show()
                     }
-                })
+                }
+            )
         }
 
         binding.homeFhir4LoadAllButton.setOnClickListener {
@@ -87,7 +87,8 @@ class HomeFragment : Fragment() {
                     override fun onError(exception: D4LException) {
                         Toast.makeText(context, exception.message, Toast.LENGTH_LONG).show()
                     }
-                })
+                }
+            )
         }
 
         binding.homeLogoutButton.setOnClickListener {
