@@ -42,10 +42,6 @@ object GradlePlugins {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugins.kotlin}"
 }
 
-fun PluginDependenciesSpec.dependencyUpdates(): PluginDependencySpec =
-        id("com.github.ben-manes.versions").version(Versions.GradlePlugins.dependencyUpdates)
-
-
 fun PluginDependenciesSpec.androidApp(): PluginDependencySpec =
         id("com.android.application")
 
