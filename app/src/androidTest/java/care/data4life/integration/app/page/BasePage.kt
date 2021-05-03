@@ -13,11 +13,9 @@ abstract class BasePage {
 
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())!!
 
-
     init {
         this.waitForPage()
     }
-
 
     abstract fun waitForPage()
 

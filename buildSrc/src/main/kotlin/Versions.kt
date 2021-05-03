@@ -19,12 +19,10 @@ object Versions {
      */
     const val fhirHelper = "1.4.1"
 
-
     /**
      * [D4L-UTIL-SDK-KMP](https://github.com/d4l-data4life/hc-util-sdk-kmp)
      */
     const val utilSdk = "1.6.1"
-
 
     const val kotlin = "1.4.31"
     const val kotlinCoroutines = "1.4.2"
@@ -37,11 +35,6 @@ object Versions {
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
         const val dexcount = "0.8.4"
-
-        /**
-         * [DependencyUpdates](https://github.com/ben-manes/gradle-versions-plugin)
-         */
-        const val dependencyUpdates = "0.36.0"
     }
 
     // Android
@@ -89,10 +82,8 @@ object Versions {
      */
     const val threeTenABP = "1.3.0"
 
-
     // Junit Test
     const val testJUnit = "4.13.2"
-
 
     // Android Test
     const val androidXTestCore = "1.3.0"

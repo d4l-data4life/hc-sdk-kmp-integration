@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun finish() {
-        //ignore so that Android test runner can't kill activity after each test
+        // ignore so that Android test runner can't kill activity after each test
     }
 
     fun explicitFinish() {
@@ -33,5 +32,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navigation_host_fragment).navigateUp()
-
 }

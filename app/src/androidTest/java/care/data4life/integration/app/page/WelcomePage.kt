@@ -13,11 +13,9 @@ class WelcomePage : BasePage() {
 
     private val screen = WelcomeScreen()
 
-
     override fun waitForPage() {
         waitByResource("care.data4life.integration.app:id/welcome_constraint")
     }
-
 
     fun openLoginPage(): LoginPage {
         screen.loginButton { click() }
@@ -31,11 +29,9 @@ class WelcomePage : BasePage() {
         return this
     }
 
-
     class WelcomeScreen : Screen<WelcomeScreen>() {
         val root = KView { withId(R.id.welcome_constraint) }
 
         val loginButton = KButton { withId(R.id.welcome_login_button) }
     }
-
 }
