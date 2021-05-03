@@ -94,7 +94,4 @@ object Versions {
 
     // https://github.com/agoda-com/Kakao
     const val androidTestKakao = "2.4.0"
-
-    // https://github.com/KasperskyLab/Kaspresso
-    const val androidTestKaspresso = "1.2.0"
 }

@@ -72,7 +72,6 @@ object Dependencies {
             const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
 
             const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
-            const val kaspresso = "com.kaspersky.android-components:kaspresso:${Versions.androidTestKaspresso}"
         }
     }
 }

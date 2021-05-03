@@ -219,8 +219,6 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
-    androidTestImplementation(Dependencies.Android.AndroidTest.kaspresso)
-
 
     androidTestImplementation(Dependencies.Android.okHttp)
     androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
