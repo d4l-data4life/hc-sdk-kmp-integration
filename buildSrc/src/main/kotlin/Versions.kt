@@ -38,7 +38,7 @@ object Versions {
     }
 
     // Android
-    const val androidDesugar = "1.0.5"
+    const val androidDesugar = "1.0.9"
 
     // AndroidX
     const val androidXKtx = "1.3.2"
