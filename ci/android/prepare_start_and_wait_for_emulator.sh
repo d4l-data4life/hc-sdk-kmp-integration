@@ -29,7 +29,7 @@ run_headless_emulator() {
     -no-accel \
     -no-audio \
     -no-boot-anim \
-    -skin 768x1980 \
+    -skin 768x2560 \
     -camera-back none \
     -camera-front none &
 }
@@ -40,7 +40,7 @@ run_emulator() {
     -no-snapshot \
     -no-audio \
     -no-boot-anim \
-    -skin 768x1980 \
+    -skin 768x2560 \
     -camera-back none \
     -camera-front none &
 }
