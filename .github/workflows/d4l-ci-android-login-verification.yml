@@ -2,7 +2,7 @@ name: D4L CI Android - Login verification
 
 on:
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '0 6 * * *'
 
 jobs:
   verify-login:
