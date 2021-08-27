@@ -145,7 +145,7 @@ abstract class BaseTest<T : DomainResource> {
 
     private fun assertRecordExpectations(record: Record<T>) {
         assertNotNull(record.fhirResource)
-        assertMetaExpectations(record.meta)
+        assertMetaExpectations(record.meta as Meta?)
     }
 
     private fun assertMetaExpectations(meta: Meta?) {
