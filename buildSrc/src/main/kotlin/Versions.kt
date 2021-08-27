@@ -7,7 +7,7 @@ object Versions {
     /**
      * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
      */
-    const val hcSdk = "1.10.0"
+    const val hcSdk = "1.14.0"
 
     /**
      * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
@@ -17,19 +17,19 @@ object Versions {
     /**
      * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
      */
-    const val fhirHelper = "1.4.1"
+    const val fhirHelper = "1.6.0"
 
     /**
      * [D4L-UTIL-SDK-KMP](https://github.com/d4l-data4life/hc-util-sdk-kmp)
      */
-    const val utilSdk = "1.7.0"
+    const val utilSdk = "1.9.0"
 
     const val kotlin = "1.4.32"
     const val kotlinCoroutines = "1.4.3"
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "4.1.3"
+        const val android = "4.2.2"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -42,16 +42,16 @@ object Versions {
 
     // AndroidX
     const val androidXKtx = "1.3.2"
-    const val androidXAppCompat = "1.2.0"
+    const val androidXAppCompat = "1.3.1"
     const val androidXBrowser = "1.3.0"
 
-    const val androidXConstraintLayout = "2.0.4"
+    const val androidXConstraintLayout = "2.1.0"
 
     const val androidXLifecycle = "2.3.1"
     const val androidXNavigation = "2.3.5"
 
     // Material
-    const val material = "1.3.0"
+    const val material = "1.4.0"
 
     // Network
     /**
@@ -75,7 +75,7 @@ object Versions {
      *
      *[chucker inspector](https://github.com/ChuckerTeam/chucker/tree/develop)
      */
-    const val chucker = "3.4.0"
+    const val chucker = "3.5.2"
 
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
@@ -86,11 +86,11 @@ object Versions {
     const val testJUnit = "4.13.2"
 
     // Android Test
-    const val androidXTestCore = "1.3.0"
-    const val androidXTest = "1.3.0"
-    const val androidXEspresso = "3.3.0"
+    const val androidXTestCore = "1.4.0"
+    const val androidXTest = "1.4.0"
+    const val androidXEspresso = "3.4.0"
     const val androidXUiAutomator = "2.2.0"
-    const val androidXTestExtJUnit = "1.1.2"
+    const val androidXTestExtJUnit = "1.1.3"
 
     // https://github.com/agoda-com/Kakao
     const val androidTestKakao = "2.4.0"

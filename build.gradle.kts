@@ -37,6 +37,8 @@ allprojects {
             force(Dependencies.Android.okHttpLoggingInterceptor)
             force(Dependencies.Android.retrofit)
         }
+
+        exclude(group = "care.data4life.hc-util-sdk-kmp", module = "util-android-debug")
     }
 }
 
