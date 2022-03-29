@@ -18,27 +18,23 @@ plugins {
     id("scripts.versioning")
 }
 
+val gitHubUser = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+val gitHubToken = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+
 allprojects {
     repositories {
         google()
         mavenCentral()
 
-        gitHub(project)
-
-        d4l()
-
-        jitPack()
-    }
-
-    // FIXME remove if dependency conflict is solved
-    configurations.all {
-        resolutionStrategy {
-            force(Dependencies.Android.okHttp)
-            force(Dependencies.Android.okHttpLoggingInterceptor)
-            force(Dependencies.Android.retrofit)
+        maven {
+            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-sdk-kmp")
+            credentials.username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+            credentials.password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
         }
 
-        exclude(group = "care.data4life.hc-util-sdk-kmp", module = "util-android-debug")
+//        d4l()
+
+        jitPack()
     }
 }
 
