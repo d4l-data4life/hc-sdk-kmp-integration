@@ -12,7 +12,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Data4LifeClient.init(this)
         AndroidThreeTen.init(this)
+        Data4LifeClient.init(this)
     }
 }
