@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2022 D4L data4life gGmbH - All rights reserved.
+ */
+
+plugins {
+    id("java")
+    id("kotlin")
+}
+
+def gitHubUser = project.findProperty("gpr.user") ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
+def gitHubToken = project.findProperty("gpr.key") ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+
+repositories {
+    google()
+    mavenCentral()
+
+    maven {
+        url = uri("https://maven.pkg.github.com/d4l-data4life/hc-sdk-kmp")
+        credentials.username = gitHubUser
+        credentials.password = gitHubToken
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation("care.data4life.hc-sdk-kmp:sdk-jvm:1.15.1")
+}
+
