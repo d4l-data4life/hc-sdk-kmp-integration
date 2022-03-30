@@ -9,6 +9,21 @@ object Versions {
      */
     const val hcSdk = "1.15.1"
 
+    /**
+     * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
+     */
+    const val fhirSdk = "1.6.3"
+
+    /**
+     * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
+     */
+    const val fhirHelper = "1.7.1"
+
+    /**
+     * [D4L-UTIL-SDK-KMP](https://github.com/d4l-data4life/hc-util-sdk-kmp)
+     */
+    const val utilSdk = "1.10.0"
+
     const val kotlin = "1.4.32"
     const val kotlinCoroutines = "1.4.3"
 

@@ -185,6 +185,7 @@ dependencies {
         exclude(group = "org.threeten", module = "threetenbp")
     }
     implementation(Dependencies.Android.threeTenABP)
+    implementation(Dependencies.Android.D4L.fhirSdk)
 
     releaseImplementation(Dependencies.Android.checkerRelease)
 
