@@ -186,6 +186,7 @@ dependencies {
     }
     implementation(Dependencies.Android.threeTenABP)
     implementation(Dependencies.Android.D4L.fhirSdk)
+    implementation(Dependencies.Android.D4L.fhirHelper)
 
     releaseImplementation(Dependencies.Android.checkerRelease)
 
