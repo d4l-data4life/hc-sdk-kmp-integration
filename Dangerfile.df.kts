@@ -82,7 +82,7 @@ danger(args) {
             warn("Set a milestone please")
         }
 
-        if (pullRequest.body.length < 10) {
+        if (pullRequest.body?.length < 10) {
             warn("Please include a description of your PR changes")
         }
 
