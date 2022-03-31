@@ -2,7 +2,6 @@
  * Copyright (c) 2021 D4L data4life gGmbH - All rights reserved.
  */
 
-import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.maven
 
