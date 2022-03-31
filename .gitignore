@@ -1,6 +1,6 @@
 # Client config
-d4l-client-config-android.json
-d4l-test-config-android.json
+d4l-client-*.json
+d4l-test-config-*.json
 
 # Gradle
 .gradle/
