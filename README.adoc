@@ -1,26 +1,20 @@
-= HC SDK Integration Test Suit
+= HC SDK Integration Test Suite
 
-image:https://github.com/d4l-data4life/hc-sdk-android-integration/workflows/D4L%20CI%20Android/badge.svg[Build Status,link=https://github.com/d4l-data4life/hc-sdk-android-integration/actions?query=workflow%3A%22D4L+CI+Android%22] image:https://github.com/d4l-data4life/hc-sdk-android-integration/workflows/D4L%20CI%20Android%20-%20Login%20verification/badge.svg[Build Status,link=https://github.com/d4l-data4life/hc-sdk-android-integration/actions?query=workflow%3A%22D4L+CI+Android+-+Login+verification%22]
+image:https://github.com/d4l-data4life/hc-sdk-kmp-integration/workflows/D4L%20CI%20-%20Login%20verification/badge.svg[Build Status,link=https://github.com/d4l-data4life/hc-sdk-android-integration/actions?query=workflow%3A%22D4L+CI+Android+-+Login+verification%22]
 
-This is an Android integration of the link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK] for testing purposes.
+This is an integration of the link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK] for testing purposes.
 
-A suit of UI tests to identify breaking changes and regressions by SDK version changes.
+A suite of UI tests to identify breaking changes and regressions by SDK version changes.
 
 == Requirements
 
 * Android 6.0 (API 23) to Android 11 (API 30)
 * Kotlin 1.4.32
 * Java 8 link:https://developer.android.com/studio/write/java8-support[Limitations] https://jakewharton.com/d8-library-desugaring/[Desugaring]
-* Android Emulator 21 - 30
-* Gradle 6.9.1
-* link:https://developer.android.com/studio#downloads[Android Studio 4.2.2]
 
 == Dependencies
 
 * link:https://github.com/d4l-data4life/hc-sdk-kmp[D4L SDK]
-* link:https://github.com/d4l-data4life/hc-fhir-java[D4L FHIR SDK]
-* link:https://github.com/d4l-data4life/hc-fhir-helper-kmp[D4L FHIR Helper SDK]
-* link:https://github.com/d4l-data4life/hc-util-kmp[D4L Util SDK]
 
 == Usage
 
@@ -70,7 +64,7 @@ Run gradle wrapper task for connected tests:
 
 [source,bash]
 ----
-./gradlew provideAndroidTestConfig
+./gradlew provideTestConfig
 ./gradlew connectedAndroidTest
 ----
 
