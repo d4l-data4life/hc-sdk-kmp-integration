@@ -7,8 +7,8 @@ plugins {
     id("kotlin")
 }
 
-def gitHubUser = project.findProperty("gpr.user") ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-def gitHubToken = project.findProperty("gpr.key") ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+def gitHubUser = project.findProperty("gpr.user") ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_USERNAME")
+def gitHubToken = project.findProperty("gpr.key") ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN")
 
 repositories {
     google()

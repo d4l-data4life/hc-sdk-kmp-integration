@@ -18,9 +18,6 @@ plugins {
     id("scripts.versioning")
 }
 
-val gitHubUser = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-val gitHubToken = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-
 allprojects {
     repositories {
         google()
@@ -28,8 +25,8 @@ allprojects {
 
         maven {
             url = uri("https://maven.pkg.github.com/d4l-data4life/hc-sdk-kmp")
-            credentials.username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-            credentials.password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
+            credentials.username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_USERNAME")
+            credentials.password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN")
         }
 
 //        d4l()
