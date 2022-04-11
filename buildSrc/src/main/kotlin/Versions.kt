@@ -24,6 +24,8 @@ object Versions {
      */
     const val utilSdk = "1.10.0"
 
+    const val authSdk = "1.14.0"
+
     const val kotlin = "1.4.32"
     const val kotlinCoroutines = "1.4.3"
 
@@ -52,6 +54,9 @@ object Versions {
 
     // Material
     const val material = "1.5.0"
+
+    // Auth
+    const val appAuth = "0.10.0"
 
     // Network
     /**

@@ -33,6 +33,12 @@ allprojects {
 
         jitPack()
     }
+
+    // FIXME remove if dependency conflict is solved
+    configurations.all {
+        exclude(group = "care.data4life.hc-result-sdk-kmp", module = "error-android-debug")
+        exclude(group = "care.data4life.hc-securestore-sdk-kmp", module = "securestore-android-debug")
+    }
 }
 
 tasks.named<Wrapper>("wrapper") {

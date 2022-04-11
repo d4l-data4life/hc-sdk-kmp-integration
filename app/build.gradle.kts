@@ -19,18 +19,18 @@ android {
         versionName = AppConfig.androidConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments(mapOf(
+        testInstrumentationRunnerArguments(
+            mapOf(
                 "clearPackageData" to "true"
-        ))
+            )
+        )
 
-        manifestPlaceholders(mapOf(
-                "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
-                "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
-                "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
-                "environment" to "${Environment.DEVELOPMENT}",
-                "platform" to d4lClientConfig.platform,
-                "debug" to "true"
-        ))
+        manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
+        manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
+        manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
+        manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
+        manifestPlaceholders["platform"] = d4lClientConfig.platform
+        manifestPlaceholders["debug"] = "true"
     }
 
     buildFeatures {
@@ -46,7 +46,10 @@ android {
         getByName("release") {
             isDebuggable = false
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "proguard-rules.pro"
+            )
             setMatchingFallbacks("release", "debug")
         }
     }
@@ -55,53 +58,53 @@ android {
 
     productFlavors {
         val development by creating {
-            dimension("environment")
-            manifestPlaceholders(mapOf(
-                    "clientId" to d4lClientConfig[Environment.DEVELOPMENT].id,
-                    "clientSecret" to d4lClientConfig[Environment.DEVELOPMENT].secret,
-                    "redirectScheme" to d4lClientConfig[Environment.DEVELOPMENT].redirectScheme,
-                    "environment" to "${Environment.DEVELOPMENT}",
-                    "platform" to d4lClientConfig.platform
-            ))
+            dimension = "environment"
+
+            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
+            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
+            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
+            manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
+            manifestPlaceholders["platform"] = d4lClientConfig.platform
+
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
             setMatchingFallbacks("release", "debug")
         }
         val staging by creating {
-            dimension("environment")
-            manifestPlaceholders(mapOf(
-                    "clientId" to d4lClientConfig[Environment.STAGING].id,
-                    "clientSecret" to d4lClientConfig[Environment.STAGING].secret,
-                    "redirectScheme" to d4lClientConfig[Environment.STAGING].redirectScheme,
-                    "environment" to "${Environment.STAGING}",
-                    "platform" to d4lClientConfig.platform
-            ))
+            dimension = "environment"
+
+            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.STAGING].id
+            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.STAGING].secret
+            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.STAGING].redirectScheme
+            manifestPlaceholders["environment"] = "${Environment.STAGING}"
+            manifestPlaceholders["platform"] = d4lClientConfig.platform
+
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
             setMatchingFallbacks("release", "debug")
         }
         val sandbox by creating {
-            dimension("environment")
-            manifestPlaceholders(mapOf(
-                    "clientId" to d4lClientConfig[Environment.SANDBOX].id,
-                    "clientSecret" to d4lClientConfig[Environment.SANDBOX].secret,
-                    "redirectScheme" to d4lClientConfig[Environment.SANDBOX].redirectScheme,
-                    "environment" to "${Environment.SANDBOX}",
-                    "platform" to d4lClientConfig.platform
-            ))
+            dimension = "environment"
+
+            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.SANDBOX].id
+            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.SANDBOX].secret
+            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.SANDBOX].redirectScheme
+            manifestPlaceholders["environment"] = "${Environment.SANDBOX}"
+            manifestPlaceholders["platform"] = d4lClientConfig.platform
+
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
             setMatchingFallbacks("release", "debug")
         }
         val production by creating {
-            dimension("environment")
-            manifestPlaceholders(mapOf(
-                    "clientId" to d4lClientConfig[Environment.PRODUCTION].id,
-                    "clientSecret" to d4lClientConfig[Environment.PRODUCTION].secret,
-                    "redirectScheme" to d4lClientConfig[Environment.PRODUCTION].redirectScheme,
-                    "environment" to "${Environment.PRODUCTION}",
-                    "platform" to d4lClientConfig.platform
-            ))
+            dimension = "environment"
+
+            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.PRODUCTION].id
+            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.PRODUCTION].secret
+            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.PRODUCTION].redirectScheme
+            manifestPlaceholders["environment"] = "${Environment.PRODUCTION}"
+            manifestPlaceholders["platform"] = d4lClientConfig.platform
+
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
             setMatchingFallbacks("release", "debug")
@@ -113,14 +116,16 @@ android {
 
     sourceSets {
         getByName("main") {
-            res.setSrcDirs(setOf(
+            res.setSrcDirs(
+                setOf(
                     "src/main/res",
 
                     // feature resources
                     "src/main/res_feature/home",
                     "src/main/res_feature/document",
                     "src/main/res_feature/welcome"
-            ))
+                )
+            )
         }
     }
 
@@ -187,6 +192,8 @@ dependencies {
     implementation(Dependencies.Android.threeTenABP)
     implementation(Dependencies.Android.D4L.fhirSdk)
     implementation(Dependencies.Android.D4L.fhirHelper)
+    implementation(Dependencies.Android.D4L.authSdk)
+    implementation(Dependencies.Android.appAuth)
 
     releaseImplementation(Dependencies.Android.checkerRelease)
 

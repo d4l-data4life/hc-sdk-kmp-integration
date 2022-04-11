@@ -32,6 +32,7 @@ toc::[]
 === Changed
 
 * Change GitHub action from self-hosted runner to cloud runner
+* Change Android target API from 30 to 31
 
 === Deprecated
 

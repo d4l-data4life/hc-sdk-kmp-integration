@@ -35,8 +35,12 @@ object Dependencies {
             const val hcSdk = "care.data4life.hc-sdk-kmp:sdk-android:${Versions.hcSdk}"
             const val utilSdk = "care.data4life.hc-util-sdk-kmp:util-android:${Versions.utilSdk}"
             const val fhirSdk = "care.data4life.hc-fhir-sdk-java:fhir-java:${Versions.fhirSdk}"
+            const val authSdk = "care.data4life.hc-auth-sdk-kmp:auth-android:${Versions.authSdk}"
             const val fhirHelper = "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Versions.fhirHelper}"
         }
+
+        // Auth
+        const val appAuth = "net.openid:appauth:${Versions.appAuth}"
 
         // Date
         const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
