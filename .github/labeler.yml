@@ -9,38 +9,16 @@ dependencies:
 
 documentation:
   - docs/**/*
-  - sdk-doc/**/*
-  - README.adoc
-  - LICENSE
   - CHANGELOG.adoc
   - CODE-OF-CONDUCT.adoc
   - CONTRIBUTION.adoc
-  - readmeOSS.adoc
+  - DEVELOPING.adoc
+  - LICENSE
+  - README.adoc
 
-# SDK Clients
-android:
-  - sdk-android/**/*
-  - sdk-android-test/**/*
-jvm:
-  - sdk-jvm/**/*
-ingestion:
-  - sdk-ingestion/**/*
-
-# SDKs
-core:
-  - sdk-core/**/*
-auth:
-  - auth-android/**/*
-  - auth-common/**/*
-  - auth-jvm/**/*
-crypto:
-  - crypto-android/**/*
-  - crypto-common/**/*
-  - crypto-jvm/**/*
-
-# Sample Apps
-sample-android:
-  - sample-android/**/*
-
-sample-jvm:
-  - sample-jvm/**/*
+# Integration Apps
+app-android:
+  - app-android/**/*
+  - app/**/*
+app-java:
+  - app-java/**/*

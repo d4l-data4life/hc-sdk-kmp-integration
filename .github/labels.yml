@@ -59,33 +59,9 @@
   color: e56992
 
 # SDK Clients
-- name: android
+- name: app-android
   description: Android client changes
   color: 32DE84
-- name: jvm
+- name: app-java
   description: JVM client changes
   color: F58219
-- name: ingestion
-  description: Ingestion client changes
-  color: 180AF7
-
-# SDKs
-- name: core
-  description: Core SDK changes
-  color: 000080
-- name: auth
-  description: Auth SDK changes
-  color: 000080
-- name: crypto
-  description: Crypto SDK changes
-  color: 000080
-
-
-# Sample Apps
-- name: sample-android
-  description: SampleApp Android
-  color: 4514b7
-- name: sample-jvm
-  description: SampleApp JVM
-  color: 4514b7
-
