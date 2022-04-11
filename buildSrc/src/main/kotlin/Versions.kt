@@ -29,7 +29,7 @@ object Versions {
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "4.2.2"
+        const val android = "7.1.3"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
@@ -41,17 +41,17 @@ object Versions {
     const val androidDesugar = "1.0.9"
 
     // AndroidX
-    const val androidXKtx = "1.3.2"
-    const val androidXAppCompat = "1.3.1"
-    const val androidXBrowser = "1.3.0"
+    const val androidXKtx = "1.7.0"
+    const val androidXAppCompat = "1.4.1"
+    const val androidXBrowser = "1.4.0"
 
-    const val androidXConstraintLayout = "2.1.0"
+    const val androidXConstraintLayout = "2.1.3"
 
-    const val androidXLifecycle = "2.3.1"
-    const val androidXNavigation = "2.3.5"
+    const val androidXLifecycle = "2.4.1"
+    const val androidXNavigation = "2.4.2"
 
     // Material
-    const val material = "1.4.0"
+    const val material = "1.5.0"
 
     // Network
     /**
@@ -80,7 +80,7 @@ object Versions {
     /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
-    const val threeTenABP = "1.3.1"
+    const val threeTenABP = "1.4.0"
 
     // Junit Test
     const val testJUnit = "4.13.2"
