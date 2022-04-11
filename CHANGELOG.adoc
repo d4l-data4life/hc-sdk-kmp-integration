@@ -71,5 +71,7 @@ toc::[]
 * Gradle Download plugin 4.1.1 -> 4.1.2
 * Spotless 5.10.2 -> 6.4.2
 * KtLint 0.41.0 -> 0.45.2
+* Kotlin 1.4.32 -> 1.6.20
+* Kotlin Coroutines 1.4.3 -> 1.6.1
 
 === Migration
