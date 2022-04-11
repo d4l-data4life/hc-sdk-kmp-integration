@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
     }
@@ -21,42 +22,24 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+
         maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-util-sdk-kmp")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
+            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-sdk-kmp")
+            credentials.username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_USERNAME")
+            credentials.password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN")
         }
-        maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-sdk-java")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
-        }
-        maven {
-            url = uri("https://maven.pkg.github.com/d4l-data4life/hc-fhir-helper-sdk-kmp")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("PACKAGE_REGISTRY_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_TOKEN")
-            }
-        }
-        maven("https://jitpack.io")
-        jcenter()
+
+//        d4l()
     }
 
     // FIXME remove if dependency conflict is solved
     configurations.all {
-        resolutionStrategy {
-            force(Dependencies.Android.okHttp)
-            force(Dependencies.Android.okHttpLoggingInterceptor)
-            force(Dependencies.Android.retrofit)
-        }
+        exclude(group = "care.data4life.hc-result-sdk-kmp", module = "error-android-debug")
+        exclude(group = "care.data4life.hc-securestore-sdk-kmp", module = "securestore-android-debug")
     }
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "6.8.3"
+    gradleVersion = "7.4.2"
     distributionType = Wrapper.DistributionType.ALL
 }

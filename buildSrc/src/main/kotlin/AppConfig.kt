@@ -8,10 +8,11 @@ object AppConfig {
     const val group = "care.data4life.integration.app"
 
     val androidConfig = AndroidConfig
+
     object AndroidConfig {
         const val minSdkVersion = 23
-        const val compileSdkVersion = 30
-        const val targetSdkVersion = 30
+        const val compileSdkVersion = 31
+        const val targetSdkVersion = 31
 
         const val versionCode = 1
         const val versionName = version

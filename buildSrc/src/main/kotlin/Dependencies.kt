@@ -20,8 +20,8 @@ object Dependencies {
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
 
             // Lifecylce
+            const val lifecylceViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidXLifecycle}"
             const val lifecylceCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.androidXLifecycle}"
-            const val lifecylceExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidXLifecycle}"
 
             // Navigation
             const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
@@ -35,8 +35,12 @@ object Dependencies {
             const val hcSdk = "care.data4life.hc-sdk-kmp:sdk-android:${Versions.hcSdk}"
             const val utilSdk = "care.data4life.hc-util-sdk-kmp:util-android:${Versions.utilSdk}"
             const val fhirSdk = "care.data4life.hc-fhir-sdk-java:fhir-java:${Versions.fhirSdk}"
+            const val authSdk = "care.data4life.hc-auth-sdk-kmp:auth-android:${Versions.authSdk}"
             const val fhirHelper = "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Versions.fhirHelper}"
         }
+
+        // Auth
+        const val appAuth = "net.openid:appauth:${Versions.appAuth}"
 
         // Date
         const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
@@ -46,9 +50,6 @@ object Dependencies {
         const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
-
-        const val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}"
-        const val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}"
 
         object Test {
             const val junit = "junit:junit:${Versions.testJUnit}"
@@ -72,7 +73,6 @@ object Dependencies {
             const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
 
             const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
-            const val kaspresso = "com.kaspersky.android-components:kaspresso:${Versions.androidTestKaspresso}"
         }
     }
 }

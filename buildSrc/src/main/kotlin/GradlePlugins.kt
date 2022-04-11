@@ -41,12 +41,3 @@ object GradlePlugins {
     const val android = "com.android.tools.build:gradle:${Versions.GradlePlugins.android}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.GradlePlugins.kotlin}"
 }
-
-fun PluginDependenciesSpec.androidApp(): PluginDependencySpec =
-    id("com.android.application")
-
-fun PluginDependenciesSpec.kotlinAndroid(): PluginDependencySpec =
-    id("kotlin-android")
-
-fun PluginDependenciesSpec.kotlinAndroidExtensions(): PluginDependencySpec =
-    id("kotlin-android-extensions")

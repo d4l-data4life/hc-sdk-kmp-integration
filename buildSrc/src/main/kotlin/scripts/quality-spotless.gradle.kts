@@ -19,15 +19,15 @@ package scripts
 /**
  * You need to add following dependencies to the buildSrc/build.gradle.kts
  *
- * - implementation("com.diffplug.spotless:spotless-plugin-gradle:5.10.2")
- * - implementation("com.pinterest:ktlint:0.41.0")
+ * - implementation("com.diffplug.spotless:spotless-plugin-gradle:5.4.2")
+ * - implementation("com.pinterest:ktlint:0.45.2")
  *
  */
 plugins {
     id("com.diffplug.spotless")
 }
 
-val ktlintVersion = "0.41.0"
+val ktlintVersion = "0.45.2"
 
 spotless {
     kotlin {

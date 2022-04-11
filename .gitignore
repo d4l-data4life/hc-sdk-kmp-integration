@@ -1,6 +1,6 @@
 # Client config
-d4l-client-config-android.json
-d4l-test-config-android.json
+d4l-client-*.json
+d4l-test-config-*.json
 
 # Gradle
 .gradle/
@@ -19,7 +19,6 @@ local.properties
 !.idea/codeStyles/
 !.idea/encoding.xml
 !.idea/copyright/
-!.idea/compiler.xml
 !.idea/externalDependencies.xml
 
 # Others
