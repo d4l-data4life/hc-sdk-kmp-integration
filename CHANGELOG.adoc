@@ -38,9 +38,9 @@ toc::[]
 
 === Removed
 
+* Remove Chucker dependency
+
 === Fixed
-
-
 
 === Bumped
 
@@ -60,7 +60,6 @@ toc::[]
 * AndroidX Lifecycle 2.2.0 -> 2.4.1
 * AndroidX Navigation 2.3.3 -> 2.4.2
 * Google Material 1.2.1 -> 1.5.0
-* Chucker 3.3.0 -> 3.5.2
 * ThreeTenABP 1.3.0 -> 1.4.0
 * AndroidX TestCore 1.3.0 -> 1.4.0
 * AndroidX Test 1.3.0 -> 1.4.0

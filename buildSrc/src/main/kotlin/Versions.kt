@@ -77,12 +77,6 @@ object Versions {
     const val gson = "2.9.0"
 
     /**
-     *
-     *[chucker inspector](https://github.com/ChuckerTeam/chucker/tree/develop)
-     */
-    const val chucker = "3.5.2"
-
-    /**
      * [ThreeTen Android Backport](https://github.com/JakeWharton/ThreeTenABP)
      */
     const val threeTenABP = "1.4.0"

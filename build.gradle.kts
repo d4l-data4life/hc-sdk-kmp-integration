@@ -30,8 +30,6 @@ allprojects {
         }
 
 //        d4l()
-
-        jitPack()
     }
 
     // FIXME remove if dependency conflict is solved

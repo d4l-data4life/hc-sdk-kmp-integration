@@ -39,12 +39,3 @@ fun RepositoryHandler.d4l() {
         }
     }
 }
-
-@Deprecated(message = "Should not be used if possible")
-fun RepositoryHandler.jitPack() {
-    maven("https://jitpack.io") {
-        content {
-            includeGroup("com.github.ChuckerTeam.Chucker") // Chucker 3.3.0
-        }
-    }
-}

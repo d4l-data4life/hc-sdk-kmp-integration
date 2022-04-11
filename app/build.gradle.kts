@@ -111,7 +111,6 @@ android {
 
     defaultPublishConfig = "developmentDebug"
 
-
     sourceSets {
         getByName("main") {
             res.setSrcDirs(
@@ -193,8 +192,6 @@ dependencies {
     implementation(Dependencies.Android.D4L.authSdk)
     implementation(Dependencies.Android.appAuth)
 
-    releaseImplementation(Dependencies.Android.checkerRelease)
-
 
     testImplementation(Dependencies.Android.Test.junit)
 
@@ -220,7 +217,6 @@ dependencies {
     androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
     androidTestImplementation(Dependencies.Android.retrofit)
     androidTestImplementation(Dependencies.Android.gson)
-    androidTestImplementation(Dependencies.Android.chuckerDebug)
 }
 
 val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"

@@ -51,9 +51,6 @@ object Dependencies {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val gson = "com.squareup.retrofit2:converter-gson:${Versions.gson}"
 
-        const val chuckerDebug = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}"
-        const val checkerRelease = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}"
-
         object Test {
             const val junit = "junit:junit:${Versions.testJUnit}"
 
