@@ -40,7 +40,7 @@ object Versions {
     }
 
     // Android
-    const val androidDesugar = "1.0.9"
+    const val androidDesugar = "1.1.5"
 
     // AndroidX
     const val androidXKtx = "1.7.0"
@@ -62,7 +62,7 @@ object Versions {
     /**
      * [okHttp](https://github.com/square/okhttp)
      */
-    const val okHttp = "4.8.1"
+    const val okHttp = "4.9.1"
 
     /**
      *

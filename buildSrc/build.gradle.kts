@@ -13,19 +13,15 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.google.code.gson:gson:2.8.7")
 
     // dependency check
-    implementation("com.github.ben-manes:gradle-versions-plugin:0.38.0")
+    implementation("com.github.ben-manes:gradle-versions-plugin:0.39.0")
     // download scripts
-    implementation("de.undercouch:gradle-download-task:4.1.1")
+    implementation("de.undercouch:gradle-download-task:4.1.2")
     // quality.gradle.kts
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:5.10.2")
-    implementation("com.pinterest:ktlint:0.41.0")
+    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.4.2")
+    implementation("com.pinterest:ktlint:0.45.2")
     // versioning.gradle.kts
     implementation("com.palantir.gradle.gitversion:gradle-git-version:0.12.3")
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
 }
