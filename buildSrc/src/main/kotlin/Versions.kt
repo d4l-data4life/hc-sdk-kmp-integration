@@ -52,6 +52,12 @@ object Versions {
     const val androidXLifecycle = "2.4.1"
     const val androidXNavigation = "2.4.2"
 
+    const val androidXCompose = "1.1.1"
+    const val androidXComposeActivity = "1.4.0"
+    const val androidXComposeViewModel = "2.4.1"
+    const val androidXComposeLiveData = "1.1.1"
+    const val androidXComposeNavigation = "2.4.2"
+
     // Material
     const val material = "1.5.0"
 
@@ -87,6 +93,7 @@ object Versions {
     // Android Test
     const val androidXTestCore = "1.4.0"
     const val androidXTest = "1.4.0"
+    const val androidXTestOrchestrator = "1.4.1"
     const val androidXEspresso = "3.4.0"
     const val androidXUiAutomator = "2.2.0"
     const val androidXTestExtJUnit = "1.1.3"

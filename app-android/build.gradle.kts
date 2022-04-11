@@ -31,10 +31,6 @@ android {
         manifestPlaceholders["debug"] = "true"
     }
 
-    buildFeatures {
-        viewBinding = true
-    }
-
     buildTypes {
         getByName("debug") {
             isDebuggable = true
@@ -126,6 +122,15 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.androidXCompose
+    }
+
     compileOptions {
         // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
@@ -140,10 +145,6 @@ android {
 
     lint {
         abortOnError = false
-    }
-
-    buildFeatures {
-        compose = false
     }
 
     useLibrary("android.test.runner")
@@ -183,6 +184,20 @@ dependencies {
 
     implementation(Dependencies.Android.material)
 
+    // Compose
+    implementation(Dependencies.Android.AndroidX.Compose.compiler)
+    implementation(Dependencies.Android.AndroidX.Compose.runtime)
+    implementation(Dependencies.Android.AndroidX.Compose.ui)
+    implementation(Dependencies.Android.AndroidX.Compose.uiTooling)
+    implementation(Dependencies.Android.AndroidX.Compose.foundation)
+    implementation(Dependencies.Android.AndroidX.Compose.material)
+    implementation(Dependencies.Android.AndroidX.Compose.materialIconsCore)
+    implementation(Dependencies.Android.AndroidX.Compose.materialIconsExtended)
+    implementation(Dependencies.Android.AndroidX.Compose.activity)
+    implementation(Dependencies.Android.AndroidX.Compose.lifecycle)
+    implementation(Dependencies.Android.AndroidX.Compose.liveData)
+    implementation(Dependencies.Android.AndroidX.Compose.navigation)
+
     implementation(Dependencies.Android.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
     }
@@ -212,6 +227,8 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
+
+    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestComposeUi)
 
     androidTestImplementation(Dependencies.Android.okHttp)
     androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)

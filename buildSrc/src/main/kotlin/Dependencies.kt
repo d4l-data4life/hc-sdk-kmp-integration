@@ -17,15 +17,51 @@ object Dependencies {
             const val ktx = "androidx.core:core-ktx:${Versions.androidXKtx}"
             const val appCompat = "androidx.appcompat:appcompat:${Versions.androidXAppCompat}"
             const val browser = "androidx.browser:browser:${Versions.androidXBrowser}"
-            const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
+            const val constraintLayout =
+                "androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayout}"
 
             // Lifecylce
             const val lifecylceViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidXLifecycle}"
             const val lifecylceCommonJava8 = "androidx.lifecycle:lifecycle-common-java8:${Versions.androidXLifecycle}"
 
             // Navigation
-            const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
+            const val navigationFragmentKtx =
+                "androidx.navigation:navigation-fragment-ktx:${Versions.androidXNavigation}"
             const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.androidXNavigation}"
+
+            object Compose {
+                const val compiler = "androidx.compose.compiler:compiler:${Versions.androidXCompose}"
+                const val runtime = "androidx.compose.runtime:runtime:${Versions.androidXCompose}"
+                const val ui = "androidx.compose.ui:ui:${Versions.androidXCompose}"
+
+                // Tooling support (Previews, etc.)
+                const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.androidXCompose}"
+
+                // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+                const val foundation = "androidx.compose.foundation:foundation:${Versions.androidXCompose}"
+
+                // Material design
+                const val material = "androidx.compose.material:material:${Versions.androidXCompose}"
+
+                // Material design icons
+                const val materialIconsCore =
+                    "androidx.compose.material:material-icons-core:${Versions.androidXCompose}"
+                const val materialIconsExtended =
+                    "androidx.compose.material:material-icons-extended:${Versions.androidXCompose}"
+
+                // Integration with activities
+                const val activity = "androidx.activity:activity-compose:${Versions.androidXComposeActivity}"
+
+                // Integration with ViewModels
+                const val lifecycle =
+                    "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.androidXComposeViewModel}"
+
+                // Integration with observables
+                const val liveData = "androidx.compose.runtime:runtime-livedata:${Versions.androidXComposeLiveData}"
+
+                // Navigation
+                const val navigation = "androidx.navigation:navigation-compose:${Versions.androidXComposeNavigation}"
+            }
         }
 
         // Material
@@ -62,15 +98,18 @@ object Dependencies {
             const val androidXTestCore = "androidx.test:core:${Versions.androidXTestCore}"
             const val androidXTestRunner = "androidx.test:runner:${Versions.androidXTest}"
             const val androidXTestRules = "androidx.test:rules:${Versions.androidXTest}"
-            const val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTest}"
+            const val androidXTestOrchestrator = "androidx.test:orchestrator:${Versions.androidXTestOrchestrator}"
 
             const val androidXTestExtJUnit = "androidx.test.ext:junit:${Versions.androidXTestExtJUnit}"
 
             const val androidXTestEspressoCore = "androidx.test.espresso:espresso-core:${Versions.androidXEspresso}"
-            const val androidXTestEspressoIntents = "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
+            const val androidXTestEspressoIntents =
+                "androidx.test.espresso:espresso-intents:${Versions.androidXEspresso}"
             const val androidXTestEspressoWeb = "androidx.test.espresso:espresso-web:${Versions.androidXEspresso}"
 
             const val androidXTestUiAutomator = "androidx.test.uiautomator:uiautomator:${Versions.androidXUiAutomator}"
+
+            const val androidXTestComposeUi = "androidx.compose.ui:ui-test-junit4:${Versions.androidXCompose}"
 
             const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
         }
