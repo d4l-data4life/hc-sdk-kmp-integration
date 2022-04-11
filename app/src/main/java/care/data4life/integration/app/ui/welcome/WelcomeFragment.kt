@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import care.data4life.integration.app.MainViewModel
 import care.data4life.integration.app.R
 import care.data4life.integration.app.databinding.WelcomeFragmentBinding
