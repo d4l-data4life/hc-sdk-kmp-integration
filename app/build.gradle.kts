@@ -1,28 +1,26 @@
 plugins {
-    androidApp()
-    kotlinAndroid()
+    id("com.android.application")
+    id("kotlin-android")
 }
 
 val d4lClientConfig = D4LConfigHelper.loadClientConfigAndroid("$rootDir")
 val d4LTestConfig = D4LConfigHelper.loadTestConfigAndroid("$rootDir")
 
 android {
-    compileSdkVersion(AppConfig.androidConfig.compileSdkVersion)
+    compileSdk = AppConfig.androidConfig.compileSdkVersion
 
     defaultConfig {
         applicationId = AppConfig.androidConfig.applicationId
 
-        minSdkVersion(AppConfig.androidConfig.minSdkVersion)
-        targetSdkVersion(AppConfig.androidConfig.targetSdkVersion)
+        minSdk = AppConfig.androidConfig.minSdkVersion
+        targetSdk = AppConfig.androidConfig.targetSdkVersion
 
         versionCode = AppConfig.androidConfig.versionCode
         versionName = AppConfig.androidConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments(
-            mapOf(
-                "clearPackageData" to "true"
-            )
+        testInstrumentationRunnerArguments += mapOf(
+            "clearPackageData" to "true"
         )
 
         manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
@@ -54,7 +52,7 @@ android {
         }
     }
 
-    flavorDimensions("environment")
+    flavorDimensions += listOf("environment")
 
     productFlavors {
         val development by creating {
@@ -133,16 +131,16 @@ android {
         // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
 
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
 
-    lintOptions {
-        isAbortOnError = false
+    lint {
+        abortOnError = false
     }
 
     buildFeatures {
