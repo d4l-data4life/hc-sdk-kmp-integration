@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import care.data4life.integration.app.R
-import care.data4life.integration.app.ui.common.LoginButton
+import care.data4life.integration.app.ui.common.PrimaryTextButton
 import care.data4life.integration.app.ui.theme.D4LColors
 import care.data4life.integration.app.ui.theme.IntegrationTheme
 import care.data4life.integration.app.ui.theme.Spacing
@@ -83,14 +83,10 @@ fun WelcomeView(
 
             Spacer(modifier = Modifier.height(Spacing.M))
 
-            LoginButton(
+            PrimaryTextButton(
+                text = stringResource(id = R.string.welcome_login_button_label),
                 onClick = onLoginClick
-            ) {
-                Text(
-                    text = stringResource(id = R.string.welcome_login_button_label).uppercase(),
-                    style = MaterialTheme.typography.button
-                )
-            }
+            )
         }
     }
 }
