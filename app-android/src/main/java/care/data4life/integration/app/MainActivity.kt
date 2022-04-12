@@ -7,6 +7,8 @@ package care.data4life.integration.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import care.data4life.integration.app.ui.IntegrationApp
+import care.data4life.integration.app.ui.theme.IntegrationTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -14,7 +16,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            // TODO
+            IntegrationTheme {
+                IntegrationApp()
+            }
         }
     }
 
