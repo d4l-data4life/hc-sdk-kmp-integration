@@ -9,22 +9,50 @@ import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 object D4LColors {
-    val primary = Color(0xFF000E7E)
+    val primary = Color(0xFF000080)
+    val primaryLight = Color(0xFF333399)
+    val primaryLighter = Color(0xFF999FCB)
+    val primaryLightest = Color(0xFFCCCFE5)
+    val primaryExtraLightest = Color(0xFFE5E6F2)
+
     val primaryDark = Color(0xFF000051)
-    val primaryAccent = Color(0xFFFF5E59)
-    val grey = Color(0xFFAAAAAA)
+
+    val secondary = Color(0xFFFF5E59)
+    val secondaryLight = Color(0xFFFFA19D)
+    val secondaryLighter = Color(0xFFFFD0CE)
+    val secondaryLightest = Color(0xFFFFE8E6)
+
+    val tertiary = Color(0xFFFFD2C3)
+    val tertiaryLight = Color(0xFFFFDBCF)
+    val tertiaryLighter = Color(0xFFFFEDE7)
+    val tertiaryLightest = Color(0xFFFFF6F3)
+
+    val violet = Color(0xFFC8AEBF)
+    val blue = Color(0xFFBDD4F0)
+    val green = Color(0xFFD7EECB)
+    val lime = Color(0xFFEBF0C8)
+    val yellow = Color(0xFFFFEBAA)
+
+    val success = Color(0xFF00855F)
+    val alarm = Color(0xFFD53939)
+
+    val neutral = Color(0xFF595757)
+    val neutralLight = Color(0xFFACABA8)
+    val neutralLighter = Color(0xFFDEDCDA)
+    val neutralLightest = Color(0xFFF2F0F1)
+    val neutralExtraLightest = Color(0xFFFAF8F8)
 }
 
 
 val DarkColorPalette = darkColors(
     // TODO add branding Colors
-    primary = Color(0xFFBB86FC),
-    primaryVariant = Color(0xFF3700B3),
-    secondary = Color(0xFF03DAC6),
-    secondaryVariant = Color(0xFF018786),
-    background = Color(0xFF121212),
+    primary = D4LColors.primaryLight,
+    primaryVariant = D4LColors.primaryLighter,
+    secondary = D4LColors.secondaryLight,
+    secondaryVariant = D4LColors.secondaryLighter,
+    background = D4LColors.neutral,
     surface = Color(0xFF121212),
-    error = Color(0xFFCF6679),
+    error = D4LColors.alarm,
     onPrimary = Color.Black,
     onSecondary = Color.Black,
     onBackground = Color.White,
@@ -35,11 +63,11 @@ val DarkColorPalette = darkColors(
 val LightColorPalette = lightColors(
     primary = D4LColors.primary,
     primaryVariant = D4LColors.primaryDark,
-    secondary = D4LColors.primaryAccent,
-    secondaryVariant = Color(0xFF018786),
-    background = Color.White,
+    secondary = D4LColors.secondary,
+    secondaryVariant = D4LColors.secondaryLight,
+    background = D4LColors.neutralLightest,
     surface = Color.White,
-    error = Color(0xFFB00020),
+    error = D4LColors.alarm,
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,

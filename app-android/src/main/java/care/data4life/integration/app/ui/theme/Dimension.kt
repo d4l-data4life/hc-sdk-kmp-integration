@@ -15,4 +15,17 @@ object Spacing {
     val double = 16.dp
     val triple = 24.dp
     val quadruple = 32.dp
+
+    val XXS = 4.dp
+    val XS = 8.dp
+    val S = 16.dp
+    val M = 24.dp
+    val L = 32.dp
+    val XL = 40.dp
+    val XXL = 56.dp
+}
+
+object Border {
+    val S = 1.dp
+    val M = 2.dp
 }
