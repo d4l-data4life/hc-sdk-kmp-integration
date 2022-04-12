@@ -5,31 +5,26 @@
 package care.data4life.integration.app
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 
-/**
- * An activity that inflates a layout that has a NavHostFragment.
- */
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var mainViewModel: MainViewModel
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
 
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        setContent {
+            // TODO
+        }
     }
 
+    // TODO remove from test!!
     override fun finish() {
         // ignore so that Android test runner can't kill activity after each test
     }
 
+    // TODO remove from test!!
     fun explicitFinish() {
         super.finish()
     }
-
-    override fun onSupportNavigateUp(): Boolean = findNavController(R.id.navigation_host_fragment).navigateUp()
 }

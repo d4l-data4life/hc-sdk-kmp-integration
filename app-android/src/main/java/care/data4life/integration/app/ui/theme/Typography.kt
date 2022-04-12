@@ -11,8 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 val IntegrationTypography = Typography(
-    // TODO overwrite text styles
-
     defaultFontFamily = FontFamily.Default,
     h1 = TextStyle(
         fontWeight = FontWeight.Light,
