@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        model = ViewModelProvider(this).get(MainViewModel::class.java)
+        model = ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -55,10 +55,8 @@ class HomeFragment : Fragment() {
                 50,
                 0,
                 object : ResultListener<List<Record<Fhir3Resource>>> {
-                    override fun onSuccess(result: List<Record<Fhir3Resource>>) {
-                        val succcess = result
-
-                        // TODO
+                    override fun onSuccess(t: List<Record<Fhir3Resource>>) {
+                        Toast.makeText(context, "Success: ${t.size}", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onError(exception: D4LException) {
@@ -78,10 +76,7 @@ class HomeFragment : Fragment() {
                 0,
                 object : care.data4life.sdk.call.Callback<List<Fhir4Record<Fhir4Resource>>> {
                     override fun onSuccess(result: List<Fhir4Record<Fhir4Resource>>) {
-
-                        val succcess = result
-
-                        // TODO
+                        Toast.makeText(context, "Success: ${result.size} items", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onError(exception: D4LException) {

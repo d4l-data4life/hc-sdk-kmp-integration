@@ -57,8 +57,8 @@ class WelcomeFragment : Fragment() {
         super.onResume()
 
         model.client.isUserLoggedIn(object : ResultListener<Boolean> {
-            override fun onSuccess(result: Boolean) {
-                if (result) {
+            override fun onSuccess(t: Boolean) {
+                if (t) {
                     findNavController(this@WelcomeFragment).navigate(R.id.action_welcome_screen_to_home_screen)
                 }
             }
