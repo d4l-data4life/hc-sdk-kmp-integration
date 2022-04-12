@@ -35,7 +35,7 @@ android {
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
         getByName("release") {
             isDebuggable = false
@@ -44,14 +44,14 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
     }
 
     flavorDimensions += listOf("environment")
 
     productFlavors {
-        val development by creating {
+        create("development") {
             dimension = "environment"
 
             manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
@@ -62,9 +62,9 @@ android {
 
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
-        val staging by creating {
+        create("staging") {
             dimension = "environment"
 
             manifestPlaceholders["clientId"] = d4lClientConfig[Environment.STAGING].id
@@ -75,9 +75,9 @@ android {
 
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
-        val sandbox by creating {
+        create("sandbox") {
             dimension = "environment"
 
             manifestPlaceholders["clientId"] = d4lClientConfig[Environment.SANDBOX].id
@@ -88,9 +88,9 @@ android {
 
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
-        val production by creating {
+        create("production") {
             dimension = "environment"
 
             manifestPlaceholders["clientId"] = d4lClientConfig[Environment.PRODUCTION].id
@@ -101,11 +101,9 @@ android {
 
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debu")
         }
     }
-
-    defaultPublishConfig = "developmentDebug"
 
     sourceSets {
         getByName("main") {
