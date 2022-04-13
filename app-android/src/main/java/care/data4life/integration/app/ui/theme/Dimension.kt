@@ -25,6 +25,11 @@ object Spacing {
     val XXL = 56.dp
 }
 
+object Sizes {
+    val topLogo = 32.dp
+    val topBarHeight = 56.dp
+}
+
 object Border {
     val S = 1.dp
     val M = 2.dp
