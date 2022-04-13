@@ -14,13 +14,13 @@ object D4LColors {
     val primaryLighter = Color(0xFF999FCB)
     val primaryLightest = Color(0xFFCCCFE5)
     val primaryExtraLightest = Color(0xFFE5E6F2)
-
     val primaryDark = Color(0xFF000051)
 
     val secondary = Color(0xFFFF5E59)
     val secondaryLight = Color(0xFFFFA19D)
     val secondaryLighter = Color(0xFFFFD0CE)
     val secondaryLightest = Color(0xFFFFE8E6)
+    val secondaryDark = Color(0xFFFF0A02)
 
     val tertiary = Color(0xFFFFD2C3)
     val tertiaryLight = Color(0xFFFFDBCF)
@@ -45,7 +45,6 @@ object D4LColors {
 
 
 val DarkColorPalette = darkColors(
-    // TODO add branding Colors
     primary = D4LColors.primaryLight,
     primaryVariant = D4LColors.primaryLighter,
     secondary = D4LColors.secondaryLight,
