@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath(GradlePlugins.android)
         classpath(GradlePlugins.kotlin)
+        classpath(GradlePlugins.jUnit5Android)
     }
 }
 

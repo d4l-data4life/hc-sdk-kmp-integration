@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("de.mannodermaus.android-junit5")
 }
 
 val d4lClientConfig = D4LConfigHelper.loadClientConfigAndroid("$rootDir")
@@ -20,7 +21,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments += mapOf(
-            "clearPackageData" to "true"
+            "runnerBuilder" to "de.mannodermaus.junit5.AndroidJUnit5Builder",
+            "clearPackageData" to "true",
         )
 
         manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
@@ -207,6 +209,12 @@ dependencies {
 
 
     testImplementation(Dependencies.Android.Test.junit)
+    testRuntimeOnly(Dependencies.Android.Test.junit5EngineVintage)
+
+    testImplementation(Dependencies.Android.Test.junit5)
+    testRuntimeOnly(Dependencies.Android.Test.junit5Engine)
+
+    testImplementation(Dependencies.Android.Test.junit5Parameterized)
 
 
     androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
@@ -215,6 +223,9 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
 
+    androidTestImplementation(Dependencies.Android.Test.junit5)
+    androidTestImplementation(Dependencies.Android.Test.junti5AndroidInstrumentation)
+    androidTestRuntimeOnly(Dependencies.Android.Test.junti5AndroidInstrumentationRuntime)
     androidTestImplementation(Dependencies.Android.Test.testKotlin)
     androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
 

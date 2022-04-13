@@ -33,6 +33,8 @@ object Versions {
         const val kotlin = Versions.kotlin
         const val android = "7.1.3"
 
+        const val jUnit5Android = "1.8.2.0"
+
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
@@ -89,6 +91,9 @@ object Versions {
 
     // Junit Test
     const val testJUnit = "4.13.2"
+
+    const val testJUnit5Android = "5.8.2"
+    const val testJUnit5AndroidInstrumentation = "1.3.0"
 
     // Android Test
     const val androidXTestCore = "1.4.0"

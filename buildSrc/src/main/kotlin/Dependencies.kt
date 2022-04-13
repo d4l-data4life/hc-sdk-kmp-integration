@@ -90,6 +90,14 @@ object Dependencies {
         object Test {
             const val junit = "junit:junit:${Versions.testJUnit}"
 
+            const val junit5 = "org.junit.jupiter:junit-jupiter-api:${Versions.testJUnit5Android}"
+            const val junit5Engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.testJUnit5Android}"
+            const val junit5EngineVintage = "org.junit.vintage:junit-vintage-engine:${Versions.testJUnit5Android}"
+            const val junit5Parameterized = "org.junit.jupiter:junit-jupiter-params:${Versions.testJUnit5Android}"
+
+            const val junti5AndroidInstrumentation = "de.mannodermaus.junit5:android-test-core:${Versions.testJUnit5AndroidInstrumentation}"
+            const val junti5AndroidInstrumentationRuntime = "de.mannodermaus.junit5:android-test-runner:${Versions.testJUnit5AndroidInstrumentation}"
+
             const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
             const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
         }
