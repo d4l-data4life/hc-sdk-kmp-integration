@@ -2,7 +2,7 @@
  * Copyright (c) 2022 D4L data4life gGmbH - All rights reserved.
  */
 
-package care.data4life.integration.app.ui.common
+package care.data4life.integration.app.ui.common.atom
 
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
