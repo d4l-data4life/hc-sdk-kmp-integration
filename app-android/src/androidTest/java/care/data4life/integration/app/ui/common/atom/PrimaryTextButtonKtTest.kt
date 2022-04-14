@@ -11,12 +11,12 @@ import androidx.compose.ui.test.performClick
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.test.compose.createAndroidComposeExtension
 import care.data4life.integration.app.ui.theme.IntegrationTheme
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import kotlin.test.assertTrue
 
 @Suppress("TestFunctionName")
-class PrimaryTextButtonTest {
+class PrimaryTextButtonKtTest {
 
     @JvmField
     @RegisterExtension
@@ -36,9 +36,12 @@ class PrimaryTextButtonTest {
             }
         }
 
-        // When/Then
-        onNodeWithText("TEXT")
-            .assertIsDisplayed()
+        // When
+        val button = onNodeWithText("TEXT")
+
+        // Then
+        button.assertIsDisplayed()
+            .assertHasClickAction()
     }
 
     @Test
@@ -57,12 +60,13 @@ class PrimaryTextButtonTest {
         }
 
         // When
-        onNodeWithText("TEXT")
-            .assertIsDisplayed()
-            .assertHasClickAction()
+        val button = onNodeWithText("TEXT")
             .performClick()
 
         // Then
+        button.assertIsDisplayed()
+            .assertHasClickAction()
+
         assertTrue(clickExecuted)
     }
 }

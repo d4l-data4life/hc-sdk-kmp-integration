@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 
 @Composable
 fun PrimaryTextButton(
@@ -18,7 +19,9 @@ fun PrimaryTextButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier
+            .testTag("PrimaryTextButton")
+            .then(modifier),
     ) {
         Text(
             text = text.uppercase(),

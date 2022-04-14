@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import care.data4life.integration.app.R.drawable
 import care.data4life.integration.app.ui.theme.Sizes
@@ -18,7 +19,9 @@ import care.data4life.integration.app.ui.theme.Sizes
 fun TopLogo() {
     Image(
         painter = painterResource(id = drawable.d4l_logo),
-        modifier = Modifier.height(Sizes.topLogo),
+        modifier = Modifier
+            .testTag("TopLogo")
+            .height(Sizes.topLogo),
         contentDescription = "Logo",
         colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
     )
