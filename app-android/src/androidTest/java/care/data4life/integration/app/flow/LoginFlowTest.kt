@@ -9,7 +9,7 @@ import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.WelcomePage
-import care.data4life.integration.app.testUtils.TestConfigLoader
+import care.data4life.integration.app.test.TestConfigLoader
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

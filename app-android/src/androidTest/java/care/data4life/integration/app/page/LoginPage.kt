@@ -10,8 +10,8 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
-import care.data4life.integration.app.testUtils.Auth2FAHelper
-import care.data4life.integration.app.testUtils.User
+import care.data4life.integration.app.test.Auth2FAHelper
+import care.data4life.integration.app.test.User
 import java.lang.Thread.sleep
 
 class LoginPage : BasePage() {

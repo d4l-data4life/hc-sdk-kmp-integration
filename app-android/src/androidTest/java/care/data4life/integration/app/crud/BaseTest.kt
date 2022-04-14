@@ -9,9 +9,9 @@ import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.WelcomePage
-import care.data4life.integration.app.testUtils.NetworkUtil
-import care.data4life.integration.app.testUtils.TestConfigLoader
-import care.data4life.integration.app.testUtils.deleteAllRecords
+import care.data4life.integration.app.test.NetworkUtil
+import care.data4life.integration.app.test.TestConfigLoader
+import care.data4life.integration.app.test.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback

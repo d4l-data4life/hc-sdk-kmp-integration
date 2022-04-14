@@ -2,7 +2,7 @@
  * Copyright (c) 2020 D4L data4life gGmbH - All rights reserved.
  */
 
-package care.data4life.integration.app.testUtils
+package care.data4life.integration.app.test
 
 import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.sdk.Data4LifeClient

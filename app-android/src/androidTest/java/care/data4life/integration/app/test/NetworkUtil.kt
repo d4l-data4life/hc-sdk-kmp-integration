@@ -2,7 +2,7 @@
  * Copyright (c) 2020 D4L data4life gGmbH - All rights reserved.
  */
 
-package care.data4life.integration.app.testUtils
+package care.data4life.integration.app.test
 
 import java.io.IOException
 import java.net.InetSocketAddress

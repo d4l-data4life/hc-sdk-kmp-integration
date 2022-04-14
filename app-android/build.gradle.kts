@@ -224,8 +224,8 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
 
     androidTestImplementation(Dependencies.Android.Test.junit5)
-    androidTestImplementation(Dependencies.Android.Test.junti5AndroidInstrumentation)
-    androidTestRuntimeOnly(Dependencies.Android.Test.junti5AndroidInstrumentationRuntime)
+    androidTestImplementation(Dependencies.Android.Test.junit5AndroidInstrumentation)
+    androidTestRuntimeOnly(Dependencies.Android.Test.junit5AndroidInstrumentationRuntime)
     androidTestImplementation(Dependencies.Android.Test.testKotlin)
     androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
 

@@ -1,8 +1,8 @@
-package care.data4life.integration.app.testUtils
+package care.data4life.integration.app.test
 
-import care.data4life.integration.app.testUtils.Auth2FAHelper.config
-import care.data4life.integration.app.testUtils.SinchService.Companion.AUTH_TOKEN
-import care.data4life.integration.app.testUtils.SinchService.Companion.SERVICE_PLAN
+import care.data4life.integration.app.test.Auth2FAHelper.config
+import care.data4life.integration.app.test.SinchService.Companion.AUTH_TOKEN
+import care.data4life.integration.app.test.SinchService.Companion.SERVICE_PLAN
 import com.google.gson.annotations.SerializedName
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
