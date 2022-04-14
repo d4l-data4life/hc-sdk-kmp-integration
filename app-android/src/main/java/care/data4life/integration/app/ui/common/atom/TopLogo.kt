@@ -20,6 +20,6 @@ fun TopLogo() {
         painter = painterResource(id = drawable.d4l_logo),
         modifier = Modifier.height(Sizes.topLogo),
         contentDescription = "Logo",
-        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary)
+        colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
     )
 }
