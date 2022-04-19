@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 @Suppress("TestFunctionName")
-class IntegrationTopBarKtTest {
+class TopBarKtTest {
 
     @JvmField
     @RegisterExtension
@@ -26,12 +26,12 @@ class IntegrationTopBarKtTest {
         // Given
         setContent {
             IntegrationTheme {
-                IntegrationTopBar()
+                TopBar()
             }
         }
 
         // When
-        val topBar = onNodeWithTag("IntegrationTopBar")
+        val topBar = onNodeWithTag("TopBar")
         val topLogo = onNodeWithTag("TopLogo")
 
         // Then

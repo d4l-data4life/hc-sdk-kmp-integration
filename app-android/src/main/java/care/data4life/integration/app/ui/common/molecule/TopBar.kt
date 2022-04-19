@@ -20,11 +20,11 @@ import care.data4life.integration.app.ui.theme.Sizes
 import care.data4life.integration.app.ui.theme.Spacing
 
 @Composable
-fun IntegrationTopBar() {
+fun TopBar() {
     Surface(
         color = MaterialTheme.colors.primary,
         contentColor = contentColorFor(MaterialTheme.colors.primary),
-        modifier = Modifier.testTag("IntegrationTopBar")
+        modifier = Modifier.testTag("TopBar")
     ) {
         Row(
             modifier = Modifier
