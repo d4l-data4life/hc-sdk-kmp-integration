@@ -216,6 +216,8 @@ dependencies {
 
     testImplementation(Dependencies.Android.Test.junit5Parameterized)
 
+    testImplementation(Dependencies.Android.Test.mockk)
+
 
     androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestCore)
@@ -234,6 +236,8 @@ dependencies {
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoWeb)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
+
+    androidTestImplementation(Dependencies.Android.AndroidTest.mockk)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
 

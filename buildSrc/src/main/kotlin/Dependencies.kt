@@ -100,6 +100,8 @@ object Dependencies {
 
             const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
             const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
+
+            const val mockk = "io.mockk:mockk:${Versions.testMockk}"
         }
 
         object AndroidTest {
@@ -120,6 +122,8 @@ object Dependencies {
             const val androidXTestComposeUi = "androidx.compose.ui:ui-test-junit4:${Versions.androidXCompose}"
 
             const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
+
+            const val mockk = "io.mockk:mockk-android:${Versions.testMockk}"
         }
     }
 }

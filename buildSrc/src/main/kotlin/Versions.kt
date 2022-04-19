@@ -95,6 +95,8 @@ object Versions {
     const val testJUnit5Android = "5.8.2"
     const val testJUnit5AndroidInstrumentation = "1.3.0"
 
+    const val testMockk = "1.12.3"
+
     // Android Test
     const val androidXTestCore = "1.4.0"
     const val androidXTest = "1.4.0"
