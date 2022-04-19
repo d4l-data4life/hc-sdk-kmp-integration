@@ -18,6 +18,20 @@ class DiDataTest {
     }
 
     @Test
+    fun GIVEN_d4lClientWrapper_WHEN_accessed_THEN_only_one_instance() {
+        // Given
+        val di = Di
+
+        // When
+        val wrapper1 = di.data.d4lClient
+        val wrapper2 = di.data.d4lClient
+
+        // Then
+        assertTrue(wrapper1 === wrapper2)
+        assertEquals(wrapper1, wrapper2)
+    }
+
+    @Test
     fun GIVEN_authService_WHEN_accessed_THEN_only_one_instance() {
         // Given
         val di = Di
