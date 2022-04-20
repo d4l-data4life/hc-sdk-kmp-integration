@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.unit.dp
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.test.compose.createAndroidComposeExtension
+import care.data4life.integration.app.test.compose.setThemedContent
 import care.data4life.integration.app.ui.theme.IntegrationTheme
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -24,14 +25,12 @@ class TopLogoKtTest {
     @Test
     fun GIVEN_contentDescription_WHEN_displayed_THEN_has() = extension.runComposeTest {
         // Given
-        setContent {
-            IntegrationTheme {
-                TopLogo()
-            }
+        setThemedContent {
+            TopLogo()
         }
 
         // When
-        val logo = onNodeWithContentDescription("Logo")
+        val logo = onNodeWithContentDescription("TopLogo")
 
         // When/Then
         logo.assertIsDisplayed()

@@ -10,7 +10,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.test.compose.createAndroidComposeExtension
-import care.data4life.integration.app.ui.theme.IntegrationTheme
+import care.data4life.integration.app.test.compose.setThemedContent
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -27,13 +27,11 @@ class PrimaryTextButtonKtTest {
         // Given
         val text = "text"
 
-        setContent {
-            IntegrationTheme {
-                PrimaryTextButton(
-                    text = text,
-                    onClick = { /*none*/ }
-                )
-            }
+        setThemedContent {
+            PrimaryTextButton(
+                text = text,
+                onClick = { /*none*/ }
+            )
         }
 
         // When
@@ -50,13 +48,11 @@ class PrimaryTextButtonKtTest {
         val text = "text"
         var clickExecuted = false
 
-        setContent {
-            IntegrationTheme {
-                PrimaryTextButton(
-                    text = text,
-                    onClick = { clickExecuted = true }
-                )
-            }
+        setThemedContent {
+            PrimaryTextButton(
+                text = text,
+                onClick = { clickExecuted = true }
+            )
         }
 
         // When

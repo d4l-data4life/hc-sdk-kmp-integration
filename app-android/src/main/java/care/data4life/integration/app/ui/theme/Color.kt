@@ -41,22 +41,24 @@ object D4LColors {
     val neutralLighter = Color(0xFFDEDCDA)
     val neutralLightest = Color(0xFFF2F0F1)
     val neutralExtraLightest = Color(0xFFFAF8F8)
-}
 
+    val neutralDark = Color(0xFF424141)
+    val neutralDarker = Color(0xFF2c2b2b)
+}
 
 val DarkColorPalette = darkColors(
     primary = D4LColors.primaryLight,
     primaryVariant = D4LColors.primaryLighter,
     secondary = D4LColors.secondaryLight,
     secondaryVariant = D4LColors.secondaryLighter,
-    background = D4LColors.neutral,
-    surface = Color(0xFF121212),
+    background = D4LColors.neutralDark,
+    surface = D4LColors.neutralDarker,
     error = D4LColors.alarm,
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.White,
     onSurface = Color.White,
-    onError = Color.Black
+    onError = Color.White
 )
 
 val LightColorPalette = lightColors(
@@ -65,7 +67,7 @@ val LightColorPalette = lightColors(
     secondary = D4LColors.secondary,
     secondaryVariant = D4LColors.secondaryLight,
     background = D4LColors.neutralLightest,
-    surface = Color.White,
+    surface = D4LColors.neutralExtraLightest,
     error = D4LColors.alarm,
     onPrimary = Color.White,
     onSecondary = Color.Black,
