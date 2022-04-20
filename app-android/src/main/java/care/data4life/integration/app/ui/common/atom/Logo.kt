@@ -5,7 +5,7 @@
 package care.data4life.integration.app.ui.common.atom
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -18,7 +18,7 @@ fun Logo() {
         painter = painterResource(id = R.drawable.d4l_logo),
         modifier = Modifier
             .testTag("Logo")
-            .fillMaxSize(),
+            .fillMaxWidth(),
         contentDescription = "Logo"
     )
 }

@@ -6,11 +6,14 @@ package care.data4life.integration.app.ui.common.atom
 
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.test.compose.createAndroidComposeExtension
+import care.data4life.integration.app.test.compose.assertScreenshotMatches
+import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import care.data4life.integration.app.test.compose.setThemedContent
+import care.data4life.integration.app.test.compose.setThemedScreenshotContent
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
@@ -64,5 +67,25 @@ class PrimaryTextButtonKtTest {
             .assertHasClickAction()
 
         assertTrue(clickExecuted)
+    }
+
+    @Test
+    fun GIVEN_button_WHEN_added_THEN_matches_screenshot() = extension.runComposeTest {
+        // Given
+        val text = "text"
+
+        setThemedScreenshotContent {
+            PrimaryTextButton(
+                text = text,
+                onClick = { /*none*/ }
+            )
+        }
+
+        // When
+        val button = onNodeWithTag("PrimaryTextButton")
+
+        // Then
+        button.assertIsDisplayed()
+            .assertScreenshotMatches("atom/PrimaryTextButton.png", true)
     }
 }
