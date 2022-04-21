@@ -23,6 +23,7 @@ import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.ResultListener
 import com.google.android.material.snackbar.Snackbar
 
+@Deprecated("compose")
 class WelcomeFragment : Fragment() {
 
     private var _binding: WelcomeFragmentBinding? = null

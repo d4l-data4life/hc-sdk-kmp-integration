@@ -8,8 +8,8 @@ import care.data4life.integration.app.data.AuthService
 import care.data4life.integration.app.data.DataContract.Service
 import care.data4life.integration.app.data.DataContract.Wrapper
 import care.data4life.integration.app.data.wrapper.D4LClientWrapper
-import care.data4life.integration.app.ui.welcome.WelcomeContract.ViewModel
-import care.data4life.integration.app.ui.welcome.WelcomeViewModel
+import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.ViewModel
+import care.data4life.integration.app.ui.feature.welcome.WelcomeViewModel
 
 object Di : DiContract {
 

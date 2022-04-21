@@ -6,7 +6,7 @@ package care.data4life.integration.app.di
 
 import care.data4life.integration.app.data.DataContract.Service
 import care.data4life.integration.app.data.DataContract.Wrapper
-import care.data4life.integration.app.ui.welcome.WelcomeContract
+import care.data4life.integration.app.ui.feature.welcome.WelcomeContract
 
 interface DiContract {
 

@@ -2,26 +2,28 @@
  * Copyright (c) 2022 D4L data4life gGmbH - All rights reserved.
  */
 
-package care.data4life.integration.app.ui.welcome
+package care.data4life.integration.app.ui.feature.welcome
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import care.data4life.integration.app.R
-import care.data4life.integration.app.ui.common.PrimaryTextButton
+import care.data4life.integration.app.ui.common.atom.Logo
+import care.data4life.integration.app.ui.common.atom.PrimaryTextButton
 import care.data4life.integration.app.ui.theme.D4LColors
 import care.data4life.integration.app.ui.theme.IntegrationTheme
 import care.data4life.integration.app.ui.theme.Spacing
@@ -31,19 +33,18 @@ fun WelcomeView(
     onLoginClick: () -> Unit
 ) {
     Surface(
-        color = MaterialTheme.colors.background
+        color = MaterialTheme.colors.surface,
+        modifier = Modifier
+            .testTag("WelcomeView")
     ) {
-
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(Spacing.S),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.d4l_logo),
-                contentDescription = null,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Logo()
 
             Spacer(modifier = Modifier.height(Spacing.M))
 
