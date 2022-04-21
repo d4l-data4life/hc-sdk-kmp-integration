@@ -6,7 +6,13 @@ package care.data4life.integration.app.crud
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import care.data4life.fhir.stu3.model.*
+import care.data4life.fhir.stu3.model.Attachment
+import care.data4life.fhir.stu3.model.CodeSystemDocumentReferenceStatus
+import care.data4life.fhir.stu3.model.CodeableConcept
+import care.data4life.fhir.stu3.model.Coding
+import care.data4life.fhir.stu3.model.DocumentReference
+import care.data4life.fhir.stu3.model.FhirInstant
+import care.data4life.fhir.stu3.model.Practitioner
 import care.data4life.fhir.stu3.util.FhirDateTimeParser
 import care.data4life.sdk.helpers.stu3.AttachmentBuilder
 import care.data4life.sdk.helpers.stu3.DocumentReferenceBuilder
