@@ -45,10 +45,11 @@ toc::[]
 === Bumped
 
 * Gradle 6.9.1 -> 7.4.2
-* HC SDK KMP 1.9.2 -> 1.15.1
-* HC FHIR SDK Java 1.2.1 -> 1.6.3
-* HC FHIR Helper 1.4.1 -> 1.7.1
-* HC Util SDK 1.4.1 -> 1.10.0
+* HC SDK KMP 1.9.2 -> 1.16.0
+* HC FHIR SDK Java 1.2.1 -> 1.8.0
+* HC FHIR Helper 1.4.1 -> 1.9.0
+* HC Auth SDK 1.14.0 -> 1.15.0
+* HC Util SDK 1.4.1 -> 1.13.0
 * Kotlin 1.4.31 -> 1.4.32
 * Kotlin Coroutines 1.4.2 -> 1.4.3
 * Android Gradle Plugin 4.1.2 -> 7.2.0
