@@ -63,6 +63,7 @@ toc::[]
 * ThreeTenABP 1.3.0 -> 1.4.0
 * AndroidX TestCore 1.3.0 -> 1.4.0
 * AndroidX Test 1.3.0 -> 1.4.0
+* AndroidX Test Orchestrator 1.4.0 -> 1.4.1
 * AndroidX Espresso 3.3.0 -> 3.4.0
 * AndroidX Test ExtJunit 1.1.2 -> 1.1.3
 * OkHttp 4.8.1 -> 4.9.1

@@ -87,6 +87,7 @@ object Versions {
     // Android Test
     const val androidXTestCore = "1.4.0"
     const val androidXTest = "1.4.0"
+    const val androidXTestOrchestrator = "1.4.1"
     const val androidXEspresso = "3.4.0"
     const val androidXUiAutomator = "2.2.0"
     const val androidXTestExtJUnit = "1.1.3"
