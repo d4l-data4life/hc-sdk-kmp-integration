@@ -71,7 +71,7 @@ toc::[]
 * Gson 2.8.6 -> 2.8.7
 * Dependency Updates Gradle plugin 0.38.0 -> 0.39.0
 * Gradle Download plugin 4.1.1 -> 4.1.2
-* Spotless 5.10.2 -> 6.4.2
+* Spotless 5.10.2 -> 6.5.1
 * KtLint 0.41.0 -> 0.45.1
 * Kotlin 1.4.32 -> 1.6.10
 * Kotlin Coroutines 1.4.3 -> 1.6.1
