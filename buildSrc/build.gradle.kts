@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.8.7")
+    implementation("com.google.code.gson:gson:2.8.9")
 
     // dependency check
     implementation("com.github.ben-manes:gradle-versions-plugin:0.39.0")
