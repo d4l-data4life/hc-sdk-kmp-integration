@@ -56,13 +56,13 @@ object Versions {
     const val material = "1.5.0"
 
     // Auth
-    const val appAuth = "0.10.0"
+    const val appAuth = "0.11.1"
 
     // Network
     /**
      * [okHttp](https://github.com/square/okhttp)
      */
-    const val okHttp = "4.9.1"
+    const val okHttp = "4.9.3"
 
     /**
      *
