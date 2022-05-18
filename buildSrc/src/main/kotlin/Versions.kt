@@ -31,7 +31,7 @@ object Versions {
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
-        const val android = "7.3.0-alpha09"
+        const val android = "7.3.0-beta01"
 
         const val jUnit5Android = "1.8.2.0"
 
