@@ -26,7 +26,7 @@ object Versions {
 
     const val authSdk = "1.14.0"
 
-    const val kotlin = "1.6.20"
+    const val kotlin = "1.6.10"
     const val kotlinCoroutines = "1.6.1"
 
     object GradlePlugins {
