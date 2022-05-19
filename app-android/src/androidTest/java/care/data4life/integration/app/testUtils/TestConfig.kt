@@ -39,7 +39,7 @@ object TestConfigLoader {
 
             return Gson().fromJson(json, TestConfig::class.java)
         } catch (error: FileNotFoundException) {
-            throw IllegalStateException("Please run './gradlew provideAndroidTestConfig' before running the tests", error)
+            throw IllegalStateException("Please run './gradlew provideTestConfig' before running the tests", error)
         }
     }
 }

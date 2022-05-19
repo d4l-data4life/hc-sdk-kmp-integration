@@ -6,12 +6,14 @@ package care.data4life.integration.app.testUtils
 
 import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.sdk.Data4LifeClient
+import care.data4life.sdk.SdkContract
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.ResultListener
 import care.data4life.sdk.model.DeleteResult
 import care.data4life.sdk.model.Record
 import kotlinx.coroutines.runBlocking
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -26,8 +28,15 @@ fun <T : DomainResource> Data4LifeClient.deleteAllRecords(clazz: Class<T>) {
 private suspend fun <T : DomainResource> fetchRecords(clazz: Class<T>): List<Record<T>> = suspendCoroutine { cont ->
     Data4LifeClient.getInstance().fetchRecords(
         clazz,
-        LocalDate.now().minusYears(10),
-        LocalDate.now(),
+        SdkContract.CreationDateRange(
+            LocalDate.now().minusYears(5),
+            LocalDate.now()
+        ),
+        SdkContract.UpdateDateTimeRange(
+            LocalDateTime.now().minusDays(10),
+            LocalDateTime.now()
+        ),
+        false,
         1000,
         0,
         object : ResultListener<List<Record<T>>> {
