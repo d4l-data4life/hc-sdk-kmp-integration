@@ -13,6 +13,7 @@ import care.data4life.integration.app.test.NetworkUtil
 import care.data4life.integration.app.test.TestConfigLoader
 import care.data4life.integration.app.test.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
+import care.data4life.sdk.SdkContract
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
@@ -35,7 +36,7 @@ import org.junit.BeforeClass
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
@@ -328,7 +329,11 @@ abstract class BaseTest<T : DomainResource> {
         client.fetchRecords(
             getTestClass(),
             null,
-            LocalDate.now(),
+            SdkContract.UpdateDateTimeRange(
+                LocalDateTime.now().minusDays(1),
+                LocalDateTime.now()
+            ),
+            false,
             1000,
             0,
             object : TestResultListener<List<Record<T>>>() {

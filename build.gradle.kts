@@ -30,7 +30,7 @@ allprojects {
             credentials.password = project.findProperty("gpr.key") as String? ?: System.getenv("PACKAGE_REGISTRY_DOWNLOAD_TOKEN")
         }
 
-//        d4l()
+        d4l()
     }
 
     // FIXME remove if dependency conflict is solved

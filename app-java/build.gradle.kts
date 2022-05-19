@@ -25,6 +25,6 @@ tasks.test {
 }
 
 dependencies {
-    implementation("care.data4life.hc-sdk-kmp:sdk-jvm:1.15.1")
+    implementation("care.data4life.hc-sdk-kmp:sdk-jvm:1.16.0")
 }
 

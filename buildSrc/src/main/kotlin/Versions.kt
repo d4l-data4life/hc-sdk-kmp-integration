@@ -7,24 +7,24 @@ object Versions {
     /**
      * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
      */
-    const val hcSdk = "1.15.1"
+    const val hcSdk = "1.16.0"
 
     /**
      * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
      */
-    const val fhirSdk = "1.6.3"
+    const val fhirSdk = "1.8.0"
 
     /**
      * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
      */
-    const val fhirHelper = "1.7.1"
+    const val fhirHelper = "1.9.0"
 
     /**
      * [D4L-UTIL-SDK-KMP](https://github.com/d4l-data4life/hc-util-sdk-kmp)
      */
-    const val utilSdk = "1.10.0"
+    const val utilSdk = "1.13.0"
 
-    const val authSdk = "1.14.0"
+    const val authSdk = "1.15.0"
 
     const val kotlin = "1.6.10"
     const val kotlinCoroutines = "1.6.1"
@@ -64,13 +64,13 @@ object Versions {
     const val material = "1.5.0"
 
     // Auth
-    const val appAuth = "0.10.0"
+    const val appAuth = "0.11.1"
 
     // Network
     /**
      * [okHttp](https://github.com/square/okhttp)
      */
-    const val okHttp = "4.9.1"
+    const val okHttp = "4.9.3"
 
     /**
      *
