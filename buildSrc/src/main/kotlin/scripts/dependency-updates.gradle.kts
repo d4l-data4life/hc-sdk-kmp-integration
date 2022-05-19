@@ -21,7 +21,7 @@ package scripts
  *
  * You need to add following dependencies to the buildSrc/build.gradle.kts
  *
- * - implementation("com.github.ben-manes:gradle-versions-plugin:0.38.0")
+ * - implementation("com.github.ben-manes:gradle-versions-plugin:0.41.0")
  *
  */
 plugins {

@@ -69,7 +69,7 @@ toc::[]
 * AndroidX Test ExtJunit 1.1.2 -> 1.1.3
 * OkHttp 4.8.1 -> 4.9.3
 * Gson 2.8.6 -> 2.8.9
-* Dependency Updates Gradle plugin 0.38.0 -> 0.39.0
+* Dependency Updates Gradle plugin 0.38.0 -> 0.41.0
 * Gradle Download plugin 4.1.1 -> 4.1.2
 * Spotless 5.10.2 -> 6.5.1
 * KtLint 0.41.0 -> 0.45.1

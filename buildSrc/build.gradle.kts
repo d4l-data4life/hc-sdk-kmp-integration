@@ -16,7 +16,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
 
     // dependency check
-    implementation("com.github.ben-manes:gradle-versions-plugin:0.39.0")
+    implementation("com.github.ben-manes:gradle-versions-plugin:0.41.0")
     // download scripts
     implementation("de.undercouch:gradle-download-task:4.1.2")
     // quality.gradle.kts
