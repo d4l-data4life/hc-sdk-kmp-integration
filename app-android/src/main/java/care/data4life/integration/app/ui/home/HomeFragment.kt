@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import care.data4life.integration.app.MainViewModel
 import care.data4life.integration.app.R
 import care.data4life.integration.app.databinding.HomeFragmentBinding
+import care.data4life.sdk.SdkContract
 import care.data4life.sdk.call.Fhir4Record
 import care.data4life.sdk.fhir.Fhir3Resource
 import care.data4life.sdk.fhir.Fhir4Resource
@@ -23,6 +24,7 @@ import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
 import care.data4life.sdk.model.Record
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
 class HomeFragment : Fragment() {
 
@@ -50,8 +52,15 @@ class HomeFragment : Fragment() {
         binding.homeFhir3LoadAllButton.setOnClickListener {
             model.client.fetchRecords(
                 Fhir3Resource::class.java,
-                LocalDate.now().minusYears(1),
-                LocalDate.now(),
+                SdkContract.CreationDateRange(
+                    LocalDate.now().minusYears(2),
+                    LocalDate.now().minusYears(1)
+                ),
+                SdkContract.UpdateDateTimeRange(
+                    LocalDateTime.now().minusDays(2),
+                    LocalDateTime.now()
+                ),
+                false,
                 50,
                 0,
                 object : ResultListener<List<Record<Fhir3Resource>>> {
@@ -72,8 +81,15 @@ class HomeFragment : Fragment() {
             model.client.fhir4.search(
                 Fhir4Resource::class.java,
                 emptyList(),
-                LocalDate.now().minusYears(1),
-                LocalDate.now(),
+                SdkContract.CreationDateRange(
+                    LocalDate.now().minusYears(2),
+                    LocalDate.now().minusYears(1)
+                ),
+                SdkContract.UpdateDateTimeRange(
+                    LocalDateTime.now().minusDays(2),
+                    LocalDateTime.now()
+                ),
+                false,
                 50,
                 0,
                 object : care.data4life.sdk.call.Callback<List<Fhir4Record<Fhir4Resource>>> {
