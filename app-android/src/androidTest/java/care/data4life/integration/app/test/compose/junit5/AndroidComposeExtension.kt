@@ -71,11 +71,14 @@ internal constructor(
 
     override fun runComposeTest(block: ComposeContext.() -> Unit) {
         ruleFactory().also { rule ->
-            rule.apply(object : Statement() {
-                override fun evaluate() {
-                    rule.block()
-                }
-            }, description).evaluate()
+            rule.apply(
+                object : Statement() {
+                    override fun evaluate() {
+                        rule.block()
+                    }
+                },
+                description
+            ).evaluate()
         }
     }
 }

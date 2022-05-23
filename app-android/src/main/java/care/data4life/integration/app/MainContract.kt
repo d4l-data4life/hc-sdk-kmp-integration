@@ -6,7 +6,5 @@ package care.data4life.integration.app
 
 interface MainContract {
 
-    interface Client {
-
-    }
+    interface Client
 }

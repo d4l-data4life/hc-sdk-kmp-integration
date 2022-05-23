@@ -31,9 +31,7 @@ fun IntegrationApp() {
 
 object Navigation {
 
-    object Arg {
-
-    }
+    object Arg
 
     object Route {
         const val WELCOME = "welcome"

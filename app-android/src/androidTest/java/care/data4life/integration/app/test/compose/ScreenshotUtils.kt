@@ -65,7 +65,7 @@ private fun saveExpectedScreenshot(path: String, bitmap: Bitmap) {
 
 private fun Bitmap.compare(other: Bitmap) {
     assert(this.width == other.width && this.height == other.height) {
-        "dimensions must be equal: ${height}x${width} vs other ${other.height}x${other.width}"
+        "dimensions must be equal: ${height}x$width vs other ${other.height}x${other.width}"
     }
 
     for (column in 0 until height) {

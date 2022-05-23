@@ -9,11 +9,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import care.data4life.integration.app.di.Di
-import care.data4life.integration.app.ui.feature.welcome.WelcomeView
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Action
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Event.NavigateToHome
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Event.NavigateToLogin
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.ViewModel
+import care.data4life.integration.app.ui.feature.welcome.WelcomeView
 import care.data4life.integration.app.ui.feature.welcome.WelcomeViewModel
 import kotlinx.coroutines.flow.onEach
 

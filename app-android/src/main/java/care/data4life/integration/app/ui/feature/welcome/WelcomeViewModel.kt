@@ -5,7 +5,6 @@
 package care.data4life.integration.app.ui.feature.welcome
 
 import care.data4life.integration.app.data.DataContract.Service
-import care.data4life.integration.app.ui.feature.welcome.WelcomeContract
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Action
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Action.LoginClicked
 import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.Action.LoginConfirmed
