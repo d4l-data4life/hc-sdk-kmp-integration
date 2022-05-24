@@ -4,8 +4,6 @@
 
 package care.data4life.integration.app.ui.navigation
 
-import androidx.compose.material.Text
-import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -14,11 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import care.data4life.integration.app.di.Di.Ui
-import care.data4life.integration.app.ui.feature.home.HomeScreen
-import care.data4life.integration.app.ui.feature.welcome.WelcomeScreen
+import care.data4life.integration.app.ui.feature.home.HomeView
+import care.data4life.integration.app.ui.feature.welcome.WelcomeView
 import care.data4life.integration.app.ui.navigation.NavigationContract.AuthDestination
 import care.data4life.integration.app.ui.navigation.NavigationContract.DashboardDestination
-import care.data4life.integration.app.ui.navigation.NavigationContract.Destination
 import care.data4life.integration.app.ui.navigation.NavigationContract.RootDestination
 
 @Composable
@@ -44,7 +41,7 @@ fun NavGraphBuilder.addAuthorization(
         route = RootDestination.Authentication.route
     ) {
         composable(route = AuthDestination.Welcome.route) {
-            WelcomeScreen(
+            WelcomeView(
                 viewModel = Ui.welcomeViewModel,
                 openDashboard = {
                     controller.navigate(RootDestination.Dashboard.route)
@@ -62,7 +59,7 @@ fun NavGraphBuilder.addDashboard(
         route = RootDestination.Dashboard.route
     ) {
         composable(route = DashboardDestination.Home.route) {
-            HomeScreen(
+            HomeView(
                 openAuthentication = {
                     controller.navigate(RootDestination.Authentication.route)
                 }
