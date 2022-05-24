@@ -12,7 +12,6 @@ import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.ViewMod
 import care.data4life.integration.app.ui.feature.welcome.WelcomeViewModel
 
 object Di : DiContract {
-
     object Ui : DiContract.Ui {
         override val welcomeViewModel: ViewModel
             get() = WelcomeViewModel(Data.authService)
