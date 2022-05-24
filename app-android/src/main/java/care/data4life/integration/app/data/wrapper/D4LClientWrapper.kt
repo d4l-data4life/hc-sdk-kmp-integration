@@ -10,14 +10,20 @@ import care.data4life.integration.app.data.DataContract.Wrapper.D4LClient
 import care.data4life.sdk.Data4LifeClient
 
 class D4LClientWrapper(
-    private val client: Data4LifeClient = createDefault()
+    client: Data4LifeClient? = createDefault()
 ) : D4LClient {
+
+    private val _client: Data4LifeClient? = client
+
+    private val client: Data4LifeClient
+        get() = _client!!
+
     override fun getRaw(): Data4LifeClient {
         return client
     }
 
     override fun getLoginIntent(context: Context, scopes: Set<String>?): Intent {
-        return client.getLoginIntent(context, scopes)
+        return client.getLoginIntent(context, scopes)!!
     }
 
     override suspend fun isAuthorized(): Boolean = callSuspendResultListenerWrapper { listener ->
@@ -25,6 +31,6 @@ class D4LClientWrapper(
     }
 
     companion object {
-        fun createDefault(): Data4LifeClient = Data4LifeClient.getInstance()
+        fun createDefault(): Data4LifeClient? = Data4LifeClient.getInstance()
     }
 }
