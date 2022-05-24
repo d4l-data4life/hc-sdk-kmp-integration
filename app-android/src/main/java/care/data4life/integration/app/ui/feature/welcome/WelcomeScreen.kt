@@ -19,7 +19,8 @@ import kotlinx.coroutines.flow.onEach
 
 @Composable
 fun WelcomeScreen(
-    viewModel: ViewModel
+    viewModel: ViewModel,
+    openDashboard: () -> Unit
 ) {
     val viewState = viewModel.state.collectAsState()
     val onLoginClicked = { viewModel.onAction(Action.LoginClicked) }

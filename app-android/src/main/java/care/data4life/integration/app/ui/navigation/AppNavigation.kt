@@ -6,6 +6,8 @@ package care.data4life.integration.app.ui.navigation
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,23 +25,39 @@ fun AppNavigation(
         navController = controller,
         startDestination = startDestination.route
     ) {
+        addAuthorization(controller)
+        addDashboard(controller)
 
-        navigation(
-            startDestination = Destination.Authentication.Welcome.route,
-            route = Destination.Authentication.route
-        ) {
-            composable(route = Destination.Authentication.Welcome.route) {
-                WelcomeScreen(viewModel = Ui.welcomeViewModel)
-            }
+    }
+}
+
+fun NavGraphBuilder.addAuthorization(
+    controller: NavController
+) {
+    navigation(
+        startDestination = Destination.Authentication.Welcome.route,
+        route = Destination.Authentication.route
+    ) {
+        composable(route = Destination.Authentication.Welcome.route) {
+            WelcomeScreen(
+                viewModel = Ui.welcomeViewModel,
+                openDashboard = {
+                    controller.navigate(Destination.Dashboard.route)
+                }
+            )
         }
+    }
+}
 
-        navigation(
-            startDestination = Destination.Dashboard.Home.route,
-            route = Destination.Dashboard.route
-        ) {
-            composable(route = Destination.Dashboard.Home.route) {
-                Text("Home screen")
-            }
+fun NavGraphBuilder.addDashboard(
+    controller: NavController
+) {
+    navigation(
+        startDestination = Destination.Dashboard.Home.route,
+        route = Destination.Dashboard.route
+    ) {
+        composable(route = Destination.Dashboard.Home.route) {
+            Text("Home screen")
         }
     }
 }
