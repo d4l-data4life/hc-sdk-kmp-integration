@@ -8,13 +8,9 @@ import care.data4life.integration.app.data.AuthService
 import care.data4life.integration.app.data.DataContract.Service
 import care.data4life.integration.app.data.DataContract.Wrapper
 import care.data4life.integration.app.data.wrapper.D4LClientWrapper
-import care.data4life.integration.app.ui.feature.welcome.WelcomeContract.ViewModel
-import care.data4life.integration.app.ui.feature.welcome.WelcomeViewModel
 
 object Di : DiContract {
     object Ui : DiContract.Ui {
-        override val welcomeViewModel: ViewModel
-            get() = WelcomeViewModel(Data.authService)
     }
 
     object Data : DiContract.Data {

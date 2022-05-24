@@ -6,16 +6,13 @@ package care.data4life.integration.app.di
 
 import care.data4life.integration.app.data.DataContract.Service
 import care.data4life.integration.app.data.DataContract.Wrapper
-import care.data4life.integration.app.ui.feature.welcome.WelcomeContract
 
 interface DiContract {
 
     val ui: Ui
     val data: Data
 
-    interface Ui {
-        val welcomeViewModel: WelcomeContract.ViewModel
-    }
+    interface Ui {}
 
     interface Data {
         val d4lClient: Wrapper.D4LClient

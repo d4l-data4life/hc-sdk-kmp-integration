@@ -11,7 +11,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import care.data4life.integration.app.di.Di.Ui
 import care.data4life.integration.app.ui.feature.home.HomeView
 import care.data4life.integration.app.ui.feature.welcome.WelcomeView
 import care.data4life.integration.app.ui.navigation.NavigationContract.AuthDestination
@@ -42,7 +41,6 @@ fun NavGraphBuilder.addAuthorization(
     ) {
         composable(route = AuthDestination.Welcome.route) {
             WelcomeView(
-                viewModel = Ui.welcomeViewModel,
                 openDashboard = {
                     controller.navigate(RootDestination.Dashboard.route)
                 }

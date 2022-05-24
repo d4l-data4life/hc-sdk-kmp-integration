@@ -12,6 +12,9 @@ import care.data4life.sdk.Data4LifeClient
 class D4LClientWrapper(
     private val client: Data4LifeClient = createDefault()
 ) : D4LClient {
+    override fun getRaw(): Data4LifeClient {
+        return client
+    }
 
     override fun getLoginIntent(context: Context, scopes: Set<String>?): Intent {
         return client.getLoginIntent(context, scopes)

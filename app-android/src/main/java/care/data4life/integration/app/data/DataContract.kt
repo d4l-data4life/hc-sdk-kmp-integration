@@ -7,11 +7,14 @@ package care.data4life.integration.app.data
 import android.content.Context
 import android.content.Intent
 import care.data4life.integration.app.data.wrapper.D4LClientWrapperContract
+import care.data4life.sdk.Data4LifeClient
 
 interface DataContract {
 
     interface Wrapper {
         interface D4LClient : D4LClientWrapperContract {
+            fun getRaw(): Data4LifeClient
+
             fun getLoginIntent(context: Context, scopes: Set<String>? = null): Intent
         }
     }
