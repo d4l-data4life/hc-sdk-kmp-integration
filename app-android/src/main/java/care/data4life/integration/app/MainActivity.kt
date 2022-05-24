@@ -23,11 +23,6 @@ class MainActivity : ComponentActivity() {
     }
 
     // TODO remove from test!!
-    override fun finish() {
-        // ignore so that Android test runner can't kill activity after each test
-    }
-
-    // TODO remove from test!!
     fun explicitFinish() {
         super.finish()
     }
