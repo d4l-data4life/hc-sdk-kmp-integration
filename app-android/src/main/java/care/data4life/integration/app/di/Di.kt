@@ -10,8 +10,7 @@ import care.data4life.integration.app.data.DataContract.Wrapper
 import care.data4life.integration.app.data.wrapper.D4LClientWrapper
 
 object Di : DiContract {
-    object Ui : DiContract.Ui {
-    }
+    object Ui : DiContract.Ui
 
     object Data : DiContract.Data {
         override val d4lClient: Wrapper.D4LClient by lazy { D4LClientWrapper() }

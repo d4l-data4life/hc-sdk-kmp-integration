@@ -12,7 +12,7 @@ interface DiContract {
     val ui: Ui
     val data: Data
 
-    interface Ui {}
+    interface Ui
 
     interface Data {
         val d4lClient: Wrapper.D4LClient

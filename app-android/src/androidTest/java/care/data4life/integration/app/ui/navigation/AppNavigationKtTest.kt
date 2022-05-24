@@ -11,7 +11,6 @@ import care.data4life.integration.app.test.compose.junit5.createAndroidComposeEx
 import care.data4life.integration.app.test.compose.setThemedContent
 import care.data4life.integration.app.ui.navigation.NavigationContract.AuthDestination
 import care.data4life.integration.app.ui.navigation.NavigationContract.DashboardDestination
-import care.data4life.integration.app.ui.navigation.NavigationContract.Destination
 import care.data4life.integration.app.ui.navigation.NavigationContract.RootDestination
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension

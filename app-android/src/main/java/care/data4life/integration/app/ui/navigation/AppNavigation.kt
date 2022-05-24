@@ -28,7 +28,6 @@ fun AppNavigation(
     ) {
         addAuthorization(controller)
         addDashboard(controller)
-
     }
 }
 
