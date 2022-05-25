@@ -4,15 +4,17 @@
 
 package care.data4life.integration.app.test.compose
 
+import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.captureToImage
 import androidx.test.platform.app.InstrumentationRegistry
-import java.io.File
 import java.io.FileNotFoundException
-import java.io.FileOutputStream
 
 /**
  * On device screenshot comparison against an expected screenshot.
@@ -29,15 +31,16 @@ fun SemanticsNodeInteraction.assertScreenshotMatches(
     saveAsExpected: Boolean = true
 ) {
     val actualBitmap = captureToImage().asAndroidBitmap()
-    val file = "$folderPath/${fileName}_${actualBitmap.width}x${actualBitmap.height}.png"
+    val screenShotName = "$fileName-${actualBitmap.width}x${actualBitmap.height}.png"
+    val screenShotPath = "$folderPath/$screenShotName"
 
     if (saveAsExpected) {
-        saveExpectedScreenshot(file, actualBitmap)
+        saveExpectedScreenshotInDownloads(screenShotPath, actualBitmap)
     }
 
-    val expectedBitmap = loadExpectedScreenshot(file)
+    val expectedBitmap = loadExpectedScreenshot(screenShotPath)
     if (expectedBitmap == null) {
-        throw AssertionError("expected screenshot not present in assets folder: $file")
+        throw AssertionError("expected screenshot not present in assets folder: $screenShotPath")
     } else {
         actualBitmap.compare(expectedBitmap)
     }
@@ -53,17 +56,28 @@ private fun loadExpectedScreenshot(path: String): Bitmap? {
     }
 }
 
-private fun saveExpectedScreenshot(path: String, bitmap: Bitmap) {
-    val outputPath = InstrumentationRegistry.getInstrumentation().targetContext.filesDir.canonicalPath
-    val filePath = "$outputPath/$path"
-    val folder = File(filePath.substringBeforeLast("/"))
-    if (!folder.exists()) {
-        folder.mkdirs()
+private fun saveExpectedScreenshotInDownloads(path: String, bitmap: Bitmap) {
+    val contentValues = ContentValues().apply {
+        put(MediaStore.MediaColumns.DISPLAY_NAME, "screenshot/$path")
+        put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
+        put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
     }
-    FileOutputStream(filePath).use { output ->
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+
+    val resolver = InstrumentationRegistry.getInstrumentation().targetContext.contentResolver
+
+    var uri: Uri? = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+
+    if (uri != null) {
+        runCatching {
+            resolver.openOutputStream(uri)?.use { output ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+            }
+        }.getOrElse {
+            uri.let {
+                resolver.delete(uri, null, null)
+            }
+        }
     }
-    println("Saved expected screenshot: $filePath")
 }
 
 private fun Bitmap.compare(other: Bitmap) {
@@ -83,9 +97,4 @@ private fun Bitmap.readRow(column: Int): IntArray {
     val row = IntArray(width)
     this.getPixels(row, 0, width, 0, column, width, 1)
     return row
-}
-
-internal fun clearScreenshots(folderName: String) {
-    val path = File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir, folderName)
-    path.deleteRecursively()
 }
