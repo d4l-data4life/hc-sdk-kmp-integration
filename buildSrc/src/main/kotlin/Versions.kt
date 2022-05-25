@@ -107,4 +107,7 @@ object Versions {
 
     // https://github.com/agoda-com/Kakao
     const val androidTestKakao = "2.4.0"
+
+    // https://github.com/KakaoCup/Compose
+    const val androidTestKakaoCompose = "0.0.7"
 }

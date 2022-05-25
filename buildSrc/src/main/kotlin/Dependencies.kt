@@ -95,8 +95,10 @@ object Dependencies {
             const val junit5EngineVintage = "org.junit.vintage:junit-vintage-engine:${Versions.testJUnit5Android}"
             const val junit5Parameterized = "org.junit.jupiter:junit-jupiter-params:${Versions.testJUnit5Android}"
 
-            const val junit5AndroidInstrumentation = "de.mannodermaus.junit5:android-test-core:${Versions.testJUnit5AndroidInstrumentation}"
-            const val junit5AndroidInstrumentationRuntime = "de.mannodermaus.junit5:android-test-runner:${Versions.testJUnit5AndroidInstrumentation}"
+            const val junit5AndroidInstrumentation =
+                "de.mannodermaus.junit5:android-test-core:${Versions.testJUnit5AndroidInstrumentation}"
+            const val junit5AndroidInstrumentationRuntime =
+                "de.mannodermaus.junit5:android-test-runner:${Versions.testJUnit5AndroidInstrumentation}"
 
             const val testKotlin = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
             const val testKotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
@@ -122,6 +124,7 @@ object Dependencies {
             const val androidXTestComposeUi = "androidx.compose.ui:ui-test-junit4:${Versions.androidXCompose}"
 
             const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
+            const val kakaoCompose = "io.github.kakaocup:compose:${Versions.androidTestKakaoCompose}"
 
             const val mockk = "io.mockk:mockk-android:${Versions.testMockk}"
         }
