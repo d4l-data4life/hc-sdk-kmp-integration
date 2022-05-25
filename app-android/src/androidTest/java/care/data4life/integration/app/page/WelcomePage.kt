@@ -4,7 +4,6 @@
 
 package care.data4life.integration.app.page
 
-import care.data4life.integration.app.R
 import com.agoda.kakao.common.views.KView
 import com.agoda.kakao.screen.Screen
 import com.agoda.kakao.text.KButton
