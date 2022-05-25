@@ -7,6 +7,9 @@ do
   FILE=$(cut -d '_' -f3 <<< "$file")
 
   cp "$file" "app-android/src/androidTest/assets/$FOLDER/$FILE"
+
+  SOURCE=$(cut -d '/' -f2 <<< "$file")
+  adb shell rm "/sdcard/Download/$SOURCE"
 done
 
 rm -rf tmp
