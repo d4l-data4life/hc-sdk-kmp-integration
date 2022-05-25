@@ -29,7 +29,7 @@ class LogoKtTest {
         }
 
         // When
-        val logo = onNodeWithTag("Logo")
+        val logo = onNodeWithTag(testTagName)
 
         // Then
         logo.assertIsDisplayed()
@@ -43,10 +43,14 @@ class LogoKtTest {
         }
 
         // When
-        val logo = onNodeWithTag("Logo")
+        val logo = onNodeWithTag(testTagName)
 
         // Then
         logo.assertIsDisplayed()
-            .assertScreenshotMatches("atom/Logo.png")
+            .assertScreenshotMatches("atom", testTagName)
+    }
+
+    companion object {
+        const val testTagName = "Logo"
     }
 }

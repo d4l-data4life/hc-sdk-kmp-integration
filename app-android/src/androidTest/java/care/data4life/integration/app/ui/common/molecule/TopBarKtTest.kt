@@ -49,10 +49,14 @@ class TopBarKtTest {
         }
 
         // When
-        val logo = onNodeWithTag("TopBar")
+        val logo = onNodeWithTag(testTageName)
 
         // Then
         logo.assertIsDisplayed()
-            .assertScreenshotMatches("molecule/TopBar.png")
+            .assertScreenshotMatches("molecule", testTageName)
+    }
+
+    companion object {
+        const val testTageName = "TopBar"
     }
 }

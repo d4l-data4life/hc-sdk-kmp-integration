@@ -47,10 +47,14 @@ class TopLogoKtTest {
         }
 
         // When
-        val logo = onNodeWithTag("TopLogo")
+        val logo = onNodeWithTag(testTagName)
 
         // Then
         logo.assertIsDisplayed()
-            .assertScreenshotMatches("atom/TopLogo.png")
+            .assertScreenshotMatches("atom", testTagName)
+    }
+
+    companion object {
+        const val testTagName = "TopLogo"
     }
 }

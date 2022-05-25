@@ -44,6 +44,9 @@ object D4LColors {
 
     val neutralDark = Color(0xFF424141)
     val neutralDarker = Color(0xFF2c2b2b)
+
+    val transparent = Color.Transparent
+    val debug = Color.Magenta
 }
 
 val DarkColorPalette = darkColors(

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import care.data4life.integration.app.R
 import care.data4life.integration.app.ui.theme.Sizes
 
@@ -25,4 +26,10 @@ fun TopLogo() {
         contentDescription = "TopLogo",
         colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
     )
+}
+
+@Preview
+@Composable
+fun TopLogoPreview() {
+    TopLogo()
 }

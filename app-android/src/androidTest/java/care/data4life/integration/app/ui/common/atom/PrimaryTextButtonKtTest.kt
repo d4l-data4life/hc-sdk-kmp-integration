@@ -82,10 +82,14 @@ class PrimaryTextButtonKtTest {
         }
 
         // When
-        val button = onNodeWithTag("PrimaryTextButton")
+        val button = onNodeWithTag(testTagName)
 
         // Then
         button.assertIsDisplayed()
-            .assertScreenshotMatches("atom/PrimaryTextButton.png", true)
+            .assertScreenshotMatches("atom", testTagName)
+    }
+
+    companion object {
+        const val testTagName = "PrimaryTextButton"
     }
 }

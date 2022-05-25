@@ -11,6 +11,7 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.captureToImage
 import androidx.test.platform.app.InstrumentationRegistry
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 
 /**
@@ -23,18 +24,20 @@ import java.io.FileOutputStream
  * If `saveAsExpected` is enabled, current screenshot will be saved on device in `data/data/{package}/files`
  */
 fun SemanticsNodeInteraction.assertScreenshotMatches(
-    expectedFilePath: String,
-    saveAsExpected: Boolean = false
+    folderPath: String,
+    fileName: String,
+    saveAsExpected: Boolean = true
 ) {
     val actualBitmap = captureToImage().asAndroidBitmap()
-    val expectedBitmap = loadExpectedScreenshot(expectedFilePath)
+    val file = "$folderPath/${fileName}_${actualBitmap.width}x${actualBitmap.height}.png"
 
     if (saveAsExpected) {
-        saveExpectedScreenshot(expectedFilePath, actualBitmap)
+        saveExpectedScreenshot(file, actualBitmap)
     }
 
+    val expectedBitmap = loadExpectedScreenshot(file)
     if (expectedBitmap == null) {
-        throw AssertionError("expected screenshot not present in assets folder: $expectedFilePath")
+        throw AssertionError("expected screenshot not present in assets folder: $file")
     } else {
         actualBitmap.compare(expectedBitmap)
     }
@@ -46,7 +49,7 @@ private fun loadExpectedScreenshot(path: String): Bitmap? {
         val file = assets.open(path)
         file.use { BitmapFactory.decodeStream(it) }
     } catch (exception: Throwable) {
-        null
+        throw FileNotFoundException("File not found: $path")
     }
 }
 
@@ -72,7 +75,7 @@ private fun Bitmap.compare(other: Bitmap) {
         val row1 = this.readRow(column)
         val row2 = other.readRow(column)
 
-        assert(row1.contentEquals(row2)) { "Bitmap row content is different" }
+        assert(row1.contentEquals(row2)) { "Screenshot row content is different" }
     }
 }
 
@@ -80,4 +83,9 @@ private fun Bitmap.readRow(column: Int): IntArray {
     val row = IntArray(width)
     this.getPixels(row, 0, width, 0, column, width, 1)
     return row
+}
+
+internal fun clearScreenshots(folderName: String) {
+    val path = File(InstrumentationRegistry.getInstrumentation().targetContext.filesDir, folderName)
+    path.deleteRecursively()
 }

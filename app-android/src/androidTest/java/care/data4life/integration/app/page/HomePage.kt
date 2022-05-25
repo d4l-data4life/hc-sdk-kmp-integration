@@ -30,8 +30,12 @@ class HomePage : BasePage() {
     }
 
     class HomeScreen : Screen<HomeScreen>() {
-        val root = KView { withId(R.id.home_constraint) }
+        val root = KView {
+            // withId(R.id.home_constraint)
+        }
 
-        val logoutButton = KButton { withId(R.id.home_logout_button) }
+        val logoutButton = KButton {
+            // withId(R.id.home_logout_button)
+        }
     }
 }

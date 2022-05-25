@@ -30,8 +30,12 @@ class WelcomePage : BasePage() {
     }
 
     class WelcomeScreen : Screen<WelcomeScreen>() {
-        val root = KView { withId(R.id.welcome_constraint) }
+        val root = KView {
+            // withId(R.id.welcome_constraint)
+        }
 
-        val loginButton = KButton { withId(R.id.welcome_login_button) }
+        val loginButton = KButton {
+            // withId(R.id.welcome_login_button)
+        }
     }
 }
