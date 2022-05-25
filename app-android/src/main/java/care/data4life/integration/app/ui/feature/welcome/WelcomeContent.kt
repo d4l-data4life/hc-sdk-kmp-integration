@@ -30,11 +30,12 @@ import care.data4life.integration.app.ui.theme.Spacing
 
 @Composable
 fun WelcomeContent(
-    onLoginClick: () -> Unit
+    onLoginClick: () -> Unit,
+    testTagName: String = "WelcomeContent"
 ) {
     Surface(
         color = MaterialTheme.colors.surface,
-        modifier = Modifier.testTag("WelcomeView"),
+        modifier = Modifier.testTag(testTagName),
     ) {
         Column(
             modifier = Modifier
@@ -85,7 +86,8 @@ fun WelcomeContent(
 
             PrimaryTextButton(
                 text = stringResource(id = R.string.welcome_login_button_label),
-                onClick = onLoginClick
+                onClick = onLoginClick,
+                testTagName = "${testTagName}ButtonLogin"
             )
         }
     }

@@ -16,11 +16,12 @@ fun PrimaryTextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    testTagName: String = "PrimaryTextButton",
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
-            .testTag("PrimaryTextButton")
+            .testTag(testTagName)
             .then(modifier),
     ) {
         Text(

@@ -13,11 +13,13 @@ import androidx.compose.ui.res.painterResource
 import care.data4life.integration.app.R
 
 @Composable
-fun Logo() {
+fun Logo(
+    testTagName: String = "Logo"
+) {
     Image(
         painter = painterResource(id = R.drawable.d4l_logo),
         modifier = Modifier
-            .testTag("Logo")
+            .testTag(testTagName)
             .fillMaxWidth(),
         contentDescription = "Logo"
     )

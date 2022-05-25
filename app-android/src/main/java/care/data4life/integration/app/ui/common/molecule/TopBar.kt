@@ -20,11 +20,13 @@ import care.data4life.integration.app.ui.theme.Sizes
 import care.data4life.integration.app.ui.theme.Spacing
 
 @Composable
-fun TopBar() {
+fun TopBar(
+    testTagName: String = "TopBar"
+) {
     Surface(
         color = MaterialTheme.colors.primary,
         contentColor = contentColorFor(MaterialTheme.colors.primary),
-        modifier = Modifier.testTag("TopBar")
+        modifier = Modifier.testTag(testTagName)
     ) {
         Row(
             modifier = Modifier
@@ -33,7 +35,7 @@ fun TopBar() {
                 .padding(start = Spacing.S, end = Spacing.S),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TopLogo()
+            TopLogo(testTagName = "TopBarLogo")
         }
     }
 }

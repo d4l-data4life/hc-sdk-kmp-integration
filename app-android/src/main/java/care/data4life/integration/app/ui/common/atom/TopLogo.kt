@@ -17,11 +17,13 @@ import care.data4life.integration.app.R
 import care.data4life.integration.app.ui.theme.Sizes
 
 @Composable
-fun TopLogo() {
+fun TopLogo(
+    testTagName: String = "TopLogo"
+) {
     Image(
         painter = painterResource(id = R.drawable.d4l_logo),
         modifier = Modifier
-            .testTag("TopLogo")
+            .testTag(testTagName)
             .height(Sizes.topLogo),
         contentDescription = "TopLogo",
         colorFilter = ColorFilter.tint(MaterialTheme.colors.onPrimary),
