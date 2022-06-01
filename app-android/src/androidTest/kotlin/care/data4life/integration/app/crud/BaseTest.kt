@@ -8,7 +8,6 @@ import androidx.test.rule.ActivityTestRule
 import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
-import care.data4life.integration.app.page.WelcomePage
 import care.data4life.integration.app.test.NetworkUtil
 import care.data4life.integration.app.test.TestConfigLoader
 import care.data4life.integration.app.test.deleteAllRecords
@@ -91,11 +90,11 @@ abstract class BaseTest<T : DomainResource> {
 
             val user = TestConfigLoader.load().user
 
-            homePage = WelcomePage()
-                .isVisible()
-                .openLoginPage()
-                .doLogin(user)
-                .isVisible()
+            // homePage = WelcomePage()
+            //     .isVisible()
+            //     .openLoginPage()
+            //     .doLogin(user)
+            //     .isVisible()
 
             assertLogin(true)
         }
@@ -107,7 +106,6 @@ abstract class BaseTest<T : DomainResource> {
 
             homePage
                 .doLogout()
-                .isVisible()
 
             assertLogin(false)
             recordId = ""
