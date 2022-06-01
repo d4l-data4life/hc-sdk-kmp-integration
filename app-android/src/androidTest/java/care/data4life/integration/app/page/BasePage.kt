@@ -4,25 +4,11 @@
 
 package care.data4life.integration.app.page
 
-import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.uiautomator.By
-import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.Until
+import care.data4life.integration.app.test.compose.junit5.ComposeContext
 
-abstract class BasePage {
-
-    val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())!!
-
-    init {
-        this.waitForPage()
-    }
-
-    abstract fun waitForPage()
-
-    fun waitByResource(resourceName: String) {
-        device.wait(Until.hasObject(By.res(resourceName)), TIMEOUT)
-    }
-
+abstract class BasePage(
+    protected val composeContext: ComposeContext,
+) {
     companion object {
         const val TIMEOUT = 1000 * 10L
 
