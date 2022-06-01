@@ -14,11 +14,11 @@ import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import care.data4life.integration.app.test.Auth2FAHelper
 import care.data4life.integration.app.test.User
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import java.lang.Thread.sleep
 
 class LoginPage(
-    composeContext: ComposeContext
+    composeContext: ComposeContentContext
 ) : BasePage(composeContext) {
 
     private val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())!!

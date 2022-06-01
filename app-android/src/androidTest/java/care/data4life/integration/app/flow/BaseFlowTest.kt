@@ -5,7 +5,7 @@
 package care.data4life.integration.app.flow
 
 import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import care.data4life.integration.app.ui.IntegrationApp
 import care.data4life.integration.app.ui.theme.IntegrationTheme
@@ -17,7 +17,7 @@ abstract class BaseFlowTest {
     @RegisterExtension
     val extension = createAndroidComposeExtension<MainActivity>()
 
-    protected fun ComposeContext.setMainContent() {
+    protected fun ComposeContentContext.setMainContent() {
         setContent {
             IntegrationTheme {
                 IntegrationApp()

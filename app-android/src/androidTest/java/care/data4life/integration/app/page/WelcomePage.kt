@@ -5,14 +5,14 @@
 package care.data4life.integration.app.page
 
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
 
-fun ComposeContext.onWelcomePage() = WelcomePage(this)
+fun ComposeContentContext.onWelcomePage() = WelcomePage(this)
 
 class WelcomePage(
-    composeContext: ComposeContext,
+    composeContext: ComposeContentContext,
 ) : BasePage(composeContext) {
     private val screen: WelcomeScreen = WelcomeScreen(composeContext)
 

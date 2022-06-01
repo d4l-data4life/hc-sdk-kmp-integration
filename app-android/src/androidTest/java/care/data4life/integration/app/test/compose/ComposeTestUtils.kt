@@ -11,11 +11,11 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import care.data4life.integration.app.ui.theme.D4LColors
 import care.data4life.integration.app.ui.theme.IntegrationTheme
 
-fun ComposeContext.setThemedContent(
+fun ComposeContentContext.setThemedContent(
     content: @Composable () -> Unit
 ) {
     setContent {
@@ -25,7 +25,7 @@ fun ComposeContext.setThemedContent(
     }
 }
 
-fun ComposeContext.setThemedScreenshotContent(
+fun ComposeContentContext.setThemedScreenshotContent(
     content: @Composable () -> Unit
 ) {
     setContent {

@@ -5,14 +5,14 @@
 package care.data4life.integration.app.page
 
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
 
-fun ComposeContext.onHomePage() = HomePage(this)
+fun ComposeContentContext.onHomePage() = HomePage(this)
 
 class HomePage(
-    composeContext: ComposeContext
+    composeContext: ComposeContentContext
 ) : BasePage(composeContext) {
 
     private val screen = HomeScreen(composeContext)
@@ -31,7 +31,7 @@ class HomePage(
         viewBuilderAction = { hasTestTag(testTagName) }
     ) {
         val logoutButton: KNode = child {
-            hasTestTag("${this@HomeScreen.testTagName}${BUTTON_LOGOUT}")
+            hasTestTag("${this@HomeScreen.testTagName}$BUTTON_LOGOUT")
         }
 
         private companion object {

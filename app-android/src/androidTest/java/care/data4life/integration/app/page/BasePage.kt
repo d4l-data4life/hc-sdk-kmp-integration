@@ -4,10 +4,10 @@
 
 package care.data4life.integration.app.page
 
-import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 
 abstract class BasePage(
-    protected val composeContext: ComposeContext,
+    protected val composeContext: ComposeContentContext,
 ) {
     companion object {
         const val TIMEOUT = 1000 * 10L

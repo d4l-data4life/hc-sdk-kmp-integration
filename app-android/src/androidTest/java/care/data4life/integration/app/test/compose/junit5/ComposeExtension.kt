@@ -5,5 +5,5 @@
 package care.data4life.integration.app.test.compose.junit5
 
 interface ComposeExtension {
-    fun runComposeTest(block: ComposeContext.() -> Unit)
+    fun runComposeTest(block: ComposeContentContext.() -> Unit)
 }

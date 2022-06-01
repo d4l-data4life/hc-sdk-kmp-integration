@@ -5,5 +5,8 @@
 package care.data4life.integration.app.test.compose.junit5
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.junit4.ComposeTestRule
 
-typealias ComposeContext = ComposeContentTestRule
+typealias ComposeContentContext = ComposeContentTestRule
+
+typealias ComposeContext = ComposeTestRule

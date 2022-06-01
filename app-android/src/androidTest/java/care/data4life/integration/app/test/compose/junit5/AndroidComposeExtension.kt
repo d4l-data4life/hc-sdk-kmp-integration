@@ -6,9 +6,10 @@ package care.data4life.integration.app.test.compose.junit5
 
 import android.annotation.SuppressLint
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import org.junit.jupiter.api.extension.BeforeEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
 import org.junit.jupiter.api.extension.ParameterContext
@@ -30,11 +31,17 @@ fun <A : ComponentActivity> createAndroidComposeExtension(
     )
 }
 
+fun createEmptyComposeExtension(): AndroidComposeExtension {
+    return AndroidComposeExtension(
+        ruleFactory = { createEmptyComposeRule() }
+    )
+}
+
 @SuppressLint("NewApi")
 class AndroidComposeExtension
 @JvmOverloads
 internal constructor(
-    private val ruleFactory: () -> ComposeContentTestRule = { createComposeRule() }
+    private val ruleFactory: () -> ComposeTestRule = { createComposeRule() }
 ) :
     BeforeEachCallback,
     ParameterResolver,
@@ -69,12 +76,14 @@ internal constructor(
 
     /* ComposeExtension */
 
-    override fun runComposeTest(block: ComposeContext.() -> Unit) {
+    override fun runComposeTest(block: ComposeContentContext.() -> Unit) {
         ruleFactory().also { rule ->
             rule.apply(
                 object : Statement() {
                     override fun evaluate() {
-                        rule.block()
+                        if (rule is ComposeContentContext) {
+                            rule.block()
+                        }
                     }
                 },
                 description
