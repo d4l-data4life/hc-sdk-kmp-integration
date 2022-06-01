@@ -123,7 +123,6 @@ object Dependencies {
 
             const val androidXTestComposeUi = "androidx.compose.ui:ui-test-junit4:${Versions.androidXCompose}"
 
-            const val kakao = "com.agoda.kakao:kakao:${Versions.androidTestKakao}"
             const val kakaoCompose = "io.github.kakaocup:compose:${Versions.androidTestKakaoCompose}"
 
             const val mockk = "io.mockk:mockk-android:${Versions.testMockk}"

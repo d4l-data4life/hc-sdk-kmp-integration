@@ -105,9 +105,6 @@ object Versions {
     const val androidXUiAutomator = "2.2.0"
     const val androidXTestExtJUnit = "1.1.3"
 
-    // https://github.com/agoda-com/Kakao
-    const val androidTestKakao = "2.4.0"
-
     // https://github.com/KakaoCup/Compose
     const val androidTestKakaoCompose = "0.0.7"
 }

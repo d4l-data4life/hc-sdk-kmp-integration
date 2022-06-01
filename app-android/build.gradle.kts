@@ -239,7 +239,6 @@ dependencies {
 
     androidTestImplementation(Dependencies.Android.AndroidTest.mockk)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
     androidTestImplementation(Dependencies.Android.AndroidTest.kakaoCompose)
 
     androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestComposeUi)
