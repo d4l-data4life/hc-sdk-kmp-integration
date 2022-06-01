@@ -105,7 +105,7 @@ class LoginPage(
                 clickButton(authApp2faButtonSmsCodeSubmit, true)
 
                 sleep(TIMEOUT_SHORT)
-                val dismissButton = findResource("android.widget.Button", "(DISMISS)")
+                val dismissButton = findResource(classNameButton, authApp2faButtonDismissRegex)
                 if (dismissButton.exists()) {
                     dismissButton.click()
 
