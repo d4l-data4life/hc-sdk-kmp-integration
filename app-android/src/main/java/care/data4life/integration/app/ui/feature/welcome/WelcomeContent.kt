@@ -97,7 +97,7 @@ fun WelcomeContent(
 @Composable
 fun PreviewWelcomeContent() {
     IntegrationTheme {
-        WelcomeContent {}
+        WelcomeContent({})
     }
 }
 
@@ -105,6 +105,6 @@ fun PreviewWelcomeContent() {
 @Composable
 fun PreviewDarkWelcomeContent() {
     IntegrationTheme(darkTheme = true) {
-        WelcomeContent {}
+        WelcomeContent({})
     }
 }

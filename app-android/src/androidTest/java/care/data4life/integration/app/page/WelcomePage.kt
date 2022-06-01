@@ -4,37 +4,39 @@
 
 package care.data4life.integration.app.page
 
-import com.agoda.kakao.common.views.KView
-import com.agoda.kakao.screen.Screen
-import com.agoda.kakao.text.KButton
+import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
+import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import io.github.kakaocup.compose.node.element.ComposeScreen
+import io.github.kakaocup.compose.node.element.KNode
 
-class WelcomePage : BasePage() {
+fun ComposeContext.onWelcomePage() = WelcomePage(this)
 
-    private val screen = WelcomeScreen()
+class WelcomePage(
+    composeContext: ComposeContext,
+) : BasePage(composeContext) {
+    private val screen: WelcomeScreen = WelcomeScreen(composeContext)
 
-    override fun waitForPage() {
-        waitByResource("care.data4life.integration.app:id/welcome_constraint")
+    fun doLogin(): LoginPage {
+        screen.loginButton.performClick()
+
+        return LoginPage(composeContext)
     }
 
-    fun openLoginPage(): LoginPage {
-        screen.loginButton { click() }
-
-        return LoginPage()
-    }
-
-    fun isVisible(): WelcomePage {
-        screen.root { isDisplayed() }
-
-        return this
-    }
-
-    class WelcomeScreen : Screen<WelcomeScreen>() {
-        val root = KView {
-            // withId(R.id.welcome_constraint)
+    class WelcomeScreen(
+        semanticsProvider: SemanticsNodeInteractionsProvider,
+        private val testTagName: String = TEST_TAG_NAME,
+    ) : ComposeScreen<WelcomeScreen>(
+        semanticsProvider = semanticsProvider,
+        viewBuilderAction = { hasTestTag(testTagName) }
+    ) {
+        val loginButton: KNode = child {
+            hasTestTag("${this@WelcomeScreen.testTagName}$BUTTON_LOGIN")
         }
 
-        val loginButton = KButton {
-            // withId(R.id.welcome_login_button)
+        private companion object {
+            const val TEST_TAG_NAME = "WelcomeContent"
+
+            const val BUTTON_LOGIN = "ButtonLogin"
         }
     }
 }

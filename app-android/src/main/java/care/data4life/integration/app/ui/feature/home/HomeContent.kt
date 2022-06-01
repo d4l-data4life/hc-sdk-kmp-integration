@@ -30,11 +30,12 @@ import care.data4life.integration.app.ui.theme.Spacing
 fun HomeContent(
     onLoadFhir3Click: () -> Unit,
     onLoadFhir4Click: () -> Unit,
-    onLogoutClick: () -> Unit
+    onLogoutClick: () -> Unit,
+    testTagName: String = "HomeContent"
 ) {
     Surface(
         color = MaterialTheme.colors.surface,
-        modifier = Modifier.testTag("HomeView"),
+        modifier = Modifier.testTag(testTagName),
     ) {
         Column(
             modifier = Modifier
@@ -75,7 +76,8 @@ fun HomeContent(
 
             PrimaryTextButton(
                 text = stringResource(id = string.home_logout_button_label),
-                onClick = onLogoutClick
+                onClick = onLogoutClick,
+                testTagName = "${testTagName}ButtonLogout"
             )
         }
     }

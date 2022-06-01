@@ -4,37 +4,40 @@
 
 package care.data4life.integration.app.page
 
-import com.agoda.kakao.common.views.KView
-import com.agoda.kakao.screen.Screen
-import com.agoda.kakao.text.KButton
+import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
+import care.data4life.integration.app.test.compose.junit5.ComposeContext
+import io.github.kakaocup.compose.node.element.ComposeScreen
+import io.github.kakaocup.compose.node.element.KNode
 
-class HomePage : BasePage() {
+fun ComposeContext.onHomePage() = HomePage(this)
 
-    private val screen = HomeScreen()
+class HomePage(
+    composeContext: ComposeContext
+) : BasePage(composeContext) {
 
-    override fun waitForPage() {
-        waitByResource("care.data4life.integration.app:id/home_constraint")
-    }
+    private val screen = HomeScreen(composeContext)
 
     fun doLogout(): WelcomePage {
-        screen.logoutButton { click() }
+        screen.logoutButton.performClick()
 
-        return WelcomePage()
+        return WelcomePage(composeContext)
     }
 
-    fun isVisible(): HomePage {
-        screen.root { isDisplayed() }
-
-        return this
-    }
-
-    class HomeScreen : Screen<HomeScreen>() {
-        val root = KView {
-            // withId(R.id.home_constraint)
+    class HomeScreen(
+        semanticsProvider: SemanticsNodeInteractionsProvider,
+        private val testTagName: String = TEST_TAG_NAME
+    ) : ComposeScreen<HomeScreen>(
+        semanticsProvider = semanticsProvider,
+        viewBuilderAction = { hasTestTag(testTagName) }
+    ) {
+        val logoutButton: KNode = child {
+            hasTestTag("${this@HomeScreen.testTagName}${BUTTON_LOGOUT}")
         }
 
-        val logoutButton = KButton {
-            // withId(R.id.home_logout_button)
+        private companion object {
+            const val TEST_TAG_NAME = "HomeContent"
+
+            const val BUTTON_LOGOUT = "ButtonLogout"
         }
     }
 }
