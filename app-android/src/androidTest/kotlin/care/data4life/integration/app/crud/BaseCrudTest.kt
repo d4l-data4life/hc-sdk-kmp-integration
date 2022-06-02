@@ -19,30 +19,31 @@ import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.fail
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.threeten.bp.LocalDateTime
-import kotlin.test.assertNotEquals
 
+@TestMethodOrder(MethodOrderer.MethodName::class)
 abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
     protected lateinit var homePage: HomePage
 
-    protected lateinit var recordId: String
-    protected lateinit var recordIds: MutableList<String>
+    protected var recordId: String = ""
+    protected var recordIds: MutableList<String> = mutableListOf()
 
     override fun setupBeforeEach() {
-        recordId = ""
-        recordIds = mutableListOf()
-
-        // old
-        requestSuccessful = true
+        // TODO needed?
     }
 
     @AfterEach
     fun tearDown() {
-        assertLoggedIn(false)
+        // TODO needed?
+        // assertLoggedIn(false)
     }
 
     @Test
@@ -375,8 +376,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         index: Int = -1
     )
 
-    private fun assertRecordExpectations(record: Record<T>) {
+    protected fun assertRecordExpectations(record: Record<T>) {
         assertNotNull(record.fhirResource)
+        assertNotNull(record.fhirResource.id)
         assertMetaExpectations(record.meta as Meta?)
     }
 
@@ -396,7 +398,6 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
     }
 
     companion object {
-        private val TIMEOUT = 10L
         private var requestSuccessful = true
     }
 }

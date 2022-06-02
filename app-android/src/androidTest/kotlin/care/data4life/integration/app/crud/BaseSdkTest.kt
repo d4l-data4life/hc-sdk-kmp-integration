@@ -4,15 +4,16 @@
 
 package care.data4life.integration.app.crud
 
-import care.data4life.integration.app.crud.BaseCrudTest.Companion
+import care.data4life.integration.app.crud.BaseSdkTest.Result.Failure
+import care.data4life.integration.app.crud.BaseSdkTest.Result.Success
 import care.data4life.integration.app.test.compose.BaseComposeTest
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
-import java.util.concurrent.TimeUnit
+import org.junit.jupiter.api.fail
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -29,16 +30,31 @@ abstract class BaseSdkTest : BaseComposeTest() {
 
     protected abstract fun setupBeforeEach()
 
+    protected suspend fun assertLoggedIn(expectedLoggedInState: Boolean) {
+        val result: Result<Boolean> = awaitListener { listener ->
+            testSubject.isUserLoggedIn(listener)
+        }
+
+        when (result) {
+            is Success -> assertEquals(
+                expectedLoggedInState,
+                result.data,
+                "Logged in state is not as expected."
+            )
+            is Failure -> fail("Failed to check logged in state: ${result.exception.message}")
+        }
+    }
+
     protected suspend fun <V> awaitListener(call: (listener: ResultListener<V>) -> Unit): Result<V> =
         suspendCoroutine { continuation ->
             call(
                 object : ResultListener<V> {
                     override fun onSuccess(t: V) {
-                        continuation.resume(Result.Success(t))
+                        continuation.resume(Success(t))
                     }
 
                     override fun onError(exception: D4LException) {
-                        continuation.resume(Result.Failure(exception))
+                        continuation.resume(Failure(exception))
                     }
                 }
             )
@@ -49,11 +65,11 @@ abstract class BaseSdkTest : BaseComposeTest() {
             call(
                 object : Callback {
                     override fun onSuccess() {
-                        continuation.resume(Result.Success(true))
+                        continuation.resume(Success(true))
                     }
 
                     override fun onError(exception: D4LException) {
-                        continuation.resume(Result.Failure(exception))
+                        continuation.resume(Failure(exception))
                     }
                 }
             )
@@ -64,30 +80,9 @@ abstract class BaseSdkTest : BaseComposeTest() {
         data class Failure(val exception: Exception) : Result<Nothing>()
     }
 
-    protected fun assertLoggedIn(expectedLoggedInState: Boolean) {
-        var isLoggedIn = false
-        testSubject.isUserLoggedIn(object : ResultListener<Boolean> {
-            override fun onSuccess(loggedIn: Boolean) {
-                isLoggedIn = loggedIn
-            }
-
-            override fun onError(exception: D4LException) {
-                exception.printStackTrace()
-            }
-        })
-
-        if (expectedLoggedInState) Assertions.assertTrue(isLoggedIn)
-        else Assertions.assertFalse(isLoggedIn)
-    }
-
     abstract inner class TestResultListener<V> : ResultListener<V> {
         override fun onError(exception: D4LException) {
             exception.printStackTrace()
-            Companion.requestSuccessful = false
         }
-    }
-
-    companion object {
-        private var requestSuccessful = true
     }
 }
