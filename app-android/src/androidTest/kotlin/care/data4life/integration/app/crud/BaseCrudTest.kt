@@ -5,8 +5,10 @@
 package care.data4life.integration.app.crud
 
 import care.data4life.fhir.stu3.model.DomainResource
+import care.data4life.integration.app.crud.BaseCrudTest.Method.CREATE
+import care.data4life.integration.app.crud.BaseSdkTest.Result.Failure
+import care.data4life.integration.app.crud.BaseSdkTest.Result.Success
 import care.data4life.integration.app.page.HomePage
-import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.SdkContract
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
@@ -17,6 +19,7 @@ import care.data4life.sdk.model.FetchResult
 import care.data4life.sdk.model.Meta
 import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
@@ -47,26 +50,28 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
     }
 
     @Test
-    fun t01_createRecord_shouldReturn_createdRecord() {
+    fun t01_createRecord_shouldReturn_createdRecord() = runBlocking {
         // Given
-        lateinit var record: Record<T>
+        val data = getModel(CREATE)
 
         // When
-        testSubject.createRecord(
-            getModel(Method.CREATE),
-            object : TestResultListener<Record<T>>() {
-                override fun onSuccess(r: Record<T>) {
-                    record = r
-                }
-            }
-        )
+        val result: Result<Record<T>> = awaitListener { listener ->
+            testSubject.createRecord(data, listener)
+        }
 
         // Then
-        assertTrue(requestSuccessful, "Create record failed")
-        assertRecordExpectations(record)
-        assertNotNull(record.fhirResource.id)
-        recordId = record.fhirResource.id!!
-        assertModelExpectations(record.fhirResource, Method.CREATE)
+        when (result) {
+            is Success -> {
+                val record = result.data
+                assertRecordExpectations(record)
+                val resource = record.fhirResource
+                assertModelExpectations(resource, CREATE)
+                recordId = resource.id!!
+            }
+            is Failure -> {
+                fail("Create record failed: ${result.exception.message}")
+            }
+        }
     }
 
     @Test
