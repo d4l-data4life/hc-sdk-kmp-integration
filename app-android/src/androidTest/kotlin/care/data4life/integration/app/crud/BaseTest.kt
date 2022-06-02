@@ -32,103 +32,42 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.threeten.bp.LocalDateTime
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
+@TestMethodOrder(MethodOrderer.MethodName::class)
 abstract class BaseTest<T : DomainResource> {
 
     @JvmField
     @RegisterExtension
     val extension = createAndroidComposeExtension<MainActivity>()
 
+    private lateinit var homePage: HomePage
+
+    protected lateinit var recordId: String
+    protected lateinit var recordIds: MutableList<String>
+
+    protected lateinit var testSubject: Data4LifeClient
+
     @BeforeAll
     fun suiteSetup() = extension.runComposeTest {
-
         isNetConnected = NetworkUtil.isOnline()
         assumeTrue(isNetConnected, "Internet connection required")
 
-        client = Data4LifeClient.getInstance()
+        testSubject = Data4LifeClient.getInstance()
 
         val user = TestConfigLoader.load().user
-
         homePage = onWelcomePage()
             .doLogin()
             .doLogin(user)
 
-        assertLogin(true)
-    }
-
-    @AfterAll
-    fun suiteCleanUp() {
-        if (!isNetConnected) return
-
-        homePage
-            .doLogout()
-
-        assertLogin(false)
-        recordId = ""
-        recordIds.clear()
-        setupDone = false
-    }
-
-    abstract fun getTestClass(): Class<T>
-
-    abstract fun getModel(method: Method, index: Int = -1): T
-
-    abstract fun assertModelExpectations(model: T, method: Method, index: Int = -1)
-
-    enum class Method {
-        CREATE, BATCH_CREATE,
-        FETCH, FETCH_BY_ID, FETCH_BY_TYPE,
-        UPDATE, BATCH_UPDATE,
-        DOWNLOAD, BATCH_DOWNLOAD,
-        DELETE, BATCH_DELETE,
-        COUNT
-    }
-
-    companion object {
-
-        private val TIMEOUT = 10L
-        private var setupDone = false
-        private var isNetConnected: Boolean = false
-        private lateinit var latch: CountDownLatch
-        private var requestSuccessful = true
-
-        private lateinit var homePage: HomePage
-
-        @JvmStatic
-        protected lateinit var recordId: String
-
-        @JvmStatic
-        protected var recordIds = mutableListOf<String>()
-
-        // SUT
-        @JvmStatic
-        protected lateinit var client: Data4LifeClient
-
-        private fun assertLogin(expectedLoggedInState: Boolean) {
-            var isLoggedIn: Boolean = false
-            latch = CountDownLatch(1)
-            client.isUserLoggedIn(object : ResultListener<Boolean> {
-                override fun onSuccess(loggedIn: Boolean) {
-                    isLoggedIn = loggedIn
-                    latch.countDown()
-                }
-
-                override fun onError(exception: D4LException) {
-                    exception.printStackTrace()
-                    latch.countDown()
-                }
-            })
-            latch.await(TIMEOUT, TimeUnit.SECONDS)
-
-            if (expectedLoggedInState) assertTrue(isLoggedIn)
-            else assertFalse(isLoggedIn)
-        }
+        assertLoggedIn(true)
     }
 
     @BeforeEach
@@ -139,27 +78,21 @@ abstract class BaseTest<T : DomainResource> {
         if (setupDone) return
         else {
             setupDone = true
-            client.deleteAllRecords(getTestClass()) // run only once before all the tests
+            testSubject.deleteAllRecords(getTestClass()) // run only once before all the tests
         }
     }
 
-    abstract inner class TestResultListener<V> : ResultListener<V> {
-        override fun onError(exception: D4LException) {
-            exception.printStackTrace()
-            requestSuccessful = false
-            latch.countDown()
-        }
-    }
+    @AfterAll
+    fun suiteCleanUp() {
+        if (!isNetConnected) return
 
-    private fun assertRecordExpectations(record: Record<T>) {
-        assertNotNull(record.fhirResource)
-        assertMetaExpectations(record.meta as Meta?)
-    }
+        homePage
+            .doLogout()
 
-    private fun assertMetaExpectations(meta: Meta?) {
-        assertNotNull(meta)
-        assertNotNull(meta?.createdDate)
-        assertNotNull(meta?.updatedDate)
+        assertLoggedIn(false)
+        recordId = ""
+        recordIds.clear()
+        setupDone = false
     }
 
     @Test
@@ -167,7 +100,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var record: Record<T>
 
         // when
-        client.createRecord(
+        testSubject.createRecord(
             getModel(Method.CREATE),
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(r: Record<T>) {
@@ -195,7 +128,7 @@ abstract class BaseTest<T : DomainResource> {
         val model2 = getModel(Method.BATCH_CREATE)
 
         // when
-        client.createRecords(
+        testSubject.createRecords(
             listOf(model1, model2),
             object : TestResultListener<CreateResult<T>>() {
                 override fun onSuccess(result: CreateResult<T>) {
@@ -224,7 +157,7 @@ abstract class BaseTest<T : DomainResource> {
         var modelCount: Int = -1
 
         // when
-        client.countRecords(
+        testSubject.countRecords(
             getTestClass(),
             object : TestResultListener<Int>() {
                 override fun onSuccess(count: Int) {
@@ -245,7 +178,7 @@ abstract class BaseTest<T : DomainResource> {
         var modelCount: Int = -1
 
         // when
-        client.countRecords(
+        testSubject.countRecords(
             null,
             object : TestResultListener<Int>() {
                 override fun onSuccess(count: Int) {
@@ -268,7 +201,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var record: Record<T>
 
         // when
-        client.fetchRecord(
+        testSubject.fetchRecord(
             recordId,
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(r: Record<T>) {
@@ -292,7 +225,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var fetchResult: FetchResult<T>
 
         // when
-        client.fetchRecords(
+        testSubject.fetchRecords(
             listOf(recordId, recordId),
             object : TestResultListener<FetchResult<T>>() {
                 override fun onSuccess(result: FetchResult<T>) {
@@ -320,7 +253,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var fetchedRecords: List<Record<T>>
 
         // when
-        client.fetchRecords(
+        testSubject.fetchRecords(
             getTestClass(),
             null,
             SdkContract.UpdateDateTimeRange(
@@ -355,7 +288,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var updatedRecord: Record<T>
 
         // when
-        client.updateRecord(
+        testSubject.updateRecord(
             getModel(Method.UPDATE),
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(record: Record<T>) {
@@ -382,7 +315,7 @@ abstract class BaseTest<T : DomainResource> {
         val model2 = getModel(Method.BATCH_UPDATE, 1)
 
         // when
-        client.updateRecords(
+        testSubject.updateRecords(
             listOf(model1, model2),
             object : TestResultListener<UpdateResult<T>>() {
                 override fun onSuccess(result: UpdateResult<T>) {
@@ -412,7 +345,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var downloadedRecord: Record<T>
 
         // when
-        client.downloadRecord(
+        testSubject.downloadRecord(
             recordId,
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(record: Record<T>) {
@@ -436,7 +369,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var downloadResult: DownloadResult<T>
 
         // when
-        client.downloadRecords(
+        testSubject.downloadRecords(
             listOf(recordId, recordId),
             object : TestResultListener<DownloadResult<T>>() {
                 override fun onSuccess(result: DownloadResult<T>) {
@@ -463,7 +396,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
 
         // when
-        client.deleteRecord(
+        testSubject.deleteRecord(
             recordId,
             object : Callback {
                 override fun onSuccess() {
@@ -490,7 +423,7 @@ abstract class BaseTest<T : DomainResource> {
         lateinit var deleteResult: DeleteResult
 
         // when
-        client.deleteRecords(
+        testSubject.deleteRecords(
             recordIds,
             object : TestResultListener<DeleteResult>() {
                 override fun onSuccess(result: DeleteResult) {
@@ -506,5 +439,67 @@ abstract class BaseTest<T : DomainResource> {
         assertEquals(2, deleteResult.successfulDeletes.size)
         assertTrue(deleteResult.failedDeletes.isEmpty())
         for (i in 0..1) assertEquals(recordIds[i], deleteResult.successfulDeletes[i])
+    }
+
+    abstract fun getTestClass(): Class<T>
+
+    abstract fun getModel(method: Method, index: Int = -1): T
+
+    abstract fun assertModelExpectations(model: T, method: Method, index: Int = -1)
+
+    enum class Method {
+        CREATE, BATCH_CREATE,
+        FETCH, FETCH_BY_ID, FETCH_BY_TYPE,
+        UPDATE, BATCH_UPDATE,
+        DOWNLOAD, BATCH_DOWNLOAD,
+        DELETE, BATCH_DELETE,
+        COUNT
+    }
+
+    private fun assertLoggedIn(expectedLoggedInState: Boolean) {
+        var isLoggedIn = false
+        latch = CountDownLatch(1)
+        testSubject.isUserLoggedIn(object : ResultListener<Boolean> {
+            override fun onSuccess(loggedIn: Boolean) {
+                isLoggedIn = loggedIn
+                latch.countDown()
+            }
+
+            override fun onError(exception: D4LException) {
+                exception.printStackTrace()
+                latch.countDown()
+            }
+        })
+        latch.await(TIMEOUT, TimeUnit.SECONDS)
+
+        if (expectedLoggedInState) assertTrue(isLoggedIn)
+        else assertFalse(isLoggedIn)
+    }
+
+    abstract inner class TestResultListener<V> : ResultListener<V> {
+        override fun onError(exception: D4LException) {
+            exception.printStackTrace()
+            requestSuccessful = false
+            latch.countDown()
+        }
+    }
+
+    private fun assertRecordExpectations(record: Record<T>) {
+        assertNotNull(record.fhirResource)
+        assertMetaExpectations(record.meta as Meta?)
+    }
+
+    private fun assertMetaExpectations(meta: Meta?) {
+        assertNotNull(meta)
+        assertNotNull(meta?.createdDate)
+        assertNotNull(meta?.updatedDate)
+    }
+
+    companion object {
+        private val TIMEOUT = 10L
+        private var setupDone = false
+        private var isNetConnected: Boolean = false
+        private lateinit var latch: CountDownLatch
+        private var requestSuccessful = true
     }
 }
