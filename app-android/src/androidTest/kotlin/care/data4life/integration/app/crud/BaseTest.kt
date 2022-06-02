@@ -24,75 +24,52 @@ import care.data4life.sdk.model.FetchResult
 import care.data4life.sdk.model.Meta
 import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
-import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assumptions.assumeTrue
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.threeten.bp.LocalDateTime
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
-@TestMethodOrder(MethodOrderer.MethodName::class)
 abstract class BaseTest<T : DomainResource> {
 
     @JvmField
     @RegisterExtension
     val extension = createAndroidComposeExtension<MainActivity>()
 
-    private lateinit var homePage: HomePage
+    protected lateinit var homePage: HomePage
 
     protected lateinit var recordId: String
     protected lateinit var recordIds: MutableList<String>
 
     protected lateinit var testSubject: Data4LifeClient
 
-    @BeforeAll
-    fun suiteSetup() = extension.runComposeTest {
+    @BeforeEach
+    fun setup() {
         isNetConnected = NetworkUtil.isOnline()
         assumeTrue(isNetConnected, "Internet connection required")
 
-        testSubject = Data4LifeClient.getInstance()
-
-        val user = TestConfigLoader.load().user
-        homePage = onWelcomePage()
-            .doLogin()
-            .doLogin(user)
-
-        assertLoggedIn(true)
-    }
-
-    @BeforeEach
-    fun beforeTest() {
+        // old
         latch = CountDownLatch(1)
         requestSuccessful = true
-
-        if (setupDone) return
-        else {
-            setupDone = true
-            testSubject.deleteAllRecords(getTestClass()) // run only once before all the tests
-        }
     }
 
-    @AfterAll
-    fun suiteCleanUp() {
+    @AfterEach
+    fun tearDown() {
         if (!isNetConnected) return
 
-        homePage
-            .doLogout()
+
 
         assertLoggedIn(false)
         recordId = ""
         recordIds.clear()
-        setupDone = false
     }
 
     @Test
@@ -456,7 +433,7 @@ abstract class BaseTest<T : DomainResource> {
         COUNT
     }
 
-    private fun assertLoggedIn(expectedLoggedInState: Boolean) {
+    protected fun assertLoggedIn(expectedLoggedInState: Boolean) {
         var isLoggedIn = false
         latch = CountDownLatch(1)
         testSubject.isUserLoggedIn(object : ResultListener<Boolean> {
@@ -497,7 +474,6 @@ abstract class BaseTest<T : DomainResource> {
 
     companion object {
         private val TIMEOUT = 10L
-        private var setupDone = false
         private var isNetConnected: Boolean = false
         private lateinit var latch: CountDownLatch
         private var requestSuccessful = true

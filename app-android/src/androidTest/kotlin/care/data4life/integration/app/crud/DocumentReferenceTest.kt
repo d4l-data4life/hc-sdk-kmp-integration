@@ -4,8 +4,6 @@
 
 package care.data4life.integration.app.crud
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
 import care.data4life.fhir.stu3.model.Attachment
 import care.data4life.fhir.stu3.model.CodeSystemDocumentReferenceStatus
 import care.data4life.fhir.stu3.model.CodeableConcept
@@ -14,16 +12,18 @@ import care.data4life.fhir.stu3.model.DocumentReference
 import care.data4life.fhir.stu3.model.FhirInstant
 import care.data4life.fhir.stu3.model.Practitioner
 import care.data4life.fhir.stu3.util.FhirDateTimeParser
+import care.data4life.integration.app.page.onWelcomePage
+import care.data4life.integration.app.test.TestConfigLoader
+import care.data4life.integration.app.test.deleteAllRecords
+import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.helpers.stu3.AttachmentBuilder
 import care.data4life.sdk.helpers.stu3.DocumentReferenceBuilder
 import care.data4life.sdk.helpers.stu3.getAttachments
 import care.data4life.sdk.helpers.stu3.getTitle
-import org.junit.runner.RunWith
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
 
-@RunWith(AndroidJUnit4::class)
-@LargeTest
 class DocumentReferenceTest : BaseTest<DocumentReference>() {
 
     //region document properties
@@ -49,6 +49,24 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
     private val NEW_TITLE = "New title"
     private val TITLE_1 = "doc1"
     private val TITLE_2 = "doc2"
+
+    @Test
+    fun testAll() = extension.runComposeTest {
+        testSubject = Data4LifeClient.getInstance()
+
+        val user = TestConfigLoader.load().user
+        homePage = onWelcomePage()
+            .doLogin()
+            .doLogin(user)
+
+        // assertLoggedIn(true)
+
+
+        testSubject.deleteAllRecords(getTestClass()) // run only once before all the tests
+
+        homePage
+            .doLogout()
+    }
 
     override fun getTestClass(): Class<DocumentReference> {
         return DocumentReference::class.java
