@@ -52,7 +52,7 @@ class DocumentReferenceTest : BaseCrudTest<DocumentReference>() {
 
         assertLoggedIn(true)
 
-        runCrudTests()
+        runCrudSingleTests()
         runCrudBatchTests()
 
         logout()
