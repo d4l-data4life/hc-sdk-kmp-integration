@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
-class DocumentReferenceTest : BaseTest<DocumentReference>() {
+class DocumentReferenceTest : BaseCrudTest<DocumentReference>() {
 
     //region document properties
     val attachmentTitle = "Brain MRI"
@@ -52,8 +52,6 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
 
     @Test
     fun testAll() = extension.runComposeTest {
-        testSubject = Data4LifeClient.getInstance()
-
         val user = TestConfigLoader.load().user
         homePage = onWelcomePage()
             .doLogin()

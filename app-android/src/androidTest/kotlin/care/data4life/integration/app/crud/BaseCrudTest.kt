@@ -5,18 +5,11 @@
 package care.data4life.integration.app.crud
 
 import care.data4life.fhir.stu3.model.DomainResource
-import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
-import care.data4life.integration.app.page.onWelcomePage
-import care.data4life.integration.app.test.NetworkUtil
-import care.data4life.integration.app.test.TestConfigLoader
-import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
-import care.data4life.integration.app.test.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.SdkContract
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
-import care.data4life.sdk.listener.ResultListener
 import care.data4life.sdk.model.CreateResult
 import care.data4life.sdk.model.DeleteResult
 import care.data4life.sdk.model.DownloadResult
@@ -26,57 +19,39 @@ import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Assumptions.assumeTrue
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
 import org.threeten.bp.LocalDateTime
-import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
-abstract class BaseTest<T : DomainResource> {
-
-    @JvmField
-    @RegisterExtension
-    val extension = createAndroidComposeExtension<MainActivity>()
+abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
     protected lateinit var homePage: HomePage
 
     protected lateinit var recordId: String
     protected lateinit var recordIds: MutableList<String>
 
-    protected lateinit var testSubject: Data4LifeClient
-
-    @BeforeEach
-    fun setup() {
-        isNetConnected = NetworkUtil.isOnline()
-        assumeTrue(isNetConnected, "Internet connection required")
+    override fun setupBeforeEach() {
+        recordId = ""
+        recordIds = mutableListOf()
 
         // old
-        latch = CountDownLatch(1)
         requestSuccessful = true
     }
 
     @AfterEach
     fun tearDown() {
-        if (!isNetConnected) return
-
-
-
         assertLoggedIn(false)
-        recordId = ""
-        recordIds.clear()
     }
 
     @Test
     fun t01_createRecord_shouldReturn_createdRecord() {
+        // Given
         lateinit var record: Record<T>
 
-        // when
+        // When
         testSubject.createRecord(
             getModel(Method.CREATE),
             object : TestResultListener<Record<T>>() {
@@ -88,7 +63,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Create record failed")
         assertRecordExpectations(record)
         assertNotNull(record.fhirResource.id)
@@ -104,7 +79,7 @@ abstract class BaseTest<T : DomainResource> {
         val model1 = getModel(Method.BATCH_CREATE)
         val model2 = getModel(Method.BATCH_CREATE)
 
-        // when
+        // When
         testSubject.createRecords(
             listOf(model1, model2),
             object : TestResultListener<CreateResult<T>>() {
@@ -116,7 +91,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Create records failed")
         assertEquals(2, createResult.successfulOperations.size)
         assertTrue(createResult.failedOperations.isEmpty())
@@ -133,7 +108,7 @@ abstract class BaseTest<T : DomainResource> {
     fun t03_countRecords_shouldReturn_recordCount() {
         var modelCount: Int = -1
 
-        // when
+        // When
         testSubject.countRecords(
             getTestClass(),
             object : TestResultListener<Int>() {
@@ -145,7 +120,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertNotEquals(-1, modelCount, "Count records failed")
         assertEquals(3, modelCount)
     }
@@ -154,7 +129,7 @@ abstract class BaseTest<T : DomainResource> {
     fun t04_countAllRecords_shouldReturn_recordCount() {
         var modelCount: Int = -1
 
-        // when
+        // When
         testSubject.countRecords(
             null,
             object : TestResultListener<Int>() {
@@ -166,7 +141,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertNotEquals(-1, modelCount, "Count all records failed")
         assertEquals(3, modelCount)
     }
@@ -177,7 +152,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var record: Record<T>
 
-        // when
+        // When
         testSubject.fetchRecord(
             recordId,
             object : TestResultListener<Record<T>>() {
@@ -189,7 +164,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Fetch record failed")
         assertRecordExpectations(record)
         assertModelExpectations(record.fhirResource, Method.FETCH)
@@ -201,7 +176,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var fetchResult: FetchResult<T>
 
-        // when
+        // When
         testSubject.fetchRecords(
             listOf(recordId, recordId),
             object : TestResultListener<FetchResult<T>>() {
@@ -213,7 +188,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Fetch records failed")
         assertEquals(2, fetchResult.successfulFetches.size)
         assertTrue(fetchResult.failedFetches.isEmpty())
@@ -229,7 +204,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var fetchedRecords: List<Record<T>>
 
-        // when
+        // When
         testSubject.fetchRecords(
             getTestClass(),
             null,
@@ -249,7 +224,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Fetch records by type failed")
         assertEquals(3, fetchedRecords.size)
         fetchedRecords.map {
@@ -264,7 +239,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var updatedRecord: Record<T>
 
-        // when
+        // When
         testSubject.updateRecord(
             getModel(Method.UPDATE),
             object : TestResultListener<Record<T>>() {
@@ -276,7 +251,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Update record failed")
         assertRecordExpectations(updatedRecord)
         assertModelExpectations(updatedRecord.fhirResource, Method.UPDATE)
@@ -291,7 +266,7 @@ abstract class BaseTest<T : DomainResource> {
         val model1 = getModel(Method.BATCH_UPDATE, 0)
         val model2 = getModel(Method.BATCH_UPDATE, 1)
 
-        // when
+        // When
         testSubject.updateRecords(
             listOf(model1, model2),
             object : TestResultListener<UpdateResult<T>>() {
@@ -303,7 +278,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Update records failed")
         assertEquals(2, updateResult.successfulUpdates.size)
         assertTrue(updateResult.failedUpdates.isEmpty())
@@ -321,7 +296,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var downloadedRecord: Record<T>
 
-        // when
+        // When
         testSubject.downloadRecord(
             recordId,
             object : TestResultListener<Record<T>>() {
@@ -333,7 +308,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Download record failed")
         assertRecordExpectations(downloadedRecord)
         assertModelExpectations(downloadedRecord.fhirResource, Method.DOWNLOAD)
@@ -345,7 +320,7 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull("recordId expected", recordId)
         lateinit var downloadResult: DownloadResult<T>
 
-        // when
+        // When
         testSubject.downloadRecords(
             listOf(recordId, recordId),
             object : TestResultListener<DownloadResult<T>>() {
@@ -357,7 +332,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Download records failed")
         assertEquals(2, downloadResult.successfulDownloads.size)
         assertTrue(downloadResult.failedDownloads.isEmpty())
@@ -372,7 +347,7 @@ abstract class BaseTest<T : DomainResource> {
         // given
         assertNotNull("recordId expected", recordId)
 
-        // when
+        // When
         testSubject.deleteRecord(
             recordId,
             object : Callback {
@@ -389,7 +364,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Delete record failed")
     }
 
@@ -399,7 +374,7 @@ abstract class BaseTest<T : DomainResource> {
         assertEquals(2, recordIds.size, "recordIds expected")
         lateinit var deleteResult: DeleteResult
 
-        // when
+        // When
         testSubject.deleteRecords(
             recordIds,
             object : TestResultListener<DeleteResult>() {
@@ -411,7 +386,7 @@ abstract class BaseTest<T : DomainResource> {
         )
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
-        // then
+        // Then
         assertTrue(requestSuccessful, "Delete records failed")
         assertEquals(2, deleteResult.successfulDeletes.size)
         assertTrue(deleteResult.failedDeletes.isEmpty())
@@ -422,44 +397,11 @@ abstract class BaseTest<T : DomainResource> {
 
     abstract fun getModel(method: Method, index: Int = -1): T
 
-    abstract fun assertModelExpectations(model: T, method: Method, index: Int = -1)
-
-    enum class Method {
-        CREATE, BATCH_CREATE,
-        FETCH, FETCH_BY_ID, FETCH_BY_TYPE,
-        UPDATE, BATCH_UPDATE,
-        DOWNLOAD, BATCH_DOWNLOAD,
-        DELETE, BATCH_DELETE,
-        COUNT
-    }
-
-    protected fun assertLoggedIn(expectedLoggedInState: Boolean) {
-        var isLoggedIn = false
-        latch = CountDownLatch(1)
-        testSubject.isUserLoggedIn(object : ResultListener<Boolean> {
-            override fun onSuccess(loggedIn: Boolean) {
-                isLoggedIn = loggedIn
-                latch.countDown()
-            }
-
-            override fun onError(exception: D4LException) {
-                exception.printStackTrace()
-                latch.countDown()
-            }
-        })
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
-
-        if (expectedLoggedInState) assertTrue(isLoggedIn)
-        else assertFalse(isLoggedIn)
-    }
-
-    abstract inner class TestResultListener<V> : ResultListener<V> {
-        override fun onError(exception: D4LException) {
-            exception.printStackTrace()
-            requestSuccessful = false
-            latch.countDown()
-        }
-    }
+    abstract fun assertModelExpectations(
+        model: T,
+        method: Method,
+        index: Int = -1
+    )
 
     private fun assertRecordExpectations(record: Record<T>) {
         assertNotNull(record.fhirResource)
@@ -472,10 +414,17 @@ abstract class BaseTest<T : DomainResource> {
         assertNotNull(meta?.updatedDate)
     }
 
+    enum class Method {
+        CREATE, BATCH_CREATE,
+        FETCH, FETCH_BY_ID, FETCH_BY_TYPE,
+        UPDATE, BATCH_UPDATE,
+        DOWNLOAD, BATCH_DOWNLOAD,
+        DELETE, BATCH_DELETE,
+        COUNT
+    }
+
     companion object {
         private val TIMEOUT = 10L
-        private var isNetConnected: Boolean = false
-        private lateinit var latch: CountDownLatch
         private var requestSuccessful = true
     }
 }
