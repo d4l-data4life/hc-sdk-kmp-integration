@@ -26,8 +26,8 @@ object Versions {
 
     const val authSdk = "1.15.0"
 
-    const val kotlin = "1.6.10"
-    const val kotlinCoroutines = "1.6.1"
+    const val kotlin = "1.6.21"
+    const val kotlinCoroutines = "1.6.2"
 
     object GradlePlugins {
         const val kotlin = Versions.kotlin
@@ -49,19 +49,19 @@ object Versions {
     const val androidXAppCompat = "1.4.1"
     const val androidXBrowser = "1.4.0"
 
-    const val androidXConstraintLayout = "2.1.3"
+    const val androidXConstraintLayout = "2.1.4"
 
     const val androidXLifecycle = "2.4.1"
     const val androidXNavigation = "2.4.2"
 
-    const val androidXCompose = "1.1.1"
-    const val androidXComposeActivity = "1.4.0"
+    const val androidXCompose = "1.2.0-beta02"
+    const val androidXComposeActivity = "1.5.0-beta01"
     const val androidXComposeViewModel = "2.4.1"
     const val androidXComposeLiveData = "1.1.1"
     const val androidXComposeNavigation = "2.4.2"
 
     // Material
-    const val material = "1.5.0"
+    const val material = "1.6.1"
 
     // Auth
     const val appAuth = "0.11.1"
