@@ -34,13 +34,6 @@ spotless {
         target("**/*.kt")
         targetExclude("buildSrc/build/")
         ktlint(ktlintVersion)
-            .setUseExperimental(true)
-            .userData(
-                mapOf(
-                    "disabled_rules" to "no-wildcard-imports",
-                    "ij_kotlin_imports_layout" to "*"
-                )
-            )
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()

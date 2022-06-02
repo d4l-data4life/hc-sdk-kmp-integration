@@ -33,7 +33,7 @@ class PrimaryTextButtonKtTest {
         setThemedContent {
             PrimaryTextButton(
                 text = text,
-                onClick = { /*none*/ }
+                onClick = { }
             )
         }
 
@@ -77,7 +77,7 @@ class PrimaryTextButtonKtTest {
         setThemedScreenshotContent {
             PrimaryTextButton(
                 text = text,
-                onClick = { /*none*/ }
+                onClick = { }
             )
         }
 
