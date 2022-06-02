@@ -9,6 +9,7 @@ val d4LTestConfig = D4LConfigHelper.loadTestConfigAndroid("$rootDir")
 
 android {
     compileSdk = AppConfig.androidConfig.compileSdkVersion
+    namespace = "care.data4life.integration.app"
 
     defaultConfig {
         applicationId = AppConfig.androidConfig.applicationId
