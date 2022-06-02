@@ -5,10 +5,10 @@
 package care.data4life.integration.app.crud
 
 import care.data4life.fhir.stu3.model.DomainResource
+import care.data4life.integration.app.crud.BaseCrudTest.Method.BATCH_CREATE
 import care.data4life.integration.app.crud.BaseCrudTest.Method.CREATE
 import care.data4life.integration.app.crud.BaseSdkTest.Result.Failure
 import care.data4life.integration.app.crud.BaseSdkTest.Result.Success
-import care.data4life.integration.app.page.HomePage
 import care.data4life.sdk.SdkContract
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
@@ -20,7 +20,6 @@ import care.data4life.sdk.model.Meta
 import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -29,28 +28,59 @@ import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
 @TestMethodOrder(MethodOrderer.MethodName::class)
 abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
-    protected lateinit var homePage: HomePage
-
-    protected var recordId: String = ""
-    protected var recordIds: MutableList<String> = mutableListOf()
+    protected lateinit var recordId: String
+    protected lateinit var recordIds: MutableList<String>
 
     override fun setupBeforeEach() {
-        // TODO needed?
+        recordId = ""
+        recordIds = mutableListOf()
     }
 
-    @AfterEach
-    fun tearDown() {
-        // TODO needed?
-        // assertLoggedIn(false)
+    fun runCrudTests() = runBlocking {
+        cleanAccount()
+        test_single_01_createRecord_shouldReturn_createdRecord()
+        test_single_02_countRecords_shouldReturn_recordCount()
     }
 
-    @Test
-    fun t01_createRecord_shouldReturn_createdRecord() = runBlocking {
+    fun runCrudBatchTests() = runBlocking {
+        cleanAccount()
+        test_batch_01_createRecords_shouldReturn_createdRecords()
+        test_batch_02_countRecords_shouldReturn_recordCount()
+    }
+
+    private suspend fun cleanAccount() {
+        val result: Result<List<Record<T>>> = awaitListener { listener ->
+            testSubject.fetchRecords(
+                getTestClass(),
+                SdkContract.CreationDateRange(
+                    LocalDate.now().minusYears(1),
+                    LocalDate.now()
+                ),
+                SdkContract.UpdateDateTimeRange(
+                    LocalDateTime.now().minusYears(1),
+                    LocalDateTime.now()
+                ),
+                false,
+                1000,
+                0,
+                listener
+            )
+        }
+
+        if (result is Success) {
+            awaitListener<DeleteResult> { listener ->
+                testSubject.deleteRecords(result.data.map { it.fhirResource.id }, listener)
+            }
+        }
+    }
+
+    private suspend fun test_single_01_createRecord_shouldReturn_createdRecord() {
         // Given
         val data = getModel(CREATE)
 
@@ -65,8 +95,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                 val record = result.data
                 assertRecordExpectations(record)
                 val resource = record.fhirResource
-                assertModelExpectations(resource, CREATE)
+                assertNotNull(resource.id)
                 recordId = resource.id!!
+                assertModelExpectations(resource, CREATE)
             }
             is Failure -> {
                 fail("Create record failed: ${result.exception.message}")
@@ -74,34 +105,74 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         }
     }
 
-    @Test
-    fun t02_createRecords_shouldReturn_createdRecords() {
-        lateinit var createResult: CreateResult<T>
-
-        // given
-        val model1 = getModel(Method.BATCH_CREATE)
-        val model2 = getModel(Method.BATCH_CREATE)
+    private suspend fun test_single_02_countRecords_shouldReturn_recordCount() {
+        // Given
 
         // When
-        testSubject.createRecords(
-            listOf(model1, model2),
-            object : TestResultListener<CreateResult<T>>() {
-                override fun onSuccess(result: CreateResult<T>) {
-                    createResult = result
-                }
-            }
-        )
+        val result: Result<Int> = awaitListener { listener ->
+            testSubject.countRecords(getTestClass(), listener)
+        }
 
         // Then
-        assertTrue(requestSuccessful, "Create records failed")
-        assertEquals(2, createResult.successfulOperations.size)
-        assertTrue(createResult.failedOperations.isEmpty())
+        when (result) {
+            is Success -> {
+                val count = result.data
+                assertEquals(1, count)
+            }
+            is Failure -> {
+                fail("Count records failed: ${result.exception.message}")
+            }
+        }
+    }
 
-        createResult.successfulOperations.map {
-            assertRecordExpectations(it)
-            assertNotNull(it.fhirResource.id)
-            recordIds.add(it.fhirResource.id!!)
-            assertModelExpectations(it.fhirResource, Method.BATCH_CREATE)
+    private suspend fun test_batch_01_createRecords_shouldReturn_createdRecords() {
+        // Given
+        val model1 = getModel(BATCH_CREATE)
+        val model2 = getModel(BATCH_CREATE)
+        val data = listOf(model1, model2)
+
+        // When
+        val result: Result<CreateResult<T>> = awaitListener { listener ->
+            testSubject.createRecords(data, listener)
+        }
+
+        // Then
+        when (result) {
+            is Success -> {
+                val createResult = result.data
+                assertEquals(2, createResult.successfulOperations.size)
+                assertTrue(createResult.failedOperations.isEmpty())
+                createResult.successfulOperations.map { record ->
+                    assertRecordExpectations(record)
+                    val resource = record.fhirResource
+                    assertNotNull(resource.id)
+                    recordIds.add(resource.id!!)
+                    assertModelExpectations(resource, BATCH_CREATE)
+                }
+            }
+            is Failure -> {
+                fail("Create records failed: ${result.exception.message}")
+            }
+        }
+    }
+
+    private suspend fun test_batch_02_countRecords_shouldReturn_recordCount() {
+        // Given
+
+        // When
+        val result: Result<Int> = awaitListener { listener ->
+            testSubject.countRecords(getTestClass(), listener)
+        }
+
+        // Then
+        when (result) {
+            is Success -> {
+                val count = result.data
+                assertEquals(2, count)
+            }
+            is Failure -> {
+                fail("Count records failed: ${result.exception.message}")
+            }
         }
     }
 
