@@ -14,8 +14,6 @@ class LoginFlowTest : BaseFlowTest() {
     fun testLoginLogoutFlow() = extension.runComposeTest {
         val user = TestConfigLoader.load().user
 
-        setMainContent()
-
         onWelcomePage()
             .doLogin()
             .doLogin(user)

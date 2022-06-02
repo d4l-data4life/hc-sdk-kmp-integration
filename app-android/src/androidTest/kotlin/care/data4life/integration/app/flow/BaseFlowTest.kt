@@ -5,10 +5,7 @@
 package care.data4life.integration.app.flow
 
 import care.data4life.integration.app.MainActivity
-import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
-import care.data4life.integration.app.ui.IntegrationApp
-import care.data4life.integration.app.ui.theme.IntegrationTheme
 import org.junit.jupiter.api.extension.RegisterExtension
 
 abstract class BaseFlowTest {
@@ -16,12 +13,4 @@ abstract class BaseFlowTest {
     @JvmField
     @RegisterExtension
     val extension = createAndroidComposeExtension<MainActivity>()
-
-    protected fun ComposeContentContext.setMainContent() {
-        setContent {
-            IntegrationTheme {
-                IntegrationApp()
-            }
-        }
-    }
 }
