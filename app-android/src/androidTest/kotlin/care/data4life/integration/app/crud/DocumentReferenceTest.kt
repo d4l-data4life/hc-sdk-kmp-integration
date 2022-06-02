@@ -12,10 +12,6 @@ import care.data4life.fhir.stu3.model.DocumentReference
 import care.data4life.fhir.stu3.model.FhirInstant
 import care.data4life.fhir.stu3.model.Practitioner
 import care.data4life.fhir.stu3.util.FhirDateTimeParser
-import care.data4life.integration.app.page.onWelcomePage
-import care.data4life.integration.app.test.TestConfigLoader
-import care.data4life.integration.app.test.deleteAllRecords
-import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.helpers.stu3.AttachmentBuilder
 import care.data4life.sdk.helpers.stu3.DocumentReferenceBuilder
 import care.data4life.sdk.helpers.stu3.getAttachments
@@ -52,18 +48,14 @@ class DocumentReferenceTest : BaseCrudTest<DocumentReference>() {
 
     @Test
     fun testAll() = extension.runComposeTest {
-        val user = TestConfigLoader.load().user
-        homePage = onWelcomePage()
-            .doLogin()
-            .doLogin(user)
+        login()
 
-        // assertLoggedIn(true)
+        assertLoggedIn(true)
 
+        runCrudTests()
+        runCrudBatchTests()
 
-        testSubject.deleteAllRecords(getTestClass()) // run only once before all the tests
-
-        homePage
-            .doLogout()
+        logout()
     }
 
     override fun getTestClass(): Class<DocumentReference> {

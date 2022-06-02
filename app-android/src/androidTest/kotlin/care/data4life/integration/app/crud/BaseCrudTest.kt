@@ -37,19 +37,20 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
     protected lateinit var recordId: String
     protected lateinit var recordIds: MutableList<String>
 
-    override fun setupBeforeEach() {
-        recordId = ""
-        recordIds = mutableListOf()
-    }
-
-    fun runCrudTests() = runBlocking {
+    protected fun runCrudTests() = runBlocking {
         cleanAccount()
+
+        recordId = ""
+
         test_single_01_createRecord_shouldReturn_createdRecord()
         test_single_02_countRecords_shouldReturn_recordCount()
     }
 
-    fun runCrudBatchTests() = runBlocking {
+    protected fun runCrudBatchTests() = runBlocking {
         cleanAccount()
+
+        recordIds = mutableListOf()
+
         test_batch_01_createRecords_shouldReturn_createdRecords()
         test_batch_02_countRecords_shouldReturn_recordCount()
     }

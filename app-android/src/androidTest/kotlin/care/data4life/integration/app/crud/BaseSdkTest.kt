@@ -7,11 +7,15 @@ package care.data4life.integration.app.crud
 import care.data4life.integration.app.crud.BaseSdkTest.Result.Failure
 import care.data4life.integration.app.crud.BaseSdkTest.Result.Success
 import care.data4life.integration.app.page.HomePage
+import care.data4life.integration.app.page.onWelcomePage
+import care.data4life.integration.app.test.TestConfigLoader
 import care.data4life.integration.app.test.compose.BaseComposeTest
+import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.lang.D4LException
 import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.BeforeEach
@@ -20,20 +24,32 @@ import kotlin.coroutines.suspendCoroutine
 
 abstract class BaseSdkTest : BaseComposeTest() {
 
-    protected lateinit var homePage: HomePage
+    private lateinit var homePage: HomePage
 
     protected lateinit var testSubject: Data4LifeClient
 
     @BeforeEach
     fun setup() {
         testSubject = Data4LifeClient.getInstance()
-
-        setupBeforeEach()
     }
 
-    protected abstract fun setupBeforeEach()
+    protected fun ComposeContentContext.login() {
+        val user = TestConfigLoader.load().user
+        homePage = onWelcomePage()
+            .doLogin()
+            .doLogin(user)
 
-    protected suspend fun assertLoggedIn(expectedLoggedInState: Boolean) {
+        waitForIdle()
+    }
+
+    protected fun ComposeContentContext.logout() {
+        homePage
+            .doLogout()
+
+        waitForIdle()
+    }
+
+    protected fun assertLoggedIn(expectedLoggedInState: Boolean) = runBlocking {
         val result: Result<Boolean> = awaitListener { listener ->
             testSubject.isUserLoggedIn(listener)
         }
