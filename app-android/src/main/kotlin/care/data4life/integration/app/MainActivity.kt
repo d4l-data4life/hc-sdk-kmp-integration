@@ -21,9 +21,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    // TODO remove from test!!
-    fun explicitFinish() {
-        super.finish()
-    }
 }

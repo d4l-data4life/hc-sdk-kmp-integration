@@ -54,7 +54,10 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         return DocumentReference::class.java
     }
 
-    override fun getModel(method: Method, index: Int): DocumentReference {
+    override fun getModel(
+        method: Method,
+        index: Int
+    ): DocumentReference {
         val attachment = AttachmentBuilder.buildWith(attachmentTitle, createdDate, contentType, data)
 
         val author = Practitioner()
@@ -88,7 +91,11 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         return document
     }
 
-    private fun mutateModel(model: DocumentReference, method: Method, index: Int) {
+    private fun mutateModel(
+        model: DocumentReference,
+        method: Method,
+        index: Int
+    ) {
         when (method) {
             Method.UPDATE -> {
                 model.description = NEW_TITLE
@@ -104,7 +111,11 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         }
     }
 
-    override fun assertModelExpectations(model: DocumentReference, method: Method, index: Int) {
+    override fun assertModelExpectations(
+        model: DocumentReference,
+        method: Method,
+        index: Int
+    ) {
         var assertRecordId = true
         var docTitle = title
         var docDataBase64: String? = dataBase64
@@ -145,7 +156,12 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         assertDocumentExpectations(model, assertRecordId, docTitle, docDataBase64)
     }
 
-    private fun assertDocumentExpectations(doc: DocumentReference, assertRecordId: Boolean = true, docTitle: String, docDataBase64: String?) {
+    private fun assertDocumentExpectations(
+        doc: DocumentReference,
+        assertRecordId: Boolean = true,
+        docTitle: String,
+        docDataBase64: String?
+    ) {
         if (assertRecordId) assertEquals(recordId, doc.id)
         assertEquals(docTitle, doc.getTitle())
         assertEquals(indexed, doc.indexed)
@@ -163,7 +179,10 @@ class DocumentReferenceTest : BaseTest<DocumentReference>() {
         assertAttachmentExpectations(doc.getAttachments()?.first()!!, docDataBase64)
     }
 
-    private fun assertAttachmentExpectations(attachment: Attachment, docDataBase64: String?) {
+    private fun assertAttachmentExpectations(
+        attachment: Attachment,
+        docDataBase64: String?
+    ) {
         assertNotNull(attachment.id)
         assertEquals(attachmentTitle, attachment.title)
         assertEquals(createdDate, attachment.creation)

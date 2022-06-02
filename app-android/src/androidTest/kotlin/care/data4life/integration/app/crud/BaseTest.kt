@@ -4,12 +4,13 @@
 
 package care.data4life.integration.app.crud
 
-import androidx.test.rule.ActivityTestRule
 import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.page.HomePage
+import care.data4life.integration.app.page.onWelcomePage
 import care.data4life.integration.app.test.NetworkUtil
 import care.data4life.integration.app.test.TestConfigLoader
+import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import care.data4life.integration.app.test.deleteAllRecords
 import care.data4life.sdk.Data4LifeClient
 import care.data4life.sdk.SdkContract
@@ -23,25 +24,56 @@ import care.data4life.sdk.model.FetchResult
 import care.data4life.sdk.model.Meta
 import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
-import com.jakewharton.threetenabp.AndroidThreeTen
-import org.junit.AfterClass
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
-import org.junit.Assume.assumeTrue
-import org.junit.Before
-import org.junit.BeforeClass
-import org.junit.FixMethodOrder
-import org.junit.Test
-import org.junit.runners.MethodSorters
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assumptions.assumeTrue
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
 import org.threeten.bp.LocalDateTime
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) // test order is important for successful completion!
 abstract class BaseTest<T : DomainResource> {
+
+    @JvmField
+    @RegisterExtension
+    val extension = createAndroidComposeExtension<MainActivity>()
+
+    @BeforeAll
+    fun suiteSetup() = extension.runComposeTest {
+
+        isNetConnected = NetworkUtil.isOnline()
+        assumeTrue(isNetConnected, "Internet connection required")
+
+        client = Data4LifeClient.getInstance()
+
+        val user = TestConfigLoader.load().user
+
+        homePage = onWelcomePage()
+            .doLogin()
+            .doLogin(user)
+
+        assertLogin(true)
+    }
+
+    @AfterAll
+    fun suiteCleanUp() {
+        if (!isNetConnected) return
+
+        homePage
+            .doLogout()
+
+        assertLogin(false)
+        recordId = ""
+        recordIds.clear()
+        setupDone = false
+    }
 
     abstract fun getTestClass(): Class<T>
 
@@ -59,13 +91,13 @@ abstract class BaseTest<T : DomainResource> {
     }
 
     companion object {
+
         private val TIMEOUT = 10L
         private var setupDone = false
         private var isNetConnected: Boolean = false
         private lateinit var latch: CountDownLatch
         private var requestSuccessful = true
-        private val rule = ActivityTestRule(MainActivity::class.java, false, false)
-        private lateinit var activity: MainActivity
+
         private lateinit var homePage: HomePage
 
         @JvmStatic
@@ -77,42 +109,6 @@ abstract class BaseTest<T : DomainResource> {
         // SUT
         @JvmStatic
         protected lateinit var client: Data4LifeClient
-
-        @BeforeClass
-        @JvmStatic
-        fun suiteSetup() {
-            isNetConnected = NetworkUtil.isOnline()
-            assumeTrue("Internet connection required", isNetConnected)
-
-            activity = rule.launchActivity(null)
-            AndroidThreeTen.init(activity.application)
-            client = Data4LifeClient.getInstance()
-
-            val user = TestConfigLoader.load().user
-
-            // homePage = WelcomePage()
-            //     .isVisible()
-            //     .openLoginPage()
-            //     .doLogin(user)
-            //     .isVisible()
-
-            assertLogin(true)
-        }
-
-        @AfterClass
-        @JvmStatic
-        fun suiteCleanUp() {
-            if (!isNetConnected) return
-
-            homePage
-                .doLogout()
-
-            assertLogin(false)
-            recordId = ""
-            recordIds.clear()
-            setupDone = false
-            activity.explicitFinish()
-        }
 
         private fun assertLogin(expectedLoggedInState: Boolean) {
             var isLoggedIn: Boolean = false
@@ -135,7 +131,7 @@ abstract class BaseTest<T : DomainResource> {
         }
     }
 
-    @Before
+    @BeforeEach
     fun beforeTest() {
         latch = CountDownLatch(1)
         requestSuccessful = true
@@ -183,7 +179,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Create record failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Create record failed")
         assertRecordExpectations(record)
         assertNotNull(record.fhirResource.id)
         recordId = record.fhirResource.id!!
@@ -211,7 +207,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Create records failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Create records failed")
         assertEquals(2, createResult.successfulOperations.size)
         assertTrue(createResult.failedOperations.isEmpty())
 
@@ -284,7 +280,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Fetch record failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Fetch record failed")
         assertRecordExpectations(record)
         assertModelExpectations(record.fhirResource, Method.FETCH)
     }
@@ -308,7 +304,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Fetch records failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Fetch records failed")
         assertEquals(2, fetchResult.successfulFetches.size)
         assertTrue(fetchResult.failedFetches.isEmpty())
         fetchResult.successfulFetches.map {
@@ -344,7 +340,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Fetch records by type failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Fetch records by type failed")
         assertEquals(3, fetchedRecords.size)
         fetchedRecords.map {
             assertRecordExpectations(it)
@@ -371,7 +367,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Update record failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Update record failed")
         assertRecordExpectations(updatedRecord)
         assertModelExpectations(updatedRecord.fhirResource, Method.UPDATE)
     }
@@ -398,7 +394,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Update records failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Update records failed")
         assertEquals(2, updateResult.successfulUpdates.size)
         assertTrue(updateResult.failedUpdates.isEmpty())
 
@@ -428,7 +424,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Download record failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Download record failed")
         assertRecordExpectations(downloadedRecord)
         assertModelExpectations(downloadedRecord.fhirResource, Method.DOWNLOAD)
     }
@@ -452,7 +448,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Download records failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Download records failed")
         assertEquals(2, downloadResult.successfulDownloads.size)
         assertTrue(downloadResult.failedDownloads.isEmpty())
         downloadResult.successfulDownloads.map {
@@ -484,13 +480,13 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Delete record failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Delete record failed")
     }
 
     @Test
     fun t13_deleteRecords_shouldDeleteRecords() {
         // given
-        assertEquals("recordIds expected", 2, recordIds.size)
+        assertEquals(2, recordIds.size, "recordIds expected")
         lateinit var deleteResult: DeleteResult
 
         // when
@@ -506,7 +502,7 @@ abstract class BaseTest<T : DomainResource> {
         latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // then
-        assertTrue("Delete records failed", requestSuccessful)
+        assertTrue(requestSuccessful, "Delete records failed")
         assertEquals(2, deleteResult.successfulDeletes.size)
         assertTrue(deleteResult.failedDeletes.isEmpty())
         for (i in 0..1) assertEquals(recordIds[i], deleteResult.successfulDeletes[i])
