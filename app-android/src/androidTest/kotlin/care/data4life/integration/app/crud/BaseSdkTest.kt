@@ -12,7 +12,6 @@ import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.listener.ResultListener
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
-import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -26,9 +25,6 @@ abstract class BaseSdkTest : BaseComposeTest() {
         testSubject = Data4LifeClient.getInstance()
 
         setupBeforeEach()
-
-        // old
-        latch = CountDownLatch(1)
     }
 
     protected abstract fun setupBeforeEach()
@@ -70,19 +66,15 @@ abstract class BaseSdkTest : BaseComposeTest() {
 
     protected fun assertLoggedIn(expectedLoggedInState: Boolean) {
         var isLoggedIn = false
-        BaseCrudTest.latch = CountDownLatch(1)
         testSubject.isUserLoggedIn(object : ResultListener<Boolean> {
             override fun onSuccess(loggedIn: Boolean) {
                 isLoggedIn = loggedIn
-                BaseCrudTest.latch.countDown()
             }
 
             override fun onError(exception: D4LException) {
                 exception.printStackTrace()
-                BaseCrudTest.latch.countDown()
             }
         })
-        BaseCrudTest.latch.await(BaseCrudTest.TIMEOUT, TimeUnit.SECONDS)
 
         if (expectedLoggedInState) Assertions.assertTrue(isLoggedIn)
         else Assertions.assertFalse(isLoggedIn)
@@ -92,15 +84,10 @@ abstract class BaseSdkTest : BaseComposeTest() {
         override fun onError(exception: D4LException) {
             exception.printStackTrace()
             Companion.requestSuccessful = false
-            Companion.latch.countDown()
         }
     }
 
     companion object {
-        private val TIMEOUT = 10L
-
-        @JvmStatic
-        protected lateinit var latch: CountDownLatch
         private var requestSuccessful = true
     }
 }

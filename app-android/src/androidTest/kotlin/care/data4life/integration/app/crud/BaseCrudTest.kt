@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.threeten.bp.LocalDateTime
-import java.util.concurrent.TimeUnit
 import kotlin.test.assertNotEquals
 
 abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
@@ -57,11 +56,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(r: Record<T>) {
                     record = r
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Create record failed")
@@ -85,11 +82,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<CreateResult<T>>() {
                 override fun onSuccess(result: CreateResult<T>) {
                     createResult = result
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Create records failed")
@@ -114,11 +109,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Int>() {
                 override fun onSuccess(count: Int) {
                     modelCount = count
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertNotEquals(-1, modelCount, "Count records failed")
@@ -135,11 +128,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Int>() {
                 override fun onSuccess(count: Int) {
                     modelCount = count
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertNotEquals(-1, modelCount, "Count all records failed")
@@ -158,11 +149,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(r: Record<T>) {
                     record = r
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Fetch record failed")
@@ -182,11 +171,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<FetchResult<T>>() {
                 override fun onSuccess(result: FetchResult<T>) {
                     fetchResult = result
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Fetch records failed")
@@ -218,11 +205,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<List<Record<T>>>() {
                 override fun onSuccess(records: List<Record<T>>) {
                     fetchedRecords = records
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Fetch records by type failed")
@@ -245,11 +230,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(record: Record<T>) {
                     updatedRecord = record
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Update record failed")
@@ -272,11 +255,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<UpdateResult<T>>() {
                 override fun onSuccess(result: UpdateResult<T>) {
                     updateResult = result
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Update records failed")
@@ -302,11 +283,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<Record<T>>() {
                 override fun onSuccess(record: Record<T>) {
                     downloadedRecord = record
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Download record failed")
@@ -326,11 +305,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<DownloadResult<T>>() {
                 override fun onSuccess(result: DownloadResult<T>) {
                     downloadResult = result
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Download records failed")
@@ -352,17 +329,14 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             recordId,
             object : Callback {
                 override fun onSuccess() {
-                    latch.countDown()
                 }
 
                 override fun onError(exception: D4LException) {
                     exception.printStackTrace()
                     requestSuccessful = false
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Delete record failed")
@@ -380,11 +354,9 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             object : TestResultListener<DeleteResult>() {
                 override fun onSuccess(result: DeleteResult) {
                     deleteResult = result
-                    latch.countDown()
                 }
             }
         )
-        latch.await(TIMEOUT, TimeUnit.SECONDS)
 
         // Then
         assertTrue(requestSuccessful, "Delete records failed")
