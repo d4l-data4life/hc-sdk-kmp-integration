@@ -73,7 +73,7 @@ toc::[]
 * Dependency Updates Gradle plugin 0.38.0 -> 0.41.0
 * Gradle Download plugin 4.1.1 -> 4.1.2
 * Spotless 5.10.2 -> 6.5.1
-* KtLint 0.41.0 -> 0.45.1
+* KtLint 0.41.0 -> 0.45.2
 * AppAuth 0.10.0 -> 0.11.1
 * Mockk 1.12.3 -> 1.12.4
 * AndroidX Compose 1.1.1 -> 1.2.0-beta02
