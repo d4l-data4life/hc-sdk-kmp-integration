@@ -69,7 +69,6 @@ class LoginPage(
         sleep(TIMEOUT_SHORT)
         enterText(authAppAuthInputEmail, user.email, true)
         enterText(authAppAuthInputPassword, user.password, true)
-        unselectCheckbox(authAppAuthCheckboxKeepLogin)
         clickButton(authAppAuthButtonSubmitLogin, true)
     }
 
@@ -233,7 +232,6 @@ class LoginPage(
         // Page enter email/password
         const val authAppAuthInputEmail = "d4l-email"
         const val authAppAuthInputPassword = "d4l-password"
-        const val authAppAuthCheckboxKeepLogin = "checkbox-remember"
         const val authAppAuthButtonSubmitLogin = "d4l-button-submit-login"
 
         // Page phone number

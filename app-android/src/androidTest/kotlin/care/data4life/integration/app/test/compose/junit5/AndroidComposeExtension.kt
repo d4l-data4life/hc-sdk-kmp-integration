@@ -38,9 +38,7 @@ fun createEmptyComposeExtension(): AndroidComposeExtension {
 }
 
 @SuppressLint("NewApi")
-class AndroidComposeExtension
-@JvmOverloads
-internal constructor(
+class AndroidComposeExtension @JvmOverloads internal constructor(
     private val ruleFactory: () -> ComposeTestRule = { createComposeRule() }
 ) :
     BeforeEachCallback,
@@ -49,16 +47,12 @@ internal constructor(
 
     private var description: Description? = null
 
-    /* BeforeEachCallback */
-
     override fun beforeEach(context: ExtensionContext) {
         description = Description.createTestDescription(
             context.testClass.orElse(this::class.java),
             context.displayName
         )
     }
-
-    /* ParameterResolver */
 
     override fun supportsParameter(
         parameterContext: ParameterContext,
@@ -73,8 +67,6 @@ internal constructor(
     ): Any {
         return this
     }
-
-    /* ComposeExtension */
 
     override fun runComposeTest(block: ComposeContentContext.() -> Unit) {
         ruleFactory().also { rule ->

@@ -9,21 +9,15 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import care.data4life.integration.app.MainActivity
+import care.data4life.integration.app.test.compose.BaseComposeTest
 import care.data4life.integration.app.test.compose.assertScreenshotMatches
-import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import care.data4life.integration.app.test.compose.setThemedContent
 import care.data4life.integration.app.test.compose.setThemedScreenshotContent
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
 
 @Suppress("TestFunctionName")
-class PrimaryTextButtonKtTest {
-
-    @JvmField
-    @RegisterExtension
-    val extension = createAndroidComposeExtension<MainActivity>()
+class PrimaryTextButtonKtTest : BaseComposeTest() {
 
     @Test
     fun GIVEN_text_WHEN_displayed_THEN_its_uppercase() = extension.runComposeTest {

@@ -23,7 +23,7 @@ import java.io.FileNotFoundException
  *
  * Screenshot dimensions must match, otherwise test will fail. Limit the surface to a fixed size.
  *
- * If `saveAsExpected` is enabled, current screenshot will be saved on device in `data/data/{package}/files`
+ * If `saveAsExpected` is enabled, current screenshot will be saved on device in `downloads`
  */
 fun SemanticsNodeInteraction.assertScreenshotMatches(
     folderPath: String,
@@ -56,9 +56,9 @@ private fun loadExpectedScreenshot(path: String): Bitmap? {
     }
 }
 
-private fun saveExpectedScreenshotInDownloads(path: String, bitmap: Bitmap) {
+private fun saveExpectedScreenshotInDownloads(name: String, bitmap: Bitmap) {
     val contentValues = ContentValues().apply {
-        put(MediaStore.MediaColumns.DISPLAY_NAME, "screenshot/$path")
+        put(MediaStore.MediaColumns.DISPLAY_NAME, "screenshot/$name")
         put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
         put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
     }

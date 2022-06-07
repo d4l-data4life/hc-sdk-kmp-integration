@@ -38,7 +38,7 @@ android {
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release", "debug")
         }
         getByName("release") {
             isDebuggable = false
@@ -47,7 +47,7 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release")
         }
     }
 
