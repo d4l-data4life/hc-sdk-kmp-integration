@@ -7,16 +7,16 @@ package care.data4life.integration.app.crud
 import care.data4life.fhir.stu3.model.DomainResource
 import care.data4life.integration.app.crud.BaseCrudTest.Method.BATCH_CREATE
 import care.data4life.integration.app.crud.BaseCrudTest.Method.CREATE
-import care.data4life.integration.app.crud.BaseSdkTest.Result.Failure
-import care.data4life.integration.app.crud.BaseSdkTest.Result.Success
+import care.data4life.integration.app.crud.BaseCrudTest.Method.UPDATE
+import care.data4life.integration.app.crud.RecordAssertions.assertRecordExpectations
+import care.data4life.integration.app.data.wrapper.awaitLegacyListener
+import care.data4life.integration.app.data.wrapper.Result
+import care.data4life.integration.app.data.wrapper.awaitLegacyCallback
 import care.data4life.sdk.SdkContract
-import care.data4life.sdk.lang.D4LException
-import care.data4life.sdk.listener.Callback
 import care.data4life.sdk.model.CreateResult
 import care.data4life.sdk.model.DeleteResult
 import care.data4life.sdk.model.DownloadResult
 import care.data4life.sdk.model.FetchResult
-import care.data4life.sdk.model.Meta
 import care.data4life.sdk.model.Record
 import care.data4life.sdk.model.UpdateResult
 import kotlinx.coroutines.runBlocking
@@ -24,13 +24,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Assertions.fail
-import org.junit.jupiter.api.MethodOrderer
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestMethodOrder
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 
-@TestMethodOrder(MethodOrderer.MethodName::class)
 abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
     protected lateinit var recordId: String
@@ -45,6 +41,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         test_single_02_countRecords_shouldReturn_recordCount()
         test_single_03_fetchRecord_shouldReturn_fetchedRecord()
         test_single_04_fetchRecordsByType_shouldReturn_fetchedRecords()
+        test_single_05_updateRecord_shouldReturn_updatedRecord()
     }
 
     protected fun runCrudBatchTests() = runBlocking {
@@ -56,10 +53,11 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         test_batch_02_countRecords_shouldReturn_recordCount()
         test_batch_03_fetchRecords_shouldReturn_fetchedRecords()
         test_batch_04_fetchRecordsByType_shouldReturn_fetchedRecords()
+        test_batch_05_updateRecords_shouldReturn_updatedRecords()
     }
 
     private suspend fun cleanAccount() {
-        val result: Result<List<Record<T>>> = awaitListener { listener ->
+        val result: Result<List<Record<T>>> = awaitLegacyListener { listener ->
             testSubject.fetchRecords(
                 getTestClass(),
                 SdkContract.CreationDateRange(
@@ -77,8 +75,8 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
             )
         }
 
-        if (result is Success) {
-            awaitListener<DeleteResult> { listener ->
+        if (result is Result.Success) {
+            awaitLegacyListener<DeleteResult> { listener ->
                 testSubject.deleteRecords(result.data.map { it.fhirResource.id }, listener)
             }
         }
@@ -90,13 +88,13 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         val data = getModel(CREATE)
 
         // When
-        val result: Result<Record<T>> = awaitListener { listener ->
+        val result: Result<Record<T>> = awaitLegacyListener { listener ->
             testSubject.createRecord(data, listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val record = result.data
                 assertRecordExpectations(record)
                 val resource = record.fhirResource
@@ -104,7 +102,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                 recordId = resource.id!!
                 assertModelExpectations(resource, CREATE)
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Create record failed: ${result.exception.message}")
             }
         }
@@ -114,17 +112,17 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<Int> = awaitListener { listener ->
+        val result: Result<Int> = awaitLegacyListener { listener ->
             testSubject.countRecords(getTestClass(), listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val count = result.data
                 assertEquals(1, count)
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Count records failed: ${result.exception.message}")
             }
         }
@@ -134,18 +132,18 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<Record<T>> = awaitListener { listener ->
+        val result: Result<Record<T>> = awaitLegacyListener { listener ->
             testSubject.fetchRecord(recordId, listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val record = result.data
                 assertRecordExpectations(record)
                 assertModelExpectations(record.fhirResource, Method.FETCH)
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Fetch record failed: ${result.exception.message}")
             }
         }
@@ -155,7 +153,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<List<Record<T>>> = awaitListener { listener ->
+        val result: Result<List<Record<T>>> = awaitLegacyListener { listener ->
             testSubject.fetchRecords(
                 getTestClass(),
                 null,
@@ -172,7 +170,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val fetchResult = result.data
                 assertEquals(1, fetchResult.size)
                 fetchResult.map { record ->
@@ -180,8 +178,72 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                     assertModelExpectations(record.fhirResource, Method.FETCH_BY_TYPE)
                 }
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Fetch records by type failed: ${result.exception.message}")
+            }
+        }
+    }
+
+    private suspend fun test_single_05_updateRecord_shouldReturn_updatedRecord() {
+        // Given
+        val data = getModel(UPDATE)
+
+        // When
+        val result: Result<Record<T>> = awaitLegacyListener { listener ->
+            testSubject.updateRecord(data, listener)
+        }
+
+        // Then
+        when (result) {
+            is Result.Success -> {
+                val record = result.data
+                assertRecordExpectations(record)
+                assertModelExpectations(record.fhirResource, UPDATE)
+            }
+            is Result.Failure -> {
+                fail("Update record failed: ${result.exception.message}")
+            }
+        }
+    }
+
+    private suspend fun test_singel_06_downloadRecord_shouldReturn_downloadedRecord() {
+        // Given
+        assertNotNull("recordId expected", recordId)
+        lateinit var downloadedRecord: Record<T>
+
+        // When
+        val result = awaitLegacyListener<Record<T>> { listener ->
+            testSubject.downloadRecord(recordId, listener)
+        }
+
+        // Then
+        when (result) {
+            is Result.Success -> {
+                val record = result.data
+                assertRecordExpectations(record)
+                assertModelExpectations(record.fhirResource, Method.DOWNLOAD)
+            }
+            is Result.Failure -> {
+                fail("Download record failed: ${result.exception.message}")
+            }
+        }
+    }
+
+    private suspend fun test_single_07_deleteRecord_shouldDeleteRecord() {
+        // Given
+
+        // When
+        val result = awaitLegacyCallback { callback ->
+            testSubject.deleteRecord(recordId, callback)
+        }
+
+        // Then
+        when (result) {
+            is Result.Success -> {
+                assertTrue(result.data, "Delete record failed")
+            }
+            is Result.Failure -> {
+                fail("Delete record failed: ${result.exception.message}")
             }
         }
     }
@@ -196,13 +258,13 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         val data = listOf(model1, model2)
 
         // When
-        val result: Result<CreateResult<T>> = awaitListener { listener ->
+        val result: Result<CreateResult<T>> = awaitLegacyListener { listener ->
             testSubject.createRecords(data, listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val createResult = result.data
                 assertEquals(2, createResult.successfulOperations.size)
                 assertTrue(createResult.failedOperations.isEmpty())
@@ -214,7 +276,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                     assertModelExpectations(resource, BATCH_CREATE)
                 }
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Create records failed: ${result.exception.message}")
             }
         }
@@ -224,17 +286,17 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<Int> = awaitListener { listener ->
+        val result: Result<Int> = awaitLegacyListener { listener ->
             testSubject.countRecords(getTestClass(), listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val count = result.data
                 assertEquals(2, count)
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Count records failed: ${result.exception.message}")
             }
         }
@@ -244,13 +306,13 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<FetchResult<T>> = awaitListener { listener ->
+        val result: Result<FetchResult<T>> = awaitLegacyListener { listener ->
             testSubject.fetchRecords(recordIds, listener)
         }
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val fetchResult = result.data
                 assertEquals(2, fetchResult.successfulFetches.size)
                 assertTrue(fetchResult.failedFetches.isEmpty())
@@ -259,7 +321,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                     assertModelExpectations(record.fhirResource, Method.FETCH_BY_ID)
                 }
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Fetch records failed: ${result.exception.message}")
             }
         }
@@ -269,7 +331,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         // Given
 
         // When
-        val result: Result<List<Record<T>>> = awaitListener { listener ->
+        val result: Result<List<Record<T>>> = awaitLegacyListener { listener ->
             testSubject.fetchRecords(
                 getTestClass(),
                 null,
@@ -286,7 +348,7 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
 
         // Then
         when (result) {
-            is Success -> {
+            is Result.Success -> {
                 val fetchResult = result.data
                 assertEquals(2, fetchResult.size)
                 fetchResult.map { record ->
@@ -294,160 +356,89 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
                     assertModelExpectations(record.fhirResource, Method.FETCH_BY_TYPE)
                 }
             }
-            is Failure -> {
+            is Result.Failure -> {
                 fail("Fetch records by type failed: ${result.exception.message}")
             }
         }
     }
 
-    // endregion
-
-    @Test
-    fun t08_updateRecord_shouldReturn_updatedRecord() {
+    private suspend fun test_batch_05_updateRecords_shouldReturn_updatedRecords() {
         // Given
-        assertNotNull("recordId expected", recordId)
-        lateinit var updatedRecord: Record<T>
-
-        // When
-        testSubject.updateRecord(
-            getModel(Method.UPDATE),
-            object : TestResultListener<Record<T>>() {
-                override fun onSuccess(record: Record<T>) {
-                    updatedRecord = record
-                }
-            }
-        )
-
-        // Then
-        assertTrue(requestSuccessful, "Update record failed")
-        assertRecordExpectations(updatedRecord)
-        assertModelExpectations(updatedRecord.fhirResource, Method.UPDATE)
-    }
-
-    @Test
-    fun t09_updateRecords_shouldReturn_updatedRecords() {
-        // Given
-        assertNotNull("recordId expected", recordId)
-        lateinit var updateResult: UpdateResult<T>
-
         val model1 = getModel(Method.BATCH_UPDATE, 0)
         val model2 = getModel(Method.BATCH_UPDATE, 1)
+        val data = listOf(model1, model2)
 
         // When
-        testSubject.updateRecords(
-            listOf(model1, model2),
-            object : TestResultListener<UpdateResult<T>>() {
-                override fun onSuccess(result: UpdateResult<T>) {
-                    updateResult = result
-                }
-            }
-        )
+        val result = awaitLegacyListener<UpdateResult<T>> { listener ->
+            testSubject.updateRecords(data, listener)
+        }
 
         // Then
-        assertTrue(requestSuccessful, "Update records failed")
-        assertEquals(2, updateResult.successfulUpdates.size)
-        assertTrue(updateResult.failedUpdates.isEmpty())
+        when (result) {
+            is Result.Success -> {
+                val updateResult = result.data
+                assertEquals(2, updateResult.successfulUpdates.size)
+                assertTrue(updateResult.failedUpdates.isEmpty())
 
-        var cnt = 0
-        updateResult.successfulUpdates.map {
-            assertRecordExpectations(it)
-            assertModelExpectations(it.fhirResource, Method.BATCH_UPDATE, cnt++)
+                updateResult.successfulUpdates.mapIndexed { index, record ->
+                    assertRecordExpectations(record)
+                    assertModelExpectations(record.fhirResource, Method.BATCH_UPDATE, index)
+                }
+            }
+            is Result.Failure -> {
+                fail("Update records failed: ${result.exception.message}")
+            }
         }
     }
 
-    @Test
-    fun t10_downloadRecord_shouldReturn_downloadedRecord() {
+    private suspend fun test_batch_06_downloadRecords_shouldReturn_downloadedRecord() {
         // Given
-        assertNotNull("recordId expected", recordId)
-        lateinit var downloadedRecord: Record<T>
 
         // When
-        testSubject.downloadRecord(
-            recordId,
-            object : TestResultListener<Record<T>>() {
-                override fun onSuccess(record: Record<T>) {
-                    downloadedRecord = record
-                }
-            }
-        )
+        val result = awaitLegacyListener<DownloadResult<T>> { listener ->
+            testSubject.downloadRecords(recordIds, listener)
+        }
 
         // Then
-        assertTrue(requestSuccessful, "Download record failed")
-        assertRecordExpectations(downloadedRecord)
-        assertModelExpectations(downloadedRecord.fhirResource, Method.DOWNLOAD)
-    }
-
-    @Test
-    fun t11_downloadRecords_shouldReturn_downloadedRecord() {
-        // Given
-        assertNotNull("recordId expected", recordId)
-        lateinit var downloadResult: DownloadResult<T>
-
-        // When
-        testSubject.downloadRecords(
-            listOf(recordId, recordId),
-            object : TestResultListener<DownloadResult<T>>() {
-                override fun onSuccess(result: DownloadResult<T>) {
-                    downloadResult = result
+        when (result) {
+            is Result.Success -> {
+                val downloadResult = result.data
+                assertEquals(2, downloadResult.successfulDownloads.size)
+                assertTrue(downloadResult.failedDownloads.isEmpty())
+                downloadResult.successfulDownloads.map {
+                    assertRecordExpectations(it)
+                    assertModelExpectations(it.fhirResource, Method.BATCH_DOWNLOAD)
                 }
             }
-        )
-
-        // Then
-        assertTrue(requestSuccessful, "Download records failed")
-        assertEquals(2, downloadResult.successfulDownloads.size)
-        assertTrue(downloadResult.failedDownloads.isEmpty())
-        downloadResult.successfulDownloads.map {
-            assertRecordExpectations(it)
-            assertModelExpectations(it.fhirResource, Method.BATCH_DOWNLOAD)
+            is Result.Failure -> {
+                fail("Download records failed: ${result.exception.message}")
+            }
         }
     }
 
-    @Test
-    fun t12_deleteRecord_shouldDeleteRecord() {
+    private suspend fun test_batch_07_deleteRecords_shouldDeleteRecords() {
         // Given
-        assertNotNull("recordId expected", recordId)
 
         // When
-        testSubject.deleteRecord(
-            recordId,
-            object : Callback {
-                override fun onSuccess() {
-                }
-
-                override fun onError(exception: D4LException) {
-                    exception.printStackTrace()
-                    requestSuccessful = false
-                }
-            }
-        )
+        val result = awaitLegacyListener<DeleteResult> { listener ->
+            testSubject.deleteRecords(recordIds, listener)
+        }
 
         // Then
-        assertTrue(requestSuccessful, "Delete record failed")
-    }
-
-    @Test
-    fun t13_deleteRecords_shouldDeleteRecords() {
-        // Given
-        assertEquals(2, recordIds.size, "recordIds expected")
-        lateinit var deleteResult: DeleteResult
-
-        // When
-        testSubject.deleteRecords(
-            recordIds,
-            object : TestResultListener<DeleteResult>() {
-                override fun onSuccess(result: DeleteResult) {
-                    deleteResult = result
-                }
+        when (result) {
+            is Result.Success -> {
+                val deleteResult = result.data
+                assertEquals(2, deleteResult.successfulDeletes.size)
+                assertTrue(deleteResult.failedDeletes.isEmpty())
+                for (i in 0..1) assertEquals(recordIds[i], deleteResult.successfulDeletes[i])
             }
-        )
-
-        // Then
-        assertTrue(requestSuccessful, "Delete records failed")
-        assertEquals(2, deleteResult.successfulDeletes.size)
-        assertTrue(deleteResult.failedDeletes.isEmpty())
-        for (i in 0..1) assertEquals(recordIds[i], deleteResult.successfulDeletes[i])
+            is Result.Failure -> {
+                fail("Delete records failed: ${result.exception.message}")
+            }
+        }
     }
+
+    // endregion
 
     abstract fun getTestClass(): Class<T>
 
@@ -459,18 +450,6 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         index: Int = -1
     )
 
-    private fun assertRecordExpectations(record: Record<T>) {
-        assertNotNull(record.fhirResource)
-        assertNotNull(record.fhirResource.id)
-        assertMetaExpectations(record.meta as Meta?)
-    }
-
-    private fun assertMetaExpectations(meta: Meta?) {
-        assertNotNull(meta)
-        assertNotNull(meta?.createdDate)
-        assertNotNull(meta?.updatedDate)
-    }
-
     enum class Method {
         CREATE, BATCH_CREATE,
         FETCH, FETCH_BY_ID, FETCH_BY_TYPE,
@@ -478,9 +457,5 @@ abstract class BaseCrudTest<T : DomainResource> : BaseSdkTest() {
         DOWNLOAD, BATCH_DOWNLOAD,
         DELETE, BATCH_DELETE,
         COUNT
-    }
-
-    companion object {
-        private var requestSuccessful = true
     }
 }

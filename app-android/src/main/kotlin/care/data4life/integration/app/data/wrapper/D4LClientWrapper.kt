@@ -26,7 +26,7 @@ class D4LClientWrapper(
         return client.getLoginIntent(context, scopes)!!
     }
 
-    override suspend fun isAuthorized(): Boolean = callSuspendResultListenerWrapper { listener ->
+    override suspend fun isAuthorized(): Result<Boolean> = awaitLegacyListener { listener ->
         client.isUserLoggedIn(listener)
     }
 

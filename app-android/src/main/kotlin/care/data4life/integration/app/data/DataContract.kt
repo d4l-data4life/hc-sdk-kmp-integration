@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import care.data4life.integration.app.data.wrapper.D4LClientWrapperContract
 import care.data4life.sdk.Data4LifeClient
+import care.data4life.integration.app.data.wrapper.Result
 
 interface DataContract {
 
@@ -23,7 +24,7 @@ interface DataContract {
         interface Auth {
             fun getLoginIntent(context: Context): Intent
 
-            suspend fun isAuthorized(): Boolean
+            suspend fun isAuthorized(): Result<Boolean>
         }
     }
 }

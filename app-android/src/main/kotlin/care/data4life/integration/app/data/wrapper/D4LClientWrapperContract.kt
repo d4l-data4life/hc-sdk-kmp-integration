@@ -6,5 +6,5 @@ package care.data4life.integration.app.data.wrapper
 
 interface D4LClientWrapperContract {
 
-    suspend fun isAuthorized(): Boolean
+    suspend fun isAuthorized(): Result<Boolean>
 }

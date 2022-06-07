@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @Suppress("TestFunctionName")
-class ResultListenerWrapperKtTest {
+class SdkCallbackWrapperKtTest {
 
     @Test
     fun GIVEN_boolean_WHEN_called_THEN_return_boolean() {
@@ -20,7 +20,7 @@ class ResultListenerWrapperKtTest {
         val expected = true
 
         // When
-        val result: Boolean = runBlocking { callSuspendResultListenerWrapper { it.onSuccess(expected) } }
+        val result: Boolean = runBlocking { callResultListener { it.onSuccess(expected) } }
 
         // Then
         assertTrue(result)
@@ -32,7 +32,7 @@ class ResultListenerWrapperKtTest {
         val expected = "success"
 
         // When
-        val result: String = runBlocking { callSuspendResultListenerWrapper { it.onSuccess(expected) } }
+        val result: String = runBlocking { callResultListener { it.onSuccess(expected) } }
 
         // Then
         assertEquals(expected, result)
@@ -46,6 +46,6 @@ class ResultListenerWrapperKtTest {
         // When/Then
         Assertions.assertThrowsExactly(
             D4LException::class.java
-        ) { runBlocking { callSuspendResultListenerWrapper<Boolean> { it.onError(exception) } } }
+        ) { runBlocking { callResultListener<Boolean> { it.onError(exception) } } }
     }
 }
