@@ -8,10 +8,10 @@ import java.io.File
 object D4LConfigHelper {
 
     private const val FILE_NAME_CLIENT_CONFIG_ANDROID = "d4l-client-config-android.json"
-    private const val FILE_NAME_TEST_CONFIG_ANDROID = "d4l-test-config-android.json"
-
     private const val ENV_CLIENT_CONFIG_ANDROID = "D4L_CLIENT_CONFIG_ANDROID"
-    private const val ENV_TEST_CONFIG_ANDROID = "D4L_TEST_CONFIG_ANDROID"
+
+    private const val FILE_NAME_TEST_CONFIG = "d4l-test-config.json"
+    private const val ENV_TEST_CONFIG = "D4L_TEST_CONFIG"
 
     private fun gson() = GsonBuilder().setPrettyPrinting().create()
 
@@ -38,7 +38,7 @@ object D4LConfigHelper {
     }
 
     fun loadTestConfigAndroid(path: String): D4LTestConfig {
-        val configJson = loadConfig(path, FILE_NAME_TEST_CONFIG_ANDROID, ENV_TEST_CONFIG_ANDROID)
+        val configJson = loadConfig(path, FILE_NAME_TEST_CONFIG, ENV_TEST_CONFIG)
         return gson().fromJson(configJson, D4LTestConfig::class.java)
     }
 

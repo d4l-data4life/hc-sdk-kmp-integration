@@ -18,11 +18,20 @@ data class User(
     val email: String,
     val password: String,
     val phoneCountryCode: String,
-    val phoneLocalNumber: String
+    val phoneLocalNumber: String,
+    val s4hDataKeys: DataKeySet
 ) {
     val phoneNumber: String
         get() = phoneCountryCode + phoneLocalNumber
 }
+
+data class DataKeySet(
+    val local: String,
+    val development: String,
+    val staging: String,
+    val sandbox: String,
+    val production: String
+)
 
 data class Sinch(
     val servicePlanId: String,
