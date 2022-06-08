@@ -6,7 +6,7 @@ package care.data4life.integration.app.ui.common.atom
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithTag
-import care.data4life.integration.app.test.compose.BaseComposeTest
+import care.data4life.integration.app.test.BaseComposeTest
 import care.data4life.integration.app.test.compose.assertScreenshotMatches
 import care.data4life.integration.app.test.compose.setThemedContent
 import care.data4life.integration.app.test.compose.setThemedScreenshotContent

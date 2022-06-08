@@ -6,7 +6,7 @@ package care.data4life.integration.app.flow
 
 import care.data4life.integration.app.page.onWelcomePage
 import care.data4life.integration.app.test.TestConfigLoader
-import care.data4life.integration.app.test.compose.BaseComposeTest
+import care.data4life.integration.app.test.BaseComposeTest
 import org.junit.jupiter.api.Test
 
 class LoginFlowTest : BaseComposeTest() {
