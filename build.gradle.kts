@@ -1,18 +1,9 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(GradlePlugins.android)
-        classpath(GradlePlugins.kotlin)
-        classpath(GradlePlugins.jUnit5Android)
-    }
-}
+import care.data4life.gradle.integration.dependency.d4l
+import care.data4life.gradle.integration.dependency.ensureKotlinVersion
 
 plugins {
+    id("care.data4life.gradle.integration.dependency")
+
     id("scripts.dependency-updates")
     id("scripts.download-scripts")
     id("scripts.quality-spotless")

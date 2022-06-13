@@ -1,3 +1,6 @@
+import care.data4life.gradle.integration.dependency.Dependency
+import care.data4life.gradle.integration.dependency.Version
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -129,7 +132,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.androidXCompose
+        kotlinCompilerExtensionVersion = Version.android.compose.core
     }
 
     compileOptions {
@@ -167,87 +170,87 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Dependencies.Android.desugar)
+    coreLibraryDesugaring(Dependency.android.desugar)
 
-    implementation(Dependencies.Android.kotlinStdLib)
-    implementation(Dependencies.Android.kotlinCoroutinesCore)
+    implementation(Dependency.Android.kotlinStdLib)
+    implementation(Dependency.Android.kotlinCoroutinesCore)
 
-    implementation(Dependencies.Android.AndroidX.ktx)
-    implementation(Dependencies.Android.AndroidX.appCompat)
-    implementation(Dependencies.Android.AndroidX.browser)
-    implementation(Dependencies.Android.AndroidX.constraintLayout)
+    implementation(Dependency.Android.AndroidX.ktx)
+    implementation(Dependency.Android.AndroidX.appCompat)
+    implementation(Dependency.Android.AndroidX.browser)
+    implementation(Dependency.Android.AndroidX.constraintLayout)
 
-    implementation(Dependencies.Android.AndroidX.lifecylceViewModelKtx)
-    implementation(Dependencies.Android.AndroidX.lifecylceCommonJava8)
+    implementation(Dependency.Android.AndroidX.lifecylceViewModelKtx)
+    implementation(Dependency.Android.AndroidX.lifecylceCommonJava8)
 
-    implementation(Dependencies.Android.AndroidX.navigationFragmentKtx)
-    implementation(Dependencies.Android.AndroidX.navigationUiKtx)
+    implementation(Dependency.Android.AndroidX.navigationFragmentKtx)
+    implementation(Dependency.Android.AndroidX.navigationUiKtx)
 
-    implementation(Dependencies.Android.material)
+    implementation(Dependency.Android.material)
 
     // Compose
-    implementation(Dependencies.Android.AndroidX.Compose.compiler)
-    implementation(Dependencies.Android.AndroidX.Compose.runtime)
-    implementation(Dependencies.Android.AndroidX.Compose.ui)
-    implementation(Dependencies.Android.AndroidX.Compose.uiTooling)
-    implementation(Dependencies.Android.AndroidX.Compose.foundation)
-    implementation(Dependencies.Android.AndroidX.Compose.material)
-    implementation(Dependencies.Android.AndroidX.Compose.materialIconsCore)
-    implementation(Dependencies.Android.AndroidX.Compose.materialIconsExtended)
-    implementation(Dependencies.Android.AndroidX.Compose.activity)
-    implementation(Dependencies.Android.AndroidX.Compose.lifecycle)
-    implementation(Dependencies.Android.AndroidX.Compose.liveData)
-    implementation(Dependencies.Android.AndroidX.Compose.navigation)
+    implementation(Dependency.Android.AndroidX.Compose.compiler)
+    implementation(Dependency.Android.AndroidX.Compose.runtime)
+    implementation(Dependency.Android.AndroidX.Compose.ui)
+    implementation(Dependency.Android.AndroidX.Compose.uiTooling)
+    implementation(Dependency.Android.AndroidX.Compose.foundation)
+    implementation(Dependency.Android.AndroidX.Compose.material)
+    implementation(Dependency.Android.AndroidX.Compose.materialIconsCore)
+    implementation(Dependency.Android.AndroidX.Compose.materialIconsExtended)
+    implementation(Dependency.Android.AndroidX.Compose.activity)
+    implementation(Dependency.Android.AndroidX.Compose.lifecycle)
+    implementation(Dependency.Android.AndroidX.Compose.liveData)
+    implementation(Dependency.Android.AndroidX.Compose.navigation)
 
-    implementation(Dependencies.Android.D4L.hcSdk) {
+    implementation(Dependency.Multiplatform.D4L.hcSdk) {
         exclude(group = "org.threeten", module = "threetenbp")
     }
-    implementation(Dependencies.Android.threeTenABP)
-    implementation(Dependencies.Android.D4L.fhirSdk)
-    implementation(Dependencies.Android.D4L.fhirHelper)
-    implementation(Dependencies.Android.D4L.authSdk)
-    implementation(Dependencies.Android.appAuth)
+    implementation(Dependency.Android.threeTenABP)
+    implementation(Dependency.Android.D4L.fhirSdk)
+    implementation(Dependency.Android.D4L.fhirHelper)
+    implementation(Dependency.Android.D4L.authSdk)
+    implementation(Dependency.Android.appAuth)
 
 
-    testImplementation(Dependencies.Android.Test.junit)
-    testRuntimeOnly(Dependencies.Android.Test.junit5EngineVintage)
+    testImplementation(Dependency.JvmTest.junit)
+    testRuntimeOnly(Dependency.JvmTest.junit5EngineVintage)
 
-    testImplementation(Dependencies.Android.Test.junit5)
-    testRuntimeOnly(Dependencies.Android.Test.junit5Engine)
+    testImplementation(Dependency.JvmTest.junit5)
+    testRuntimeOnly(Dependency.JvmTest.junit5Engine)
 
-    testImplementation(Dependencies.Android.Test.junit5Parameterized)
+    testImplementation(Dependency.JvmTest.junit5Parameterized)
 
-    testImplementation(Dependencies.Android.Test.mockk)
+    testImplementation(Dependency.AndroidTest.mockk)
 
 
-    androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestCore)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRunner)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
+    androidTestUtil(Dependency.AndroidTest.orchestrator)
+    androidTestImplementation(Dependency.AndroidTest.core)
+    androidTestImplementation(Dependency.AndroidTest.runner)
+    androidTestImplementation(Dependency.AndroidTest.rules)
+    androidTestImplementation(Dependency.AndroidTest.junitExt)
 
-    androidTestImplementation(Dependencies.Android.Test.junit5)
-    androidTestImplementation(Dependencies.Android.Test.junit5AndroidInstrumentation)
-    androidTestRuntimeOnly(Dependencies.Android.Test.junit5AndroidInstrumentationRuntime)
-    androidTestImplementation(Dependencies.Android.Test.testKotlin)
-    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
+    androidTestImplementation(Dependency.JvmTest.junit5)
+    androidTestImplementation(Dependency.AndroidTest.junit5AndroidInstrumentation)
+    androidTestRuntimeOnly(Dependency.AndroidTest.junit5AndroidInstrumentationRuntime)
+    androidTestImplementation(Dependency.JvmTest.testKotlin)
+    androidTestImplementation(Dependency.JvmTest.testKotlinJunit)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoCore)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoIntents)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoWeb)
+    androidTestImplementation(Dependency.AndroidTest.espressoCore)
+    androidTestImplementation(Dependency.AndroidTest.espressoIntents)
+    androidTestImplementation(Dependency.AndroidTest.espressoWeb)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
+    androidTestImplementation(Dependency.AndroidTest.uiAutomator)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.mockk)
+    androidTestImplementation(Dependency.AndroidTest.mockk)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.kakaoCompose)
+    androidTestImplementation(Dependency.AndroidTest.kakaoCompose)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestComposeUi)
+    androidTestImplementation(Dependency.AndroidTest.composeUi)
 
-    androidTestImplementation(Dependencies.Android.okHttp)
-    androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
-    androidTestImplementation(Dependencies.Android.retrofit)
-    androidTestImplementation(Dependencies.Android.gson)
+    androidTestImplementation(Dependency.Android.okHttp)
+    androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependency.Android.retrofit)
+    androidTestImplementation(Dependency.Android.gson)
 }
 
 val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"
