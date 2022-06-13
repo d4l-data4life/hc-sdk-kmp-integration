@@ -7,8 +7,8 @@ package care.data4life.integration.app.data
 import android.content.Context
 import android.content.Intent
 import care.data4life.integration.app.data.wrapper.D4LClientWrapperContract
-import care.data4life.sdk.Data4LifeClient
 import care.data4life.integration.app.data.wrapper.Result
+import care.data4life.sdk.Data4LifeClient
 
 interface DataContract {
 

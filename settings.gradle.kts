@@ -15,7 +15,6 @@ includeBuild("gradlePlugin/integration-dependency")
 include(":app-android")
 include(":app-java")
 
-
 rootProject.name = "hc-sdk-kmp-integration"
 
 val includeSdk: String by settings

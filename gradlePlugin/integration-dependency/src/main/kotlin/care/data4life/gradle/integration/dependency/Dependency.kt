@@ -233,6 +233,5 @@ object Dependency {
         const val kakaoCompose = "io.github.kakaocup:compose:${Version.androidTest.kakaoCompose}"
 
         const val mockk = "io.mockk:mockk-android:${Version.multiplatformTest.mockK}"
-
     }
 }

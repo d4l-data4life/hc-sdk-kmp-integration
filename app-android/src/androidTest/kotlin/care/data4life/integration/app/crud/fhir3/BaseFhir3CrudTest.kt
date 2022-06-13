@@ -19,8 +19,8 @@ import care.data4life.sdk.model.DeleteResult
 import care.data4life.sdk.model.DownloadResult
 import care.data4life.sdk.model.FetchResult
 import care.data4life.sdk.model.UpdateResult
-import care.data4life.sdk.model.Record as LegacyRecord
 import org.threeten.bp.LocalDate
+import care.data4life.sdk.model.Record as LegacyRecord
 
 abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
 

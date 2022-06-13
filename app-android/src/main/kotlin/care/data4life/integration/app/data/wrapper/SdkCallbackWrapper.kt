@@ -5,12 +5,12 @@
 package care.data4life.integration.app.data.wrapper
 
 import care.data4life.sdk.call.Callback
-import care.data4life.sdk.listener.Callback as Fhir3Callback
-import care.data4life.sdk.listener.ResultListener as Fhir3ResultListener
 import care.data4life.sdk.lang.D4LException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import care.data4life.sdk.listener.Callback as Fhir3Callback
+import care.data4life.sdk.listener.ResultListener as Fhir3ResultListener
 
 suspend fun <T> awaitCallback(call: (callback: Callback<T>) -> Unit): Result<T> =
     suspendCoroutine { continuation ->

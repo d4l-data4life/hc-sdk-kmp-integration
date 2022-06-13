@@ -17,7 +17,6 @@ import care.data4life.sdk.helpers.stu3.AttachmentBuilder
 import care.data4life.sdk.helpers.stu3.DocumentReferenceBuilder
 import care.data4life.sdk.helpers.stu3.getAttachments
 import care.data4life.sdk.helpers.stu3.getTitle
-
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -36,7 +35,6 @@ class DocumentReferenceTest : BaseFhir3CrudTest<DocumentReference>() {
 
             // runTestSuite(10)
         }
-
 
         logout()
     }
