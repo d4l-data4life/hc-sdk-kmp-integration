@@ -1,0 +1,47 @@
+{
+    "annotations": [],
+    "customCreationDate": "2022-03-21T00:00:00.000Z",
+    "fhirResource": {
+        "resourceType": "DocumentReference",
+        "id": "d86c6088-88da-4aa5-86fe-531a17264ae7",
+        "identifier": [
+            {
+                "system": "urn:ietf:rfc:3986",
+                "value": "urn:uuid:15aba874-9d5b-4ca5-a895-04be62e48f0a"
+            },
+            {
+                "value": "d4l_f_p_t#04be240d-be2d-4eec-9249-f6af1ec5dc13#04be240d-be2d-4eec-9249-f6af1ec5dc13#04be240d-be2d-4eec-9249-f6af1ec5dc13"
+            }
+        ],
+        "status": "current",
+        "description": "Tricky document",
+        "content": [
+            {
+                "attachment": {
+                    "id": "04be240d-be2d-4eec-9249-f6af1ec5dc13",
+                    "title": "Tricky document",
+                    "contentType": "application/pdf",
+                    "size": 540798,
+                    "hash": "RfqIgrg/GzN3QKk121ReDXsrurk="
+                }
+            }
+        ],
+        "date": "2022-03-16T11:00:00.000Z"
+    },
+    "id": "d86c6088-88da-4aa5-86fe-531a17264ae7",
+    "partner": "711ead8c-d5f8-4042-a849-2d78681ea169",
+    "updatedDate": "2022-03-21T08:38:49.811Z",
+    "status": "Active",
+    "attachments": [
+        {
+            "id": "04be240d-be2d-4eec-9249-f6af1ec5dc13",
+            "title": "Tricky document",
+            "contentType": "application/pdf",
+            "size": 540798,
+            "hash": "RfqIgrg/GzN3QKk121ReDXsrurk="
+        }
+    ],
+    "title": "Tricky document",
+    "type": "",
+    "author": {}
+}
