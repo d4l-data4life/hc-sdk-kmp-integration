@@ -26,3 +26,17 @@ if (includeSdk.toBoolean()) {
         }
     }
 }
+
+val includeAuth: String by settings
+if (includeAuth.toBoolean()) {
+    includeBuild("../hc-auth-sdk-kmp") {
+        dependencySubstitution {
+            substitute(module("care.data4life.hc-auth-sdk-kmp:auth"))
+                .using(project(":auth"))
+            substitute(module("care.data4life.hc-auth-sdk-kmp:auth-jvm"))
+                .using(project(":auth"))
+            substitute(module("care.data4life.hc-auth-sdk-kmp:auth-android"))
+                .using(project(":auth"))
+        }
+    }
+}
