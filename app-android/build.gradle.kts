@@ -220,7 +220,7 @@ dependencies {
 
     testImplementation(Dependency.JvmTest.junit5Parameterized)
 
-    testImplementation(Dependency.AndroidTest.mockk)
+    testImplementation(Dependency.jvmTest.mockk)
 
 
     androidTestUtil(Dependency.AndroidTest.orchestrator)
