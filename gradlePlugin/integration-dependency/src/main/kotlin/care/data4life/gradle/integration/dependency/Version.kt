@@ -21,8 +21,9 @@ object Version {
 
     object GradlePlugin {
         const val kotlin = Version.kotlin
-        const val android = "7.3.0-beta01"
+        const val android = "7.3.0-beta02"
         const val jUnit5Android = "1.8.2.0"
+
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
@@ -108,6 +109,7 @@ object Version {
             /**
              * [AndroidX](https://developer.android.com/jetpack/androidx)
              */
+            const val core = "1.1.0"
             const val ktx = "1.7.0"
             const val appCompat = "1.4.1"
             const val browser = "1.4.0"
