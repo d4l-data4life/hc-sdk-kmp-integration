@@ -24,6 +24,8 @@ allprojects {
         d4l()
     }
 
+    ensureKotlinVersion()
+
     // FIXME remove if dependency conflict is solved
     configurations.all {
         exclude(group = "care.data4life.hc-result-sdk-kmp", module = "error-android-debug")
