@@ -8,20 +8,29 @@ import android.app.Activity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
+import care.data4life.integration.app.data.wrapper.Result.Failure
+import care.data4life.integration.app.data.wrapper.Result.Success
 import care.data4life.integration.app.di.Di
+import kotlinx.coroutines.launch
 
 @Composable
 fun WelcomeView(
     openDashboard: () -> Unit
 ) {
+    val coroutineScope = rememberCoroutineScope()
     val launcher = rememberLauncherForActivityResult(
         contract = StartActivityForResult(),
     ) { result ->
         when (result.resultCode) {
             Activity.RESULT_OK -> {
-                openDashboard()
+                coroutineScope.launch {
+                    when (Di.data.authService.finishLogin(result.data!!)) {
+                        is Success -> openDashboard()
+                        is Failure -> TODO()
+                    }
+                }
             }
             else -> {
                 // TODO "Failed to login with D4L"
@@ -29,9 +38,8 @@ fun WelcomeView(
         }
     }
 
-    val context = LocalContext.current
     val onLoginClicked = {
-        launcher.launch(Di.data.authService.getLoginIntent(context))
+        launcher.launch(Di.data.authService.getLoginIntent())
     }
 
     WelcomeContent(

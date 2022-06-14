@@ -4,7 +4,6 @@
 
 package care.data4life.integration.app.data.wrapper
 
-import android.content.Context
 import android.content.Intent
 import care.data4life.integration.app.data.DataContract.Wrapper.D4LClient
 import care.data4life.sdk.Data4LifeClient
@@ -22,8 +21,12 @@ class D4LClientWrapper(
         return client
     }
 
-    override fun getLoginIntent(context: Context, scopes: Set<String>?): Intent {
-        return client.getLoginIntent(context, scopes)!!
+    override fun getLoginIntent(scopes: Set<String>?): Intent {
+        return client.getLoginIntent(scopes)!!
+    }
+
+    override suspend fun finishLogin(authData: Intent): Result<Boolean> = awaitLegacyCallback { callback ->
+        client.finishLogin(authData, callback)
     }
 
     override suspend fun isAuthorized(): Result<Boolean> = awaitLegacyListener { listener ->

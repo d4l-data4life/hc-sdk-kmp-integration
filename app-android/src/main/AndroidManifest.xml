@@ -29,22 +29,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="care.data4life.sdk.auth.LoginActivity"
-            android:exported="true"
-            />
-
-        <activity
-            android:name="net.openid.appauth.RedirectUriReceiverActivity"
-            android:exported="true"
-            />
-
-        <activity
-            android:name="net.openid.appauth.AuthorizationManagementActivity"
-            tools:replace="android:launchMode"
-            android:launchMode="singleInstance"
-            />
-
         <uses-library
             android:name="android.test.runner"
             android:required="false"

@@ -4,7 +4,6 @@
 
 package care.data4life.integration.app.data
 
-import android.content.Context
 import android.content.Intent
 import care.data4life.integration.app.data.DataContract.Service
 import care.data4life.integration.app.data.DataContract.Wrapper
@@ -14,8 +13,12 @@ class AuthService(
     private val client: Wrapper.D4LClient,
 ) : Service.Auth {
 
-    override fun getLoginIntent(context: Context): Intent {
-        return client.getLoginIntent(context)
+    override fun getLoginIntent(): Intent {
+        return client.getLoginIntent()
+    }
+
+    override suspend fun finishLogin(authData: Intent): Result<Boolean> {
+        return client.finishLogin(authData)
     }
 
     override suspend fun isAuthorized(): Result<Boolean> = client.isAuthorized()
