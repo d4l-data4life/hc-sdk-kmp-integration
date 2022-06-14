@@ -9,20 +9,20 @@ import care.data4life.integration.app.data.DataContract.Wrapper.D4LClient
 import care.data4life.sdk.Data4LifeClient
 
 class D4LClientWrapper(
-    client: Data4LifeClient? = createDefault()
+    client: Data4LifeClient? = null
 ) : D4LClient {
 
     private val _client: Data4LifeClient? = client
 
     private val client: Data4LifeClient
-        get() = _client!!
+        get() = _client ?: createDefault()
 
     override fun getRaw(): Data4LifeClient {
         return client
     }
 
     override fun getLoginIntent(scopes: Set<String>?): Intent {
-        return client.getLoginIntent(scopes)!!
+        return client.getLoginIntent(scopes)
     }
 
     override suspend fun finishLogin(authData: Intent): Result<Boolean> = awaitLegacyCallback { callback ->
@@ -34,6 +34,6 @@ class D4LClientWrapper(
     }
 
     companion object {
-        fun createDefault(): Data4LifeClient? = Data4LifeClient.getInstance()
+        fun createDefault(): Data4LifeClient = Data4LifeClient.getInstance()
     }
 }
