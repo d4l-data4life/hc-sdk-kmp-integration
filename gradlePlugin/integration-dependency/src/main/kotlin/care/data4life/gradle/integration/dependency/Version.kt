@@ -53,7 +53,7 @@ object Version {
              */
             const val utilSdk = "1.13.0"
 
-            const val authSdk = "1.15.0"
+            const val authSdk = "1.15.0-fix-auth-SNAPSHOT"
         }
 
         /**
