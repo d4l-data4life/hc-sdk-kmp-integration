@@ -29,12 +29,7 @@ android {
             "clearPackageData" to "true",
         )
 
-        manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
-        manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
-        manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
-        manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
-        manifestPlaceholders["platform"] = d4lClientConfig.platform
-        manifestPlaceholders["debug"] = "true"
+        manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.DEVELOPMENT, true))
     }
 
     buildTypes {
@@ -60,54 +55,38 @@ android {
         create("development") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.DEVELOPMENT))
 
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release", "debug")
         }
         create("staging") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.STAGING].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.STAGING].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.STAGING].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.STAGING}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.STAGING))
 
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release", "debug")
         }
         create("sandbox") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.SANDBOX].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.SANDBOX].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.SANDBOX].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.SANDBOX}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.SANDBOX))
 
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release", "debug")
         }
         create("production") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.PRODUCTION].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.PRODUCTION].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.PRODUCTION].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.PRODUCTION}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.PRODUCTION))
 
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
-            matchingFallbacks += listOf("release", "debu")
+            matchingFallbacks += listOf("release", "debug")
         }
     }
 
@@ -127,7 +106,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         compose = true
     }
 
