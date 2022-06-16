@@ -4,6 +4,7 @@
 
 package care.data4life.integration.app.data.wrapper
 
+import care.data4life.integration.app.data.wrapper.Result.Success
 import care.data4life.sdk.lang.D4LException
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions
@@ -20,10 +21,10 @@ class SdkCallbackWrapperKtTest {
         val expected = true
 
         // When
-        val result: Boolean = runBlocking { callResultListener { it.onSuccess(expected) } }
+        val result: Result<Boolean> = runBlocking { awaitCallback { it.onSuccess(expected) } }
 
         // Then
-        assertTrue(result)
+        assertTrue((result as Success).data)
     }
 
     @Test
@@ -32,10 +33,10 @@ class SdkCallbackWrapperKtTest {
         val expected = "success"
 
         // When
-        val result: String = runBlocking { callResultListener { it.onSuccess(expected) } }
+        val result: Result<String> = runBlocking { awaitCallback { it.onSuccess(expected) } }
 
         // Then
-        assertEquals(expected, result)
+        assertEquals(expected, (result as Success).data)
     }
 
     @Test
@@ -46,6 +47,6 @@ class SdkCallbackWrapperKtTest {
         // When/Then
         Assertions.assertThrowsExactly(
             D4LException::class.java
-        ) { runBlocking { callResultListener<Boolean> { it.onError(exception) } } }
+        ) { runBlocking { awaitCallback<Boolean> { it.onError(exception) } } }
     }
 }

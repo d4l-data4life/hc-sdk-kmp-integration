@@ -28,6 +28,7 @@ object Repository {
         "care.data4life.hc-sdk-kmp",
         "care.data4life.hc-util-sdk-kmp",
         "care.data4life.hc-util-test-sdk-kmp",
+        "care.data4life.hc-auth-sdk-kmp",
         "care.data4life.hc-fhir-sdk-kmp",
         "care.data4life.hc-fhir-helper-sdk-kmp",
         "care.data4life.hc-securestore-kmp",
