@@ -4,10 +4,10 @@
 
 package care.data4life.integration.app.data.wrapper
 
+import care.data4life.integration.app.data.wrapper.Result.Failure
 import care.data4life.integration.app.data.wrapper.Result.Success
 import care.data4life.sdk.lang.D4LException
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -44,9 +44,10 @@ class SdkCallbackWrapperKtTest {
         // Given
         val exception = D4LException("exception")
 
-        // When/Then
-        Assertions.assertThrowsExactly(
-            D4LException::class.java
-        ) { runBlocking { awaitCallback<Boolean> { it.onError(exception) } } }
+        // When
+        val result: Result<String> = runBlocking { awaitCallback { it.onError(exception) } }
+
+        // Then
+        assertEquals(exception, (result as Failure).exception)
     }
 }

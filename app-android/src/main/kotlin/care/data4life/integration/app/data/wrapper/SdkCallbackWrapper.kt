@@ -7,7 +7,6 @@ package care.data4life.integration.app.data.wrapper
 import care.data4life.sdk.call.Callback
 import care.data4life.sdk.lang.D4LException
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 import care.data4life.sdk.listener.Callback as Fhir3Callback
 import care.data4life.sdk.listener.ResultListener as Fhir3ResultListener
@@ -56,17 +55,3 @@ suspend fun <V> awaitLegacyListener(call: (listener: Fhir3ResultListener<V>) -> 
             }
         )
     }
-
-suspend fun <T> callResultListener(
-    call: (Fhir3ResultListener<T>) -> Unit
-): T = suspendCoroutine { continuation ->
-    call(object : Fhir3ResultListener<T> {
-        override fun onError(exception: D4LException) {
-            continuation.resumeWithException(exception)
-        }
-
-        override fun onSuccess(t: T) {
-            continuation.resume(t)
-        }
-    })
-}
