@@ -223,6 +223,7 @@ dependencies {
     androidTestImplementation(Dependency.AndroidTest.kakaoCompose)
 
     androidTestImplementation(Dependency.AndroidTest.composeUi)
+    debugImplementation(Dependency.AndroidTest.composeUiManifest)
 
     androidTestImplementation(Dependency.Android.okHttp)
     androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)

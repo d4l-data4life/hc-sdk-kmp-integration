@@ -4,7 +4,7 @@
 
 package care.data4life.integration.app.test
 
-import care.data4life.integration.app.MainActivity
+import androidx.activity.ComponentActivity
 import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import org.junit.jupiter.api.extension.RegisterExtension
 
@@ -12,5 +12,5 @@ abstract class BaseComposeTest {
 
     @JvmField
     @RegisterExtension
-    val extension = createAndroidComposeExtension<MainActivity>()
+    val extension = createAndroidComposeExtension<ComponentActivity>()
 }

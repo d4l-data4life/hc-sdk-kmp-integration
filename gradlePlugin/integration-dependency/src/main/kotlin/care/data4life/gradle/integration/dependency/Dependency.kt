@@ -228,6 +228,7 @@ object Dependency {
             "de.mannodermaus.junit5:android-test-runner:${Version.androidTest.jUnit5AndroidInstrumentation}"
 
         const val composeUi = "androidx.compose.ui:ui-test-junit4:${Version.android.compose.core}"
+        const val composeUiManifest = "androidx.compose.ui:ui-test-manifest:${Version.android.compose.core}"
 
         const val kakaoCompose = "io.github.kakaocup:compose:${Version.androidTest.kakaoCompose}"
 
