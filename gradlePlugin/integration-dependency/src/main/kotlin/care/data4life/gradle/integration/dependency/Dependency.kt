@@ -50,7 +50,6 @@ object Dependency {
             }
         }
 
-        @Deprecated("D4L Dependencies should be defined directly by the consumer to avoid circle dependencies.")
         object D4L {
 
             val util = Util

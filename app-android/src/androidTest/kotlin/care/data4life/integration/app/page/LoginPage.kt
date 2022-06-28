@@ -13,9 +13,11 @@ import androidx.test.uiautomator.UiScrollable
 import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 import care.data4life.integration.app.test.Auth2FAHelper
+import care.data4life.integration.app.test.BuildConfig
 import care.data4life.integration.app.test.User
 import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
 import java.lang.Thread.sleep
+import java.util.Locale
 
 class LoginPage(
     composeContext: ComposeContentContext
@@ -28,7 +30,7 @@ class LoginPage(
     }
 
     private fun waitForBrowser() {
-        device.wait(Until.hasObject(By.pkg(chromePackageName).depth(0)), TIMEOUT)
+        device.wait(Until.hasObject(By.pkg(chromePackageName).depth(0)), TIMEOUT_LONG)
     }
 
     private fun hasBrowser(): Boolean {
@@ -40,15 +42,20 @@ class LoginPage(
         handleLoginRegisterPage()
         handleAuthPage(user)
 
-        if (!hasBrowser()) return HomePage(composeContext)
+        if (!hasBrowser()) {
+            sleep(TIMEOUT_LONG)
+            return HomePage(composeContext)
+        }
 
         handlePhoneNumberPage(user)
         handle2faPage(user)
+        handleDataKeyPage(user)
 
         // Chrome
         sleep(TIMEOUT_SHORT)
         dismissChromeInfoBar()
 
+        sleep(TIMEOUT_LONG)
         return HomePage(composeContext)
     }
 
@@ -117,6 +124,17 @@ class LoginPage(
         }
     }
 
+    private fun handleDataKeyPage(user: User) {
+        sleep(TIMEOUT_SHORT)
+        if (hasResource(authAppDataKeyTextArea)) {
+            enterText(
+                authAppDataKeyTextArea,
+                user.getS4hDataKeyForEnvironment(BuildConfig.FLAVOR.lowercase(Locale.ENGLISH))
+            )
+            clickButton(authAppDataKeyNextButton, false)
+        }
+    }
+
     // Chrome
     private fun dismissChromeWelcomeScreen() {
         // dismiss Chrome welcome screen
@@ -153,7 +171,7 @@ class LoginPage(
         val acceptCookies = device.findObject(
             UiSelector().instance(0)
                 .className(classNameButton)
-                .descriptionMatches("(Accept|Akzeptieren)")
+                .descriptionMatches(authAppCookieButtonAcceptRegex)
         )
         acceptCookies.waitForExists(TIMEOUT_SHORT)
         if (acceptCookies.exists()) {
@@ -226,6 +244,9 @@ class LoginPage(
         const val chromeNegativeButton = "com.android.chrome:id/negative_button"
         const val chromeInfoBarCloseButton = "com.android.chrome:id/infobar_close_button"
 
+        // AuthApp Cookie
+        const val authAppCookieButtonAcceptRegex = "(Accept|ACCEPT|Akzeptieren)"
+
         // Page register/login
         const val authAppRegisterButtonLogin = "d4l-button-login"
 
@@ -246,6 +267,10 @@ class LoginPage(
         const val authApp2faButtonSmsCodeSubmit = "d4l-button-submit-sms-code"
         const val authApp2faButtonResendSms = "d4l-button-resend-sms-code"
         const val authApp2faButtonDismissRegex = "(DISMISS)"
+
+        // Page DataKey
+        const val authAppDataKeyTextArea = "main-key"
+        const val authAppDataKeyNextButton = "d4l-button-submit-sms-code"
 
         // Types
         const val classNameButton = "android.widget.Button"

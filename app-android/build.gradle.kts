@@ -186,7 +186,6 @@ dependencies {
     implementation(Dependency.Android.threeTenABP)
     implementation(Dependency.Android.D4L.fhirSdk)
     implementation(Dependency.Android.D4L.fhirHelper)
-    implementation(Dependency.Android.D4L.authSdk)
     implementation(Dependency.Android.appAuth)
 
 

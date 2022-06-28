@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import care.data4life.integration.app.data.wrapper.Result.Failure
 import care.data4life.integration.app.data.wrapper.Result.Success
 import care.data4life.integration.app.di.Di
+import care.data4life.sdk.log.Log
 import kotlinx.coroutines.launch
 
 @Composable
@@ -26,9 +27,11 @@ fun WelcomeView(
         when (result.resultCode) {
             Activity.RESULT_OK -> {
                 coroutineScope.launch {
-                    when (Di.data.authService.finishLogin(result.data!!)) {
+                    when (val authResult = Di.data.authService.finishLogin(result.data!!)) {
                         is Success -> openDashboard()
-                        is Failure -> TODO()
+                        is Failure -> {
+                            Log.error(authResult.exception, "Failed to login")
+                        }
                     }
                 }
             }

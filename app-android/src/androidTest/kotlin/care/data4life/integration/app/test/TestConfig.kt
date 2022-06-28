@@ -23,6 +23,17 @@ data class User(
 ) {
     val phoneNumber: String
         get() = phoneCountryCode + phoneLocalNumber
+
+    fun getS4hDataKeyForEnvironment(environment: String): String {
+        return when (environment) {
+            "local" -> s4hDataKeys.local
+            "development" -> s4hDataKeys.development
+            "staging" -> s4hDataKeys.staging
+            "sandbox" -> s4hDataKeys.sandbox
+            "production" -> s4hDataKeys.production
+            else -> "empty"
+        }
+    }
 }
 
 data class DataKeySet(
