@@ -1,6 +1,8 @@
 # Client config
 d4l-client-*.json
+s4h-client-*.json
 d4l-test-*.json
+s4h-test-*.json
 
 # Gradle
 .gradle/
