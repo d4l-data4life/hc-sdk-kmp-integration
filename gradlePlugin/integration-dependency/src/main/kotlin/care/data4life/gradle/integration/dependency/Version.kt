@@ -21,13 +21,13 @@ object Version {
 
     object GradlePlugin {
         const val kotlin = Version.kotlin
-        const val android = "7.3.0-beta02"
+        const val android = "7.3.0-beta04"
         const val jUnit5Android = "1.8.2.0"
 
         /**
          * [Dexcount](https://github.com/KeepSafe/dexcount-gradle-plugin)
          */
-        const val dexcount = "0.8.4"
+        const val dexcount = "3.1.0"
     }
 
     object Multiplatform {
@@ -39,7 +39,7 @@ object Version {
             /**
              * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
              */
-            const val coroutines = "1.6.2"
+            const val coroutines = "1.6.3"
         }
 
         object D4L {
@@ -110,8 +110,8 @@ object Version {
              * [AndroidX](https://developer.android.com/jetpack/androidx)
              */
             const val core = "1.1.0"
-            const val ktx = "1.7.0"
-            const val appCompat = "1.4.1"
+            const val ktx = "1.8.0"
+            const val appCompat = "1.4.2"
             const val browser = "1.4.0"
 
             const val constraintLayout = "2.1.4"
@@ -121,8 +121,8 @@ object Version {
         }
 
         object Compose {
-            const val core = "1.2.0-beta02"
-            const val activity = "1.5.0-beta01"
+            const val core = "1.2.0-rc02"
+            const val activity = "1.5.0-rc01"
             const val viewModel = "2.4.1"
             const val liveData = "1.1.1"
             const val navigation = "2.4.2"
@@ -162,8 +162,8 @@ object Version {
         /**
          * [Android Testing](https://developer.android.com/testing)
          */
-        const val androidXTestCore = "1.4.0"
         const val androidXTest = "1.4.0"
+        const val androidXTestCore = "1.5.0-alpha01"
         const val androidXTestOrchestrator = "1.4.1"
         const val androidXEspresso = "3.4.0"
         const val androidXUiAutomator = "2.2.0"
