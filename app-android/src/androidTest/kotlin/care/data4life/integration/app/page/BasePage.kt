@@ -10,6 +10,7 @@ abstract class BasePage(
     protected val composeContext: ComposeContentContext,
 ) {
     companion object {
+
         const val TIMEOUT_LONG = 1000 * 10L
 
         const val TIMEOUT_MEDIUM = 1000 * 1L
