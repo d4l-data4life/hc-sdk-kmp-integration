@@ -33,8 +33,10 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
 
         val mutatedItems = mutateItems(loadedItems)
 
-        update(mutatedItems)
-        download(recordIds, mutatedItems)
+        update(recordIds, mutatedItems)
+        if (supportsDownload()) {
+            download(recordIds, mutatedItems)
+        }
 
         delete(recordIds)
         count(0)
@@ -114,11 +116,11 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
     abstract suspend fun callFetchByType(): List<Result<Record<T>>>
     abstract fun assertFetchByType(expected: T, actual: Record<T>)
 
-    private suspend fun update(items: List<T>) {
+    private suspend fun update(recordIds: List<String>, items: List<T>) {
         // Given
 
         // When
-        val results: List<Result<Record<T>>> = callUpdate(items)
+        val results: List<Result<Record<T>>> = callUpdate(recordIds, items)
 
         // Then
         assertEquals(items.size, results.size)
@@ -127,9 +129,10 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
         }
     }
 
-    abstract suspend fun callUpdate(items: List<T>): List<Result<Record<T>>>
+    abstract suspend fun callUpdate(recordIds: List<String>, items: List<T>): List<Result<Record<T>>>
     abstract fun assertUpdate(expected: T, actual: Record<T>)
 
+    abstract fun supportsDownload(): Boolean
     private suspend fun download(recordIds: List<String>, items: List<T>) {
         // Given
 

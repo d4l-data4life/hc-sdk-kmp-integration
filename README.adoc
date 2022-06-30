@@ -9,7 +9,7 @@ A suite of UI tests to identify breaking changes and regressions by SDK version 
 == Requirements
 
 * Android 6.0 (API 23) to Android 12L (API 32)
-* Kotlin 1.6.20
+* Kotlin 1.6.21
 * Java 11
 
 == Dependencies
@@ -72,9 +72,5 @@ Run gradle wrapper task for connected tests:
 
 * [x] Login
 * [x] Logout
-* [ ] Document CRUD
-* [ ] Report CRUD
-* [ ] Observation CRUD
-* [ ] Fetch record by type
-* [ ] Count total records
-* [ ] Count records per type
+* [x] AppData CRUD + count
+* [x] FHIR 3 and FHIR 4 Document CRUD + count

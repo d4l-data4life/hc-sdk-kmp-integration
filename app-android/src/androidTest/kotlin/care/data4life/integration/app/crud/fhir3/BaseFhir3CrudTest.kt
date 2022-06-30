@@ -100,7 +100,9 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         }
     }
 
-    override suspend fun callUpdate(items: List<T>): List<Result<Record<T>>> {
+    override fun supportsDownload(): Boolean = true
+
+    override suspend fun callUpdate(recordIds: List<String>, items: List<T>): List<Result<Record<T>>> {
         val results: MutableList<Result<Record<T>>> = mutableListOf()
         if (items.count() == 1) {
             val legacyResult: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->

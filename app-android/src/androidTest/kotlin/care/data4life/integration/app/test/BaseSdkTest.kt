@@ -4,18 +4,25 @@
 
 package care.data4life.integration.app.test
 
+import care.data4life.integration.app.MainActivity
 import care.data4life.integration.app.data.wrapper.Result
 import care.data4life.integration.app.data.wrapper.awaitLegacyListener
 import care.data4life.integration.app.page.HomePage
 import care.data4life.integration.app.page.onWelcomePage
 import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
+import care.data4life.integration.app.test.compose.junit5.createAndroidComposeExtension
 import care.data4life.sdk.Data4LifeClient
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.fail
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.extension.RegisterExtension
 
-abstract class BaseSdkTest : BaseComposeTest() {
+abstract class BaseSdkTest {
+
+    @JvmField
+    @RegisterExtension
+    val extension = createAndroidComposeExtension<MainActivity>()
 
     private lateinit var homePage: HomePage
 
