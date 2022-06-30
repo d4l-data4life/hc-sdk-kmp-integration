@@ -14,6 +14,7 @@ import care.data4life.integration.app.data.wrapper.Result.Failure
 import care.data4life.integration.app.data.wrapper.Result.Success
 import care.data4life.integration.app.di.Di
 import care.data4life.sdk.log.Log
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
@@ -26,9 +27,9 @@ fun WelcomeView(
     ) { result ->
         when (result.resultCode) {
             Activity.RESULT_OK -> {
-                coroutineScope.launch {
+                coroutineScope.launch(Dispatchers.IO) {
                     when (val authResult = Di.data.authService.finishLogin(result.data!!)) {
-                        is Success -> openDashboard()
+                        is Success -> launch(Dispatchers.Main) { openDashboard() }
                         is Failure -> {
                             Log.error(authResult.exception, "Failed to login")
                         }
@@ -36,7 +37,7 @@ fun WelcomeView(
                 }
             }
             else -> {
-                // TODO "Failed to login with D4L"
+                Log.debug("Failed to login: $result")
             }
         }
     }
