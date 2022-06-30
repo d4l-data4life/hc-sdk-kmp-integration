@@ -16,8 +16,9 @@ import care.data4life.integration.app.test.Auth2FAHelper
 import care.data4life.integration.app.test.BuildConfig
 import care.data4life.integration.app.test.User
 import care.data4life.integration.app.test.compose.junit5.ComposeContentContext
-import java.lang.Thread.sleep
 import java.util.Locale
+
+fun ComposeContentContext.onLoginPage() = LoginPage(this)
 
 class LoginPage(
     composeContext: ComposeContentContext
@@ -43,7 +44,6 @@ class LoginPage(
         handleAuthPage(user)
 
         if (!hasBrowser()) {
-            sleep(TIMEOUT_LONG)
             return HomePage(composeContext)
         }
 
@@ -52,38 +52,35 @@ class LoginPage(
         handleDataKeyPage(user)
 
         // Chrome
-        sleep(TIMEOUT_SHORT)
         dismissChromeInfoBar()
 
-        sleep(TIMEOUT_LONG)
-        return HomePage(composeContext)
+        if (!hasBrowser()) {
+            return HomePage(composeContext)
+        } else {
+            throw IllegalStateException("Browser should be closed now")
+        }
     }
 
     // Pages
 
     private fun handleChromePage() {
-        sleep(TIMEOUT_SHORT)
         dismissChromeWelcomeScreen()
     }
 
     private fun handleLoginRegisterPage() {
-        sleep(TIMEOUT_SHORT)
         dismissAuthAppCookie()
         clickButton(authAppRegisterButtonLogin, true)
     }
 
     private fun handleAuthPage(user: User) {
-        sleep(TIMEOUT_SHORT)
         enterText(authAppAuthInputEmail, user.email, true)
         enterText(authAppAuthInputPassword, user.password, true)
         clickButton(authAppAuthButtonSubmitLogin, true)
     }
 
     private fun handlePhoneNumberPage(user: User) {
-        sleep(TIMEOUT_SHORT)
         dismissChromeSavePassword()
 
-        sleep(TIMEOUT_SHORT)
         if (hasResource(authAppNumberInputPhoneNumber)) {
             enterText(authAppNumberInputPhoneCountryCode, user.phoneCountryCode, false)
             enterText(authAppNumberInputPhoneNumber, user.phoneLocalNumber, false)
@@ -93,7 +90,6 @@ class LoginPage(
     }
 
     private fun handle2faPage(user: User) {
-        sleep(TIMEOUT_SHORT)
         if (hasResource(authApp2faInputPin)) {
             for (index in 0 until max2faRetries) {
                 val message = Auth2FAHelper.fetchCurrent2faCode(user.phoneNumber)
@@ -110,7 +106,6 @@ class LoginPage(
 
                 clickButton(authApp2faButtonSmsCodeSubmit, true)
 
-                sleep(TIMEOUT_SHORT)
                 val dismissButton = findResource(classNameButton, authApp2faButtonDismissRegex)
                 if (dismissButton.exists()) {
                     dismissButton.click()
@@ -125,7 +120,6 @@ class LoginPage(
     }
 
     private fun handleDataKeyPage(user: User) {
-        sleep(TIMEOUT_SHORT)
         if (hasResource(authAppDataKeyTextArea)) {
             enterText(
                 authAppDataKeyTextArea,
@@ -139,16 +133,17 @@ class LoginPage(
     private fun dismissChromeWelcomeScreen() {
         // dismiss Chrome welcome screen
         val accept = device.findObject(UiSelector().resourceId(chromeAcceptTerms))
+        accept.waitForExists(TIMEOUT_SHORT)
         if (accept.exists()) {
             accept.click()
             device.waitForIdle()
         }
         val noThanks = device.findObject(UiSelector().resourceId(chromeNegativeButton))
+        noThanks.waitForExists(TIMEOUT_SHORT)
         if (noThanks.exists()) {
             noThanks.click()
             device.waitForIdle()
         }
-        sleep(TIMEOUT_SHORT)
     }
 
     private fun dismissChromeSavePassword() {
@@ -205,11 +200,13 @@ class LoginPage(
 
     private fun hasResource(resourceId: String): Boolean {
         val resource = findResource(resourceId)
+        resource.waitForExists(TIMEOUT_SHORT)
         return resource.exists()
     }
 
     private fun clickButton(resourceId: String, required: Boolean = false) {
         val button = findResource(resourceId)
+        button.waitForExists(TIMEOUT_SHORT)
         if (button.exists()) {
             button.click()
             device.waitForIdle()
@@ -220,6 +217,7 @@ class LoginPage(
 
     private fun enterText(resourceId: String, text: String, required: Boolean = false) {
         val input = findResource(resourceId)
+        input.waitForExists(TIMEOUT_SHORT)
         if (input.exists()) {
             input.text = text
             device.waitForIdle()
