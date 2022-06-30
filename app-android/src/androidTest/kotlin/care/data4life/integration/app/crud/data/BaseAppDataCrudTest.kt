@@ -41,18 +41,18 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
     override suspend fun callFetch(recordIds: List<String>): List<Result<DataRecord<DataResource>>> {
         val results: MutableList<Result<DataRecord<DataResource>>> = mutableListOf()
         for (index in 0 until recordIds.count()) {
-            val legacyResult: Result<DataRecord<DataResource>> = awaitCallback { callback ->
+            val result: Result<DataRecord<DataResource>> = awaitCallback { callback ->
                 testSubject.data.fetch(recordIds[index], callback)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         }
 
         return results
     }
 
     override suspend fun callFetchByType(): List<Result<DataRecord<DataResource>>> {
-        val legacyResult: Result<List<DataRecord<DataResource>>> = awaitCallback { callback ->
+        val result: Result<List<DataRecord<DataResource>>> = awaitCallback { callback ->
             testSubject.data.search(
                 emptyList(),
                 CreationDateRange(
@@ -70,14 +70,14 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
             )
         }
 
-        return mapToResults(legacyResult) {
-            if (legacyResult is Success) legacyResult.data
+        return mapToResults(result) {
+            if (result is Success) result.data
             else emptyList()
         }
     }
 
     override fun supportsDownload(): Boolean = false
-    
+
     override suspend fun callDownload(recordIds: List<String>): List<Result<Record<DataResource>>> {
         throw UnsupportedOperationException("callDownload is not supported to AppData")
     }
@@ -88,11 +88,11 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
     ): List<Result<DataRecord<DataResource>>> {
         val results: MutableList<Result<DataRecord<DataResource>>> = mutableListOf()
         for (index in 0 until items.count()) {
-            val legacyResult: Result<DataRecord<DataResource>> = awaitCallback { callback ->
+            val result: Result<DataRecord<DataResource>> = awaitCallback { callback ->
                 testSubject.data.update(recordIds[index], items[index], emptyList(), callback)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         }
 
         return results
@@ -114,14 +114,14 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
         return results
     }
 
-    private fun mapToResult(legacyResult: Result<DataRecord<DataResource>>): Result<DataRecord<DataResource>> {
-        return when (legacyResult) {
+    private fun mapToResult(result: Result<DataRecord<DataResource>>): Result<DataRecord<DataResource>> {
+        return when (result) {
             is Success -> {
-                val data = mapToRecord(legacyResult.data)
+                val data = mapToRecord(result.data)
                 Success(data)
             }
             is Failure -> {
-                Failure(legacyResult.exception)
+                Failure(result.exception)
             }
         }
     }
@@ -145,12 +145,12 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
         return results
     }
 
-    private fun mapToRecord(legacyRecord: DataRecord<DataResource>): DataRecord<DataResource> {
+    private fun mapToRecord(result: DataRecord<DataResource>): DataRecord<DataResource> {
         return DataRecord(
-            identifier = legacyRecord.identifier,
-            resource = legacyRecord.resource,
-            meta = legacyRecord.meta,
-            annotations = legacyRecord.annotations
+            identifier = result.identifier,
+            resource = result.resource,
+            meta = result.meta,
+            annotations = result.annotations
         )
     }
 }

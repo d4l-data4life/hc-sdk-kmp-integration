@@ -41,18 +41,18 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callFetch(recordIds: List<String>): List<Result<Fhir4Record<T>>> {
         val results: MutableList<Result<Fhir4Record<T>>> = mutableListOf()
         for (index in 0 until recordIds.count()) {
-            val legacyResult: Result<Fhir4Record<T>> = awaitCallback { callback ->
+            val result: Result<Fhir4Record<T>> = awaitCallback { callback ->
                 testSubject.fhir4.fetch(recordIds[index], callback)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         }
 
         return results
     }
 
     override suspend fun callFetchByType(): List<Result<Fhir4Record<T>>> {
-        val legacyResult: Result<List<Fhir4Record<T>>> = awaitCallback { callback ->
+        val result: Result<List<Fhir4Record<T>>> = awaitCallback { callback ->
             testSubject.fhir4.search(
                 getTestClass(),
                 emptyList(),
@@ -71,8 +71,8 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
             )
         }
 
-        return mapToResults(legacyResult) {
-            if (legacyResult is Success) legacyResult.data
+        return mapToResults(result) {
+            if (result is Success) result.data
             else emptyList()
         }
     }
@@ -82,11 +82,11 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callUpdate(recordIds: List<String>, items: List<T>): List<Result<Record<T>>> {
         val results: MutableList<Result<Fhir4Record<T>>> = mutableListOf()
         for (index in 0 until items.count()) {
-            val legacyResult: Result<Fhir4Record<T>> = awaitCallback { callback ->
+            val result: Result<Fhir4Record<T>> = awaitCallback { callback ->
                 testSubject.fhir4.update(recordIds[index], items[index], emptyList(), callback)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         }
 
         return results
@@ -95,11 +95,11 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callDownload(recordIds: List<String>): List<Result<Fhir4Record<T>>> {
         val results: MutableList<Result<Fhir4Record<T>>> = mutableListOf()
         for (index in 0 until recordIds.count()) {
-            val legacyResult: Result<Fhir4Record<T>> = awaitCallback { callback ->
+            val result: Result<Fhir4Record<T>> = awaitCallback { callback ->
                 testSubject.fhir4.download(recordIds[index], callback)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         }
 
         return results
@@ -121,14 +121,14 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         return results
     }
 
-    private fun mapToResult(legacyResult: Result<Fhir4Record<T>>): Result<Fhir4Record<T>> {
-        return when (legacyResult) {
+    private fun mapToResult(result: Result<Fhir4Record<T>>): Result<Fhir4Record<T>> {
+        return when (result) {
             is Success -> {
-                val data = mapToRecord(legacyResult.data)
+                val data = mapToRecord(result.data)
                 Success(data)
             }
             is Failure -> {
-                Failure(legacyResult.exception)
+                Failure(result.exception)
             }
         }
     }
@@ -149,12 +149,12 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         return results
     }
 
-    private fun mapToRecord(legacyRecord: Fhir4Record<T>): Fhir4Record<T> {
+    private fun mapToRecord(result: Fhir4Record<T>): Fhir4Record<T> {
         return Fhir4Record(
-            identifier = legacyRecord.identifier,
-            resource = legacyRecord.resource,
-            meta = legacyRecord.meta,
-            annotations = legacyRecord.annotations
+            identifier = result.identifier,
+            resource = result.resource,
+            meta = result.meta,
+            annotations = result.annotations
         )
     }
 }

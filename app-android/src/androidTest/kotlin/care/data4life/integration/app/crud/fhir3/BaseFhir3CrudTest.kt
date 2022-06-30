@@ -27,19 +27,19 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callCreate(items: List<T>): List<Result<Record<T>>> {
         val results: MutableList<Result<Record<T>>> = mutableListOf()
         if (items.count() == 1) {
-            val legacyResult: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
+            val result: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
                 testSubject.createRecord(items[0], listener)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         } else {
-            val legacyResult: Result<CreateResult<T>> = awaitLegacyListener { listener ->
+            val result: Result<CreateResult<T>> = awaitLegacyListener { listener ->
                 testSubject.createRecords(items, listener)
             }
 
             results.addAll(
-                mapToResults(legacyResult) {
-                    if (legacyResult is Success) legacyResult.data.successfulOperations
+                mapToResults(result) {
+                    if (result is Success) result.data.successfulOperations
                     else emptyList()
                 }
             )
@@ -57,19 +57,19 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callFetch(recordIds: List<String>): List<Result<Record<T>>> {
         val results: MutableList<Result<Record<T>>> = mutableListOf()
         if (recordIds.count() == 1) {
-            val legacyResult: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
+            val result: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
                 testSubject.fetchRecord(recordIds[0], listener)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         } else {
-            val legacyResult: Result<FetchResult<T>> = awaitLegacyListener { listener ->
+            val result: Result<FetchResult<T>> = awaitLegacyListener { listener ->
                 testSubject.fetchRecords(recordIds, listener)
             }
 
             results.addAll(
-                mapToResults(legacyResult) {
-                    if (legacyResult is Success) legacyResult.data.successfulFetches
+                mapToResults(result) {
+                    if (result is Success) result.data.successfulFetches
                     else emptyList()
                 }
             )
@@ -79,7 +79,7 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     }
 
     override suspend fun callFetchByType(): List<Result<Record<T>>> {
-        val legacyResult: Result<List<LegacyRecord<T>>> = awaitLegacyListener { listener ->
+        val result: Result<List<LegacyRecord<T>>> = awaitLegacyListener { listener ->
             testSubject.fetchRecords(
                 getTestClass(),
                 CreationDateRange(
@@ -94,8 +94,8 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
             )
         }
 
-        return mapToResults(legacyResult) {
-            if (legacyResult is Success) legacyResult.data
+        return mapToResults(result) {
+            if (result is Success) result.data
             else emptyList()
         }
     }
@@ -105,19 +105,19 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callUpdate(recordIds: List<String>, items: List<T>): List<Result<Record<T>>> {
         val results: MutableList<Result<Record<T>>> = mutableListOf()
         if (items.count() == 1) {
-            val legacyResult: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
+            val result: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
                 testSubject.updateRecord(items[0], listener)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         } else {
-            val legacyResult: Result<UpdateResult<T>> = awaitLegacyListener { listener ->
+            val result: Result<UpdateResult<T>> = awaitLegacyListener { listener ->
                 testSubject.updateRecords(items, listener)
             }
 
             results.addAll(
-                mapToResults(legacyResult) {
-                    if (legacyResult is Success) legacyResult.data.successfulUpdates
+                mapToResults(result) {
+                    if (result is Success) result.data.successfulUpdates
                     else emptyList()
                 }
             )
@@ -129,19 +129,19 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
     override suspend fun callDownload(recordIds: List<String>): List<Result<Record<T>>> {
         val results: MutableList<Result<Record<T>>> = mutableListOf()
         if (recordIds.count() == 1) {
-            val legacyResult: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
+            val result: Result<LegacyRecord<T>> = awaitLegacyListener { listener ->
                 testSubject.downloadRecord(recordIds[0], listener)
             }
 
-            results.add(mapToResult(legacyResult))
+            results.add(mapToResult(result))
         } else {
-            val legacyResult: Result<DownloadResult<T>> = awaitLegacyListener { listener ->
+            val result: Result<DownloadResult<T>> = awaitLegacyListener { listener ->
                 testSubject.downloadRecords(recordIds, listener)
             }
 
             results.addAll(
-                mapToResults(legacyResult) {
-                    if (legacyResult is Success) legacyResult.data.successfulDownloads
+                mapToResults(result) {
+                    if (result is Success) result.data.successfulDownloads
                     else emptyList()
                 }
             )
@@ -163,30 +163,30 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
                 is Failure -> Failure(result.exception)
             }
         } else {
-            val legacyResult: Result<DeleteResult> = awaitLegacyListener { listener ->
+            val result: Result<DeleteResult> = awaitLegacyListener { listener ->
                 testSubject.deleteRecords(recordIds, listener)
             }
 
-            when (legacyResult) {
+            when (result) {
                 is Success -> {
-                    val data = legacyResult.data.successfulDeletes.map { Success(it) }
+                    val data = result.data.successfulDeletes.map { Success(it) }
                     results.addAll(data)
                 }
-                is Failure -> results.add(Failure(legacyResult.exception))
+                is Failure -> results.add(Failure(result.exception))
             }
         }
 
         return results
     }
 
-    private fun mapToResult(legacyResult: Result<LegacyRecord<T>>): Result<Record<T>> {
-        return when (legacyResult) {
+    private fun mapToResult(result: Result<LegacyRecord<T>>): Result<Record<T>> {
+        return when (result) {
             is Success -> {
-                val data = mapToRecord(legacyResult.data)
+                val data = mapToRecord(result.data)
                 Success(data)
             }
             is Failure -> {
-                Failure(legacyResult.exception)
+                Failure(result.exception)
             }
         }
     }
@@ -207,12 +207,12 @@ abstract class BaseFhir3CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         return results
     }
 
-    private fun mapToRecord(legacyRecord: LegacyRecord<T>): Record<T> {
+    private fun mapToRecord(result: LegacyRecord<T>): Record<T> {
         return Fhir3Record(
-            identifier = legacyRecord.identifier,
-            resource = legacyRecord.fhirResource,
-            meta = legacyRecord.meta!!,
-            annotations = legacyRecord.annotations!!
+            identifier = result.identifier,
+            resource = result.fhirResource,
+            meta = result.meta!!,
+            annotations = result.annotations!!
         )
     }
 }
