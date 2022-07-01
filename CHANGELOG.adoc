@@ -46,7 +46,7 @@ toc::[]
 === Bumped
 
 * Gradle 6.9.1 -> 7.4.2
-* HC SDK KMP 1.9.2 -> 1.16.0
+* HC SDK KMP 1.9.2 -> 1.16.0-fix-auth-SNAPSHOT
 * HC FHIR SDK Java 1.2.1 -> 1.8.0
 * HC FHIR Helper 1.4.1 -> 1.9.0
 * HC Auth SDK 1.14.0 -> 1.15.0
