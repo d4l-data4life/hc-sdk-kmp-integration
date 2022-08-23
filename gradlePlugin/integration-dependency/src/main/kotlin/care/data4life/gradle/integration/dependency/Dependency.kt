@@ -53,6 +53,9 @@ object Dependency {
         object D4L {
 
             val util = Util
+            val sdk = SDK
+            val auth = Auth
+            val fhirHelper = FhirHelper
 
             object Util {
                 const val common = "care.data4life.hc-util-sdk-kmp:util:${Version.multiplatform.d4l.utilSdk}"
@@ -60,7 +63,19 @@ object Dependency {
                 const val jvm = "care.data4life.hc-util-sdk-kmp:util-jvm:${Version.multiplatform.d4l.utilSdk}"
             }
 
-            const val hcSdk = "care.data4life.hc-sdk-kmp:sdk-android:${Version.multiplatform.d4l.hcSdk}"
+            object SDK {
+                const val android = "care.data4life.hc-sdk-kmp:sdk-android:${Version.multiplatform.d4l.hcSdk}"
+                const val jvm = "care.data4life.hc-sdk-kmp:sdk-jvm:${Version.multiplatform.d4l.hcSdk}"
+            }
+
+            object Auth {
+                const val android = "care.data4life.hc-auth-sdk-kmp:auth-android:${Version.multiplatform.d4l.authSdk}"
+            }
+
+            object FhirHelper {
+                const val android =
+                    "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Version.multiplatform.d4l.fhirHelper}"
+            }
         }
 
         object Koin {
@@ -98,6 +113,9 @@ object Dependency {
     object Jvm {
         // Crypto
         const val bouncyCastleJdk15 = "org.bouncycastle:bcprov-jdk15on:${Version.jvm.bouncyCastle}"
+
+        // FHIR
+        const val fhirSdk = "care.data4life.hc-fhir-sdk-java:fhir-java:${Version.jvm.fhirSdk}"
     }
 
     object JvmTest {
@@ -185,13 +203,6 @@ object Dependency {
 
         // Material
         const val material = "com.google.android.material:material:${Version.android.material}"
-
-        // D4L
-        object D4L {
-            const val authSdk = "care.data4life.hc-auth-sdk-kmp:auth-android:${Version.multiplatform.d4l.authSdk}"
-            const val fhirSdk = "care.data4life.hc-fhir-sdk-java:fhir-java:${Version.jvm.fhirSdk}"
-            const val fhirHelper = "care.data4life.hc-fhir-helper-sdk-kmp:fhir-helper-android:${Version.jvm.fhirHelper}"
-        }
 
         // Auth
         const val appAuth = "net.openid:appauth:${Version.android.appAuth}"

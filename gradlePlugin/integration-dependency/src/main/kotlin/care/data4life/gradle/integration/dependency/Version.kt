@@ -46,14 +46,22 @@ object Version {
             /**
              * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
              */
-            const val hcSdk = "1.16.0-fix-auth-SNAPSHOT"
+            const val hcSdk = "1.17.0"
 
             /**
-             * [hc-util-kmp](https://github.com/d4l-data4life/hc-util-kmp)
+             * [hc-util-sdk-kmp](https://github.com/d4l-data4life/hc-util-sdk-kmp)
              */
-            const val utilSdk = "1.13.0"
+            const val utilSdk = "1.14.0"
 
+            /**
+             * [hc-auth-sdk-kmp](https://github.com/d4l-data4life/hc-auth-sdk-kmp)
+             */
             const val authSdk = "1.16.0"
+
+            /**
+             * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
+             */
+            const val fhirHelper = "1.10.0"
         }
 
         /**
@@ -79,12 +87,7 @@ object Version {
         /**
          * [D4L-FHIR-SDK-JAVA](https://github.com/d4l-data4life/hc-fhir-sdk-java)
          */
-        const val fhirSdk = "1.8.0"
-
-        /**
-         * [D4L-FHIR-HELPER-SDK-KMP](https://github.com/d4l-data4life/hc-fhir-helper-sdk-kmp)
-         */
-        const val fhirHelper = "1.9.0"
+        const val fhirSdk = "1.9.0"
     }
 
     object JvmTest {

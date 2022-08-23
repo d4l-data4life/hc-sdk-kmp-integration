@@ -180,12 +180,12 @@ dependencies {
     implementation(Dependency.Android.AndroidX.Compose.liveData)
     implementation(Dependency.Android.AndroidX.Compose.navigation)
 
-    implementation(Dependency.Multiplatform.D4L.hcSdk) {
+    implementation(Dependency.Multiplatform.D4L.sdk.android) {
         exclude(group = "org.threeten", module = "threetenbp")
     }
     implementation(Dependency.Android.threeTenABP)
-    implementation(Dependency.Android.D4L.fhirSdk)
-    implementation(Dependency.Android.D4L.fhirHelper)
+    implementation(Dependency.Jvm.fhirSdk)
+    implementation(Dependency.multiplatform.d4l.fhirHelper.android)
     implementation(Dependency.Android.appAuth)
 
 
