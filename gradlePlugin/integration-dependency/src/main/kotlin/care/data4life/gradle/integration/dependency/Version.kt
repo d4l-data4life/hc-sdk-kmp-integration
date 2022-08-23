@@ -21,7 +21,7 @@ object Version {
 
     object GradlePlugin {
         const val kotlin = Version.kotlin
-        const val android = "7.3.0-beta04"
+        const val android = "7.2.2"
         const val jUnit5Android = "1.8.2.0"
 
         /**
