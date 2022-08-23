@@ -32,7 +32,7 @@ toc::[]
 === Changed
 
 * Change GitHub action from self-hosted runner to cloud runner
-* Change Android target API from 30 to 32
+* Change Android target API from 30 to 33
 * Change UI tests from Kakao to Kakao Compose
 
 === Deprecated
