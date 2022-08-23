@@ -110,7 +110,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Version.android.compose.core
+        kotlinCompilerExtensionVersion = Version.android.compose.compiler
     }
 
     compileOptions {

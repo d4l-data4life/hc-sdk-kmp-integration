@@ -52,11 +52,11 @@ toc::[]
 * HC Auth SDK 1.14.0 -> 1.17.0
 * HC Util SDK 1.4.1 -> 1.14.0
 * Kotlin 1.4.31 -> 1.6.21
-* Kotlin Coroutines 1.4.2 -> 1.6.3
+* Kotlin Coroutines 1.4.2 -> 1.6.4
 * Android Gradle Plugin 4.1.2 -> 7.2.2
 * Android Desugar 1.0.5 -> 1.1.5
 * AndroidX Ktx 1.3.1 -> 1.8.0
-* AndroidX AppCompat 1.2.0 -> 1.4.2
+* AndroidX AppCompat 1.2.0 -> 1.5.0
 * AndroidX Browser 1.3.0 -> 1.4.0
 * AndroidX ConstraintLayout 2.0.4 -> 2.1.4
 * AndroidX Lifecycle 2.2.0 -> 2.4.1
@@ -75,9 +75,19 @@ toc::[]
 * Spotless 5.10.2 -> 6.5.1
 * KtLint 0.41.0 -> 0.45.2
 * AppAuth 0.10.0 -> 0.11.1
-* Mockk 1.12.3 -> 1.12.4
+* Mockk 1.12.3 -> 1.12.6
 * AndroidX Compose 1.1.1 -> 1.2.0-rc02
 * AndroidX Compose Activity 1.4.0 -> 1.5.0-rc01
 * Gradle Dexcount Plugin 0.8.4 -> 3.1.0
+* JSONAssert 1.5.0 -> 1.5.1
+* Jacoco 0.8.7 -> 0.8.8
+- Compose Compiler 1.2.0-rc02 -> 1.3.0
+- Compose Core 1.2.0-rc02 -> 1.3.0alpha03
+- Compose Activity 1.5.0-rc01 -> 1.5.1
+- Compose ViewModel 2.4.1 -> 2.5.1
+- Compose LiveData 1.1.1 -> 1.2.1
+- Compose Navigation 2.4.2 -> 2.5.1
+- OkHttp 4.9.3 -> 4.10.0
+- Kakao Compose 0.0.7 - > 0.1.0
 
 === Migration

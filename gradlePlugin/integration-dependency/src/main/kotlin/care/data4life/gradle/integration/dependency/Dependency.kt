@@ -154,7 +154,8 @@ object Dependency {
                 "androidx.constraintlayout:constraintlayout:${Version.android.androidX.constraintLayout}"
 
             // Lifecycle
-            const val lifecylceViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.android.androidX.lifecycle}"
+            const val lifecylceViewModelKtx =
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.android.androidX.lifecycle}"
             const val lifecylceExtensions =
                 "androidx.lifecycle:lifecycle-extensions:${Version.android.androidX.lifecycle}"
             const val lifecylceCommonJava8 =
@@ -167,7 +168,7 @@ object Dependency {
                 "androidx.navigation:navigation-ui-ktx:${Version.android.androidX.navigation}"
 
             object Compose {
-                const val compiler = "androidx.compose.compiler:compiler:${Version.android.compose.core}"
+                const val compiler = "androidx.compose.compiler:compiler:${Version.android.compose.compiler}"
                 const val runtime = "androidx.compose.runtime:runtime:${Version.android.compose.core}"
                 const val ui = "androidx.compose.ui:ui:${Version.android.compose.core}"
 

@@ -17,7 +17,7 @@ object Version {
     /**
      * [Kotlin](https://github.com/JetBrains/kotlin)
      */
-    const val kotlin = "1.6.21"
+    const val kotlin = "1.7.10"
 
     object GradlePlugin {
         const val kotlin = Version.kotlin
@@ -39,7 +39,7 @@ object Version {
             /**
              * [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
              */
-            const val coroutines = "1.6.3"
+            const val coroutines = "1.6.4"
         }
 
         object D4L {
@@ -74,7 +74,7 @@ object Version {
         /**
          * [mockk](http://mockk.io)
          */
-        const val mockK = "1.12.4"
+        const val mockK = "1.12.6"
     }
 
     object Jvm {
@@ -93,9 +93,12 @@ object Version {
     object JvmTest {
         const val jUnit = "4.13.2"
 
-        const val jsonAssert = "1.5.0"
+        /**
+         * [JSONassert](https://github.com/skyscreamer/JSONassert)
+         */
+        const val jsonAssert = "1.5.1"
 
-        const val jacoco = "0.8.7"
+        const val jacoco = "0.8.8"
     }
 
     object Android {
@@ -104,7 +107,8 @@ object Version {
         val compose = Compose
 
         /**
-         * [Android Desugar](https://developer.android.com/studio/write/java8-support)
+         * [Android Desugar](https://github.com/google/desugar_jdk_libs)
+         * [Information](https://developer.android.com/studio/write/java8-support)
          */
         const val androidDesugar = "1.1.5"
 
@@ -114,7 +118,7 @@ object Version {
              */
             const val core = "1.1.0"
             const val ktx = "1.8.0"
-            const val appCompat = "1.4.2"
+            const val appCompat = "1.5.0"
             const val browser = "1.4.0"
 
             const val constraintLayout = "2.1.4"
@@ -124,11 +128,12 @@ object Version {
         }
 
         object Compose {
-            const val core = "1.2.0-rc02"
-            const val activity = "1.5.0-rc01"
-            const val viewModel = "2.4.1"
-            const val liveData = "1.1.1"
-            const val navigation = "2.4.2"
+            const val compiler = "1.3.0"
+            const val core = "1.3.0-alpha03"
+            const val activity = "1.5.1"
+            const val viewModel = "2.5.1"
+            const val liveData = "1.2.1"
+            const val navigation = "2.5.1"
         }
 
         /**
@@ -143,7 +148,7 @@ object Version {
         /**
          * [okHttp](https://github.com/square/okhttp)
          */
-        const val okHttp = "4.9.3"
+        const val okHttp = "4.10.0"
 
         /**
          *[retrofit](https://github.com/square/retrofit)
@@ -181,6 +186,6 @@ object Version {
         const val robolectric = "4.7.3"
 
         // https://github.com/KakaoCup/Compose
-        const val kakaoCompose = "0.0.7"
+        const val kakaoCompose = "0.1.0"
     }
 }
