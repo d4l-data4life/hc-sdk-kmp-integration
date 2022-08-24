@@ -40,3 +40,17 @@ if (includeAuth.toBoolean()) {
         }
     }
 }
+
+val includeCrypto: String by settings
+if (includeCrypto.toBoolean()) {
+    includeBuild("../hc-crypto-sdk-kmp") {
+        dependencySubstitution {
+            substitute(module("care.data4life.hc-crypto-sdk-kmp:crypto"))
+                .using(project(":crypto"))
+            substitute(module("care.data4life.hc-crypto-sdk-kmp:crypto-jvm"))
+                .using(project(":crypto"))
+            substitute(module("care.data4life.hc-crypto-sdk-kmp:crypto-android"))
+                .using(project(":crypto"))
+        }
+    }
+}

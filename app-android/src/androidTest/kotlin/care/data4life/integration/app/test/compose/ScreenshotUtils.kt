@@ -65,7 +65,7 @@ private fun saveExpectedScreenshotInDownloads(name: String, bitmap: Bitmap) {
 
     val resolver = InstrumentationRegistry.getInstrumentation().targetContext.contentResolver
 
-    var uri: Uri? = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
+    val uri: Uri? = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
 
     if (uri != null) {
         runCatching {
