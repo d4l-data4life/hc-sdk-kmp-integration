@@ -116,15 +116,7 @@ object Version {
             /**
              * [AndroidX](https://developer.android.com/jetpack/androidx)
              */
-            const val core = "1.1.0"
-            const val ktx = "1.8.0"
             const val appCompat = "1.5.0"
-            const val browser = "1.4.0"
-
-            const val constraintLayout = "2.1.4"
-
-            const val lifecycle = "2.4.1"
-            const val navigation = "2.4.2"
         }
 
         object Compose {

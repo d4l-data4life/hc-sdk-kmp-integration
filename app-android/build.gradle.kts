@@ -153,16 +153,7 @@ dependencies {
     implementation(Dependency.Android.kotlinStdLib)
     implementation(Dependency.Android.kotlinCoroutinesCore)
 
-    implementation(Dependency.Android.AndroidX.ktx)
     implementation(Dependency.Android.AndroidX.appCompat)
-    implementation(Dependency.Android.AndroidX.browser)
-    implementation(Dependency.Android.AndroidX.constraintLayout)
-
-    implementation(Dependency.Android.AndroidX.lifecylceViewModelKtx)
-    implementation(Dependency.Android.AndroidX.lifecylceCommonJava8)
-
-    implementation(Dependency.Android.AndroidX.navigationFragmentKtx)
-    implementation(Dependency.Android.AndroidX.navigationUiKtx)
 
     implementation(Dependency.Android.material)
 

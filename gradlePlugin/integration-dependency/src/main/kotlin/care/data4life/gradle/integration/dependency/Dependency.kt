@@ -145,27 +145,7 @@ object Dependency {
         const val desugar = "com.android.tools:desugar_jdk_libs:${Version.android.androidDesugar}"
 
         object AndroidX {
-            const val ktx = "androidx.core:core-ktx:${Version.android.androidX.ktx}"
             const val appCompat = "androidx.appcompat:appcompat:${Version.android.androidX.appCompat}"
-            const val browser = "androidx.browser:browser:${Version.android.androidX.browser}"
-
-            // Layout
-            const val constraintLayout =
-                "androidx.constraintlayout:constraintlayout:${Version.android.androidX.constraintLayout}"
-
-            // Lifecycle
-            const val lifecylceViewModelKtx =
-                "androidx.lifecycle:lifecycle-viewmodel-ktx:${Version.android.androidX.lifecycle}"
-            const val lifecylceExtensions =
-                "androidx.lifecycle:lifecycle-extensions:${Version.android.androidX.lifecycle}"
-            const val lifecylceCommonJava8 =
-                "androidx.lifecycle:lifecycle-common-java8:${Version.android.androidX.lifecycle}"
-
-            // Navigation
-            const val navigationFragmentKtx =
-                "androidx.navigation:navigation-fragment-ktx:${Version.android.androidX.navigation}"
-            const val navigationUiKtx =
-                "androidx.navigation:navigation-ui-ktx:${Version.android.androidX.navigation}"
 
             object Compose {
                 const val compiler = "androidx.compose.compiler:compiler:${Version.android.compose.compiler}"
