@@ -74,7 +74,7 @@ object Version {
         /**
          * [mockk](http://mockk.io)
          */
-        const val mockK = "1.12.7"
+        const val mockK = "1.12.5"
     }
 
     object Jvm {
