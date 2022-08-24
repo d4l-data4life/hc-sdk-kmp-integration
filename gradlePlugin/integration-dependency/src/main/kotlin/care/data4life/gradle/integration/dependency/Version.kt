@@ -74,7 +74,7 @@ object Version {
         /**
          * [mockk](http://mockk.io)
          */
-        const val mockK = "1.12.6"
+        const val mockK = "1.12.7"
     }
 
     object Jvm {
@@ -171,7 +171,7 @@ object Version {
          * [Android Testing](https://developer.android.com/testing)
          */
         const val androidXTest = "1.4.0"
-        const val androidXTestCore = "1.5.0-alpha01"
+        const val androidXTestCore = "1.5.0-alpha02"
         const val androidXTestOrchestrator = "1.4.1"
         const val androidXEspresso = "3.4.0"
         const val androidXUiAutomator = "2.2.0"
