@@ -3,7 +3,6 @@
  */
 
 import care.data4life.gradle.integration.dependency.d4l
-import care.data4life.gradle.integration.dependency.ensureKotlinVersion
 
 plugins {
     `kotlin-dsl`
@@ -16,8 +15,6 @@ repositories {
     google()
     d4l()
 }
-
-ensureKotlinVersion("1.5.31")
 
 dependencies {
     implementation(care.data4life.gradle.integration.dependency.GradlePlugin.kotlin)

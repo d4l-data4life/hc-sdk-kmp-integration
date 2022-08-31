@@ -1,5 +1,4 @@
 import care.data4life.gradle.integration.dependency.d4l
-import care.data4life.gradle.integration.dependency.ensureKotlinVersion
 
 plugins {
     id("care.data4life.gradle.integration.dependency")
@@ -23,8 +22,6 @@ allprojects {
 
         d4l()
     }
-
-    ensureKotlinVersion()
 
     // FIXME remove if dependency conflict is solved
     configurations.all {
