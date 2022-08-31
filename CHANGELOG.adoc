@@ -82,7 +82,7 @@ toc::[]
 * JSONAssert 1.5.0 -> 1.5.1
 * Jacoco 0.8.7 -> 0.8.8
 - Compose Compiler 1.2.0-rc02 -> 1.3.0
-- Compose Core 1.2.0-rc02 -> 1.3.0alpha03
+- Compose Core 1.2.0-rc02 -> 1.3.0-beta01
 - Compose Activity 1.5.0-rc01 -> 1.5.1
 - Compose ViewModel 2.4.1 -> 2.5.1
 - Compose LiveData 1.1.1 -> 1.2.1

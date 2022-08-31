@@ -121,7 +121,7 @@ object Version {
 
         object Compose {
             const val compiler = "1.3.0"
-            const val core = "1.3.0-alpha03"
+            const val core = "1.3.0-beta01"
             const val activity = "1.5.1"
             const val viewModel = "2.5.1"
             const val liveData = "1.2.1"
