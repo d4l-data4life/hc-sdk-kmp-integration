@@ -46,7 +46,7 @@ object Version {
             /**
              * [D4L-SDK](https://github.com/d4l-data4life/hc-sdk-kmp)
              */
-            const val hcSdk = "1.17.0"
+            const val hcSdk = "1.17.1"
 
             /**
              * [hc-util-sdk-kmp](https://github.com/d4l-data4life/hc-util-sdk-kmp)
