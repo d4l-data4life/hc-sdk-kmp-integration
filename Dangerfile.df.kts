@@ -82,13 +82,13 @@ danger(args) {
             warn("Set a milestone please")
         }
 
-        val body = pullRequest.body
+        val body: String? = pullRequest.body
         if (body != null && body.length < 10) {
             warn("Please include a description of your PR changes")
         }
 
         // Changelog
-        if (isChangelogUpdated) {
+        if (!isChangelogUpdated) {
             warn("Changes should be reflected in the CHANGELOG.adoc")
         }
 

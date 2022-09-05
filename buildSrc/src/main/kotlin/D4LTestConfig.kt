@@ -11,7 +11,16 @@ data class UserConfig(
     val email: String,
     val password: String,
     val phoneCountryCode: String,
-    val phoneLocalNumber: String
+    val phoneLocalNumber: String,
+    val s4hDataKeys: DataKeySet
+)
+
+data class DataKeySet(
+    val local: String,
+    val development: String,
+    val staging: String,
+    val sandbox: String,
+    val production: String
 )
 
 data class SinchConfig(

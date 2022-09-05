@@ -1,6 +1,10 @@
+import care.data4life.gradle.integration.dependency.Dependency
+import care.data4life.gradle.integration.dependency.Version
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("de.mannodermaus.android-junit5")
 }
 
 val d4lClientConfig = D4LConfigHelper.loadClientConfigAndroid("$rootDir")
@@ -8,6 +12,7 @@ val d4LTestConfig = D4LConfigHelper.loadTestConfigAndroid("$rootDir")
 
 android {
     compileSdk = AppConfig.androidConfig.compileSdkVersion
+    namespace = "care.data4life.integration.app"
 
     defaultConfig {
         applicationId = AppConfig.androidConfig.applicationId
@@ -20,26 +25,18 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments += mapOf(
-            "clearPackageData" to "true"
+            "runnerBuilder" to "de.mannodermaus.junit5.AndroidJUnit5Builder",
+            "clearPackageData" to "true",
         )
 
-        manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
-        manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
-        manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
-        manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
-        manifestPlaceholders["platform"] = d4lClientConfig.platform
-        manifestPlaceholders["debug"] = "true"
-    }
-
-    buildFeatures {
-        viewBinding = true
+        manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.DEVELOPMENT, true))
     }
 
     buildTypes {
         getByName("debug") {
             isDebuggable = true
             isMinifyEnabled = false
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debug")
         }
         getByName("release") {
             isDebuggable = false
@@ -48,68 +45,50 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release")
         }
     }
 
     flavorDimensions += listOf("environment")
 
     productFlavors {
-        val development by creating {
+        create("development") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.DEVELOPMENT].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.DEVELOPMENT].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.DEVELOPMENT].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.DEVELOPMENT}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.DEVELOPMENT))
 
             applicationIdSuffix = ".development"
             versionNameSuffix = "-development"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debug")
         }
-        val staging by creating {
+        create("staging") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.STAGING].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.STAGING].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.STAGING].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.STAGING}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.STAGING))
 
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debug")
         }
-        val sandbox by creating {
+        create("sandbox") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.SANDBOX].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.SANDBOX].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.SANDBOX].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.SANDBOX}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.SANDBOX))
 
             applicationIdSuffix = ".sandbox"
             versionNameSuffix = "-sandbox"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debug")
         }
-        val production by creating {
+        create("production") {
             dimension = "environment"
 
-            manifestPlaceholders["clientId"] = d4lClientConfig[Environment.PRODUCTION].id
-            manifestPlaceholders["clientSecret"] = d4lClientConfig[Environment.PRODUCTION].secret
-            manifestPlaceholders["redirectScheme"] = d4lClientConfig[Environment.PRODUCTION].redirectScheme
-            manifestPlaceholders["environment"] = "${Environment.PRODUCTION}"
-            manifestPlaceholders["platform"] = d4lClientConfig.platform
+            manifestPlaceholders.putAll(d4lClientConfig.toConfigMap(Environment.PRODUCTION))
 
             applicationIdSuffix = ".production"
             versionNameSuffix = "-production"
-            setMatchingFallbacks("release", "debug")
+            matchingFallbacks += listOf("release", "debug")
         }
     }
-
-    defaultPublishConfig = "developmentDebug"
 
     sourceSets {
         getByName("main") {
@@ -126,6 +105,14 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = Version.android.compose.compiler
+    }
+
     compileOptions {
         // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
@@ -140,10 +127,6 @@ android {
 
     lint {
         abortOnError = false
-    }
-
-    buildFeatures {
-        compose = false
     }
 
     useLibrary("android.test.runner")
@@ -165,58 +148,78 @@ android {
 
 
 dependencies {
-    coreLibraryDesugaring(Dependencies.Android.desugar)
+    coreLibraryDesugaring(Dependency.android.desugar)
 
-    implementation(Dependencies.Android.kotlinStdLib)
-    implementation(Dependencies.Android.kotlinCoroutinesCore)
+    implementation(Dependency.Android.kotlinStdLib)
+    implementation(Dependency.Android.kotlinCoroutinesCore)
 
-    implementation(Dependencies.Android.AndroidX.ktx)
-    implementation(Dependencies.Android.AndroidX.appCompat)
-    implementation(Dependencies.Android.AndroidX.browser)
-    implementation(Dependencies.Android.AndroidX.constraintLayout)
+    implementation(Dependency.Android.AndroidX.appCompat)
 
-    implementation(Dependencies.Android.AndroidX.lifecylceViewModelKtx)
-    implementation(Dependencies.Android.AndroidX.lifecylceCommonJava8)
+    implementation(Dependency.Android.material)
 
-    implementation(Dependencies.Android.AndroidX.navigationFragmentKtx)
-    implementation(Dependencies.Android.AndroidX.navigationUiKtx)
+    // Compose
+    implementation(Dependency.Android.AndroidX.Compose.compiler)
+    implementation(Dependency.Android.AndroidX.Compose.runtime)
+    implementation(Dependency.Android.AndroidX.Compose.ui)
+    implementation(Dependency.Android.AndroidX.Compose.uiTooling)
+    implementation(Dependency.Android.AndroidX.Compose.foundation)
+    implementation(Dependency.Android.AndroidX.Compose.material)
+    implementation(Dependency.Android.AndroidX.Compose.materialIconsCore)
+    implementation(Dependency.Android.AndroidX.Compose.materialIconsExtended)
+    implementation(Dependency.Android.AndroidX.Compose.activity)
+    implementation(Dependency.Android.AndroidX.Compose.lifecycle)
+    implementation(Dependency.Android.AndroidX.Compose.liveData)
+    implementation(Dependency.Android.AndroidX.Compose.navigation)
 
-    implementation(Dependencies.Android.material)
-
-    implementation(Dependencies.Android.D4L.hcSdk) {
+    implementation(Dependency.Multiplatform.D4L.sdk.android) {
         exclude(group = "org.threeten", module = "threetenbp")
     }
-    implementation(Dependencies.Android.threeTenABP)
-    implementation(Dependencies.Android.D4L.fhirSdk)
-    implementation(Dependencies.Android.D4L.fhirHelper)
-    implementation(Dependencies.Android.D4L.authSdk)
-    implementation(Dependencies.Android.appAuth)
+    implementation(Dependency.Android.threeTenABP)
+    implementation(Dependency.Jvm.fhirSdk)
+    implementation(Dependency.multiplatform.d4l.fhirHelper.android)
+    implementation(Dependency.Android.appAuth)
 
 
-    testImplementation(Dependencies.Android.Test.junit)
+    testImplementation(Dependency.JvmTest.junit)
+    testRuntimeOnly(Dependency.JvmTest.junit5EngineVintage)
+
+    testImplementation(Dependency.JvmTest.junit5)
+    testRuntimeOnly(Dependency.JvmTest.junit5Engine)
+
+    testImplementation(Dependency.JvmTest.junit5Parameterized)
+
+    testImplementation(Dependency.jvmTest.mockk)
 
 
-    androidTestUtil(Dependencies.Android.AndroidTest.androidXTestOrchestrator)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestCore)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRunner)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestRules)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestExtJUnit)
+    androidTestUtil(Dependency.AndroidTest.orchestrator)
+    androidTestImplementation(Dependency.AndroidTest.core)
+    androidTestImplementation(Dependency.AndroidTest.runner)
+    androidTestImplementation(Dependency.AndroidTest.rules)
+    androidTestImplementation(Dependency.AndroidTest.junitExt)
 
-    androidTestImplementation(Dependencies.Android.Test.testKotlin)
-    androidTestImplementation(Dependencies.Android.Test.testKotlinJunit)
+    androidTestImplementation(Dependency.JvmTest.junit5)
+    androidTestImplementation(Dependency.AndroidTest.junit5AndroidInstrumentation)
+    androidTestRuntimeOnly(Dependency.AndroidTest.junit5AndroidInstrumentationRuntime)
+    androidTestImplementation(Dependency.JvmTest.testKotlin)
+    androidTestImplementation(Dependency.JvmTest.testKotlinJunit)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoCore)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoIntents)
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestEspressoWeb)
+    androidTestImplementation(Dependency.AndroidTest.espressoCore)
+    androidTestImplementation(Dependency.AndroidTest.espressoIntents)
+    androidTestImplementation(Dependency.AndroidTest.espressoWeb)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.androidXTestUiAutomator)
+    androidTestImplementation(Dependency.AndroidTest.uiAutomator)
 
-    androidTestImplementation(Dependencies.Android.AndroidTest.kakao)
+    androidTestImplementation(Dependency.AndroidTest.mockk)
 
-    androidTestImplementation(Dependencies.Android.okHttp)
-    androidTestImplementation(Dependencies.Android.okHttpLoggingInterceptor)
-    androidTestImplementation(Dependencies.Android.retrofit)
-    androidTestImplementation(Dependencies.Android.gson)
+    androidTestImplementation(Dependency.AndroidTest.kakaoCompose)
+
+    androidTestImplementation(Dependency.AndroidTest.composeUi)
+    debugImplementation(Dependency.AndroidTest.composeUiManifest)
+
+    androidTestImplementation(Dependency.Android.okHttp)
+    androidTestImplementation(Dependency.Android.okHttpLoggingInterceptor)
+    androidTestImplementation(Dependency.Android.retrofit)
+    androidTestImplementation(Dependency.Android.gson)
 }
 
 val androidTestAssetsPath = "${projectDir}/src/androidTest/assets"

@@ -1,17 +1,8 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath(GradlePlugins.android)
-        classpath(GradlePlugins.kotlin)
-    }
-}
+import care.data4life.gradle.integration.dependency.d4l
 
 plugins {
+    id("care.data4life.gradle.integration.dependency")
+
     id("scripts.dependency-updates")
     id("scripts.download-scripts")
     id("scripts.quality-spotless")
@@ -40,6 +31,6 @@ allprojects {
 }
 
 tasks.named<Wrapper>("wrapper") {
-    gradleVersion = "7.4.2"
+    gradleVersion = "7.5.1"
     distributionType = Wrapper.DistributionType.ALL
 }
