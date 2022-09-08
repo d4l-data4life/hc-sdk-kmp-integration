@@ -23,7 +23,7 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
         val results: MutableList<Result<DataRecord<DataResource>>> = mutableListOf()
         for (index in 0 until items.count()) {
             val result: Result<DataRecord<DataResource>> = awaitCallback { callback ->
-                testSubject.data.create(items[index], emptyList(), callback)
+                testSubject.data.create(items[index], getAnnotations(), callback)
             }
 
             results.add(mapToResult(result))
@@ -34,7 +34,7 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
 
     override suspend fun callCount(): Result<Int> {
         return awaitCallback { callback ->
-            testSubject.data.count(emptyList(), callback)
+            testSubject.data.count(getAnnotations(), callback)
         }
     }
 
@@ -54,7 +54,7 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
     override suspend fun callFetchByType(): List<Result<DataRecord<DataResource>>> {
         val result: Result<List<DataRecord<DataResource>>> = awaitCallback { callback ->
             testSubject.data.search(
-                emptyList(),
+                getAnnotations(),
                 CreationDateRange(
                     LocalDate.now().minusYears(1),
                     LocalDate.now()
@@ -89,7 +89,7 @@ abstract class BaseAppDataCrudTest : BaseCrudSdkTest<DataResource>() {
         val results: MutableList<Result<DataRecord<DataResource>>> = mutableListOf()
         for (index in 0 until items.count()) {
             val result: Result<DataRecord<DataResource>> = awaitCallback { callback ->
-                testSubject.data.update(recordIds[index], items[index], emptyList(), callback)
+                testSubject.data.update(recordIds[index], items[index], getAnnotations(), callback)
             }
 
             results.add(mapToResult(result))

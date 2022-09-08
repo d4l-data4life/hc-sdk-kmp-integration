@@ -42,7 +42,9 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
         count(0)
     }
 
-    private suspend fun create(items: List<T>): List<Record<T>> {
+    abstract fun getAnnotations(): List<String>
+
+    protected suspend fun create(items: List<T>): List<Record<T>> {
         // Given
         val createdRecords = mutableListOf<Record<T>>()
 
@@ -61,7 +63,7 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
     abstract suspend fun callCreate(items: List<T>): List<Result<Record<T>>>
     abstract fun assertCreateRecord(expected: T, actual: Record<T>)
 
-    private suspend fun count(count: Int) {
+    protected suspend fun count(count: Int) {
         // Given
 
         // When
@@ -80,7 +82,7 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
 
     abstract suspend fun callCount(): Result<Int>
 
-    private suspend fun fetch(recordIds: List<String>, items: List<T>) {
+    protected suspend fun fetch(recordIds: List<String>, items: List<T>): List<Result<Record<T>>> {
         // Given
 
         // When
@@ -91,12 +93,14 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
         assertResults(results, "Fetch") { index, record ->
             assertFetchRecord(items[index], record)
         }
+
+        return results
     }
 
     abstract suspend fun callFetch(recordIds: List<String>): List<Result<Record<T>>>
     abstract fun assertFetchRecord(expected: T, actual: Record<T>)
 
-    private suspend fun fetchByType(count: Int, items: List<T>): List<T> {
+    protected suspend fun fetchByType(count: Int, items: List<T>): List<T> {
         // Given
         val loadedItems = mutableListOf<T>()
 
@@ -167,7 +171,7 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
 
     abstract suspend fun callDelete(recordIds: List<String>): List<Result<String>>
 
-    private suspend fun cleanAccount() {
+    protected suspend fun cleanAccount() {
         val results: List<Result<Record<T>>> = callFetchByType()
 
         val ids = results.filter { it is Success }
@@ -208,7 +212,7 @@ abstract class BaseCrudSdkTest<T> : BaseSdkTest() {
 
     abstract fun generateItem(): T
 
-    private fun generateItems(count: Int): List<T> {
+    protected fun generateItems(count: Int): List<T> {
         val items = mutableListOf<T>()
         for (i in 1..count) {
             items.add(generateItem())

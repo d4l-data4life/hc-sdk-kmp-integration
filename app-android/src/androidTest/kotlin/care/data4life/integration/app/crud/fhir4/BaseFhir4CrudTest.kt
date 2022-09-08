@@ -23,7 +23,7 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         val results: MutableList<Result<Fhir4Record<T>>> = mutableListOf()
         for (index in 0 until items.count()) {
             val result: Result<Fhir4Record<T>> = awaitCallback { callback ->
-                testSubject.fhir4.create(items[index], emptyList(), callback)
+                testSubject.fhir4.create(items[index], getAnnotations(), callback)
             }
 
             results.add(mapToResult(result))
@@ -34,7 +34,7 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
 
     override suspend fun callCount(): Result<Int> {
         return awaitCallback { callback ->
-            testSubject.fhir4.count(getTestClass(), emptyList(), callback)
+            testSubject.fhir4.count(getTestClass(), getAnnotations(), callback)
         }
     }
 
@@ -55,7 +55,7 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         val result: Result<List<Fhir4Record<T>>> = awaitCallback { callback ->
             testSubject.fhir4.search(
                 getTestClass(),
-                emptyList(),
+                getAnnotations(),
                 CreationDateRange(
                     LocalDate.now().minusYears(1),
                     LocalDate.now()
@@ -83,7 +83,7 @@ abstract class BaseFhir4CrudTest<T : DomainResource> : BaseCrudSdkTest<T>() {
         val results: MutableList<Result<Fhir4Record<T>>> = mutableListOf()
         for (index in 0 until items.count()) {
             val result: Result<Fhir4Record<T>> = awaitCallback { callback ->
-                testSubject.fhir4.update(recordIds[index], items[index], emptyList(), callback)
+                testSubject.fhir4.update(recordIds[index], items[index], getAnnotations(), callback)
             }
 
             results.add(mapToResult(result))

@@ -67,6 +67,10 @@ class AppDataTest : BaseAppDataCrudTest() {
         assertTrue { expected.value.contentEquals(actual.value) }
     }
 
+    override fun getAnnotations(): List<String> {
+        return emptyList()
+    }
+
     companion object {
         val data = byteArrayOf(0x25, 0x50, 0x44, 0x46, 0x2d)
         val dataMutated = data.reversedArray()

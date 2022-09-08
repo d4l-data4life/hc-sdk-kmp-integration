@@ -39,6 +39,8 @@ class DocumentReferenceTest : BaseFhir3CrudTest<DocumentReference>() {
         logout()
     }
 
+    override fun getAnnotations(): List<String> = emptyList()
+
     override fun assertCreateRecord(expected: DocumentReference, actual: Record<DocumentReference>) {
         assertDocumentReference(expected, actual.resource, true)
     }

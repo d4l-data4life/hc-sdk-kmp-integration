@@ -39,6 +39,8 @@ class DocumentReferenceTest : BaseFhir4CrudTest<DocumentReference>() {
         logout()
     }
 
+    override fun getAnnotations(): List<String> = emptyList()
+
     override fun assertCreateRecord(expected: DocumentReference, actual: Record<DocumentReference>) {
         assertDocumentReference(expected, actual.resource, true)
     }
@@ -68,7 +70,12 @@ class DocumentReferenceTest : BaseFhir4CrudTest<DocumentReference>() {
     }
 
     override fun generateItem(): DocumentReference {
-        val attachment = AttachmentBuilder.buildWith(attachmentTitle, createdDate, contentType, data)
+        val attachment = AttachmentBuilder.buildWith(
+            attachmentTitle,
+            createdDate,
+            contentType,
+            data
+        )
 
         val author = Practitioner()
         val docTypeCoding = Coding().apply {
