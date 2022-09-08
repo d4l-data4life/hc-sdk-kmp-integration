@@ -25,7 +25,26 @@ Template could be found here: link:https://github.com/d4l-data4life/hc-readme-te
 ==== Versions
 toc::[]
 
-== https://github.com/d4l-data4life/hc-sdk-kmp-integration/compare/v1.15.1...main[Unreleased]
+== https://github.com/d4l-data4life/hc-sdk-kmp-integration/compare/v1.17.1...main[Unreleased]
+
+=== Added
+
+=== Changed
+
+=== Deprecated
+
+=== Removed
+
+=== Fixed
+
+=== Bumped
+
+- Android Gradle Plugin 7.2.2 -> 7.3.0-rc01
+- jUnit5 Android 1.8.2.0 -> 1.8.2.1
+
+=== Migration
+
+== https://github.com/d4l-data4life/hc-sdk-kmp-integration/compare/v1.15.1...1.17.1[1.17.1]
 
 === Added
 
